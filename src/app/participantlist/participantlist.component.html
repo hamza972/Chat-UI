@@ -1,0 +1,27 @@
+
+<div class="row no-gutters">
+    <div class="col-3">
+        Name
+        <div class="d-flex flex-row flex-wrap">
+            <a *ngFor="let user of userArray" class="list-group-item list-group-item-action">
+                {{user.firstName}} {{user.lastName}}
+              </a>
+        </div>
+    </div>
+    <div class="col-3">
+        Role
+        <div class="d-flex flex-row flex-wrap">
+            <a *ngFor="let user of userArray" class="list-group-item list-group-item-action">
+                {{user.role}}
+              </a>
+        </div>
+    </div>
+    <div class="col-3">
+        Email
+        <div class="d-flex flex-row flex-wrap">
+            <a *ngFor="let user of userArray" class="list-group-item list-group-item-action">
+                {{user.email}}
+              </a>
+        </div>
+    </div>
+</div>

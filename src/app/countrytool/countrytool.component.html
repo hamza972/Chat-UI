@@ -1,0 +1,27 @@
+<div class="row mt-4">
+    <div class="col-12">
+      
+      <div class="row" *ngIf="authError">
+        <div class="col-12 alert alert-danger">
+          {{ authError?.message }}
+        </div>
+      </div>
+      <form #countryCreateForm="ngForm" (ngSubmit)="createCountry(countryCreateForm)">
+        <div class="row">
+          <div class="col-md-12 mb-2">
+              <div class="col-12">
+                  <h4>Country and Affiliate Tool</h4>
+                </div>
+            <input ngModel #countryName="ngModel" name="countryName" type="text" class="form-control" id="countryName" placeholder="Country or affiliate name">
+          </div>
+        </div>
+        <div>
+          <div class="row">
+            <div class="col-md-12">
+              <button type="submit">Create</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>

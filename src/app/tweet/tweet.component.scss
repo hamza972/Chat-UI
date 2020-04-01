@@ -1,0 +1,35 @@
+body {
+    max-width: 50%;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    text-align:center;
+
+    li {
+        text-align: center;
+        display: inline;
+
+        p {
+            margin: 0;
+        }
+
+        p.tweet {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        p.userOrRole {
+            text-transform: uppercase;
+            font-size: .9rem;
+            flex-grow: 1;
+        }
+        p.tweetDate {
+            text-transform: uppercase;
+            font-size: .9rem;
+            flex-grow: 1;
+        }
+    }
+}

@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+body, html {
+    height: 100%;
+    margin: 0 auto;
+    background: #F2F2F2;
+}
+
+div {
+    text-align: center;
+    padding: 10px 0;
+    margin: auto;
+}
+
+body {
+    font-family: 'Roboto';
+    font-size: 18px;
+    color: #333333;
+    background-image: url('/assets/img/backgroundOpacity.jpg'); 
+    }
+
+select {
+    width: 50%;
+    padding: 12px 20px;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    background-color: #4D4D4D;
+    border: none;
+    color: #F2F2F2;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border: 2px solid
+  }
+
+  
+  button:hover {
+    background-color: #F2F2F2; 
+    color: #4D4D4D;
+    border: 2px solid;
+  }
+
+.navcontainer {
+    width: 80%;
+    margin: 0 auto;
+    padding: 1.3em;
+    display: grid;
+    grid-template-columns: 30% auto;
+
+    a {
+        color: #F2F2F2;
+    }
+}
+
+input {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+.center {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+  }
+
+  .centerContinent {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+    opacity: 0.4;
+  }
+
+  .centerheader {
+    margin: auto;
+    float: right
+  }
+
+
+textarea {
+    width: 40%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+}
+form {
+    max-width: 50%;
+    margin: auto;
+    text-align: center;
+    background: rgba(0,173,239, 0.3);
+    border: 2px solid;
+    align-items: center;
+}

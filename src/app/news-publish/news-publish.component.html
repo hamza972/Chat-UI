@@ -1,0 +1,36 @@
+<body>
+    <div class="grid-container">
+        <div id="div_a_1">
+            <div id="searchmenu">
+                <label>
+                    <input [(ngModel)]="search.term" style="background-color: white; color: gray; height: 5%; width: 100%; 
+                    position: absolute; top: 0%; left: 0%; padding-left: 2%; border-bottom: solid 1px;"
+                    placeholder="Search..."/>
+                  </label>
+            </div>
+            <button type="button" style="position: absolute; top: 85%; left: 8%; color: white; background-color: none;
+                border: solid 1px; height: auto; width: 50%; padding: 4px; border-color: black;">
+                <a routerLink="/news-publish">Publish</a></button>
+        </div>
+        <div id="div_a_2">
+            <div id="news_view">
+                <p style="position: absolute; top: 3%; left: 4%; font-size: 22px;">Title:</p>
+                <div>  
+                    <label>
+                      <input [(ngModel)]="recipient" style=" background-color: white; color: gray; 
+                      float: right; width: 40%; height: 4%; border: solid 1px; position: absolute; top: 3%; left: 10%; padding-left: 0%;" 
+                      placeholder=""/>
+                    </label>
+                  </div>
+                  <button type="button" style="position: absolute; top: 3%; right: 18%; color: white; background-color: none;
+                  border: solid 1px; height: auto; width: 10%; padding: 4px; border-color: black;">Publish</button>
+                  <button type="button" style="position: absolute; top: 3%; right: 6%; color: white; background-color: none;
+                  border: solid 1px; height: auto; width: 10%; padding: 4px; border-color: black;" (click)="btnClickBack();">Cancel</button>
+                <textarea style="background-color: white; color: gray; 
+                    width: 92%; height: 85%; border: solid 1px; position: absolute; top: 10%; left: 4%;
+                    padding-top: 0; padding-left: 0;">
+                </textarea>
+            </div>
+        </div>
+    </div>
+    </body>>
