@@ -24,6 +24,7 @@ import { ParticipantlistComponent } from './participantlist/participantlist.comp
 import { ChatComponent } from './chat/chat.component';
 import { EmailViewComponent } from './email-view/email-view.component';
 import { NewsPublishComponent } from './news-publish/news-publish.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { NewsPublishComponent } from './news-publish/news-publish.component';
     ParticipantlistComponent,
     ChatComponent,
     EmailViewComponent,
-    NewsPublishComponent
+    NewsPublishComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
