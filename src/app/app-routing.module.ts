@@ -16,6 +16,7 @@ import { ParticipantlistComponent } from './participantlist/participantlist.comp
 import { ChatComponent } from './chat/chat.component';
 import { EmailViewComponent } from './email-view/email-view.component';
 import { NewsPublishComponent } from './news-publish/news-publish.component';
+import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
 { path: 'roleTool', component: RoletoolComponent},
 { path: 'chat', component: ChatComponent},
 { path: 'participantTool', component:ParticipanttoolComponent},
+{ path: 'user', component:UserComponent},
 { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
