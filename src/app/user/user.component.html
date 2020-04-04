@@ -9,7 +9,7 @@
           {{ authError?.message }}
         </div>
       </div>
-      <form #userRegForm="ngForm" (ngSubmit)="createParticipantUser(userRegForm)">
+      <form #userRegForm="ngForm" (ngSubmit)="createUser(userRegForm)">
         <div class="row">
           <div class="col-md-6 mb-2">
             <input ngModel #firstName="ngModel" name="firstName" type="text" class="form-control" id="firstName" placeholder="First name">
