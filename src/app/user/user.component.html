@@ -1,1 +1,38 @@
-<p>user works!</p>
+<div class="row mt-4">
+    <div class="col-12">
+      <h4>User Creation</h4>
+    </div>
+
+    <div class="col-12">
+      <div class="row" *ngIf="authError">
+        <div class="col-12 alert alert-danger">
+          {{ authError?.message }}
+        </div>
+      </div>
+      <form #userRegForm="ngForm" (ngSubmit)="createParticipantUser(userRegForm)">
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <input ngModel #firstName="ngModel" name="firstName" type="text" class="form-control" id="firstName" placeholder="First name">
+          </div>
+          <div class="col-md-6 mb-2">
+            <input ngModel #lastName="ngModel" name="lastName" type="text" class="form-control" id="lastName" placeholder="Last name">
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mb-2">
+              <select ngModel #role="ngModel" name="role" type="text" class="form-control" id="role" aria-placeholder="Role">
+                <option value="" disabled selected>Select a Role</option>
+                <option *ngFor="let role of roleArray" [value]="role.roleName">{{role.roleName}} - {{role.ofCountry}}</option>
+              </select>
+            </div>
+          </div>
+        <div>
+          <div class="row">
+            <div class="col-md-12">
+              <button type="submit">Create</button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
