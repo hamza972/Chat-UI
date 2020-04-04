@@ -12,6 +12,7 @@ import { userMain } from '../models/user-main';
 export class UserSubComponent implements OnInit {
 
     userArray: user[];
+    userDetails: Array<string>;
 
     constructor(private auth: LoginService,
       private router: Router) { }
@@ -22,6 +23,18 @@ export class UserSubComponent implements OnInit {
         console.log(user);
         this.userArray = user;
       });
+  }
+
+  selectionChanged(event) {
+      this.userDetails = event.target.value.split("|");
+  }
+
+  createUser(frm) {
+      frm.value.firstName = this.userDetails[0];
+      frm.value.lastName = this.userDetails[1];
+      frm.value.role = this.userRole;
+      console.log(frm.value);
+      this.auth.createParticipantUser(frm.value);
   }
 
 }

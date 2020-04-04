@@ -13,9 +13,9 @@
 
         <div class="row">
             <div class="col-md-12 mb-2">
-              <select ngModel #role="ngModel" name="role" type="text" class="form-control" id="role" aria-placeholder="Role">
+              <select ngModel #role="ngModel" name="role" type="text" class="form-control" id="role" aria-placeholder="Role" (change)="selectionChanged($event)">
                 <option value="" disabled selected>Select a User</option>
-                <option *ngFor="let user of userArray" [value]="role.roleName">{{user.firstName}} {{user.lastName}} - {{user.role}}</option>
+                <option *ngFor="let user of userArray" [value]="user.firstName + '|' + user.lastName + '|' + user.role ">{{user.firstName}} {{user.lastName}} - {{user.role}}</option>
               </select>
             </div>
           </div>
