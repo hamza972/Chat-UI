@@ -15,6 +15,7 @@
           <li><a *ngIf="user$ | async" routerLink="/news">News</a></li>
           <li><a *ngIf="user$ | async" routerLink="/chat">Chat</a></li>
           <li><a *ngIf="user$ | async" routerLink="/user">User</a></li>
+          <li><a *ngIf="user$ | async" routerLink="/user-sub">User-sub</a></li>
           <li><a *ngIf="(user$ | async).systemRole === 'admin'" routerLink="/control">Control</a></li>
           <li><a *ngIf="user$ | async" (click)="logout()" routerLink="/">Logout</a></li>
         </ul>
