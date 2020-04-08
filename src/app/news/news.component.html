@@ -52,7 +52,7 @@
     <ul *ngIf="(user$ | async).systemRole === 'participant'" class="d-flex flex-row flex-wrap">
         <li *ngFor="let newsClass of newsArray" class="list-group-item list-group-item-action">
                 <p class="news">{{ newsClass.newsDescription }}</p>
-                <p class="userOrRole">{{newsClass.newsRole}}</p>
+                <p class="userOrRole">{{newsClass.userRole}} {{newsClass.userName}}</p>
                 <p class="tweetDate">{{newsClass.newsDate.toDate() | date: 'medium'}}</p>
         </li>
         </ul>
@@ -61,13 +61,22 @@
 <ul *ngIf="(user$ | async).systemRole === 'admin'" class="d-flex flex-row flex-wrap">
     <li *ngFor="let newsClass of newsArray" class="list-group-item list-group-item-action">
             <p class="news">{{ newsClass.newsDescription }}</p>
-            <p class="userOrRole">{{newsClass.newsRole}} ({{newsClass.userName}})</p>
+            <p class="userOrRole"> {{newsClass.userRole}} ({{newsClass.userName}})</p>
             <p class="newsDate">{{newsClass.newsDate.toDate() | date: 'medium'}}</p>
     </li>
     </ul>
     </div>
 
-
+    <form #newsCreateForm="ngForm" (ngSubmit)="createNews(newsDescription)">
+        <div>
+            <div class="col-md-12">
+                <textarea  ngModel #newsDescription="ngModel" name="newsDescription" type="text" class="form-control" id="newsDescription"  placeholder="Enter your tweet"></textarea>
+            </div>
+            <div class="col-md-12">
+                    <button type="submit">Post as {{newsUser.role}}</button>
+            </div>
+        </div>
+        </form>
 
 
 </body>
