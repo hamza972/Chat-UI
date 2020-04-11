@@ -3,6 +3,7 @@ import { LoginService } from '../auth/login.service';
 import { Router } from '@angular/router';
 
 import { userMain } from '../models/user-main';
+import { appUser } from '../models/user';
 
 @Component({
   selector: 'app-user-sub',
@@ -11,8 +12,9 @@ import { userMain } from '../models/user-main';
 })
 export class UserSubComponent implements OnInit {
 
-    userArray: user[];
+    userArray: appUser[];
     userDetails: Array<string>;
+    userRole: string;
 
     constructor(private auth: LoginService,
       private router: Router) { }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../auth/login.service';
 import { Router } from '@angular/router';
 
-import { role } from '../models/country';
+import { role } from '../models/role';
 
 @Component({
   selector: 'app-user',
