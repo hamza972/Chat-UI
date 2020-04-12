@@ -12,8 +12,13 @@ import {newsClass} from '../models/newsClass';
 })
 export class NewsComponent implements OnInit {
 
+  user: firebase.User;
+  newUserNews: newsClass;
+  newsUser: appUser;
+  userID: string;
   user$: Observable<appUser>;
   newsArray: newsClass[];
+  sortedArray: newsClass[];
 
   constructor(private auth: LoginService,
     private router: Router) { }
@@ -21,6 +26,19 @@ export class NewsComponent implements OnInit {
   ngOnInit() {
     this.user$ = this.auth.user$;
     this.auth.getNews().subscribe(news => {this.newsArray = news});
+
+    this.user$ = this.auth.user$;
+    this.user$.subscribe(userT => {
+      console.log(userT);
+      this.newsUser = userT;
+    });
+  }
+
+
+  createNews(frm) { 
+    console.log(frm.value);
+    this.newUserNews = {userName: this.newsUser.firstName + ' ' + this.newsUser.lastName, newsDate: new Date(), newsDescription: frm.value, userEmail: this.newsUser.email, userRole: this.newsUser.role}
+    this.auth.sendNewsData(this.newUserNews);
   }
 
   btnClick= function () {

@@ -165,6 +165,16 @@ export class LoginService {
     })
   } 
 
+  sendNewsData(newNews: newsClass) {
+    return this.db.collection(`News`).add({
+      userName: newNews.userName,
+      userEmail: newNews.userEmail,
+      userRole: newNews.userRole,
+      newsDescription: newNews.newsDescription,
+      newsDate: newNews.newsDate
+    })
+  } 
+
   getRoles() {
     return this.roles$;
   }
