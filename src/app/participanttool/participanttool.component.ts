@@ -11,6 +11,7 @@ export class ParticipanttoolComponent implements OnInit {
 
   authError: any; 
   roleArray: role[];
+  roleDetails: Array<string>;
 
   constructor(private auth: LoginService) { }
 
@@ -25,7 +26,17 @@ export class ParticipanttoolComponent implements OnInit {
     })
   }
 
-  createParticipantUser(frm) { 
-    this.auth.createParticipantUser(frm.value);
+  selectionChanged(event) {
+      this.roleDetails = event.target.value.split("|");
+      //console.log(this.roleDetails);
+  }
+
+  createParticipantUser(frm) {
+      frm.value.roleFirstName = this.roleDetails[0];
+      frm.value.roleLastName = this.roleDetails[1];
+      frm.value.rolePosition = this.roleDetails[2];
+      frm.value.roleAffiliation = this.roleDetails[3];
+      //console.log(frm.value);
+      this.auth.createParticipantUser(frm.value);
   }
 }

@@ -20,10 +20,10 @@
         </div>
         <div class="row">
             <div class="col-md-12 mb-2">
-              <select ngModel #role="ngModel" name="role" type="text" class="form-control" id="role" aria-placeholder="Role">
+              <select ngModel #role="ngModel" name="role" type="text" class="form-control" id="role" aria-placeholder="Role" (change)="selectionChanged($event)">
                 <option value="" disabled selected>Select a Role</option>
-                <option *ngFor="let role of roleArray" [value]="role.roleName">{{role.roleName}} - {{role.ofCountry}}</option>
-              </select> 
+                <option *ngFor="let role of roleArray" [value]="role.firstName + '|' + role.lastName + '|' + role.roleName + '|' + role.ofCountry"> {{role.roleName}} - {{role.ofCountry}} | {{role.firstName}} {{role.lastName}}</option>
+              </select>
             </div>
           </div>
         <div class="row">
