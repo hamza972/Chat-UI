@@ -151,7 +151,9 @@ export class LoginService {
     this.router.navigate(['/control'])
     return this.db.collection(`Roles`).add({
       roleName: newRole.roleName,
-      ofCountry: newRole.ofCountry
+      ofCountry: newRole.ofCountry,
+      firstName: newRole.firstName,
+      lastName: newRole.lastName
     })
   }
 
