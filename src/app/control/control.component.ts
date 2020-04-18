@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../auth/login.service';
 import { Router } from '@angular/router';
 import { country } from '../models/country';
-import { role } from '../models/role';
+import { Role } from '../models/Role';
 import { appUser } from '../models/user';
 
 @Component({
@@ -14,7 +14,7 @@ export class ControlComponent implements OnInit {
 
   user: firebase.User;
   countryArray: country[];
-  roleArray: role[];
+  roleArray: Role[];
   userArray: appUser[];
 
   constructor(private auth: LoginService,

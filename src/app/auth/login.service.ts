@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { appUser } from '../models/user';
 import { switchMap } from 'rxjs/operators';
 import { country } from '../models/country';
-import { role } from '../models/role';
+import { Role } from '../models/Role';
 import { stringify } from 'querystring';
 import { tweetClass } from '../models/tweetClass';
 import { newsClass } from '../models/newsClass';
@@ -25,7 +25,7 @@ export class LoginService {
   user$: Observable<appUser>;
   userList$: Observable<appUser[]>;
   countries$: Observable<country[]>;
-  roles$: Observable<role[]>;
+  roles$: Observable<Role[]>;
   tweetSend: tweetClass;
   tweets$: Observable<tweetClass[]>;
   news$ : Observable<newsClass[]>;
@@ -151,7 +151,7 @@ export class LoginService {
     })
   }
 
-  sendRoleData(newRole: role) {
+  sendRoleData(newRole: Role) {
     this.router.navigate(['/control'])
     return this.db.collection(`Roles`).add({
       roleName: newRole.roleName,

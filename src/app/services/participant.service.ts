@@ -18,9 +18,9 @@ export class ParticipantService {
 
         this.participantCollection = this.afs.collection('Users', ref => ref.orderBy('firstName', 'asc'));
 
-        this.items = this.participantCollection.snapshotChanges().pipe(map(changes => {
+        this.participant = this.participantCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
-                const data = a.payload.doc.data() as Item;
+                const data = a.payload.doc.data() as Participant;
                 data.id = a.payload.doc.id;
                 return data;
             });

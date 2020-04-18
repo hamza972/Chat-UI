@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../auth/login.service';
-import { role } from '../models/role';
+import { Role } from '../models/Role';
 
 @Component({
   selector: 'app-participanttool',
@@ -9,8 +9,8 @@ import { role } from '../models/role';
 })
 export class ParticipanttoolComponent implements OnInit {
 
-  authError: any; 
-  roleArray: role[];
+  authError: any;
+  roleArray: Role[];
   roleDetails: Array<string>;
 
   constructor(private auth: LoginService) { }

@@ -18,9 +18,9 @@ export class RoleService {
 
         this.roleCollection = this.afs.collection('Roles', ref => ref.orderBy('roleName', 'asc'));
 
-        this.items = this.roleCollection.snapshotChanges().pipe(map(changes => {
+        this.role = this.roleCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
-                const data = a.payload.doc.data() as Item;
+                const data = a.payload.doc.data() as Role;
                 data.id = a.payload.doc.id;
                 return data;
             });
@@ -32,7 +32,7 @@ export class RoleService {
     }
 
     add(role: Role) {
-        this.roleCollection.add(participant);
+        this.roleCollection.add(role);
     }
 
     delete(role: Role) {
@@ -42,6 +42,6 @@ export class RoleService {
 
     update(role: Role) {
         this.roleDoc = this.afs.doc(`Roles/${role.id}`);
-        this.roleDoc.update(participant);
+        this.roleDoc.update(role);
     }
 }

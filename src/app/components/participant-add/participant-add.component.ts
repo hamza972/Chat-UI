@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ParticipantService } from '../../services/participant.service';
 import { RoleService } from '../../services/role.service';
 import { Participant } from '../../models/Participant';
-import { ROle } from '../../models/Role';
+import { Role } from '../../models/Role';
 
 @Component({
     selector: 'app-participant-add',
@@ -27,10 +27,6 @@ export class ParticipantAddComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
-        this.participantService.get().subscribe(participant => {
-            this.participants = participant;
-        });
-
         this.roleService.get().subscribe(role => {
             console.log(role);
             this.roles = role;
