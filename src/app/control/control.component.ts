@@ -30,7 +30,7 @@ export class ControlComponent implements OnInit {
       this.roleArray = roles;
     });
     this.auth.getUserList().subscribe(users => {
-      console.log(users);
+      //console.log(users);
       this.userArray = users;
     });
 

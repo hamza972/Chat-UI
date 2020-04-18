@@ -8,6 +8,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire'
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from "@angular/fire/database";
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { HomeComponent } from './home/home.component';
@@ -27,6 +28,9 @@ import { EmailViewComponent } from './email-view/email-view.component';
 import { NewsPublishComponent } from './news-publish/news-publish.component';
 import { UserComponent } from './user/user.component';
 import { UserSubComponent } from './user-sub/user-sub.component';
+
+import { ParticipantService } from './services/participant.service';
+import { ParticipantComponent } from './components/participant/participant.component';
 
 @NgModule({
   declarations: [
@@ -49,18 +53,22 @@ import { UserSubComponent } from './user-sub/user-sub.component';
     EmailViewComponent,
     NewsPublishComponent,
     UserComponent,
-    UserSubComponent
+    UserSubComponent,
+    ParticipantComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule, 
+    FormsModule,
     AngularFireModule.initializeApp( environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
+    AngularFireDatabaseModule,
     NgbModule
   ],
-  providers: [],
+  providers: [
+      ParticipantService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -41,25 +41,7 @@
     <ngb-tab title="Participant">
         <ng-template ngbTabContent>
             <div class="col-8">
-                <img class="image" (click)="goToParticipantTool()" src="assets/img/Participant.png" style="width:190px;height:142px;" class="center">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">Student Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Role Name</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let user of userArray">
-                            <td>{{user.firstName}} {{user.lastName}}</td>
-                            <td>{{user.email}}</td>
-                            <td>{{user.rolePosition}}, {{user.roleAffiliation}}</td>
-                            <td>{{user.roleFirstName}} {{user.roleLastName}}</td>
-                        </tr>
-                    </tbody>
-                  </table>
+                <app-participant></app-participant>
             </div>
         </ng-template>
     </ngb-tab>
