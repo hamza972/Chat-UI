@@ -31,7 +31,9 @@ import { UserSubComponent } from './user-sub/user-sub.component';
 import { ParticipantComponent } from './components/participant/participant.component';
 import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
 import { RoleComponent } from './components/role/role.component';
+import { RoleAddComponent } from './components/role-add/role-add.component';
 
+import { AffiliateService } from './services/affiliate.service';
 import { ParticipantService } from './services/participant.service';
 import { RoleService } from './services/role.service';
 
@@ -58,7 +60,8 @@ import { RoleService } from './services/role.service';
     UserComponent,
     UserSubComponent,
     ParticipantComponent,
-    ParticipantAddComponent
+    ParticipantAddComponent,
+    RoleAddComponent
   ],
   imports: [
     BrowserModule,
@@ -71,6 +74,7 @@ import { RoleService } from './services/role.service';
     NgbModule
   ],
   providers: [
+      AffiliateService,
       ParticipantService,
       RoleService
   ],

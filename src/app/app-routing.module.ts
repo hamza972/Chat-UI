@@ -22,6 +22,7 @@ import { UserSubComponent } from './user-sub/user-sub.component';
 import { ParticipantComponent } from './components/participant/participant.component';
 import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
 import { RoleComponent } from './components/role/role.component';
+import { RoleAddComponent } from './components/role-add/role-add.component';
 
 const routes: Routes = [
 { path: 'login', component: LoginComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
 { path: 'control', component: ControlComponent},
 { path: 'scenario', component: ScenarioComponent},
 { path: 'role', component: RoleComponent},
+{ path: 'role-add', component: RoleAddComponent},
 { path: 'countryTool', component: CountrytoolComponent},
 { path: 'roleTool', component: RoletoolComponent},
 { path: 'chat', component: ChatComponent},
