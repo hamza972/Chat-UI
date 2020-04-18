@@ -21,6 +21,7 @@ import { UserComponent } from './user/user.component';
 import { UserSubComponent } from './user-sub/user-sub.component';
 
 import { ParticipantComponent } from './components/participant/participant.component';
+import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
 
 const routes: Routes = [
 { path: 'login', component: LoginComponent },
@@ -40,6 +41,7 @@ const routes: Routes = [
 { path: 'chat', component: ChatComponent},
 { path: 'participantTool', component:ParticipanttoolComponent},
 { path: 'participant', component:ParticipantComponent},
+{ path: 'participant-add', component:ParticipantAddComponent},
 { path: 'user', component:UserComponent},
 { path: 'user-sub', component:UserSubComponent},
 { path: '', redirectTo: '/home', pathMatch: 'full'}

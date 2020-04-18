@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ParticipantService } from '../../services/participant.service';
 import { Participant } from '../../models/Participant';
 
@@ -12,7 +13,10 @@ export class ParticipantComponent implements OnInit {
     editState: boolean = false;
     participantToEdit: Participant;
 
-    constructor(private participantService: ParticipantService) { }
+    constructor(
+        private participantService: ParticipantService,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {
         this.participantService.get().subscribe(participant => {
@@ -20,6 +24,11 @@ export class ParticipantComponent implements OnInit {
         });
     }
 
+    add() {
+        this.router.navigate(['/participant-add']);
+    }
+
+    /*
     deleteItem($event, participant: Participant) {
         this.clearState();
         this.participantService.deleteItem(item);
@@ -39,5 +48,6 @@ export class ParticipantComponent implements OnInit {
         this.editState = false;
         this.participantToEdit = null;
     }
+    */
 
 }

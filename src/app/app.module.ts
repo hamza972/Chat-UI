@@ -29,8 +29,11 @@ import { NewsPublishComponent } from './news-publish/news-publish.component';
 import { UserComponent } from './user/user.component';
 import { UserSubComponent } from './user-sub/user-sub.component';
 
-import { ParticipantService } from './services/participant.service';
 import { ParticipantComponent } from './components/participant/participant.component';
+import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
+
+import { ParticipantService } from './services/participant.service';
+import { RoleService } from './services/role.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,8 @@ import { ParticipantComponent } from './components/participant/participant.compo
     NewsPublishComponent,
     UserComponent,
     UserSubComponent,
-    ParticipantComponent
+    ParticipantComponent,
+    ParticipantAddComponent
   ],
   imports: [
     BrowserModule,
@@ -67,7 +71,8 @@ import { ParticipantComponent } from './components/participant/participant.compo
     NgbModule
   ],
   providers: [
-      ParticipantService
+      ParticipantService,
+      RoleService
   ],
   bootstrap: [AppComponent]
 })

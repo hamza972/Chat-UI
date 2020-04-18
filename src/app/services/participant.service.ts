@@ -32,16 +32,16 @@ export class ParticipantService {
     }
 
     add(participant: Participant) {
-        this.participantCollection.add(item);
+        this.participantCollection.add(participant);
     }
 
     delete(participant: Participant) {
-        this.participantDoc = this.afs.doc(`Users/${item.id}`);
+        this.participantDoc = this.afs.doc(`Users/${participant.id}`);
         this.participantDoc.delete();
     }
 
     update(participant: Participant) {
-        this.participantDoc = this.afs.doc(`Users/${item.id}`);
-        this.participantDoc.update(item);
+        this.participantDoc = this.afs.doc(`Users/${participant.id}`);
+        this.participantDoc.update(participant);
     }
 }
