@@ -23,8 +23,12 @@ import { ParticipantComponent } from './components/participant/participant.compo
 import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
 import { RoleComponent } from './components/role/role.component';
 import { RoleAddComponent } from './components/role-add/role-add.component';
+import { AffiliateComponent } from './components/affiliate/affiliate.component';
+import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
 
 const routes: Routes = [
+{ path: 'affiliate', component: AffiliateComponent },
+{ path: 'affiliate-add', component: AffiliateAddComponent },
 { path: 'login', component: LoginComponent },
 { path: 'participantlist', component: ParticipantlistComponent },
 { path: 'registration', component: RegistrationComponent},
