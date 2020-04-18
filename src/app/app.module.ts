@@ -32,6 +32,7 @@ import { ParticipantComponent } from './components/participant/participant.compo
 import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
 import { RoleComponent } from './components/role/role.component';
 import { RoleAddComponent } from './components/role-add/role-add.component';
+import { AffiliateComponent } from './components/affiliate/affiliate.component';
 
 import { AffiliateService } from './services/affiliate.service';
 import { ParticipantService } from './services/participant.service';
@@ -61,7 +62,8 @@ import { RoleService } from './services/role.service';
     UserSubComponent,
     ParticipantComponent,
     ParticipantAddComponent,
-    RoleAddComponent
+    RoleAddComponent,
+    AffiliateComponent
   ],
   imports: [
     BrowserModule,
