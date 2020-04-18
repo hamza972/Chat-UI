@@ -8,7 +8,6 @@ import { TweetComponent } from './tweet/tweet.component';
 import { EmailComponent } from './email/email.component';
 import { NewsComponent } from './news/news.component';
 import { ScenarioComponent } from './scenario/scenario.component';
-import { ControlComponent } from './control/control.component';
 import { CountrytoolComponent } from './countrytool/countrytool.component';
 import { RoletoolComponent } from './roletool/roletool.component';
 import { ParticipanttoolComponent } from './participanttool/participanttool.component';
@@ -19,6 +18,7 @@ import { NewsPublishComponent } from './news-publish/news-publish.component';
 import { UserComponent } from './user/user.component';
 import { UserSubComponent } from './user-sub/user-sub.component';
 
+import { ControlComponent } from './components/control/control.component';
 import { ParticipantComponent } from './components/participant/participant.component';
 import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
 import { RoleComponent } from './components/role/role.component';
