@@ -92,13 +92,6 @@ export class LoginService {
       })
   }
 
-  createUser(user) {
-      return this.db.collection(`UserMain`).add({
-        firstName: user.firstName,
-        lastName: user.lastName,
-        role: user.role
-      })
-  }
 
   createParticipantUser(userP) {
     this.afAuth.auth.createUserWithEmailAndPassword(userP.email, userP.password)

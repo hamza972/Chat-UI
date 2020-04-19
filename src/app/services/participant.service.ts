@@ -32,7 +32,7 @@ export class ParticipantService {
     }
 
     add(participant: Participant) {
-        this.participantCollection.add(participant);
+        return this.participantCollection.add(participant);
     }
 
     delete(participant: Participant) {

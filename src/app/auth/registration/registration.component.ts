@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+    selector: 'app-registration',
+    templateUrl: './registration.component.html',
+    styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
 
-  authError: any; 
+    authError: any;
 
-  constructor(private auth: LoginService) { }
+    constructor(private auth: AuthService) { }
 
-  ngOnInit() {
-    this.auth.eventAuthError$.subscribe( data =>{
-      this.authError = data;
-    })
-  }
+    ngOnInit() {
+        // this.auth.eventAuthError$.subscribe( data =>{
+        //     this.authError = data;
+        // })
+    }
 
-  createControlUser(frm) { 
-    this.auth.createControlUser(frm.value);
-  }
+    create(frm) {
+        this.auth.create(frm.value);
+    }
 }
