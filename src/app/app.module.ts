@@ -30,6 +30,7 @@ import { AffiliateComponent } from './components/affiliate/affiliate.component';
 import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
 
 import { AffiliateService } from './services/affiliate.service';
+import { AuthService } from './services/auth.service';
 import { ParticipantService } from './services/participant.service';
 import { RoleService } from './services/role.service';
 
@@ -66,6 +67,7 @@ import { RoleService } from './services/role.service';
     NgbModule
   ],
   providers: [
+      AuthService,
       AffiliateService,
       ParticipantService,
       RoleService
