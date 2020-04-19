@@ -12,7 +12,7 @@ import { AffiliateService } from '../../services/affiliate.service';
 })
 export class RoleAddComponent implements OnInit {
 
-    role: Role = { firstName?: "" };
+    role: Role = { firstName: "" };
     affiliates: Affiliate[];
 
     constructor(
