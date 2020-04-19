@@ -17,9 +17,6 @@ import { TweetComponent } from './tweet/tweet.component';
 import { EmailComponent } from './email/email.component';
 import { NewsComponent } from './news/news.component';
 import { ScenarioComponent } from './scenario/scenario.component';
-import { CountrytoolComponent } from './countrytool/countrytool.component';
-import { RoletoolComponent } from './roletool/roletool.component';
-import { ParticipanttoolComponent } from './participanttool/participanttool.component';
 import { ParticipantlistComponent } from './participantlist/participantlist.component';
 import { ChatComponent } from './chat/chat.component';
 import { EmailViewComponent } from './email-view/email-view.component';
@@ -52,9 +49,6 @@ import { RoleService } from './services/role.service';
     NewsComponent,
     ScenarioComponent,
     ControlComponent,
-    CountrytoolComponent,
-    RoletoolComponent,
-    ParticipanttoolComponent,
     ParticipantlistComponent,
     ChatComponent,
     EmailViewComponent,

@@ -8,9 +8,6 @@ import { TweetComponent } from './tweet/tweet.component';
 import { EmailComponent } from './email/email.component';
 import { NewsComponent } from './news/news.component';
 import { ScenarioComponent } from './scenario/scenario.component';
-import { CountrytoolComponent } from './countrytool/countrytool.component';
-import { RoletoolComponent } from './roletool/roletool.component';
-import { ParticipanttoolComponent } from './participanttool/participanttool.component';
 import { ParticipantlistComponent } from './participantlist/participantlist.component';
 import { ChatComponent } from './chat/chat.component';
 import { EmailViewComponent } from './email-view/email-view.component';
@@ -42,10 +39,7 @@ const routes: Routes = [
 { path: 'scenario', component: ScenarioComponent},
 { path: 'role', component: RoleComponent},
 { path: 'role-add', component: RoleAddComponent},
-{ path: 'countryTool', component: CountrytoolComponent},
-{ path: 'roleTool', component: RoletoolComponent},
 { path: 'chat', component: ChatComponent},
-{ path: 'participantTool', component:ParticipanttoolComponent},
 { path: 'participant', component:ParticipantComponent},
 { path: 'participant-add', component:ParticipantAddComponent},
 { path: 'user', component:UserComponent},
