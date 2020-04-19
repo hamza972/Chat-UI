@@ -8,12 +8,9 @@ import { TweetComponent } from './tweet/tweet.component';
 import { EmailComponent } from './email/email.component';
 import { NewsComponent } from './news/news.component';
 import { ScenarioComponent } from './scenario/scenario.component';
-import { ParticipantlistComponent } from './participantlist/participantlist.component';
 import { ChatComponent } from './chat/chat.component';
 import { EmailViewComponent } from './email-view/email-view.component';
 import { NewsPublishComponent } from './news-publish/news-publish.component';
-import { UserComponent } from './user/user.component';
-import { UserSubComponent } from './user-sub/user-sub.component';
 
 import { ControlComponent } from './components/control/control.component';
 import { ParticipantComponent } from './components/participant/participant.component';
@@ -27,7 +24,6 @@ const routes: Routes = [
 { path: 'affiliate', component: AffiliateComponent },
 { path: 'affiliate-add', component: AffiliateAddComponent },
 { path: 'login', component: LoginComponent },
-{ path: 'participantlist', component: ParticipantlistComponent },
 { path: 'registration', component: RegistrationComponent},
 { path: 'home', component: HomeComponent},
 { path: 'tweet', component: TweetComponent},
@@ -42,8 +38,6 @@ const routes: Routes = [
 { path: 'chat', component: ChatComponent},
 { path: 'participant', component:ParticipantComponent},
 { path: 'participant-add', component:ParticipantAddComponent},
-{ path: 'user', component:UserComponent},
-{ path: 'user-sub', component:UserSubComponent},
 { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
