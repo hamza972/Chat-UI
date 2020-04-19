@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ParticipantService } from '../../services/participant.service';
-import { Participant } from '../../models/Participant';
+import { Participant } from '../../models/participant';
 
 @Component({
   selector: 'app-participant',

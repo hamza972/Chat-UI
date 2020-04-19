@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { appUser } from '../models/user';
 import { switchMap } from 'rxjs/operators';
 import { country } from '../models/country';
-import { Role } from '../models/Role';
+import { Role } from '../models/role';
 import { stringify } from 'querystring';
 import { tweetClass } from '../models/tweetClass';
 import { newsClass } from '../models/newsClass';

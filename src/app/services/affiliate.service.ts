@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Affiliate } from '../models/affiliate';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -8,9 +9,9 @@ import { map } from 'rxjs/operators';
 })
 export class AffiliateService {
 
-    affiliateCollection: AngularFirestoreCollection<Role>;
-    affiliate: Observable<Role[]>;
-    roleDoc: AngularFirestoreDocument<Role>;
+    affiliateCollection: AngularFirestoreCollection<Affiliate>;
+    affiliate: Observable<Affiliate[]>;
+    affiliateDoc: AngularFirestoreDocument<Affiliate>;
 
     constructor(public afs: AngularFirestore) {
         //this.items = this.afs.collection('items').valueChanges();
@@ -19,7 +20,7 @@ export class AffiliateService {
 
         this.affiliate = this.affiliateCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
-                const data = a.payload.doc.data() as Role;
+                const data = a.payload.doc.data() as Affiliate;
                 data.id = a.payload.doc.id;
                 return data;
             });
@@ -30,17 +31,17 @@ export class AffiliateService {
         return this.affiliateCollection.valueChanges();
     }
 
-    add(affiliate: Role) {
+    add(affiliate: Affiliate) {
         this.affiliateCollection.add(affiliate);
     }
 
-    delete(affiliate: Role) {
-        this.roleDoc = this.afs.doc(`Countries/${affiliate.id}`);
-        this.roleDoc.delete();
+    delete(affiliate: Affiliate) {
+        this.affiliateDoc = this.afs.doc(`Countries/${affiliate.id}`);
+        this.affiliateDoc.delete();
     }
 
-    update(affiliate: Role) {
-        this.roleDoc = this.afs.doc(`Countries/${affiliate.id}`);
-        this.roleDoc.update(affiliate);
+    update(affiliate: Affiliate) {
+        this.affiliateDoc = this.afs.doc(`Countries/${affiliate.id}`);
+        this.affiliateDoc.update(affiliate);
     }
 }

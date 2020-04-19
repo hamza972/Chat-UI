@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Role } from '../../models/role';
+import { Affiliate } from '../../models/affiliate';
 import { RoleService } from '../../services/role.service';
 import { AffiliateService } from '../../services/affiliate.service';
-import { Role } from '../../models/Role';
-import { Affiliate } from '../../models/Affiliate';
 
 @Component({
     selector: 'app-role-add',

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ParticipantService } from '../../services/participant.service';
 import { RoleService } from '../../services/role.service';
-import { Participant } from '../../models/Participant';
-import { Role } from '../../models/Role';
+import { Participant } from '../../models/participant';
+import { Role } from '../../models/role';
 
 @Component({
     selector: 'app-participant-add',
