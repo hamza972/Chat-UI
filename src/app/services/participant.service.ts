@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Participant } from '../models/participant';
+import { AuthService } from './../services/auth.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -13,7 +14,10 @@ export class ParticipantService {
     participant: Observable<Participant[]>;
     participantDoc: AngularFirestoreDocument<Participant>;
 
-    constructor(public afs: AngularFirestore) {
+    constructor(
+        public afs: AngularFirestore,
+        private auth: AuthService
+    ) {
         //this.items = this.afs.collection('items').valueChanges();
 
         this.participantCollection = this.afs.collection('Users', ref => ref.orderBy('firstName', 'asc'));
@@ -32,7 +36,8 @@ export class ParticipantService {
     }
 
     add(participant: Participant) {
-        return this.participantCollection.add(participant);
+        return this.auth.createUser(participant);
+        //return this.participantCollection.add(participant);
     }
 
     delete(participant: Participant) {

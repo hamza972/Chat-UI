@@ -44,7 +44,12 @@ export class AuthService {
             email: this.newUser.email,
             firstname: this.newUser.firstName,
             lastName: this.newUser.lastName,
-            systemRole: this.newUser.systemRole
+            systemRole: this.newUser.systemRole,
+            role: this.newUser.role,
+            roleFirstName: this.newUser.roleFirstName,
+            roleLastName: this.newUser.roleLastName,
+            rolePosition: this.newUser.rolePosition,
+            roleAffiliation: this.newUser.roleAffiliation
         })
     }
 

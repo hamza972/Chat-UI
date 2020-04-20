@@ -35,7 +35,7 @@ export class ParticipantAddComponent implements OnInit {
 
     selectionChanged(event) {
         this.roleDetails = event.target.value.split("|");
-        //console.log(this.roleDetails);
+        console.log(this.roleDetails);
     }
 
     cancel() {
@@ -48,6 +48,7 @@ export class ParticipantAddComponent implements OnInit {
             this.participant.roleLastName = this.roleDetails[1];
             this.participant.rolePosition = this.roleDetails[2];
             this.participant.roleAffiliation = this.roleDetails[3];
+            this.participant.systemRole = "participant";
             this.participantService.add(this.participant);
             this.router.navigate(['/control']);
         }
