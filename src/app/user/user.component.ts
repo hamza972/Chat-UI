@@ -26,7 +26,7 @@ export class UserComponent implements OnInit {
 
   createUser(frm) {
       console.log(frm.value);
-      this.auth.createUser(frm.value);
+      //this.auth.createUser(frm.value);
   }
 
 }

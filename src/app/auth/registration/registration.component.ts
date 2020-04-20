@@ -10,15 +10,17 @@ export class RegistrationComponent implements OnInit {
 
     authError: any;
 
-    constructor(private auth: AuthService) { }
+    constructor(
+        private auth: AuthService
+    ) { }
 
-    ngOnInit() {
-        // this.auth.eventAuthError$.subscribe( data =>{
-        //     this.authError = data;
-        // })
+    ngOnInit(): void {
+        this.auth.eventAuthError$.subscribe( data => {
+            this.authError
+        })
     }
 
     create(frm) {
-        this.auth.create(frm.value);
+        this.auth.createUser(frm.value);
     }
 }
