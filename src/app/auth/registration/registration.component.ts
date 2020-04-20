@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class RegistrationComponent implements OnInit {
     authError: any;
 
     constructor(
-        private auth: AuthService
+        private auth: AuthService,
+        private router: Router
     ) { }
 
     ngOnInit(): void {
@@ -21,6 +23,13 @@ export class RegistrationComponent implements OnInit {
     }
 
     create(frm) {
+        //frm.value.systemRole = frm.value.syr == "cc" ? "control" : "participant";
+        frm.value.systemRole = "control";
+        //console.log(frm.value);
         this.auth.createUser(frm.value);
+    }
+
+    cancel() {
+        this.router.navigate(['/home']);
     }
 }
