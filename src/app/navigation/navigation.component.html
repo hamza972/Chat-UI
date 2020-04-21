@@ -1,15 +1,19 @@
 <header>
-    <!-- <a  *ngIf="user$ | async" class="logo">Logged in as: {{ (user$ | async).role }} - {{ (user$ | async).email }}</a> -->
-    <ul class="nav-tabs" *ngIf="user">
-        <li><a *ngIf="user" routerLink="/">Home</a></li>
-        <!-- <li ngbNavItem><a ngbNavLink *ngIf="(user$ | async).systemRole === 'participant'" routerLink="/role">Role</a></li> -->
-        <li><a *ngIf="user" routerLink="/scenario">Scenario</a></li>
-        <li><a *ngIf="user" routerLink="/email">Email</a></li>
-        <li><a *ngIf="user" routerLink="/tweet">Tweet Board</a></li>
-        <li><a *ngIf="user" routerLink="/news">News</a></li>
-        <li><a *ngIf="user" routerLink="/chat">Chat</a></li>
-        <!-- <li ngbNavItem><a ngbNavLink *ngIf="(user$ | async).systemRole === 'admin'" routerLink="/control">Control</a></li> -->
-        <li><a *ngIf="user" routerLink="/control">Control</a></li>
-        <li><a *ngIf="user" (click)="logout()" routerLink="/">Logout</a></li>
-    </ul>
+    <nav *ngIf="user">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo ml-12"><i class="fa fa-pencil"></i>MEPS</a>
+            <ul class="right hide-on-med-and-down">
+                <!-- <li ngbNavItem><a ngbNavLink *ngIf="(user$ | async).systemRole === 'participant'" routerLink="/role">Role</a></li> -->
+                <li><a *ngIf="user" routerLink="/scenario">Scenario</a></li>
+                <li><a *ngIf="user" routerLink="/email">Email</a></li>
+                <li><a *ngIf="user" routerLink="/tweet">Tweet Board</a></li>
+                <li><a *ngIf="user" routerLink="/news">News</a></li>
+                <li><a *ngIf="user" routerLink="/chat">Chat</a></li>
+                <!-- <li ngbNavItem><a ngbNavLink *ngIf="(user$ | async).systemRole === 'admin'" routerLink="/control">Control</a></li> -->
+                <li><a *ngIf="user" routerLink="/control">Control</a></li>
+                <li><a *ngIf="user" (click)="logout()" routerLink="/">Logout</a></li>
+                <!-- <a  *ngIf="user$ | async" class="logo">Logged in as: {{ (user$ | async).role }} - {{ (user$ | async).email }}</a> -->
+            </ul>
+        </div>
+    </nav>
 </header>
