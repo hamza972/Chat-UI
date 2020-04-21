@@ -6,7 +6,7 @@
       <nav>
         <ul>
           <li class="loggedlogo"><b *ngIf="!user" ><img src="assets/img/loggedoutlogo.png" style="width:582px;height:142px;"></b></li>
-          <li><a *ngIf="user$ | async" routerLink="/">Home</a></li>
+          <li><a *ngIf="user$ | async" routerLink="/">Homeersdihfsudhfisudh</a></li>
           <li><a *ngIf="(user$ | async).systemRole === 'participant'" routerLink="/role">Role</a></li>
           <li><a *ngIf="(user$ | async).systemRole === 'admin'" routerLink="/participantlist">Participant List</a></li>
           <li><a *ngIf="user$ | async" routerLink="/scenario">Scenario</a></li>
