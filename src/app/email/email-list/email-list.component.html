@@ -1,0 +1,50 @@
+<!-- <h1 *ngFor="let email of emails">{{ email.body }}</h1> -->
+
+<form>
+  <div class="form-group form-inline">
+    <input
+      placeholder="Search email:"
+      class="form-control ml-2"
+      type="text"
+      [formControl]="filter"
+    />
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"><ng-content></ng-content></th>
+      <th scope="col">Subject</th>
+      <th scope="col">Body</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let email of emails$ | async; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>
+        <ngb-highlight
+          [result]="email.from.user"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight
+          [result]="email.subject"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td>
+        <ngb-highlight
+          [result]="email.body"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td>
+        {{ email.date.seconds | date: "dd-MM-yyyy" }}
+      </td>
+    </tr>
+  </tbody>
+</table>
