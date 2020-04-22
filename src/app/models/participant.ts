@@ -1,4 +1,4 @@
-export interface appUser {
+export interface Participant {
     id?:string;
     firstName?:string;
     lastName?: string;

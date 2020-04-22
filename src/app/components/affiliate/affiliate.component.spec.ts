@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RoletoolComponent } from './roletool.component';
+import { AffiliateComponent } from './affiliate.component';
 
-describe('RoletoolComponent', () => {
-  let component: RoletoolComponent;
-  let fixture: ComponentFixture<RoletoolComponent>;
+describe('AffiliateComponent', () => {
+  let component: AffiliateComponent;
+  let fixture: ComponentFixture<AffiliateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RoletoolComponent ]
+      declarations: [ AffiliateComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RoletoolComponent);
+    fixture = TestBed.createComponent(AffiliateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

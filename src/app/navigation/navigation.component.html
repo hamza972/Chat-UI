@@ -1,24 +1,19 @@
-<img *ngIf="user$ | async" src="assets/img/outline.png" style="width:190px;height:142px;" class="headeritem">
-<img *ngIf="user$ | async" src="assets/img/Heading.png" style="width:582px;height:142px;" class="centerheader">
 <header>
-    <div class="navcontainer">
-      <a  *ngIf="user$ | async" class="logo">Logged in as: {{ (user$ | async).role }} - {{ (user$ | async).email }}</a>
-      <nav>
-        <ul>
-          <li class="loggedlogo"><b *ngIf="!user" ><img src="assets/img/loggedoutlogo.png" style="width:582px;height:142px;"></b></li>
-          <li><a *ngIf="user$ | async" routerLink="/">Homeersdihfsudhfisudh</a></li>
-          <li><a *ngIf="(user$ | async).systemRole === 'participant'" routerLink="/role">Role</a></li>
-          <li><a *ngIf="(user$ | async).systemRole === 'admin'" routerLink="/participantlist">Participant List</a></li>
-          <li><a *ngIf="user$ | async" routerLink="/scenario">Scenario</a></li>
-          <li><a *ngIf="user$ | async" routerLink="/email">Email</a></li>
-          <li><a *ngIf="user$ | async" routerLink="/tweet">Tweet Board</a></li>
-          <li><a *ngIf="user$ | async" routerLink="/news">News</a></li>
-          <li><a *ngIf="user$ | async" routerLink="/chat">Chat</a></li>
-          <li><a *ngIf="user$ | async" routerLink="/user">User</a></li>
-          <li><a *ngIf="user$ | async" routerLink="/user-sub">User-sub</a></li>
-          <li><a *ngIf="(user$ | async).systemRole === 'admin'" routerLink="/control">Control</a></li>
-          <li><a *ngIf="user$ | async" (click)="logout()" routerLink="/">Logout</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <nav *ngIf="user">
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo ml-12"><i class="fa fa-pencil"></i>MEPS</a>
+            <ul class="right hide-on-med-and-down">
+                <!-- <li ngbNavItem><a ngbNavLink *ngIf="(user$ | async).systemRole === 'participant'" routerLink="/role">Role</a></li> -->
+                <li><a *ngIf="user" routerLink="/scenario">Scenario</a></li>
+                <li><a *ngIf="user" routerLink="/email">Email</a></li>
+                <li><a *ngIf="user" routerLink="/tweet">Tweet Board</a></li>
+                <li><a *ngIf="user" routerLink="/news">News</a></li>
+                <li><a *ngIf="user" routerLink="/chat">Chat</a></li>
+                <!-- <li ngbNavItem><a ngbNavLink *ngIf="(user$ | async).systemRole === 'admin'" routerLink="/control">Control</a></li> -->
+                <li><a *ngIf="user" routerLink="/control">Control</a></li>
+                <li><a *ngIf="user" (click)="logout()" routerLink="/">Logout</a></li>
+                <!-- <a  *ngIf="user$ | async" class="logo">Logged in as: {{ (user$ | async).role }} - {{ (user$ | async).email }}</a> -->
+            </ul>
+        </div>
+    </nav>
+</header>

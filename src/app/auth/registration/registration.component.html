@@ -1,45 +1,47 @@
 <div class="row mt-4">
     <div class="col-12">
-      <h4>Control User Registration</h4>
+        <h4>Control User Registration</h4>
     </div>
-  
+
     <div class="col-12">
-      <div class="row" *ngIf="authError">
-        <div class="col-12 alert alert-danger">
-          {{ authError?.message }}
-        </div>
-      </div>
-      <form #userRegForm="ngForm" (ngSubmit)="createControlUser(userRegForm)">
-        <div class="row">
-          <div class="col-md-6 mb-2">
-            <input ngModel #firstName="ngModel" name="firstName" type="text" class="form-control" id="firstName" placeholder="First name">
-          </div>
-          <div class="col-md-6 mb-2">
-            <input ngModel #lastName="ngModel" name="lastName" type="text" class="form-control" id="lastName" value="" placeholder="Last name">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 mb-2">
-            <input ngModel #email="ngModel" name="email" type="email" class="form-control" placeholder="Email address">
-          </div>
-        </div>
-        <div>
-          <div class="row">
-            <div class="col-md-12 mb-2">
-              <input ngModel #password="ngModel" name="password" type="password" class="form-control" placeholder="New password">
+        <div class="row" *ngIf="authError">
+            <div class="col-12 alert alert-danger">
+                {{ authError?.message }}
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12 mb-2">
-              <input name="password" type="password" class="form-control" placeholder="Confirm password">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <button type="submit">Submit</button>
-            </div>
-          </div>
         </div>
-      </form>
+        <form #userRegForm="ngForm" (ngSubmit)="create(userRegForm)">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <input ngModel #firstName="ngModel" name="firstName" type="text" class="form-control" id="firstName" placeholder="First name">
+                </div>
+                <div class="col-md-6 mb-2">
+                    <input ngModel #lastName="ngModel" name="lastName" type="text" class="form-control" id="lastName" value="" placeholder="Last name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mb-2">
+                    <input ngModel #email="ngModel" name="email" type="email" class="form-control" placeholder="Email address">
+                </div>
+            </div>
+            <div>
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <input ngModel #password="ngModel" name="password" type="password" class="form-control" placeholder="New password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <input name="password" type="password" class="form-control" placeholder="Confirm password">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input ngModel #syr="ngModel" name="syr" type="hidden" class="form-control" value="cc">
+                        <button type="submit">Submit</button>
+                        <button type="button" (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
-  </div>
+</div>

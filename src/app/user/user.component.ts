@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../auth/login.service';
 import { Router } from '@angular/router';
 
-import { role } from '../models/role';
+import { Role } from '../models/role';
 
 @Component({
   selector: 'app-user',
@@ -11,7 +11,7 @@ import { role } from '../models/role';
 })
 export class UserComponent implements OnInit {
 
-    roleArray: role[];
+    roleArray: Role[];
 
     constructor(private auth: LoginService,
       private router: Router) { }
@@ -26,7 +26,7 @@ export class UserComponent implements OnInit {
 
   createUser(frm) {
       console.log(frm.value);
-      this.auth.createUser(frm.value);
+      //this.auth.createUser(frm.value);
   }
 
 }

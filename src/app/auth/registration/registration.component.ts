@@ -1,24 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss']
+    selector: 'app-registration',
+    templateUrl: './registration.component.html',
+    styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent implements OnInit {
 
-  authError: any; 
+    authError: any;
 
-  constructor(private auth: LoginService) { }
+    constructor(
+        private auth: AuthService,
+        private router: Router
+    ) { }
 
-  ngOnInit() {
-    this.auth.eventAuthError$.subscribe( data =>{
-      this.authError = data;
-    })
-  }
+    ngOnInit(): void {
+        this.auth.eventAuthError$.subscribe( data => {
+            this.authError
+        })
+    }
 
-  createControlUser(frm) { 
-    this.auth.createControlUser(frm.value);
-  }
+    create(frm) {
+        //frm.value.systemRole = frm.value.syr == "cc" ? "control" : "participant";
+        frm.value.systemRole = "control";
+        frm.value.role = "admin";
+        frm.value.roleFirstName = "admin";
+        frm.value.roleLastName = "admin";
+        frm.value.rolePosition = "admin";
+        frm.value.roleAffiliation = "admin";
+        console.log(frm.value);
+        this.auth.createUser(frm.value);
+    }
+
+    cancel() {
+        this.router.navigate(['/home']);
+    }
 }

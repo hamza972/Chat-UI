@@ -1,43 +1,38 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from '../auth/login.service';
+import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
-import { AngularFirestore, AngularFirestoreDocument, DocumentReference, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { appUser } from '../models/user';
-import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
-import { stringify } from 'querystring';
-import { UserInfo } from 'firebase';
 
 @Component({
-  selector: 'app-navigation',
-  templateUrl: './navigation.component.html',
-  styleUrls: ['./navigation.component.scss']
+    selector: 'app-navigation',
+    templateUrl: './navigation.component.html',
+    styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
+    user: firebase.User;
 
-  user$: Observable<appUser>;
+    constructor(
+        private auth: AuthService,
+        private router: Router
+    ) { }
 
-appTitle: string = 'MEPS';
-user: firebase.User;
-
-  constructor(private auth: LoginService,
-    private router: Router) { 
-      
-      
+    ngOnInit(): void {
+        this.auth.getUserState()
+        .subscribe(user => {
+            this.user = user;
+        })
     }
 
-  ngOnInit() {
-    this.user$ = this.auth.user$;
-    this.auth.getUserCurrent()
-      .subscribe( user => {
-        this.user = user;
-      })
-  }
-  
+    login() {
+        this.router.navigate(['/login']);
+    }
 
+    register() {
+        console.log('here');
+        this.router.navigate(['/registration']);
+    }
 
-
-  logout() {
-    this.auth.logout();
-  }
+    logout() {
+        this.auth.logout();
+        this.router.navigate(['/home']);
+    }
 }
