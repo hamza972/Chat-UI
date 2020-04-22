@@ -1,19 +1,55 @@
+
+
 <header>
-    <nav *ngIf="user">
-        <div class="nav-wrapper">
-            <a href="#!" class="brand-logo ml-12"><i class="fa fa-pencil"></i>MEPS</a>
-            <ul class="right hide-on-med-and-down">
-                <!-- <li ngbNavItem><a ngbNavLink *ngIf="(user$ | async).systemRole === 'participant'" routerLink="/role">Role</a></li> -->
-                <li><a *ngIf="user" routerLink="/scenario">Scenario</a></li>
-                <li><a *ngIf="user" routerLink="/email">Email</a></li>
-                <li><a *ngIf="user" routerLink="/tweet">Tweet Board</a></li>
-                <li><a *ngIf="user" routerLink="/news">News</a></li>
-                <li><a *ngIf="user" routerLink="/chat">Chat</a></li>
-                <!-- <li ngbNavItem><a ngbNavLink *ngIf="(user$ | async).systemRole === 'admin'" routerLink="/control">Control</a></li> -->
-                <li><a *ngIf="user" routerLink="/control">Control</a></li>
-                <li><a *ngIf="user" (click)="logout()" routerLink="/">Logout</a></li>
-                <!-- <a  *ngIf="user$ | async" class="logo">Logged in as: {{ (user$ | async).role }} - {{ (user$ | async).email }}</a> -->
-            </ul>
+    <!--Navigation -->
+<nav *ngIf="user" class="nav-extended">
+    
+    <!-- set header wrapper -->
+    <div class="header-wrapper">
+        <!-- set header -->
+        <div class="header w clearfix">
+
+
+            <div class="nav-wrapper">
+                
+                <div class="nav clearfix">
+             <!-- Set web logoo -->
+             <div class="logo" title="MEPS">
+                <a class="Middle" href="#"></a>
+                <a class="MEPS" href="#"></a>
+             </div>
+
+                 <!-- set leftside content -->
+                    <!-- <a href="#!" class="brand-logo ml-12"><i class="fa fa-pencil"></i>MEPS</a> -->
+                    <ul class="right hide-on-med-and-down">
+                        <!-- <li ngbNavItem><a ngbNavLink *ngIf="(user$ | async).systemRole === 'participant'" routerLink="/role">Role</a></li> -->
+                        <li><a *ngIf="user" routerLink="/scenario" >Scenario</a></li>
+                        <li><a *ngIf="user" routerLink="/email">Email</a></li>
+                        <li><a *ngIf="user" routerLink="/tweet">Tweet Board</a></li>
+                        <li><a *ngIf="user" routerLink="/news">News</a></li>
+                        <li><a *ngIf="user" routerLink="/chat">Chat</a></li>
+                        <!-- <li ngbNavItem><a ngbNavLink *ngIf="(user$ | async).systemRole === 'admin'" routerLink="/control">Control</a></li> -->
+                        <li><a *ngIf="user" routerLink="/control">Control</a></li>
+                        <li><a *ngIf="user" (click)="logout()" routerLink="/">Logout</a></li>
+                        <!-- <a  *ngIf="user$ | async" class="logo">Logged in as: {{ (user$ | async).role }} - {{ (user$ | async).email }}</a> -->
+                    </ul>
+
+                  <!-- set rightside content -->                       
+                     <ul class="user">
+                         <li><a href="javascript:;">
+                            <i class="fa fa-user"> </i>
+                             Username
+                            <i class="fa fa-angle-down"> </i>
+                            </a>
+                       </li>                         
+                     </ul>
+
+                </div>
+    
+            </div>
+
         </div>
-    </nav>
+    </div>
+</nav>
+ <!-- end Navigation -->
 </header>
