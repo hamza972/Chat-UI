@@ -2,7 +2,8 @@ body
 {
     margin: 0;
     padding: 0;
-    background-image: url("./1.jpg");
+    background-image: url("../../../assets/img/1.png");
+    
     background-size: cover;
     font-family: sans-serif;
 }
@@ -13,18 +14,20 @@ body
     left: 50%;
     transform: translate(-50%,-50%);
     width: 700px;
-    height: 420px;
+    height: 450px;
     border-radius: 5px;
-    border:10px solid rgba(255, g255, 255, .2);
+    border:10px solid rgba(255, 255, 255, .2);
     box-shadow :  10px 10px 15px rgba(0, 0, 0, .3);
 
 }
 .imgBx
 {
-    width: 350px;
-    height: 420px;
-    overflow: hidden;
     float: left;
+    right: 120px;
+    width: 350px;
+    height: 423px;
+    overflow: hidden;
+
 
 }
 .imgBx img
@@ -34,15 +37,16 @@ body
 }
 .loginBox
 {
+    
     float: right;
     left: 20px;
-    width: 350px;
+    width: 300px;
     height: 420px;
     box-sizing: border-box;
     padding:  80px 40px;
     background-color: rgba(255, 255, 255,.8);
 }
-h1
+h3
 {
     margin: 0;
     margin-top: 20px;
@@ -72,10 +76,10 @@ h1
 {
     color: rgba(0, 0, 0, .3);
 }
-.inputBox
-{
-    position: relative;
-}
+// .inputBox
+// {
+//     position: relative;
+// }
 
 .loginBox input[type="submit"]
 {
