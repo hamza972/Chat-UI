@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "~8.2.0",
     "@angular/router": "~8.2.0",
     "@ng-bootstrap/ng-bootstrap": "~5.2.2",
+    "@ckeditor/ckeditor5-angular": "^1.2.3",
+    "@ckeditor/ckeditor5-build-classic": "^18.0.0",
     "bootstrap": "^4.4.1",
     "firebase": "^6.4.0",
     "font-awesome": "^4.7.0",

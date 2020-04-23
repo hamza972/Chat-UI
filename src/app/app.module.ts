@@ -1,38 +1,50 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { environment } from '../environments/environment';
-import { AngularFireModule } from '@angular/fire'
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { AppRoutingModule } from "./app-routing.module";
+import { AppComponent } from "./app.component";
+import { environment } from "../environments/environment";
+import { AngularFireModule } from "@angular/fire";
+import { AngularFireAuthModule } from "@angular/fire/auth";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireDatabaseModule } from "@angular/fire/database";
-import { LoginComponent } from './auth/login/login.component';
-import { RegistrationComponent } from './auth/registration/registration.component';
-import { HomeComponent } from './home/home.component';
-import { NavigationComponent } from './navigation/navigation.component';
-import { TweetComponent } from './tweet/tweet.component';
-import { EmailComponent } from './email/email.component';
-import { NewsComponent } from './news/news.component';
-import { ScenarioComponent } from './scenario/scenario.component';
-import { ChatComponent } from './chat/chat.component';
-import { EmailViewComponent } from './email-view/email-view.component';
-import { NewsPublishComponent } from './news-publish/news-publish.component';
+import { LoginComponent } from "./auth/login/login.component";
+import { RegistrationComponent } from "./auth/registration/registration.component";
+import { HomeComponent } from "./home/home.component";
+import { NavigationComponent } from "./navigation/navigation.component";
+import { TweetComponent } from "./tweet/tweet.component";
+import { EmailComponent } from "./email/email.component";
+import { NewsComponent } from "./news/news.component";
+import { ScenarioComponent } from "./scenario/scenario.component";
+import { ChatComponent } from "./chat/chat.component";
+import { EmailViewComponent } from "./email-view/email-view.component";
+import { NewsPublishComponent } from "./news-publish/news-publish.component";
 
-import { ControlComponent } from './components/control/control.component';
-import { ParticipantComponent } from './components/participant/participant.component';
-import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
-import { RoleComponent } from './components/role/role.component';
-import { RoleAddComponent } from './components/role-add/role-add.component';
-import { AffiliateComponent } from './components/affiliate/affiliate.component';
-import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
+import { ControlComponent } from "./components/control/control.component";
+import { ParticipantComponent } from "./components/participant/participant.component";
+import { ParticipantAddComponent } from "./components/participant-add/participant-add.component";
+import { RoleComponent } from "./components/role/role.component";
+import { RoleAddComponent } from "./components/role-add/role-add.component";
+import { AffiliateComponent } from "./components/affiliate/affiliate.component";
+import { AffiliateAddComponent } from "./components/affiliate-add/affiliate-add.component";
 
-import { AffiliateService } from './services/affiliate.service';
-import { AuthService } from './services/auth.service';
-import { ParticipantService } from './services/participant.service';
-import { RoleService } from './services/role.service';
+import { AffiliateService } from "./services/affiliate.service";
+import { AuthService } from "./services/auth.service";
+import { ParticipantService } from "./services/participant.service";
+import { RoleService } from "./services/role.service";
+
+/*
+ * All imports for emails including services and external componenets
+ */
+import { CKEditorModule } from "@ckeditor/ckeditor5-angular";
+import { EmailComposeComponent } from "./email/email-compose/email-compose.component";
+import { EmailInboxComponent } from "./email/email-inbox/email-inbox.component";
+import { EmailDeletedComponent } from "./email/email-deleted/email-deleted.component";
+import { EmailDraftsComponent } from "./email/email-drafts/email-drafts.component";
+import { EmailSentComponent } from "./email/email-sent/email-sent.component";
+import { EmailListComponent } from "./email/email-list/email-list.component";
+import { EmailService } from "./services/email.service";
 
 @NgModule({
   declarations: [
@@ -54,24 +66,33 @@ import { RoleService } from './services/role.service';
     ParticipantAddComponent,
     RoleAddComponent,
     AffiliateComponent,
-    AffiliateAddComponent
+    AffiliateAddComponent,
+    EmailComposeComponent,
+    EmailInboxComponent,
+    EmailDeletedComponent,
+    EmailDraftsComponent,
+    EmailSentComponent,
+    EmailListComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    AngularFireModule.initializeApp( environment.firebase),
+    ReactiveFormsModule,
+    CKEditorModule,
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireDatabaseModule,
-    NgbModule
+    NgbModule,
   ],
   providers: [
-      AuthService,
-      AffiliateService,
-      ParticipantService,
-      RoleService
+    AuthService,
+    AffiliateService,
+    ParticipantService,
+    RoleService,
+    EmailService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
