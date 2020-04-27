@@ -50,7 +50,7 @@
     
                  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" >  
                    
-                    <div class="row" *ngIf="authError">
+                    <div class="inputBox" *ngIf="authError">
                         <div class="col-12 alert alert-danger">{{ authError?.message }}</div>
                     </div >      
     
