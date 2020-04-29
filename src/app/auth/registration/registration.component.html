@@ -15,39 +15,43 @@
                         {{ authError?.message }}
                     </div>
                 </div>
+                
                 <form #userRegForm="ngForm" (ngSubmit)="create(userRegForm)">
                     <div class="row">
                         <div class="col-md-6 mb-2">
-                            <input ngModel #firstName="ngModel" name="firstName" type="text" class="form-control" id="firstName" placeholder="First name">
+                            <input ngModel #firstName="ngModel" name="firstName" type="text" class="form-control" id="firstName" placeholder="First name" autofocus >
                         </div>
                         <div class="col-md-6 mb-2">
-                            <input ngModel #lastName="ngModel" name="lastName" type="text" class="form-control" id="lastName" value="" placeholder="Last name">
+                            <input ngModel #lastName="ngModel" name="lastName" type="text" class="form-control" id="lastName" value="" placeholder="Last name"autofocus>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12 mb-2">
-                            <input ngModel #email="ngModel" name="email" type="email" class="form-control" placeholder="Email address">
+                            <input ngModel #email="ngModel" name="email" type="email" class="form-control" placeholder="Email address" autofocus>
                         </div>
                     </div>
                     <div>
                         <div class="row">
                             <div class="col-md-12 mb-2">
-                                <input ngModel #password="ngModel" name="password" type="password" class="form-control" placeholder="New password">
+                                <input ngModel #password="ngModel" name="password" type="password" class="form-control" placeholder="New password" autofocus>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12 mb-2">
-                                <input name="password" type="password" class="form-control" placeholder="Confirm password">
+                                <input name="password" type="password" class="form-control" placeholder="Confirm password" autofocus> 
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <input ngModel #syr="ngModel" name="syr" type="hidden" class="form-control" value="cc">
+                                <input ngModel #syr="ngModel" name="syr" type="hidden" class="form-control" value="cc" autofocus>
                                 <button type="submit">Submit</button>
                                 <button type="button" (click)="cancel()">Cancel</button>
                             </div>
                         </div>
                     </div>
+
+
+
                 </form>
             </div>
         </div>

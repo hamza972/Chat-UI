@@ -59,7 +59,7 @@ h4
     margin: 0;
     font-size: 45px;
     margin-left: 73px;
-    margin-top: 70px;
+    margin-top: 65px;
     padding: 0 0 63px;
     color: #828282;
 }
@@ -72,6 +72,7 @@ h4
 }
 .loginBox input
 {
+    
     width: 100%;
     // margin-bottom: 25px;
 }
@@ -113,4 +114,8 @@ h4
     color:  #828282 ;
     font-weight: bold;
 }
-
+.loginBox input[type="submit"]:hover
+{
+    background-color: #828282;
+    color: #f0f5f9;
+}
