@@ -21,8 +21,8 @@ body
     top: 45%;
     left: 50%;
     transform: translate(-50%,-50%);
-    width: 700px;
-    height: 420px;
+    width: 800px;
+    height: 500px;
     border-radius: 7px;
     border:0px solid rgba(255, 255, 255, .2);
     box-shadow :  10px 10px 15px rgba(0, 0, 0, .3);
@@ -32,8 +32,8 @@ body
 {
     float: left;
    
-    width: 350px;
-    height: 420px;
+    width: 420px;
+    height: 500px;
     overflow: hidden;
 
 }
@@ -47,8 +47,8 @@ body
     
     float: right;
     left: 20px;
-    width: 320px;
-    height: 420px;
+    width: 350px;
+    height: 500px;
     box-sizing: border-box;
     padding:  15px 40px;
     background-color: rgba(255, 255, 255,.3);
@@ -57,16 +57,23 @@ body
 h4
 {
     margin: 0;
-    
-    margin-left: 75px;
-    margin-top: 25px;
-    padding: 0 0 60px;
+    font-size: 45px;
+    margin-left: 73px;
+    margin-top: 70px;
+    padding: 0 0 63px;
     color: #828282;
+}
+
+.alert-danger
+{
+    font-size: 12px;
+    padding: 0;
+    margin: 0;
 }
 .loginBox input
 {
     width: 100%;
-    margin-bottom: 25px;
+    // margin-bottom: 25px;
 }
 .loginBox input[type="email"],
 .loginBox input[type="password"]
@@ -74,12 +81,13 @@ h4
     border: none;   
     border-bottom: 2px solid #828282; 
     outline: none;
-    height: 30px;
+    height: 35px;
     color: #828282;
     background: transparent;
     font-size: 16px;
     padding-left: 10px;
     box-sizing: border-box;
+    margin-bottom: 25px;
 
 }
 ::placeholder
@@ -93,10 +101,12 @@ h4
 
 .loginBox input[type="submit"]
 {
-    
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 0;
     border: 1px solid #828282;
     outline: none ;
-    height: 40px;
+    height: 45px;
     font-size: 18px;    
     background: transparent;
     cursor: pointer;
