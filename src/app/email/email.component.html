@@ -1,4 +1,53 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="row">
+  <div class="col-12">
+    <ngb-tabset
+      [destroyOnHide]="false"
+      (tabChange)="tabstatus[$event.nextId] = true"
+    >
+      <ngb-tab id="tab1" title="Compose">
+        <ng-template ngbTabContent>
+          <div>
+            <app-email-compose [user]="user"></app-email-compose>
+          </div>
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab id="tab2" title="Inbox">
+        <ng-template ngbTabContent>
+          <div *ngIf="tabstatus['tab2'] === true">
+            <app-email-inbox [user]="user"></app-email-inbox>
+          </div>
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab id="tab3" title="Sent">
+        <ng-template ngbTabContent>
+          <div *ngIf="tabstatus['tab3'] === true">
+            <app-email-sent [user]="user"></app-email-sent>
+          </div>
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab id="tab4" title="Drafts">
+        <ng-template ngbTabContent>
+          <div *ngIf="tabstatus['tab4'] === true">
+            <app-email-drafts></app-email-drafts>
+          </div>
+        </ng-template>
+      </ngb-tab>
+
+      <ngb-tab id="tab5" title="Deleted">
+        <ng-template ngbTabContent>
+          <div *ngIf="tabstatus['tab5'] === true">
+            <app-email-deleted></app-email-deleted>
+          </div>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </div>
+</div>
+
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <body>
 <div class="grid-container" style="margin-right: 1%;">
   <div id="div_a_1" class="clearfix">
@@ -23,7 +72,7 @@
         <p style="font-size: 32px;">Inbox</p>
       </div>
       <div style="position: relative; top: 60%; right: 1%;">
-        <!-- <div style=" background-color: blue; color: gray; float: right; width: 15%; height: 15%; border: solid 1px;"></div> -->
+        <div style=" background-color: blue; color: gray; float: right; width: 15%; height: 15%; border: solid 1px;"></div> 
         <label>
           <input [(ngModel)]="search.term" style=" background-color: white; color: gray; 
           float: right; width: auto; height: 15%; border: solid 1px; position: absolute; top: 2%; right: 2%;" 
@@ -55,4 +104,4 @@
     </div>
   </div>
 </div>
-</body>
+</body> -->
