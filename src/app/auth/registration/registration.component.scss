@@ -17,13 +17,14 @@ body
 .container
 {
     position: absolute;
-    top: 50%;
+   
+    top: 45%;
     left: 50%;
     transform: translate(-50%,-50%);
     width: 800px;
     height: 500px;
-    border-radius: 5px;
-    border:10px solid rgba(255, 255, 255, .2);
+    border-radius: 7px;
+    border:0px solid rgba(255, 255, 255, .2);
     box-shadow :  10px 10px 15px rgba(0, 0, 0, .3);
 
 }
@@ -37,6 +38,62 @@ h5
     padding: 0 0 70px;
     color: #6e7783;
 }
+
+// frist name icon
+.col-md-6,
+.col-md-6 .mb-2
+{
+    position: relative;
+}
+.col-md-6 .user-icon
+{
+    position: absolute;
+    top: 8px;
+    right: 30px;
+}
+.col-md-6 .user-icon img
+{
+    width: 20px;
+    height: 20px;
+}
+
+// email icon
+.col-md-12 .mb-2
+{
+    position: relative;
+}
+.col-md-12 .email-icon
+{
+    position: absolute;
+    top: 8px;
+    right: 30px;
+}
+.col-md-12 .email-icon img
+{
+    width: 20px;
+    height: 20px;
+}
+
+// password icon
+
+.col-md-12 ,
+.col-md-12 .mb-2
+{
+    position: relative;
+}
+.col-md-12 .password-icon
+{
+    position: absolute;
+    top: 8px;
+    right: 30px;
+}
+.col-md-12 .password-icon img
+{
+    width: 20px;
+    height: 20px;
+}
+
+
 
 
 .col-md-6 , .col-md-12

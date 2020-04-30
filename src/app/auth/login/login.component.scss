@@ -98,22 +98,27 @@ h4
 {
     position: relative;
 }
-.inputBox .email-icon
+.inputBox .email-icon,
+.inputBox .password-icon
 {
-    background-image: url(../../../assets/img/email.png);
     position: absolute;
-    top: 6px;
-    right: 0;
-    z-index: 9999;
+    top: 5px;
+    right: 10px;
+   
+}
+.inputBox .email-icon img,
+.inputBox .password-icon img
+{
+    // margin-top: 5px;;
+    width: 20px;
+    height: 20px;
+    
 }
 ::placeholder
 {
     color: rgba(0, 0, 0, .3);
 }
-// .inputBox
-// {
-//     position: relative;
-// }
+
 
 .loginBox input[type="submit"]
 {
