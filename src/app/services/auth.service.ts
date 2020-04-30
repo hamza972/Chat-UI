@@ -65,7 +65,8 @@ export class AuthService {
     }
 
     logout() {
-        this.afAuth.auth.signOut();
-        this.router.navigate(['/home']);
+        this.router.navigate(["/home"]);
+        window.location.reload();
+        return this.afAuth.auth.signOut();
     }
 }
