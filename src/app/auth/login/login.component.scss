@@ -61,7 +61,7 @@ h4
     margin-left: 73px;
     margin-top: 65px;
     padding: 0 0 63px;
-    color: #828282;
+    color: #6e7783;
 }
 
 .alert-danger
@@ -70,6 +70,8 @@ h4
     padding: 0;
     margin: 0;
 }
+
+
 .loginBox input
 {
     
@@ -80,16 +82,29 @@ h4
 .loginBox input[type="password"]
 {
     border: none;   
-    border-bottom: 2px solid #828282; 
+    border-bottom: 2px solid #6e7783; 
     outline: none;
     height: 35px;
-    color: #828282;
+    color: #6e7783;
     background: transparent;
     font-size: 16px;
     padding-left: 10px;
     box-sizing: border-box;
     margin-bottom: 25px;
 
+}
+
+.inputBox
+{
+    position: relative;
+}
+.inputBox .email-icon
+{
+    background-image: url(../../../assets/img/email.png);
+    position: absolute;
+    top: 6px;
+    right: 0;
+    z-index: 9999;
 }
 ::placeholder
 {
@@ -105,17 +120,17 @@ h4
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 0;
-    border: 1px solid #828282;
+    border: 1px solid #6e7783;
     outline: none ;
     height: 45px;
     font-size: 18px;    
     background: transparent;
     cursor: pointer;
-    color:  #828282 ;
+    color:  #6e7783 ;
     font-weight: bold;
 }
 .loginBox input[type="submit"]:hover
 {
-    background-color: #828282;
-    color: #f0f5f9;
+    background-color: #6e7783;
+    color:#f2e9e1;
 }
