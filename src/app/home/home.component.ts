@@ -16,8 +16,13 @@ export class HomeComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+
+        /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserState()
         .subscribe(user => {
+            if(user === null) {
+                this.router.navigate(['/home']);
+            }
             this.user = user;
         })
     }

@@ -1,43 +1,45 @@
-<div class="row mt-4">
-    <div class="col-12">
-        <h4>Participant Creation</h4>
-    </div>
-
-    <div class="col-12">
-        <div class="row" *ngIf="authError">
-            <div class="col-12 alert alert-danger">
-                {{ authError?.message }}
-            </div>
+<div *ngIf="user">
+    <div class="row mt-4">
+        <div class="col-12">
+            <h4>Participant Creation</h4>
         </div>
-        <form (ngSubmit)="add()">
-            <div class="row">
-                <div class="col-md-6 mb-2">
-                    <input [(ngModel)]="participant.firstName" name="firstName" type="text" class="form-control" placeholder="First name">
-                </div>
-                <div class="col-md-6 mb-2">
-                    <input [(ngModel)]="participant.lastName" name="lastName" type="text" class="form-control" id="lastName" placeholder="Last name">
-                </div>
-                <div class="col-md-12 mb-2">
-                    <select [(ngModel)]="participant.role" name="role" type="text" class="form-control" id="role" aria-placeholder="Role" (change)="selectionChanged($event)">
-                        <option value="" disabled selected>Select a Role</option>
-                        <option *ngFor="let role of roles" [value]="role.firstName + '|' + role.lastName + '|' + role.roleName + '|' + role.ofCountry"> {{role.roleName}} - {{role.ofCountry}} | {{role.firstName}} {{role.lastName}}</option>
-                    </select>
-                </div>
-                <div class="col-md-12 mb-2">
-                    <input [(ngModel)]="participant.email" name="email" type="email" class="form-control" placeholder="Email address">
-                </div>
-                <div class="col-md-12 mb-2">
-                    <input [(ngModel)]="participant.password" name="password" type="password" class="form-control" placeholder="Password">
-                </div>
-                <div class="col-md-12 mb-2">
-                    <input [(ngModel)]="participant.password" name="password" type="password" class="form-control" placeholder="Confirm password">
-                </div>
-                <div class="col-md-12">
-                    <button type="submit">Create</button>
-                    <button type="button" (click)="cancel()">Cancel</button>
+
+        <div class="col-12">
+            <div class="row" *ngIf="authError">
+                <div class="col-12 alert alert-danger">
+                    {{ authError?.message }}
                 </div>
             </div>
+            <form (ngSubmit)="add()">
+                <div class="row">
+                    <div class="col-md-6 mb-2">
+                        <input [(ngModel)]="participant.firstName" name="firstName" type="text" class="form-control" placeholder="First name">
+                    </div>
+                    <div class="col-md-6 mb-2">
+                        <input [(ngModel)]="participant.lastName" name="lastName" type="text" class="form-control" id="lastName" placeholder="Last name">
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <select [(ngModel)]="participant.role" name="role" type="text" class="form-control" id="role" aria-placeholder="Role" (change)="selectionChanged($event)">
+                            <option value="" disabled selected>Select a Role</option>
+                            <option *ngFor="let role of roles" [value]="role.firstName + '|' + role.lastName + '|' + role.roleName + '|' + role.ofCountry"> {{role.roleName}} - {{role.ofCountry}} | {{role.firstName}} {{role.lastName}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <input [(ngModel)]="participant.email" name="email" type="email" class="form-control" placeholder="Email address">
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <input [(ngModel)]="participant.password" name="password" type="password" class="form-control" placeholder="Password">
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <input [(ngModel)]="participant.password" name="password" type="password" class="form-control" placeholder="Confirm password">
+                    </div>
+                    <div class="col-md-12">
+                        <button type="submit">Create</button>
+                        <button type="button" (click)="cancel()">Cancel</button>
+                    </div>
+                </div>
 
-        </form>
+            </form>
+        </div>
     </div>
 </div>
