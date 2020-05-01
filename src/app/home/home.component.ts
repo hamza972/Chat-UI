@@ -25,6 +25,18 @@ export class HomeComponent implements OnInit {
             }
             this.user = user;
         })
+
+        this.auth.userLoggedIn.subscribe(data => {
+            console.log(data);
+        })
+
+        // this.auth.userLoggedIn2.subscribe(data => {
+        //     console.log(data);
+        // })
+
+        this.auth.observable.subscribe(data => {
+            console.log(data)
+        });
     }
 
     login() {
