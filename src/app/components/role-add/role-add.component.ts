@@ -22,6 +22,16 @@ export class RoleAddComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        
+        /* Check if user is signed in, otherwise redirect to home */
+        this.auth.getUserData().subscribe(user => {
+            if(user === null) {
+                this.router.navigate(['/home']);
+            } else {
+                this.user = user[0];
+            }
+        })
+
         this.affiliateService.get().subscribe(affiliate => {
             console.log(affiliate);
             this.affiliates = affiliate;
