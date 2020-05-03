@@ -22,17 +22,14 @@ export class AuthService {
     ) { }
 
     getUserData() {
-        var userData = JSON.parse(localStorage.getItem('userData'));
-
-        if(userData) {
-            return this.db.collection("Users", (ref) => ref.where("email", "==", userData.email)).valueChanges();
-        } else {
-            return of(null);
-        }
-    }
-
-    getUserState() {
-        return this.afAuth.authState;
+        return this.afAuth.authState.pipe(
+          switchMap((user) => {
+            if (user) {
+              return this.db.collection("Users", (ref) => ref.where("email", "==", user.email)).valueChanges();
+            } else {
+              return of(null);
+            }
+        }));
     }
 
     createUser(user) {
@@ -72,7 +69,6 @@ export class AuthService {
         })
         .then(userCredential => {
             if(userCredential) {
-                localStorage.setItem('userData', JSON.stringify(userCredential.user));
                 this.router.navigate(['/home']);
             }
 
@@ -80,7 +76,6 @@ export class AuthService {
     }
 
     logout() {
-        localStorage.clear();
         this.router.navigate(["/home"]);
         window.location.reload();
         return this.afAuth.auth.signOut();
