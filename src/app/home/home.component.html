@@ -1,4 +1,17 @@
-<h1 *ngIf="!user">MEPS</h1>
+<!-- <h1 *ngIf="!user">MEPS</h1> -->
 <p *ngIf="user">Logged in as: {{user?.email}} - {{user?.displayName}}</p>
-<button type="button" class="btn btn-primary mr-2 " *ngIf="!user" (click)="register()" name="button">Register</button>
-<button type="button" class="btn btn-primary" *ngIf="!user" (click)="!login()" name="button">Login</button>
+
+<body *ngIf="!user">
+    <div class="container" *ngIf="!user" >
+
+        <div class="imgBx" *ngIf="!user" >
+            <img src="../../../assets/img/2-2.png" alt="">
+            </div>
+        <div class="select" *ngIf="!user" >
+            <button type="button" class="btn btn-primary mr-2 " *ngIf="!user" (click)="register()" name="button" autofocus>Register</button>
+            <button type="button" class="btn btn-primary" *ngIf="!user" (click)="!login()" name="button">Login</button>
+        </div>
+    
+    </div> 
+</body>
+/
