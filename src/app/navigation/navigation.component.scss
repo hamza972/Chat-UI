@@ -1,0 +1,139 @@
+// // set clearfix
+// .clearfix::before,
+// .clearfix::after
+// {
+//     content: "";
+//     display: table;
+//     clear: both;
+// }
+
+// // =================================================
+
+
+// set header wrapper width，Set wrapper to center
+.w
+{
+    width: 1226px;
+    margin: 0 auto;
+}
+// set header wrapper color and shadow
+.header-wrapper
+{
+    background-color: #6e7783;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .3);
+}
+// set height of header
+.header
+{
+    height: 100px;
+}
+
+
+// // ==================================================
+
+/* set logo */
+.header .logo
+{
+    float: left;
+    margin-top: 25px;
+    margin-left: -20px;
+    margin-right: 25px;
+
+    overflow: hidden;
+    width: 150px;
+    height: 50px;
+    position: relative;
+    text-indent: -9999px;
+}
+// /* set logo link */
+.header .logo a
+{
+    position: absolute;
+    display: block;
+    width: 150px;
+    height: 50px;
+    left: 0;  
+    background-image: url("../../assets/img/logo-MEPS.png");    
+    background-color: transparent;
+    background-position: center;
+    transition: left 0.3s;
+}
+// /* set logo animation */
+.header .logo .Middle{
+    background-image: url("../../assets/img/logo-full-name.png");
+    left: -150px;
+}
+.header .logo:hover .MEPS{
+    left: 150px;
+}
+
+.header .logo:hover .Middle{
+    left: 0;
+}
+
+// // =====================================================================
+
+/* set user */
+.user
+{
+    float: right;
+    margin-left: 200px;
+}
+.user .fa-user
+{
+    margin-right: 10px;
+   
+}
+.user .fa-angle-down
+{
+    margin-left: 7px;
+   
+}
+
+// // =======================================================================
+
+// set basic detail
+.nav
+{
+    min-width: 1226px;
+}
+// // Remove underline and change color
+.nav a
+{
+    font-size: 20px;
+    text-decoration: none;
+    color:#c9d6de;
+    line-height: 5;
+}
+
+// // ============================================================================
+.header .nav-wrapper
+{
+    float: left;
+    margin-left: 7px;
+}
+
+// .header .nav
+// {
+//     height: 100px;
+//     line-height: 100px;
+//     padding-left: 58px;
+// }
+
+// .nav-wrapper li
+// {
+//     float: left;
+// }
+// .nav-wrapper li a
+// {
+//     display: block;
+//     font-size: 16px;
+//     margin-right: 20px;
+// }
+
+// set hover
+.nav-wrapper li a:hover
+{
+    color: #fff;
+
+}
