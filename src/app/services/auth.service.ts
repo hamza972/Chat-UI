@@ -21,6 +21,16 @@ export class AuthService {
         private router: Router
     ) { }
 
+    getUserData() {
+        var userData = JSON.parse(localStorage.getItem('userData'));
+
+        if(userData) {
+            return this.db.collection("Users", (ref) => ref.where("email", "==", userData.email)).valueChanges();
+        } else {
+            return of(null);
+        }
+    }
+
     getUserState() {
         return this.afAuth.authState;
     }
@@ -61,12 +71,16 @@ export class AuthService {
             this.eventAuthError.next(error);
         })
         .then(userCredential => {
-            if(userCredential)
-            this.router.navigate(['/home']);
+            if(userCredential) {
+                localStorage.setItem('userData', JSON.stringify(userCredential.user));
+                this.router.navigate(['/home']);
+            }
+
         })
     }
 
     logout() {
+        localStorage.clear();
         this.router.navigate(["/home"]);
         window.location.reload();
         return this.afAuth.auth.signOut();
