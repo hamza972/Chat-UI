@@ -17,6 +17,7 @@ export class EmailComponent implements OnInit {
   ngOnInit() {
     this.auth.getUserCurrent().subscribe((user) => {
       this.user = user;
+      localStorage.setItem("userEmail", user.email);
     });
   }
 }
