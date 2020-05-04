@@ -31,18 +31,22 @@
                             <li><a *ngIf="user" routerLink="/chat">Chat</a></li>
                             <!-- <li ngbNavItem><a ngbNavLink *ngIf="(user$ | async).systemRole === 'admin'" routerLink="/control">Control</a></li> -->
                             <li><a *ngIf="user" routerLink="/control">Control</a></li>
-                            <li><a *ngIf="user" (click)="logout()" routerLink="/">Logout</a></li>
                             <!-- <a  *ngIf="user$ | async" class="logo">Logged in as: {{ (user$ | async).role }} - {{ (user$ | async).email }}</a> -->
                         </ul>
 
                         <!-- set rightside content -->
-                        <ul class="user">
-                            <li><a href="javascript:;">
+                        <ul class="user" ngbDropdown>
+                            <li id="userDropdown" ngbDropdownToggle><a>
                                 <i class="fa fa-user"> </i>
                                 {{user.firstName}}
                                 <i class="fa fa-angle-down"> </i>
                                 </a>
                             </li>
+                            <div ngbDropdownMenu aria-labelledby="userDropdown">
+                              <div ngbDropdownItem>{{user.roleFirstName}} {{user.roleLastName}}</div>
+                              <div ngbDropdownItem>{{user.rolePosition}} {{user.roleAffiliation}}</div>
+                              <div ngbDropdownItem (click)="logout()" routerLink="/">Logout</div>
+                            </div>
                         </ul>
 
                     </div>
@@ -51,6 +55,8 @@
 
             </div>
         </div>
+
     </nav>
+
 <!-- end Navigation -->
 </header>
