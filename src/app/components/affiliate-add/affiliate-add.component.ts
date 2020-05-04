@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { AffiliateService } from '../../services/affiliate.service';
 import { Affiliate } from '../../models/affiliate';
 
@@ -10,16 +11,28 @@ import { Affiliate } from '../../models/affiliate';
 })
 export class AffiliateAddComponent implements OnInit {
 
+    user: firebase.User;
+
     affiliate: Affiliate = {
         countryName: ""
     };
 
     constructor(
+        private auth: AuthService,
         private affiliateService: AffiliateService,
         private router: Router
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        /* Check if user is signed in, otherwise redirect to home */
+        this.auth.getUserData().subscribe(user => {
+            if(user === null) {
+                this.router.navigate(['/home']);
+            } else {
+                this.user = user[0];
+            }
+        })
+    }
 
     cancel() {
         this.router.navigate(['/control']);

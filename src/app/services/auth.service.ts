@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { switchMap, mergeMap } from "rxjs/operators";
+import { Participant } from '../models/participant';
 
 @Injectable({
     providedIn: 'root'
@@ -19,8 +21,15 @@ export class AuthService {
         private router: Router
     ) { }
 
-    getUserState() {
-        return this.afAuth.authState;
+    getUserData() {
+        return this.afAuth.authState.pipe(
+          switchMap((user) => {
+            if (user) {
+              return this.db.collection("Users", (ref) => ref.where("email", "==", user.email)).valueChanges();
+            } else {
+              return of(null);
+            }
+        }));
     }
 
     createUser(user) {
@@ -59,12 +68,16 @@ export class AuthService {
             this.eventAuthError.next(error);
         })
         .then(userCredential => {
-            if(userCredential)
-            this.router.navigate(['/home']);
+            if(userCredential) {
+                this.router.navigate(['/home']);
+            }
+
         })
     }
 
     logout() {
+        this.router.navigate(["/home"]);
+        window.location.reload();
         return this.afAuth.auth.signOut();
     }
 }

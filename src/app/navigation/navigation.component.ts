@@ -16,9 +16,13 @@ export class NavigationComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.auth.getUserState()
-        .subscribe(user => {
-            this.user = user;
+        /* Check if user is signed in, otherwise redirect to home */
+        this.auth.getUserData().subscribe(user => {
+            if(user === null) {
+                this.router.navigate(['/home']);
+            } else {
+                this.user = user[0];
+            }
         })
     }
 

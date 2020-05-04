@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { ParticipantService } from '../../services/participant.service';
 import { RoleService } from '../../services/role.service';
 import { Participant } from '../../models/participant';
@@ -19,14 +20,25 @@ export class ParticipantAddComponent implements OnInit {
     editState: boolean = false;
     participantToEdit: Participant;
     roleDetails: Array<string>;
+    user: firebase.User;
 
     constructor(
+        private auth: AuthService,
         private participantService: ParticipantService,
         private roleService: RoleService,
         private router: Router
     ) {}
 
     ngOnInit(): void {
+        /* Check if user is signed in, otherwise redirect to home */
+        this.auth.getUserData().subscribe(user => {
+            if(user === null) {
+                this.router.navigate(['/home']);
+            } else {
+                this.user = user[0];
+            }
+        })
+
         this.roleService.get().subscribe(role => {
             console.log(role);
             this.roles = role;
