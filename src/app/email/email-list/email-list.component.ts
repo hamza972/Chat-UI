@@ -37,4 +37,8 @@ export class EmailListComponent implements OnInit {
       );
     });
   }
+
+  getUser() {
+    return localStorage.getItem("userEmail");
+  }
 }

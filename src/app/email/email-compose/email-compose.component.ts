@@ -63,5 +63,18 @@ export class EmailComposeComponent implements OnInit {
     console.log("sending");
   }
 
-  draft() {}
+  draft() {
+    this.newEmail = {
+      subject: this.subject,
+      body: this.body,
+      to: {
+        user: this.sendTo || " ",
+      },
+      from: {
+        user: this.user.email,
+      },
+    };
+    this.auth.draftEmail(this.newEmail);
+    console.log("drafting");
+  }
 }

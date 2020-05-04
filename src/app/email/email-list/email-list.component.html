@@ -24,9 +24,15 @@
   <tbody>
     <tr *ngFor="let email of emails$ | async; index as i">
       <th scope="row">{{ i + 1 }}</th>
-      <td>
+      <td *ngIf="email.from.user != getUser()">
         <ngb-highlight
           [result]="email.from.user"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td *ngIf="email.from.user == getUser()">
+        <ngb-highlight
+          [result]="email.to.user"
           [term]="filter.value"
         ></ngb-highlight>
       </td>

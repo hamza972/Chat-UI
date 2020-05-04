@@ -199,6 +199,23 @@ export class LoginService {
     });
   }
 
+  draftEmail(email: Email) {
+    return this.db.collection(`Emails`).add({
+      subject: email.subject,
+      date: new Date(),
+      draft: true,
+      from: {
+        user: email.from.user,
+        deleted: false,
+      },
+      to: {
+        user: email.to.user,
+        deleted: false,
+      },
+      body: email.body,
+    });
+  }
+
   getRoles() {
     return this.roles$;
   }
