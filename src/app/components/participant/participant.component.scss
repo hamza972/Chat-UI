@@ -1,10 +1,15 @@
+
 .image
 {
+    margin-top: 40px;
+    margin-bottom: 40px;
     height: 42px;
     width: 125px;
-    margin-bottom: 40px;
-    margin-top: 40px;
-    // margin-left: 75px;
-    
+    left: 0;
+    background-image: url("../../../assets/img/Participant.png"); 
 
+}
+.image:hover
+{
+    background-position: -126px 0;
 }

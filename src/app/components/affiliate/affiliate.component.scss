@@ -1,35 +1,15 @@
-.ui
-{   
-    overflow: hidden;
-    position: relative;
+
+.image
+{
     margin-top: 40px;
     margin-bottom: 40px;
     height: 42px;
     width: 125px;
-    text-indent: -9999px;
-}
-.ui .image
-{
-    position: absolute;
-    height: 42px;
-    width: 125px;
     left: 0;
     background-image: url("../../../assets/img/Affiliation.png"); 
-    background-color: transparent;
-    background-position: center;
-    transition: left 0s;
-}
-.ui .img
-{
-    background-image: url("../../../assets/img/affiliation-hover.png");
-    left: 0px;
-}
 
-.ui:hover .image
-{
-    left: 125px;
 }
-.ui:hover .img
+.image:hover
 {
-    left: 0;
+    background-position: -126px 0;
 }
