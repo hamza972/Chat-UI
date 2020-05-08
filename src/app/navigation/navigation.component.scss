@@ -93,9 +93,15 @@
 // // =======================================================================
 
 // set basic detail
+
 .nav
 {
     min-width: 1226px;
+    height: 100px;
+}
+.ul .right
+{
+    height: 100px;
 }
 // // Remove underline and change color
 .nav a
