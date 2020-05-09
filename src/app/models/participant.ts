@@ -9,4 +9,5 @@ export interface Participant {
     roleLastName?: string;
     rolePosition?: string;
     roleAffiliation?: string;
+    profileImage?: string;
   }
