@@ -14,6 +14,7 @@ import { Participant } from '../../models/participant';
 export class ProfileComponent implements OnInit {
 
     userID: string;
+    user: firebase.User;
 
     constructor(
         private auth: AuthService,
