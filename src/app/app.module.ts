@@ -46,6 +46,7 @@ import { EmailDraftsComponent } from "./email/email-drafts/email-drafts.componen
 import { EmailSentComponent } from "./email/email-sent/email-sent.component";
 import { EmailListComponent } from "./email/email-list/email-list.component";
 import { EmailService } from "./services/email.service";
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { EmailService } from "./services/email.service";
     EmailDraftsComponent,
     EmailSentComponent,
     EmailListComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
