@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tweet } from '../../models/tweet';
+import { Participant } from '../../models/participant';
 import { TweetService } from '../../services/tweet.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -13,7 +14,7 @@ export class TweetComponent implements OnInit {
 
     tweet: Tweet = { content: "" };
     tweets: Tweet[];
-    user: firebase.User;
+    user: Participant = { rolePosition: ""};
 
     constructor(
         private auth: AuthService,
