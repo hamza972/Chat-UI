@@ -13,7 +13,7 @@ import { LoginComponent } from "./auth/login/login.component";
 import { RegistrationComponent } from "./auth/registration/registration.component";
 import { HomeComponent } from "./home/home.component";
 import { NavigationComponent } from "./navigation/navigation.component";
-import { TweetComponent } from "./tweet/tweet.component";
+
 import { EmailComponent } from "./email/email.component";
 import { NewsComponent } from "./news/news.component";
 import { ScenarioComponent } from "./scenario/scenario.component";
@@ -28,6 +28,7 @@ import { RoleComponent } from "./components/role/role.component";
 import { RoleAddComponent } from "./components/role-add/role-add.component";
 import { AffiliateComponent } from "./components/affiliate/affiliate.component";
 import { AffiliateAddComponent } from "./components/affiliate-add/affiliate-add.component";
+import { TweetComponent } from "./components/tweet/tweet.component";
 
 import { AffiliateService } from "./services/affiliate.service";
 import { AuthService } from "./services/auth.service";
