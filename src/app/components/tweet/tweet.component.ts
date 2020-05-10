@@ -15,6 +15,7 @@ export class TweetComponent implements OnInit {
     tweet: Tweet = { content: "" };
     tweets: Tweet[];
     user: Participant = { rolePosition: ""};
+    authError: any;
 
     constructor(
         private auth: AuthService,
@@ -46,7 +47,7 @@ export class TweetComponent implements OnInit {
         this.router.navigate(['/tweet']);
     }
 
-    add(form) {
+    add() {
         if(this.tweet.content != '') {
 
             this.tweet = {

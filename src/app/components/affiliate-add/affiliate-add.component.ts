@@ -16,6 +16,7 @@ export class AffiliateAddComponent implements OnInit {
     affiliate: Affiliate = {
         countryName: ""
     };
+    authError: any;
 
     constructor(
         private auth: AuthService,
@@ -38,7 +39,7 @@ export class AffiliateAddComponent implements OnInit {
         this.router.navigate(['/control']);
     }
 
-    add(form) {
+    add() {
         if(this.affiliate.countryName != '') {
             this.affiliateService.add(this.affiliate);
             this.router.navigate(['/control']);
