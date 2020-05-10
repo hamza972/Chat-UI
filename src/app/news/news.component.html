@@ -68,8 +68,13 @@
     </div>
 -->
 
+<div>
+    <div class="col-md-12">
+       <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="form-control" id="txtSearchNews"  placeholder="Enter title to search"></textarea> 
+    </div>
+</div>
 
-    <div class="row" *ngFor="let newsClass of newsArray">
+    <div class="row" *ngFor="let newsClass of newsArray | filter : searchText">
        <!-- <div class="col-1">
             <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
         </div>-->
