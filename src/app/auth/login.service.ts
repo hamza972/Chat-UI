@@ -179,7 +179,8 @@ export class LoginService {
       userRole: newNews.userRole,
       newsDescription: newNews.newsDescription,
       newsDate: newNews.newsDate,
-    });
+      newsHeadline: newNews.newsHeadline
+  });
   }
 
   sendEmail(email: Email) {
