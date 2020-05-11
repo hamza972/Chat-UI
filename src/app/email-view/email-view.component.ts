@@ -12,6 +12,12 @@ import { Observable } from 'rxjs';
 })
 export class EmailViewComponent implements OnInit {
 
+    /* added by xander */
+    search: any;
+    recipient: any;
+    subject: any;
+    /* added by xander */
+
   user$: Observable<appUser>;
   constructor(private auth: LoginService,
     private router: Router) { }

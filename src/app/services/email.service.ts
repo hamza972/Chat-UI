@@ -79,4 +79,25 @@ export class EmailService {
 
     return this.emailCollection.valueChanges();
   }
+
+  drafts(user: User) {
+    this.emailCollection = this.afs.collection("Emails", (ref) =>
+      ref
+        .where("from.user", "==", user.email)
+        .where("from.deleted", "==", false)
+        .where("draft", "==", true)
+    );
+
+    this.email = this.emailCollection.snapshotChanges().pipe(
+      map((changes) => {
+        return changes.map((a) => {
+          const data = a.payload.doc.data() as Email;
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      })
+    );
+
+    return this.emailCollection.valueChanges();
+  }
 }

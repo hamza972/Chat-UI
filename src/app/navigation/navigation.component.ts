@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
+import { Participant } from '../models/participant';
 
 @Component({
     selector: 'app-navigation',
@@ -8,7 +9,8 @@ import { Router } from '@angular/router';
     styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
-    user: firebase.User;
+
+    user: Participant = { rolePosition: ""};
 
     constructor(
         private auth: AuthService,
@@ -16,9 +18,13 @@ export class NavigationComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.auth.getUserState()
-        .subscribe(user => {
-            this.user = user;
+        /* Check if user is signed in, otherwise redirect to home */
+        this.auth.getUserData().subscribe(user => {
+            if(user === null) {
+                this.router.navigate(['/home']);
+            } else {
+                this.user = user[0];
+            }
         })
     }
 

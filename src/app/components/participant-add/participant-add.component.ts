@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 import { ParticipantService } from '../../services/participant.service';
 import { RoleService } from '../../services/role.service';
 import { Participant } from '../../models/participant';
@@ -13,20 +14,33 @@ import { Role } from '../../models/role';
 export class ParticipantAddComponent implements OnInit {
 
     participant: Participant = {
-        firstName: ""
+        firstName: "",
+        password: ""
     };
     roles: Role[];
     editState: boolean = false;
     participantToEdit: Participant;
     roleDetails: Array<string>;
+    user: firebase.User;
+    authError: any;
 
     constructor(
+        private auth: AuthService,
         private participantService: ParticipantService,
         private roleService: RoleService,
         private router: Router
     ) {}
 
     ngOnInit(): void {
+        /* Check if user is signed in, otherwise redirect to home */
+        this.auth.getUserData().subscribe(user => {
+            if(user === null) {
+                this.router.navigate(['/home']);
+            } else {
+                this.user = user[0];
+            }
+        })
+
         this.roleService.get().subscribe(role => {
             console.log(role);
             this.roles = role;
@@ -42,7 +56,7 @@ export class ParticipantAddComponent implements OnInit {
         this.router.navigate(['/control']);
     }
 
-    add(form) {
+    add() {
         if(this.participant.email != '') {
             this.participant.roleFirstName = this.roleDetails[0];
             this.participant.roleLastName = this.roleDetails[1];

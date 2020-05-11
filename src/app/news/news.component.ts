@@ -19,6 +19,7 @@ export class NewsComponent implements OnInit {
   user$: Observable<appUser>;
   newsArray: newsClass[];
   sortedArray: newsClass[];
+  //search;
 
   constructor(private auth: LoginService,
     private router: Router) { }
@@ -32,14 +33,21 @@ export class NewsComponent implements OnInit {
       console.log(userT);
       this.newsUser = userT;
     });
+
+   // console.log(this.searchNews(" "))
   }
 
 
-  createNews(frm) { 
+  createNews(frm, frm2) { 
     console.log(frm.value);
-    this.newUserNews = {userName: this.newsUser.firstName + ' ' + this.newsUser.lastName, newsDate: new Date(), newsDescription: frm.value, userEmail: this.newsUser.email, userRole: this.newsUser.role}
+    this.newUserNews = {userName: this.newsUser.firstName + ' ' + this.newsUser.lastName, newsDate: new Date(), newsDescription: frm.value, newsHeadline: frm2.value, userEmail: this.newsUser.email, userRole: this.newsUser.role}
     this.auth.sendNewsData(this.newUserNews);
   }
+
+  /*searchNews(key:string)
+  {
+    return this.newsArray.map(news => news.newsDescription.includes("first"))
+  }*/
 
   btnClick= function () {
     this.router.navigateByUrl('/news-publish');

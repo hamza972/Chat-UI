@@ -1,19 +1,26 @@
-<img class="image" (click)="add()" src="assets/img/Role.png" style="width:190px;height:142px;" class="center">
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Affiliation</th>
-            <th scope="col">Title</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let role of roles">
-            <td>{{role.ofCountry}}</td>
-            <td>{{role.roleName}}</td>
-            <td>{{role.firstName}}</td>
-            <td>{{role.lastName}}</td>
-        </tr>
-    </tbody>
-  </table>
+<div *ngIf="user">
+    
+    <div class="ui">    
+        <div class="image" (click)="add()"></div>
+    </div>
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Affiliation</th>
+                <th scope="col">Title</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let role of roles">
+                <td>{{role.ofCountry}}</td>
+                <td>{{role.roleName}}</td>
+                <td>{{role.firstName}}</td>
+                <td>{{role.lastName}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

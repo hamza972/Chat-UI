@@ -31,7 +31,7 @@
       <ngb-tab id="tab4" title="Drafts">
         <ng-template ngbTabContent>
           <div *ngIf="tabstatus['tab4'] === true">
-            <app-email-drafts></app-email-drafts>
+            <app-email-drafts [user]="user"></app-email-drafts>
           </div>
         </ng-template>
       </ngb-tab>

@@ -179,7 +179,8 @@ export class LoginService {
       userRole: newNews.userRole,
       newsDescription: newNews.newsDescription,
       newsDate: newNews.newsDate,
-    });
+      newsHeadline: newNews.newsHeadline
+  });
   }
 
   sendEmail(email: Email) {
@@ -187,6 +188,23 @@ export class LoginService {
       subject: email.subject,
       date: new Date(),
       draft: false,
+      from: {
+        user: email.from.user,
+        deleted: false,
+      },
+      to: {
+        user: email.to.user,
+        deleted: false,
+      },
+      body: email.body,
+    });
+  }
+
+  draftEmail(email: Email) {
+    return this.db.collection(`Emails`).add({
+      subject: email.subject,
+      date: new Date(),
+      draft: true,
       from: {
         user: email.from.user,
         deleted: false,
