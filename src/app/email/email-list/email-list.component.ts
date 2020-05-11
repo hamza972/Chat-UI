@@ -41,4 +41,16 @@ export class EmailListComponent implements OnInit {
   getUser() {
     return localStorage.getItem("userEmail");
   }
+
+  delete(email: Email, method: string) {
+    if (method === "inbox") {
+      email.to.deleted = true;
+      console.log("a");
+    }
+
+    if (method === "sent") {
+      email.from.deleted = true;
+      console.log("b");
+    }
+  }
 }
