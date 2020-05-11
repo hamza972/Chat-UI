@@ -19,6 +19,7 @@
       <th scope="col">Subject</th>
       <th scope="col">Body</th>
       <th scope="col">Date</th>
+      <th scope="col">Options</th>
     </tr>
   </thead>
   <tbody>
@@ -50,6 +51,22 @@
       </td>
       <td>
         {{ email.date.seconds | date: "dd-MM-yyyy" }}
+      </td>
+      <td *ngIf="email.from.user != getUser()">
+        <button
+          class="btn waves-effect waves-light red"
+          (click)="delete(email, 'inbox')"
+        >
+          Delete
+        </button>
+      </td>
+      <td *ngIf="email.from.user == getUser()">
+        <button
+          class="btn waves-effect waves-light red"
+          (click)="delete(email, 'sent')"
+        >
+          Delete
+        </button>
       </td>
     </tr>
   </tbody>

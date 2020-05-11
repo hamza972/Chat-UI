@@ -39,7 +39,7 @@
       <ngb-tab id="tab5" title="Deleted">
         <ng-template ngbTabContent>
           <div *ngIf="tabstatus['tab5'] === true">
-            <app-email-deleted></app-email-deleted>
+            <app-email-deleted [user]="user"></app-email-deleted>
           </div>
         </ng-template>
       </ngb-tab>
