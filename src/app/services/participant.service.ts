@@ -32,7 +32,7 @@ export class ParticipantService {
     }
 
     get() {
-        return this.participantCollection.valueChanges();
+        return this.participant;
     }
 
     add(participant: Participant) {

@@ -40,12 +40,12 @@ export class ParticipantComponent implements OnInit {
         this.router.navigate(['/participant-add']);
     }
 
-    /*
-    deleteItem($event, participant: Participant) {
-        this.clearState();
-        this.participantService.deleteItem(item);
+
+    delete($event, participant: Participant) {
+        this.participantService.delete(participant);
     }
 
+    /*
     edit($event, participant: Participant) {
         this.editState = true;
         this.participantToEdit = item;
