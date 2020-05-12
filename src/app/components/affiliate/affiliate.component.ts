@@ -12,6 +12,8 @@ import { Affiliate } from '../../models/affiliate';
 export class AffiliateComponent implements OnInit {
     affiliates: Affiliate[];
     user: firebase.User;
+    editState: boolean = false;
+    itemToEdit: Affiliate;
 
     constructor(
         private auth: AuthService,
@@ -38,6 +40,22 @@ export class AffiliateComponent implements OnInit {
 
     add() {
         this.router.navigate(['/affiliate-add']);
+    }
+
+    edit($event, affiliate: Affiliate) {
+        console.log(123);
+        this.editState = true;
+        this.itemToEdit = affiliate;
+    }
+
+    update(affiliate: Affiliate) {
+        this.affiliateService.update(affiliate);
+        this.clearState();
+    }
+
+    clearState() {
+        this.editState = false;
+        this.itemToEdit = null;
     }
 
 }

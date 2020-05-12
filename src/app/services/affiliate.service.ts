@@ -28,7 +28,7 @@ export class AffiliateService {
     }
 
     get() {
-        return this.affiliateCollection.valueChanges();
+        return this.affiliate;
     }
 
     add(affiliate: Affiliate) {
