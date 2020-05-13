@@ -4,7 +4,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { HomeComponent } from './home/home.component';
-import { TweetComponent } from './tweet/tweet.component';
 import { EmailComponent } from './email/email.component';
 import { NewsComponent } from './news/news.component';
 import { ScenarioComponent } from './scenario/scenario.component';
@@ -19,6 +18,8 @@ import { RoleComponent } from './components/role/role.component';
 import { RoleAddComponent } from './components/role-add/role-add.component';
 import { AffiliateComponent } from './components/affiliate/affiliate.component';
 import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
+import { TweetComponent } from "./components/tweet/tweet.component";
+import { ProfileComponent } from "./components/profile/profile.component";
 
 const routes: Routes = [
 { path: 'affiliate', component: AffiliateComponent },
@@ -38,6 +39,7 @@ const routes: Routes = [
 { path: 'chat', component: ChatComponent},
 { path: 'participant', component:ParticipantComponent},
 { path: 'participant-add', component:ParticipantAddComponent},
+{ path: 'profile/:id', component:ProfileComponent},
 { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 

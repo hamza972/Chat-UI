@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { switchMap, mergeMap } from "rxjs/operators";
+import { switchMap, mergeMap, map } from "rxjs/operators";
 import { Participant } from '../models/participant';
 
 @Injectable({
@@ -23,13 +23,22 @@ export class AuthService {
 
     getUserData() {
         return this.afAuth.authState.pipe(
-          switchMap((user) => {
-            if (user) {
-              return this.db.collection("Users", (ref) => ref.where("email", "==", user.email)).valueChanges();
-            } else {
-              return of(null);
-            }
-        }));
+            switchMap((user) => {
+                if (user) {
+
+                    return this.db.collection("Users", (ref) => ref.where("email", "==", user.email)).snapshotChanges().pipe(map(changes => {
+                        return changes.map(a => {
+                            const data = a.payload.doc.data() as Participant;
+                            data.id = a.payload.doc.id;
+                            return data;
+                        });
+                    }));
+
+                } else {
+                    return of(null);
+                }
+            })
+        );
     }
 
     createUser(user) {

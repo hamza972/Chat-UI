@@ -16,6 +16,7 @@ export class RoleAddComponent implements OnInit {
     role: Role = { firstName: "" };
     affiliates: Affiliate[];
     user: firebase.User;
+    authError: any;
 
     constructor(
         private auth: AuthService,
@@ -45,7 +46,7 @@ export class RoleAddComponent implements OnInit {
         this.router.navigate(['/control']);
     }
 
-    add(form) {
+    add() {
         if(this.role.roleName != '') {
             this.roleService.add(this.role);
             this.router.navigate(['/control']);

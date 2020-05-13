@@ -1,11 +1,42 @@
 <div *ngIf="user">
-    <div class="ui">    
+    <div class="ui">
         <div class="image" (click)="add()"></div>
     </div>
 
-    <div class="d-flex flex-row flex-wrap">
-        <a *ngFor="let affiliate of affiliates" class="list-group-item list-group-item-action">
-            {{affiliate.countryName}}
-          </a>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-striped col-12">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- DOESN'T LOOK GOOD ON THE BROWSER BUT WORKS OK  -->
+                    <tr *ngFor="let affiliate of affiliates">
+                        <td *ngIf="!editState">{{affiliate.countryName}}</td>
+                        <td *ngIf="!editState"><button (click)="edit($event, affiliate)" value="Edit" class="btn blue">Edit</button></td>
+
+                        <form (ngSubmit)="update(affiliate)">
+                        <td *ngIf="editState && itemToEdit.id == affiliate.id" id="abc">
+
+                                    <input *ngIf="itemToEdit.id == affiliate.id"  type="text" name="countryName" [(ngModel)]="affiliate.countryName">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </td>
+                        <td *ngIf="editState && itemToEdit.id == affiliate.id" id="def">
+
+                                    <input type="submit" name="" value="Update" class="btn orange">
+                                    <button (click)="clearState()" value="Cancel" class="btn red">Cancel</button>
+                        </td>
+                        </form>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
     </div>
+
 </div>

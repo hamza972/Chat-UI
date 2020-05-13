@@ -14,13 +14,15 @@ import { Role } from '../../models/role';
 export class ParticipantAddComponent implements OnInit {
 
     participant: Participant = {
-        firstName: ""
+        firstName: "",
+        password: ""
     };
     roles: Role[];
     editState: boolean = false;
     participantToEdit: Participant;
     roleDetails: Array<string>;
     user: firebase.User;
+    authError: any;
 
     constructor(
         private auth: AuthService,
@@ -54,7 +56,7 @@ export class ParticipantAddComponent implements OnInit {
         this.router.navigate(['/control']);
     }
 
-    add(form) {
+    add() {
         if(this.participant.email != '') {
             this.participant.roleFirstName = this.roleDetails[0];
             this.participant.roleLastName = this.roleDetails[1];
