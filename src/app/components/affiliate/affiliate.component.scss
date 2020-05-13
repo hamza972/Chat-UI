@@ -13,3 +13,22 @@
 {
     background-position: -126px 0;
 }
+.table
+{
+   width: 1000px;
+   height: 1080px;
+}
+.list-group-item
+{
+    border: none;
+    // border-bottom:1px solid  #6e7783;
+    border-top:1px solid  #6e7783;
+    // background-color:  #f2e9e1;
+}
+ .list-group-item-action
+{
+    // display: flex;
+    // border: 1px solid #6e7783;
+    padding-left: 140px;
+
+}

@@ -47,6 +47,7 @@ import { EmailSentComponent } from "./email/email-sent/email-sent.component";
 import { EmailListComponent } from "./email/email-list/email-list.component";
 import { EmailService } from "./services/email.service";
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     EmailDraftsComponent,
     EmailSentComponent,
     EmailListComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
