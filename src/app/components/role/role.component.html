@@ -12,6 +12,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
+                <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +21,9 @@
                 <td>{{role.roleName}}</td>
                 <td>{{role.firstName}}</td>
                 <td>{{role.lastName}}</td>
+
+                <!-- trying /routerLink="profile/role.id" but not sure how-->
+                <td><button (click)="profile($event, role)" value="View" class="btn green">View</button></td>
             </tr>
         </tbody>
     </table>
