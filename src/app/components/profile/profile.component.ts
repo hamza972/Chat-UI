@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit {
 
     userID: string;
     user: firebase.User;
+    role: Role;
 
     constructor(
         private auth: AuthService,
@@ -41,7 +42,13 @@ export class ProfileComponent implements OnInit {
             this.userID = params.get("id")
         })
 
-        console.log(this.userID);
+        this.get(this.userID);
+    }
+
+    get(userID) {
+        this.roleService.profile(userID).subscribe(role => {
+            this.role = role;
+        });
     }
 
 }

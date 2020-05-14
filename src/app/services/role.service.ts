@@ -28,6 +28,10 @@ export class RoleService {
         }));
     }
 
+    profile(id) {
+        return this.afs.collection('Roles').doc(id).valueChanges();
+    }
+
     add(role: Role) {
         this.roleCollection.add(role);
     }
