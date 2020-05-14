@@ -12,11 +12,16 @@ import { Router } from '@angular/router';
 export class ChatComponent implements OnInit {
 
   user$: Observable<appUser>;
-  constructor(private auth: LoginService,
+
+constructor(private auth: LoginService,
     private router: Router) { }
 
   ngOnInit() {
     this.user$ = this.auth.user$;
+    
   }
+
+  
+ 
 
 }

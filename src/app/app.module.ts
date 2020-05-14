@@ -48,6 +48,13 @@ import { EmailListComponent } from "./email/email-list/email-list.component";
 import { EmailService } from "./services/email.service";
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 
+import { NgChatModule } from 'ng-chat';
+import { HttpModule } from '@angular/http';
+
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,7 +94,10 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     NgbModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    HttpModule,
+    NgChatModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     AuthService,
