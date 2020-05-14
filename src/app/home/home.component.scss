@@ -1,18 +1,47 @@
+
 .map
 {
+    display: inline-block;
     margin-top: 40px;
-    margin-bottom: 40px;
-    height: 420px;
-    width: 507px;
+    margin-bottom: 20px;
+    margin-right:0;
+    height: 280px;
+    width: 338px;
     background-image: url("../../assets/img/MiddleEast.png");
+
 }
 .map:hover
 {
-    background-position: -507px 0;
+    background-position: -338px 0;
 }
-
-
-
+.heading
+{
+    display: inline-block;
+    margin-left: 120px;
+    margin-bottom: 100px;
+    height: 140px;
+    width: 400px;
+    background-image: url("../../assets/img/Heading.png");
+}
+.heading:hover
+{
+    background-position: -407px 0;
+}
+h3
+{
+    color: #6e7783;
+    margin-bottom: 40px;
+}
+.one
+{
+    height: 350px;
+    overflow:auto;
+}
+.two
+{
+    height: 350px;
+    overflow:auto;
+}
 
 
 
