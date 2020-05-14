@@ -15,10 +15,11 @@ export class RoleService {
 
     constructor(public afs: AngularFirestore) {
         //this.items = this.afs.collection('items').valueChanges();
-
         this.roleCollection = this.afs.collection('Roles', ref => ref.orderBy('roleName', 'asc'));
+    }
 
-        this.role = this.roleCollection.snapshotChanges().pipe(map(changes => {
+    get() {
+        return this.roleCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
                 const data = a.payload.doc.data() as Role;
                 data.id = a.payload.doc.id;
@@ -27,8 +28,8 @@ export class RoleService {
         }));
     }
 
-    get() {
-        return this.roleCollection.valueChanges();
+    profile(id) {
+        return this.afs.collection('Roles').doc(id).valueChanges();
     }
 
     add(role: Role) {
