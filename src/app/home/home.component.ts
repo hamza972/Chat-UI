@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
+import { Tweet } from './../models/tweet';
+import { newsClass } from './../models/newsClass';
+import { TweetService } from './../services/tweet.service';
+import { NewsService } from './../services/news.service';
 
 @Component({
     selector: 'app-home',
@@ -9,9 +13,16 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
     user: firebase.User;
+    tweet: Tweet = { content: "" };
+    tweets: Tweet[];
+
+    news: newsClass = { newsDescription: "" };
+    newss: newsClass[];
 
     constructor(
         private auth: AuthService,
+        private tweetService: TweetService,
+        private newsService: NewsService,
         private router: Router
     ) { }
 
@@ -25,6 +36,16 @@ export class HomeComponent implements OnInit {
                 this.user = user[0];
             }
         })
+
+        /* Retrieve latest tweets */
+        this.tweetService.get().subscribe(tweet => {
+            this.tweets = tweet;
+        });
+
+        /* Retrieve latest news */
+        this.newsService.get().subscribe(news => {
+            this.newss = news;
+        });
     }
 
     login() {

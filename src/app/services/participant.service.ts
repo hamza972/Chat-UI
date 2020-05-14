@@ -19,20 +19,17 @@ export class ParticipantService {
         private auth: AuthService
     ) {
         //this.items = this.afs.collection('items').valueChanges();
-
         this.participantCollection = this.afs.collection('Users', ref => ref.orderBy('firstName', 'asc'));
+    }
 
-        this.participant = this.participantCollection.snapshotChanges().pipe(map(changes => {
+    get() {
+        return this.participantCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
                 const data = a.payload.doc.data() as Participant;
                 data.id = a.payload.doc.id;
                 return data;
             });
         }));
-    }
-
-    get() {
-        return this.participantCollection.valueChanges();
     }
 
     add(participant: Participant) {

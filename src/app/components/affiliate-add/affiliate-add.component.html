@@ -7,11 +7,15 @@
         </div>
         <form #countryCreateForm="ngForm" (ngSubmit)="add()">
             <div class="row">
+
                 <div class="col-md-12 mb-2">
+                    
                     <div class="col-12">
                         <h4>Country and Affiliate Tool</h4>
                     </div>
+                    
                     <input [(ngModel)]="affiliate.countryName" name="countryName" type="text" class="form-control" id="countryName" placeholder="Country or affiliate name">
+                
                 </div>
             </div>
             <div>
