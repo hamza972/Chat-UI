@@ -37,10 +37,14 @@ export class TweetComponent implements OnInit {
         })
 
         this.tweetService.get().subscribe(tweet => {
-            console.log(tweet);
             this.tweets = tweet;
         });
 
+    }
+
+    /* go to profile page */
+    profile($event, tweet: Tweet) {
+        this.router.navigate(['/profile/'+tweet.roleID]);
     }
 
     cancel() {
@@ -64,6 +68,7 @@ export class TweetComponent implements OnInit {
                 email: this.user.email,
                 systemRole: this.user.systemRole,
                 role: this.user.role,
+                roleID: this.user.roleID,
                 roleFirstName: this.user.roleFirstName,
                 roleLastName: this.user.roleLastName,
                 rolePosition: this.user.rolePosition,
