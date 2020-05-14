@@ -21,7 +21,7 @@
                     <div class="col-md-12 mb-2">
                         <select [(ngModel)]="participant.role" name="role" type="text" class="form-control" id="role" aria-placeholder="Role" (change)="selectionChanged($event)">
                             <option value="" disabled selected>Select a Role</option>
-                            <option *ngFor="let role of roles" [value]="role.firstName + '|' + role.lastName + '|' + role.roleName + '|' + role.ofCountry"> {{role.roleName}} - {{role.ofCountry}} | {{role.firstName}} {{role.lastName}}</option>
+                            <option *ngFor="let role of roles" [value]="role.firstName + '|' + role.lastName + '|' + role.roleName + '|' + role.ofCountry + '|' + role.id"> {{role.roleName}} - {{role.ofCountry}} | {{role.firstName}} {{role.lastName}}</option>
                         </select>
                     </div>
                     <div class="col-md-12 mb-2">
