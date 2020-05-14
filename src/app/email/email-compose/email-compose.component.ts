@@ -4,8 +4,8 @@ import { ParticipantService } from "../../services/participant.service";
 import { Observable } from "rxjs";
 import { appUser as User } from "../../models/user";
 import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
-import { LoginService } from "../../auth/login.service";
 import { Email } from "src/app/models/email";
+import { EmailService } from "../../services/email.service";
 
 @Component({
   selector: "app-email-compose",
@@ -23,7 +23,7 @@ export class EmailComposeComponent implements OnInit {
 
   constructor(
     private participantService: ParticipantService,
-    private auth: LoginService
+    private emailService: EmailService
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +59,7 @@ export class EmailComposeComponent implements OnInit {
         user: this.user.email,
       },
     };
-    this.auth.sendEmail(this.newEmail);
+    this.emailService.sendEmail(this.newEmail);
     console.log("sending");
   }
 
@@ -74,7 +74,7 @@ export class EmailComposeComponent implements OnInit {
         user: this.user.email,
       },
     };
-    this.auth.draftEmail(this.newEmail);
+    this.emailService.draftEmail(this.newEmail);
     console.log("drafting");
   }
 }

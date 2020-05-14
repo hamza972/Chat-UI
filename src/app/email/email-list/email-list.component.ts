@@ -3,6 +3,7 @@ import { FormControl } from "@angular/forms";
 import { Email } from "../../models/email";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
+import { EmailService } from "../../services/email.service";
 
 @Component({
   selector: "app-email-list",
@@ -14,7 +15,7 @@ export class EmailListComponent implements OnInit {
   emails$: Observable<Email[]>;
   filter = new FormControl("");
 
-  constructor() {}
+  constructor(private emailService: EmailService) {}
 
   ngOnInit() {}
 
@@ -38,19 +39,38 @@ export class EmailListComponent implements OnInit {
     });
   }
 
-  getUser() {
-    return localStorage.getItem("userEmail");
+  getTab() {
+    return localStorage.getItem("tab");
   }
 
-  delete(email: Email, method: string) {
-    if (method === "inbox") {
+  delete(email: Email) {
+    if (this.getTab() === "inbox") {
       email.to.deleted = true;
-      console.log("a");
+      this.emailService.delete(email);
     }
 
-    if (method === "sent") {
+    if (this.getTab() === "send") {
       email.from.deleted = true;
-      console.log("b");
+      this.emailService.delete(email);
     }
+
+    if (this.getTab() === "draft") {
+      this.emailService.hardDelete(email);
+    }
+
+    if (this.getTab() === "delete") {
+      this.emailService.hardDelete(email);
+    }
+  }
+
+  cleanHtml(str: String) {
+    return str.replace(/(<([^>]+)>)/gi, "");
+  }
+
+  filterDeletePageSendReceive(from: String) {
+    if (from == localStorage.getItem("userEmail")) {
+      return "me";
+    }
+    return from;
   }
 }
