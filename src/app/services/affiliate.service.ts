@@ -15,20 +15,17 @@ export class AffiliateService {
 
     constructor(public afs: AngularFirestore) {
         //this.items = this.afs.collection('items').valueChanges();
-
         this.affiliateCollection = this.afs.collection('Countries', ref => ref.orderBy('countryName', 'asc'));
+    }
 
-        this.affiliate = this.affiliateCollection.snapshotChanges().pipe(map(changes => {
+    get() {
+        return this.affiliate = this.affiliateCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
                 const data = a.payload.doc.data() as Affiliate;
                 data.id = a.payload.doc.id;
                 return data;
             });
         }));
-    }
-
-    get() {
-        return this.affiliate;
     }
 
     add(affiliate: Affiliate) {
