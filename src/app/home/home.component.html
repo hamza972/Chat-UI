@@ -4,13 +4,61 @@
 <!-- =====add map img======= -->
 <div class="map"></div>
 
+<div class="row" *ngIf="user">
+    <div class="col-6">
+
+        <h3>Latest Tweets</h3>
+        <div class="row" *ngFor="let tweet of tweets; let i=index">
+            <div *ngIf="i<5">
+                <div class="col-1">
+                    <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
+                </div>
+                <div class="col-8">
+                    <div class="card-panel grey lighten-5 z-depth-1">
+                        <div class="card-content">
+                            <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}} {{tweet.roleLastName}}</p>
+                            <p class="black-text">{{tweet.content}}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">{{tweet.date.toDate() | date: 'medium'}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6">
+
+        <h3>Latest News</h3>
+        <div class="row" *ngFor="let news of newss; let i=index">
+            <div *ngIf="i<5">
+                <div class="col-12">
+                    <div class="card-panel grey lighten-5 z-depth-1">
+                        <div class="card-content">
+                            <p class="grey-text" >{{news.newsHeadline}}</p>
+                            <p class="black-text">{{news.newsDescription}}</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">{{news.newsDate.toDate() | date: 'medium'}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
 
 <body *ngIf="!user">
     <div class="container" *ngIf="!user" >
 
         <div class="imgBx" *ngIf="!user" >
             <img src="../../../assets/img/2-2.png" alt="">
-            </div>
+        </div>
         <div class="select" *ngIf="!user" >
             <button type="button" class="btn btn-primary mr-2 " *ngIf="!user" (click)="register()" name="button" autofocus>Register</button>
             <button type="button" class="btn btn-primary" *ngIf="!user" (click)="login()" name="button">Login</button>
@@ -18,4 +66,3 @@
 
     </div>
 </body>
-/
