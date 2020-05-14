@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
 
     userID: string;
     user: firebase.User;
-    role: Role;
+    role: Role = { firstName: "" };
 
     constructor(
         private auth: AuthService,
