@@ -4,26 +4,5 @@
 </div>
 
 
-<div style="text-align:center">
-
-  
-  
-    <div *ngIf="!userId" class="form-box">
-       
-  
-        <small>Pick a username to join a chat.</small>
-  
-        <form #chatInfoForm="ngForm" (ngSubmit)="joinRoom()">
-  
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name"
-                   required
-                   [(ngModel)]="username" name="name"
-                   #name="ngModel">
-  
-            <button type="submit" class="btn btn-success" [disabled]="!chatInfoForm.form.valid">Join</button>
-        </form>
-    </div>
-  </div>
   
   <ng-chat *ngIf="userId" [adapter]="adapter" [userId]="userId" [historyEnabled]="false" [fileUploadUrl]="'http://localhost:3000/uploadFile'" [theme]="'dark-theme'"></ng-chat>
