@@ -64,6 +64,7 @@ export class AuthService {
             lastName: this.newUser.lastName,
             systemRole: this.newUser.systemRole,
             role: this.newUser.role,
+            roleID: this.newUser.roleID,
             roleFirstName: this.newUser.roleFirstName,
             roleLastName: this.newUser.roleLastName,
             rolePosition: this.newUser.rolePosition,

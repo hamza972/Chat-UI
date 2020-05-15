@@ -28,7 +28,7 @@
 
 <div class="row" *ngFor="let tweet of tweets">
     <div class="col-1">
-        <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
+        <img (click)="profile($event, tweet)" src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
     </div>
     <div class="col-11">
         <div class="card-panel grey lighten-5 z-depth-1">

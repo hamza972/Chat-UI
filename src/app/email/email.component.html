@@ -2,9 +2,9 @@
   <div class="col-12">
     <ngb-tabset
       [destroyOnHide]="false"
-      (tabChange)="tabstatus[$event.nextId] = true"
+      (tabChange)="tabstatus[$event.nextId] = true; setTab($event)"
     >
-      <ngb-tab id="tab1" title="Compose">
+      <ngb-tab id="compose" title="Compose">
         <ng-template ngbTabContent>
           <div>
             <app-email-compose [user]="user"></app-email-compose>
@@ -12,33 +12,33 @@
         </ng-template>
       </ngb-tab>
 
-      <ngb-tab id="tab2" title="Inbox">
+      <ngb-tab id="inbox" title="Inbox">
         <ng-template ngbTabContent>
-          <div *ngIf="tabstatus['tab2'] === true">
+          <div *ngIf="tabstatus['inbox'] === true">
             <app-email-inbox [user]="user"></app-email-inbox>
           </div>
         </ng-template>
       </ngb-tab>
 
-      <ngb-tab id="tab3" title="Sent">
+      <ngb-tab id="send" title="Sent">
         <ng-template ngbTabContent>
-          <div *ngIf="tabstatus['tab3'] === true">
+          <div *ngIf="tabstatus['send'] === true">
             <app-email-sent [user]="user"></app-email-sent>
           </div>
         </ng-template>
       </ngb-tab>
 
-      <ngb-tab id="tab4" title="Drafts">
+      <ngb-tab id="draft" title="Drafts">
         <ng-template ngbTabContent>
-          <div *ngIf="tabstatus['tab4'] === true">
+          <div *ngIf="tabstatus['draft'] === true">
             <app-email-drafts [user]="user"></app-email-drafts>
           </div>
         </ng-template>
       </ngb-tab>
 
-      <ngb-tab id="tab5" title="Deleted">
+      <ngb-tab id="delete" title="Deleted">
         <ng-template ngbTabContent>
-          <div *ngIf="tabstatus['tab5'] === true">
+          <div *ngIf="tabstatus['delete'] === true">
             <app-email-deleted [user]="user"></app-email-deleted>
           </div>
         </ng-template>

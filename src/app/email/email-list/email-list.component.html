@@ -15,7 +15,9 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col"><ng-content></ng-content></th>
+      <th scope="col" *ngIf="getTab() == 'send' || getTab() == 'draft'">To</th>
+      <th scope="col" *ngIf="getTab() == 'inbox'">From</th>
+      <th scope="col" *ngIf="getTab() == 'delete'">User</th>
       <th scope="col">Subject</th>
       <th scope="col">Body</th>
       <th scope="col">Date</th>
@@ -25,15 +27,21 @@
   <tbody>
     <tr *ngFor="let email of emails$ | async; index as i">
       <th scope="row">{{ i + 1 }}</th>
-      <td *ngIf="email.from.user != getUser()">
+      <td *ngIf="getTab() == 'inbox'">
         <ngb-highlight
           [result]="email.from.user"
           [term]="filter.value"
         ></ngb-highlight>
       </td>
-      <td *ngIf="email.from.user == getUser()">
+      <td *ngIf="getTab() == 'send' || getTab() == 'draft'">
         <ngb-highlight
           [result]="email.to.user"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td *ngIf="getTab() == 'delete'">
+        <ngb-highlight
+          [result]="filterDeletePageSendReceive(email.from.user)"
           [term]="filter.value"
         ></ngb-highlight>
       </td>
@@ -45,25 +53,17 @@
       </td>
       <td>
         <ngb-highlight
-          [result]="email.body"
+          [result]="cleanHtml(email.body)"
           [term]="filter.value"
         ></ngb-highlight>
       </td>
       <td>
         {{ email.date.seconds | date: "dd-MM-yyyy" }}
       </td>
-      <td *ngIf="email.from.user != getUser()">
+      <td>
         <button
           class="btn waves-effect waves-light red"
-          (click)="delete(email, 'inbox')"
-        >
-          Delete
-        </button>
-      </td>
-      <td *ngIf="email.from.user == getUser()">
-        <button
-          class="btn waves-effect waves-light red"
-          (click)="delete(email, 'sent')"
+          (click)="delete(email)"
         >
           Delete
         </button>

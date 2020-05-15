@@ -1,20 +1,14 @@
 import { Injectable, DoBootstrap } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { auth } from "firebase";
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-} from "@angular/fire/firestore";
+import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { appUser } from "../models/user";
 import { switchMap } from "rxjs/operators";
 import { country } from "../models/country";
 import { Role } from "../models/role";
-import { stringify } from "querystring";
 import { tweetClass } from "../models/tweetClass";
 import { newsClass } from "../models/newsClass";
-import { Email } from "../models/email";
 
 @Injectable({
   providedIn: "root",
@@ -179,41 +173,7 @@ export class LoginService {
       userRole: newNews.userRole,
       newsDescription: newNews.newsDescription,
       newsDate: newNews.newsDate,
-      newsHeadline: newNews.newsHeadline
-  });
-  }
-
-  sendEmail(email: Email) {
-    return this.db.collection(`Emails`).add({
-      subject: email.subject,
-      date: new Date(),
-      draft: false,
-      from: {
-        user: email.from.user,
-        deleted: false,
-      },
-      to: {
-        user: email.to.user,
-        deleted: false,
-      },
-      body: email.body,
-    });
-  }
-
-  draftEmail(email: Email) {
-    return this.db.collection(`Emails`).add({
-      subject: email.subject,
-      date: new Date(),
-      draft: true,
-      from: {
-        user: email.from.user,
-        deleted: false,
-      },
-      to: {
-        user: email.to.user,
-        deleted: false,
-      },
-      body: email.body,
+      newsHeadline: newNews.newsHeadline,
     });
   }
 
