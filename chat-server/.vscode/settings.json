@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/e4809c8f-1430-48c8-b31a-d512d72ee6d4/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/meps-chat-server",
+    "appService.deploySubpath": ""
+}
