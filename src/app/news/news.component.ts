@@ -19,6 +19,8 @@ export class NewsComponent implements OnInit {
   user$: Observable<appUser>;
   newsArray: newsClass[];
   sortedArray: newsClass[];
+  authError: any;
+  searchText: string;
   //search;
 
   constructor(private auth: LoginService,
@@ -38,7 +40,7 @@ export class NewsComponent implements OnInit {
   }
 
 
-  createNews(frm, frm2) { 
+  createNews(frm, frm2) {
     console.log(frm.value);
     this.newUserNews = {userName: this.newsUser.firstName + ' ' + this.newsUser.lastName, newsDate: new Date(), newsDescription: frm.value, newsHeadline: frm2.value, userEmail: this.newsUser.email, userRole: this.newsUser.role}
     this.auth.sendNewsData(this.newUserNews);
