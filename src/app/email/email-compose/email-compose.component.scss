@@ -1,11 +1,15 @@
-::-webkit-input-placeholder {
-  color: grey;
-}
+// <input id="email-to" type="text" [(ngModel)]="sendTo" placeholder="To..." [ngbTypeahead]="searchUsers"/>
+// <br />
+// <input type="text" [(ngModel)]="subject" placeholder="Subject..." />
+// <hr />
+// <h6>Body</h6>
+// <ckeditor
+//   [editor]="Editor"
+//   [(ngModel)]="body"
+//   style="min-height: 100px;"
+// ></ckeditor>
 
-:-ms-input-placeholder {
-  color: grey;
-}
+// <br /><br />
 
-::placeholder {
-  color: grey;
-}
+// <button type="button" name="sendEmail" (click)="send()">Send</button>
+// <button type="button" name="draftEmail" (click)="draft()">Draft</button>

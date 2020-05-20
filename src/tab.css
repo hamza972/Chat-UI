@@ -1,0 +1,42 @@
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+    color: #fff!important;
+    background-color: #1987ba!important;
+}
+.nav-tabs .nav-link{
+  border: 1px solid transparent;
+  border-top-left-radius:0px!important;
+  border-top-right-radius: 0px!important;
+  border-radius: 25px!important;
+}
+@media screen and (min-width:992px){  
+ngb-tabset{
+  display: flex;
+  margin-top: 50px;
+}
+ngb-tabset ul{
+  display: block!important;
+  width: 150px;
+  float: left;
+}
+.tab-content{
+  padding-left: 20px;
+  width: 90%;
+}
+}
+#tab1-panel > div > app-email-compose > button:nth-child(9){
+  padding: 10px 25px;
+  border-radius: 25px;
+  border: none;
+  background: #0c7d2a;
+  color: #fff;
+  margin-right: 15px;
+}
+
+#tab1-panel > div > app-email-compose > button:nth-child(10){
+  padding: 10px 25px;
+  border-radius: 25px;
+  border: none;
+  background: #1987ba;
+  color: #fff;
+  margin-right: 15px;
+}

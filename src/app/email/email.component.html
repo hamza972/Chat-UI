@@ -5,6 +5,9 @@
       (tabChange)="tabstatus[$event.nextId] = true; setTab($event)"
     >
       <ngb-tab id="compose" title="Compose">
+          <ng-template ngbTabTitle><span class="tab-title">
+              <i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;Compose</span>
+            </ng-template>
         <ng-template ngbTabContent>
           <div>
             <app-email-compose [user]="user"></app-email-compose>
@@ -13,6 +16,9 @@
       </ngb-tab>
 
       <ngb-tab id="inbox" title="Inbox">
+          <ng-template ngbTabTitle><span class="tab-title">
+              <i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;Inbox</span>
+            </ng-template>
         <ng-template ngbTabContent>
           <div *ngIf="tabstatus['inbox'] === true">
             <app-email-inbox [user]="user"></app-email-inbox>
@@ -21,6 +27,9 @@
       </ngb-tab>
 
       <ngb-tab id="send" title="Sent">
+          <ng-template ngbTabTitle><span class="tab-title">
+              <i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp;Sent</span>
+            </ng-template>
         <ng-template ngbTabContent>
           <div *ngIf="tabstatus['send'] === true">
             <app-email-sent [user]="user"></app-email-sent>
@@ -29,6 +38,9 @@
       </ngb-tab>
 
       <ngb-tab id="draft" title="Drafts">
+          <ng-template ngbTabTitle><span class="tab-title">
+              <i class="fa fa-envelope-open-o" aria-hidden="true"></i> &nbsp;Drafts</span>
+            </ng-template>
         <ng-template ngbTabContent>
           <div *ngIf="tabstatus['draft'] === true">
             <app-email-drafts [user]="user"></app-email-drafts>
@@ -37,6 +49,9 @@
       </ngb-tab>
 
       <ngb-tab id="delete" title="Deleted">
+          <ng-template ngbTabTitle><span class="tab-title">
+              <i class="fa fa-trash" aria-hidden="true"></i> &nbsp;Deleted</span>
+            </ng-template>
         <ng-template ngbTabContent>
           <div *ngIf="tabstatus['delete'] === true">
             <app-email-deleted [user]="user"></app-email-deleted>
