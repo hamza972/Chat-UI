@@ -58,7 +58,7 @@
         ></ngb-highlight>
       </td>
       <td>
-        {{ email.date.seconds | date: "dd-MM-yyyy" }}
+        {{ email.date.seconds * 1000 | date: "dd-MM-yyyy" }}
       </td>
       <td>
         <button
