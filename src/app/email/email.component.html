@@ -4,7 +4,7 @@
       [destroyOnHide]="false"
       (tabChange)="tabstatus[$event.nextId] = true; setTab($event)"
     >
-      <ngb-tab id="compose" title="Compose">
+      <ngb-tab id="compose" title="">
           <ng-template ngbTabTitle><span class="tab-title">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;Compose</span>
             </ng-template>
@@ -15,7 +15,7 @@
         </ng-template>
       </ngb-tab>
 
-      <ngb-tab id="inbox" title="Inbox">
+      <ngb-tab id="inbox" title="">
           <ng-template ngbTabTitle><span class="tab-title">
               <i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;Inbox</span>
             </ng-template>
@@ -26,7 +26,7 @@
         </ng-template>
       </ngb-tab>
 
-      <ngb-tab id="send" title="Sent">
+      <ngb-tab id="send" title="">
           <ng-template ngbTabTitle><span class="tab-title">
               <i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp;Sent</span>
             </ng-template>
@@ -37,7 +37,7 @@
         </ng-template>
       </ngb-tab>
 
-      <ngb-tab id="draft" title="Drafts">
+      <ngb-tab id="draft" title="">
           <ng-template ngbTabTitle><span class="tab-title">
               <i class="fa fa-envelope-open-o" aria-hidden="true"></i> &nbsp;Drafts</span>
             </ng-template>
@@ -48,7 +48,7 @@
         </ng-template>
       </ngb-tab>
 
-      <ngb-tab id="delete" title="Deleted">
+      <ngb-tab id="delete" title="">
           <ng-template ngbTabTitle><span class="tab-title">
               <i class="fa fa-trash" aria-hidden="true"></i> &nbsp;Deleted</span>
             </ng-template>
