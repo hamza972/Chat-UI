@@ -8,19 +8,23 @@
         </div>
         <form #roleForm="ngForm" (ngSubmit)="add()">
             <div class="row">
-                <div class="col-md-12 mb-2">
+                <div class="input-wrapper">
                     <input [(ngModel)]="tweet.content" name="content" type="text" class="form-control" id="content" placeholder="What's on your mind?">
+                    <div class="col-md-12">
+                           <button type="submit">Tweet</button>
+                    </div>
+                    <!-- <button type="button" (click)="cancel()">Cancel</button> -->
                 </div>
+                <!-- <div class="col-md-12 mb-2">
+                    <input [(ngModel)]="tweet.content" name="content" type="text" class="form-control" id="content" placeholder="What's on your mind?">
+                </div> -->
             </div>
 
-            <div>
+            <!-- <div>
                 <div class="row">
                     <div class="col-md-12">
                         <button type="submit">Tweet</button>
-                        <!-- <button type="button" (click)="cancel()">Cancel</button> -->
-                    </div>
-                </div>
-            </div>
+                        <!-- <button type="button" (click)="cancel()">Cancel</button> --> 
         </form>
     </div>
 
