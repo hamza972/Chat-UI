@@ -70,9 +70,46 @@
 
 <div>
     <div class="col-md-12">
-       <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="form-control" id="txtSearchNews"  placeholder="Enter title to search"></textarea> 
+              <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="form-control" id="txtSearchNews"  placeholder="Enter title to search"></textarea> 
+              
+              <button class="search-btn">
+                     <i class="fa fa-search"></i>
+             </button>
+
     </div>
+
 </div>
+
+        <div class="row mt-4">
+
+            <div class="col-12">
+                <div class="row" *ngIf="authError">
+                    <div class="col-12 alert alert-danger">
+                        {{ authError?.message }}
+                    </div>
+                </div>
+                <form #newsCreateForm="ngForm" (ngSubmit)="createNews(newsDescription, newsHeadline)">
+                    <div class="row">
+                        <div class="col-md-12 mb-2">
+                            <input ngModel #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control" id="newsHeadline"  placeholder="Enter Headline">
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <textarea  ngModel #newsDescription="ngModel" name="newsDescription" type="text" class="form-control" id="newsDescription"  placeholder="Enter news description"></textarea>
+                        </div>
+                    </div>
+        
+                    <div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit">Post as {{newsUser.role}}</button>
+                                <!-- <button type="button" (click)="cancel()">Cancel</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        
+        </div>
 
     <div class="row" *ngFor="let newsClass of newsArray | filter : searchText">
        <!-- <div class="col-1">
@@ -108,40 +145,6 @@
             </div>
         </div>
         </form>-->
-
-
-
-        <div class="row mt-4">
-
-            <div class="col-12">
-                <div class="row" *ngIf="authError">
-                    <div class="col-12 alert alert-danger">
-                        {{ authError?.message }}
-                    </div>
-                </div>
-                <form #newsCreateForm="ngForm" (ngSubmit)="createNews(newsDescription, newsHeadline)">
-                    <div class="row">
-                        <div class="col-md-12 mb-2">
-                            <input ngModel #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control" id="newsHeadline"  placeholder="Enter Headline">
-                        </div>
-                        <div class="col-md-12 mb-2">
-                            <textarea  ngModel #newsDescription="ngModel" name="newsDescription" type="text" class="form-control" id="newsDescription"  placeholder="Enter news description"></textarea>
-                        </div>
-                    </div>
-        
-                    <div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button type="submit">Post as {{newsUser.role}}</button>
-                                <!-- <button type="button" (click)="cancel()">Cancel</button> -->
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        
-        </div>
-
 
 
 </body>
