@@ -4,6 +4,8 @@ import { appUser } from '../models/user';
 import { LoginService } from '../auth/login.service';
 import { Router } from '@angular/router';
 import {newsClass} from '../models/newsClass';
+import { Participant } from '../models/participant';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-news',
@@ -21,12 +23,27 @@ export class NewsComponent implements OnInit {
   sortedArray: newsClass[];
   authError: any;
   searchText: string;
+  user2: Participant = { rolePosition: ""};
   //search;
 
   constructor(private auth: LoginService,
+      private auth2: AuthService,
     private router: Router) { }
 
   ngOnInit() {
+      /* Check if user is signed in, otherwise redirect to home */
+      this.auth2.getUserData().subscribe(user => {
+          if(user === null) {
+              this.router.navigate(['/home']);
+          } else {
+              this.user2 = user[0];
+              console.log(user[0]);
+              console.log(user[0]);
+              console.log(user[0]);
+              console.log(this.user2);
+          }
+      })
+
     this.user$ = this.auth.user$;
     this.auth.getNews().subscribe(news => {this.newsArray = news});
 
