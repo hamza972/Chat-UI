@@ -26,6 +26,7 @@ export class RegistrationComponent implements OnInit {
         //frm.value.systemRole = frm.value.syr == "cc" ? "control" : "participant";
         frm.value.systemRole = "control";
         frm.value.role = "admin";
+        frm.value.roleID = "admin";
         frm.value.roleFirstName = "admin";
         frm.value.roleLastName = "admin";
         frm.value.rolePosition = "admin";
