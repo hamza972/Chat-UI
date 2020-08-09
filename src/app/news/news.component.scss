@@ -127,3 +127,62 @@ button[type="submit"]:hover
     background-color: #6e7783;
     color:#f2e9e1;
 }
+
+
+// ============= Adjust the Side-bar ===================================
+
+.contact-info{
+    position: fixed;
+    top: 40%;
+    z-index: 99999;
+    left: 0;
+    
+  }
+  .option{
+    cursor: pointer;
+    position: relative;
+  }
+  .option i{
+    display: block;
+    width: 60px;
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+    background: #f1f1f1;
+    color: #b9b9b9;
+    font-size: 20px;
+    transition: 0.6s;
+  }
+  .option:hover i{
+    color: #6F7784;
+  }
+  .text{
+    position: absolute;
+    height: 60px;
+    width: 120px;
+    background: #6F7784;
+    top: 0;
+    z-index: -1;
+    left: -140px;
+    color: #f2e9e1;
+    line-height: 60px;
+    text-align: center;
+    transition: 0.6s;
+  }
+  option.a{
+    position: absolute;
+    height: 60px;
+    width: 120px;
+    background: #6F7784;
+    top: 0;
+    z-index: -1;
+    left: -140px;
+    color: #f2e9e1;
+    line-height: 60px;
+    text-align: center;
+    transition: 0.6s;
+  }
+  
+  .option:hover .text{
+    left: 60px;
+  }
