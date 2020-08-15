@@ -61,6 +61,7 @@ export class EmailComposeComponent implements OnInit {
     };
     this.emailService.sendEmail(this.newEmail);
     console.log("sending");
+    alert("Your Email has been sent!!");
   }
 
   draft() {
@@ -76,5 +77,6 @@ export class EmailComposeComponent implements OnInit {
     };
     this.emailService.draftEmail(this.newEmail);
     console.log("drafting");
+    alert("Your Email has been been moved to the drafts!!");
   }
 }
