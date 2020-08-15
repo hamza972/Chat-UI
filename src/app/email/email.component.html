@@ -19,7 +19,7 @@
 
       <ngb-tab id="inbox" title="">
           <ng-template ngbTabTitle><span class="tab-title">
-              <i class="fa fa-envelope-o" aria-hidden="true"></i> &nbsp;Inbox</span>
+            <i class="far fa-envelope"></i> &nbsp;Inbox</span>
             </ng-template>
         <ng-template ngbTabContent>
           <div *ngIf="tabstatus['inbox'] === true">
@@ -30,7 +30,7 @@
 
       <ngb-tab id="send" title="">
           <ng-template ngbTabTitle><span class="tab-title">
-              <i class="fa fa-paper-plane-o" aria-hidden="true"></i> &nbsp;Sent</span>
+            <i class="far fa-paper-plane"></i> &nbsp;Sent</span>
             </ng-template>
         <ng-template ngbTabContent>
           <div *ngIf="tabstatus['send'] === true">
@@ -41,7 +41,7 @@
 
       <ngb-tab id="draft" title="">
           <ng-template ngbTabTitle><span class="tab-title">
-              <i class="fa fa-envelope-open-o" aria-hidden="true"></i> &nbsp;Drafts</span>
+            <i class="far fa-envelope-open"></i>&nbsp;Drafts</span>
             </ng-template>
         <ng-template ngbTabContent>
           <div *ngIf="tabstatus['draft'] === true">
@@ -52,7 +52,7 @@
 
       <ngb-tab id="delete" title="">
           <ng-template ngbTabTitle><span class="tab-title">
-              <i class="fa fa-trash" aria-hidden="true"></i> &nbsp;Deleted</span>
+            <i class="far fa-trash-alt"></i> &nbsp;Deleted</span>
             </ng-template>
         <ng-template ngbTabContent>
           <div *ngIf="tabstatus['delete'] === true">
