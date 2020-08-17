@@ -17,6 +17,7 @@ import { NavigationComponent } from "./navigation/navigation.component";
 import { EmailComponent } from "./email/email.component";
 import { NewsComponent } from "./news/news.component";
 import { ScenarioComponent } from "./scenario/scenario.component";
+
 import { ChatComponent } from "./chat/chat.component";
 import { EmailViewComponent } from "./email-view/email-view.component";
 import { NewsPublishComponent } from "./news-publish/news-publish.component";
@@ -48,7 +49,7 @@ import { EmailListComponent } from "./email/email-list/email-list.component";
 import { EmailService } from "./services/email.service";
 import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import { ProfileComponent } from './components/profile/profile.component';
-
+import { DiaryComponent } from './diary/diary.component';
 import { NgChatModule } from 'ng-chat';
 import { HttpModule } from '@angular/http';
 
@@ -84,6 +85,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     EmailSentComponent,
     EmailListComponent,
     ProfileComponent,
+    DiaryComponent,
   ],
   imports: [
     BrowserModule,
