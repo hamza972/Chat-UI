@@ -95,6 +95,18 @@
     line-height: 30px;
 }
 
+//============================= diary ========================================
+
+.nav .diary a
+{
+    font-size: 15px;
+    padding-left: 0px;
+    line-height: 30px;
+    color: black;
+    text-decoration: none;
+}
+
+
 // // =======================================================================
 
 // set basic detail
@@ -152,3 +164,5 @@
 .dropdown-toggle::after {
     display: none;
 }
+
+

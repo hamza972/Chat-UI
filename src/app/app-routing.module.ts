@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { EmailComponent } from './email/email.component';
 import { NewsComponent } from './news/news.component';
 import { ScenarioComponent } from './scenario/scenario.component';
+import { DiaryComponent } from './diary/diary.component';
 import { ChatComponent } from './chat/chat.component';
 import { EmailViewComponent } from './email-view/email-view.component';
 import { NewsPublishComponent } from './news-publish/news-publish.component';
@@ -34,6 +35,7 @@ const routes: Routes = [
 { path: 'news', component: NewsComponent},
 { path: 'control', component: ControlComponent},
 { path: 'scenario', component: ScenarioComponent},
+{ path: 'diary', component: DiaryComponent},
 { path: 'role', component: RoleComponent},
 { path: 'role-add', component: RoleAddComponent},
 { path: 'chat', component: ChatComponent},
