@@ -6,6 +6,7 @@ import { appUser as User } from "../../models/user";
 import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
 import { Email } from "src/app/models/email";
 import { EmailService } from "../../services/email.service";
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: "app-email-compose",
@@ -48,7 +49,7 @@ export class EmailComposeComponent implements OnInit {
       )
     );
 
-  send() {
+  send(frm: NgForm) {
     this.newEmail = {
       subject: this.subject,
       body: this.body,
@@ -59,9 +60,11 @@ export class EmailComposeComponent implements OnInit {
         user: this.user.email,
       },
     };
+    frm.reset();
     this.emailService.sendEmail(this.newEmail);
     console.log("sending");
     alert("Your Email has been sent!!");
+    //var form = <HTMLInputElement>document.getElementById("Form").reset();
   }
 
   draft() {
