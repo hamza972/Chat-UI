@@ -32,7 +32,7 @@ ngb-tabset ul{
   margin-right: 15px;
 }
 
-#compose-panel > div > app-email-compose > button:nth-child(10){
+#compose-panel > div > app-email-compose > form > button:nth-child(10){
   padding: 10px 25px;
   border-radius: 25px;
   border: none;
