@@ -77,11 +77,12 @@ button[type="submit"]:hover
   .color-12{width:100%;}
 
 }
+
 .row-container
 {
   display:grid;
   height:400px;
-  align-contnet:end;
+  align-content:end;
   grid-template-columns: auto auto auto;
   grid-gap: 10px;
   background-color: none;
