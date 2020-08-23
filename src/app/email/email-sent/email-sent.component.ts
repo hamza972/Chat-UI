@@ -18,5 +18,6 @@ export class EmailSentComponent implements OnInit {
     this.emailService.sent(this.user).subscribe((emails) => {
       this.emails = emails;
     });
+    console.log(this.emails);
   }
 }
