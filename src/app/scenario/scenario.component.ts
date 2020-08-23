@@ -59,7 +59,7 @@ export class ScenarioComponent implements OnInit {
           this.scenario = {
 
               date: new Date(),
-              content: this.scenario.content
+              content: this.scenario.content,
           }
 
           console.log(this.scenario);
