@@ -5,6 +5,7 @@ import { Participant } from '../models/participant';
 import { ScenarioService } from '../services/scenario.service';
 import { AuthService } from '../services/auth.service';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-scenario',
@@ -53,7 +54,7 @@ export class ScenarioComponent implements OnInit {
       this.router.navigate(['/scenario']);
   }
 
-  add() {
+  add(frm: NgForm) {
       if(this.scenario.content != '') {
 
           this.scenario = {
@@ -66,7 +67,10 @@ export class ScenarioComponent implements OnInit {
 
           this.scenarioService.add(this.scenario);
           //this.router.navigate(['/control']);
+          alert("Your Email has been sent!!");
+          frm.reset();
       }
+
       console.log(this.scenario )
   }
 

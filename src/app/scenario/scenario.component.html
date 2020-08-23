@@ -8,7 +8,7 @@
                 {{ authError?.message }}
             </div>
         </div>
-        <form #roleForm="ngForm" (ngSubmit)="add()">
+        <form #Form="ngForm" (ngSubmit)="add(Form)">
             <div class="row">
                 <div class="input-wrapper">
                     <input [(ngModel)]="scenario.content" name="content" type="text" class="form-control" id="content" placeholder="Add the next scenario task for the students!!!">
