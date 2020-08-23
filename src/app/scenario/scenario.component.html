@@ -1,8 +1,45 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 
-<div>
-<img *ngIf="user$ | async" src="assets/img/comingsoon.png" style="width:950px;height:710px;" class="center">
+<div class="row mt-4">
+
+    <div class="col-12">
+        <div class="row" *ngIf="authError">
+            <div class="col-12 alert alert-danger">
+                {{ authError?.message }}
+            </div>
+        </div>
+        <form #roleForm="ngForm" (ngSubmit)="add()">
+            <div class="row">
+                <div class="input-wrapper">
+                    <input [(ngModel)]="tweet.content" name="content" type="text" class="form-control" id="content" placeholder="What's on your mind?">
+                    <div class="col-md-12">
+                           <button type="submit">Post Scenario</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
 </div>
+
+<div class="row" *ngFor="let tweet of tweets">
+    <div class="col-1">
+        <img (click)="profile($event, tweet)" src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
+    </div>
+    <div class="col-11">
+        <div class="card-panel grey lighten-5 z-depth-1">
+            <div class="card-content">
+                <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}} {{tweet.roleLastName}}</p>
+                <p class="deep-purple-text" *ngIf="user.rolePosition === 'admin'">{{tweet.firstName}} {{tweet.lastName}}</p>
+                <p class="black-text">{{tweet.content}}</p>
+            </div>
+            <div class="card-action">
+                <a href="#">{{tweet.date.toDate() | date: 'medium'}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 
    <!-- set a side bar -->
 
