@@ -1,8 +1,147 @@
-<h1>diary page works</h1>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+
+   <!-- not working javascript -->
+   <!-- <script type="text/javascript">
+        window.onload = function(){
+    			var box1 = document.getElementById("box1");
+				var box2 = document.getElementById("box2");
+				var box3 = document.getElementById("box3");
+                var box4 = document.getElementById("box4");
+				var box5 = document.getElementById("box5");
+				var box6 = document.getElementById("box6");   
+                drag(box1);
+                drag(box2);
+                drag(box3);
+                drag(box4);
+                drag(box5);
+                drag(box6);
+
+                function drag(obj){
+				obj.onmousedown = function(event){
+
+					obj.setCapture && obj.setCapture();					
+					event = event || window.event;
+
+					var ol = event.clientX - obj.offsetLeft;
+					var ot = event.clientY - obj.offsetTop;					
+					
+					//Binding an onmousemove event document
+					document.onmousemove = function(event){
+						event = event || window.event;
+						var left = event.clientX - ol;
+						var top = event.clientY - ot;
+
+						obj.style.left = left+"px";
+						obj.style.top = top+"px";	
+					};
+					
+					//binding a mouseup event to document
+					document.onmouseup = function(){
+						document.onmousemove = null;
+						document.onmouseup = null;
+						obj.releaseCapture && obj.releaseCapture();
+					};
+
+					return false;					
+				};
+			}   
+        }        
+    </script> -->
+
+
+<html lang="zh-CN">
+
+ <!-- Set the main content -->
+ <!-- Adding a diary container -->
+   <ul>
+       <li>
+           <a href="diary" id="box1" >
+               <h2>Wednesday 6th September, 10:36pm</h2>
+                <p>1, I have continued trade talks with Iran.
+                    <br>
+                    2, Replied to Trump about stuff.
+                    <br>
+                    3, Followed up on trade deals with Israel.
+                    <br>
+                    4, Started hopeful trade deals with Egypt.
+                    <br>
+                    <br>
+                    &nbsp; &nbsp; ADD   &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DELETE 
+                </p>
+           </a>
+        </li>
+        <li>
+            <a href="diary" id="box2">
+                <h2>Wednesday 6th September, 7:22pm</h2>
+                 <p>
+                    Things to do...
+                    <br>
+                    1, follow up trade deals and Arms deals in case people have forgotten i.e., Israel, Turkey, Libya and Egypt 
+                    <br>
+                    <br>
+                    
+                    <br>
+                    <br>
+                    &nbsp; &nbsp; ADD   &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DELETE 
+                 </p>
+            </a>
+         </li>
+         <li>
+            <a href="diary" id="box3">
+                <h2>Monday 4th September, 5:09pm</h2>
+                 <p>Important: We decided to have a meeting at 7pm Tuesday to discuss Israel-Palestine conflict.
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    &nbsp; &nbsp; ADD   &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DELETE 
+                 </p>
+            </a>
+         </li>
+         <li>
+            <a href="diary" id="box4">
+                <h2>Sunday 3rd September, 5:37pm</h2>
+                 <p>
+                     1, I have assured Morocco that we support them in their ownership of the Western Sahara. 
+                     <br>
+                     2, Also, have tweeted about it and contacted all media issuing a statement that we support Morocco
+                     <br>
+                     <br>
+                     &nbsp; &nbsp; ADD   &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DELETE 
+                 </p>
+            </a>
+         </li>
+         <li>
+            <a href="diary" id="box5">
+                <h2>Saturday 2nd September, 4:56pm</h2>
+                 <p>I have continued trade talks with Saudi Arabia, Israel and Morocco. No response yet. I have also added the trade talks tags to each of the emails and archived them.
+                    <br>
+                    <br>
+                    <br>
+                    &nbsp; &nbsp; ADD   &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DELETE   
+                 </p>
+            </a>
+         </li>
+         <li>
+            <a href="diary" id="box6">
+                <h2>Saturday 2nd September, 2:48pm</h2>
+                 <p>I'll do Algeria, Libya and Iran
+                    <br>
+                    you can do Saudi, Israel and Morocco
+                    <br>
+                    then we need to talk more with the European leaders let's try start talks with them about Syria and say we don't believe a ceasefire will work
+                    <br>
+                    <br>
+                    &nbsp; &nbsp; ADD   &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;DELETE   
+                </p>
+            </a>
+         </li>
+  
+  </ul>
+
    <!-- set a side bar -->
-
-
    <div class="contact-info">
     <div class="option">
         <i class="fa fa-home"></i>
@@ -36,5 +175,6 @@
         <a class="text" href="control">Control</a> 
 
     </div>
+  </div>  
 
-  </div>
+</html>
