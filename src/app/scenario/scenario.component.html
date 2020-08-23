@@ -22,19 +22,16 @@
 
 </div>
 
-<div class="row" *ngFor="let tweet of tweets">
+<div class="row" *ngFor="let scenario of scenarios">
     <div class="col-1">
-        <img (click)="profile($event, tweet)" src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
     </div>
     <div class="col-11">
         <div class="card-panel grey lighten-5 z-depth-1">
             <div class="card-content">
-                <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}} {{tweet.roleLastName}}</p>
-                <p class="deep-purple-text" *ngIf="user.rolePosition === 'admin'">{{tweet.firstName}} {{tweet.lastName}}</p>
-                <p class="black-text">{{tweet.content}}</p>
+                <p class="black-text">{{scenario.content}}</p>
             </div>
             <div class="card-action">
-                <a href="#">{{tweet.date.toDate() | date: 'medium'}}</a>
+                <a href="#">{{scenario.date.toDate() | date: 'medium'}}</a>
             </div>
         </div>
     </div>
