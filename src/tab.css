@@ -40,3 +40,12 @@ ngb-tabset ul{
   color: #fff;
   margin-right: 15px;
 }
+
+#compose-panel > div > app-email-compose > form > button:nth-child(11){
+  padding: 10px 25px;
+  border-radius: 25px;
+  border: none;
+  background: #0c7d2a;
+  color: #fff;
+  margin-right: 15px;
+}
