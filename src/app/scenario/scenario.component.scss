@@ -13,7 +13,7 @@ input[type=text]
   margin-left: 20px;
   margin-top: 10px;
   border-bottom: none;
-  width: 600px;
+  width: 80%;
   word-break:break-all
 }
 ::placeholder
@@ -31,11 +31,10 @@ button[type="submit"]
   border: none;
   outline: none ;
   height: 40px;
-  font-size: 18px;    
-  background: #c9d6de;
+  font-size: 20px;    
+  background: rgb(81, 201, 248);
   cursor: pointer;
-  color:  #6e7783;
-  font-weight: bold;   
+  color:  #ffffff; 
 }
 button[type="submit"]:hover
 {
@@ -88,8 +87,9 @@ button[type="submit"]:hover
   background-color: none;
 
 }
-.button {
+.button[type-submit] {
   background-color: grey-text;
+  color: #FAFAFA;
   border: none;
   color: white;
   padding: 15px 32px;
@@ -98,6 +98,11 @@ button[type="submit"]:hover
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
+}
+.card-panel{
+  background-color: rgb(204,1961,196);
+  width: 82%;
+  font-size: 20px;
 }
 
 
