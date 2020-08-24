@@ -67,7 +67,7 @@ export class EmailComposeComponent implements OnInit {
     //var form = <HTMLInputElement>document.getElementById("Form").reset();
   }
 
-  draft() {
+  draft(frm: NgForm) {
     this.newEmail = {
       subject: this.subject,
       body: this.body,
@@ -81,5 +81,6 @@ export class EmailComposeComponent implements OnInit {
     this.emailService.draftEmail(this.newEmail);
     console.log("drafting");
     alert("Your Email has been been moved to the drafts!!");
+    frm.reset();
   }
 }
