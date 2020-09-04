@@ -1,59 +1,9 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 
-   <!-- not working javascript -->
-   <!-- <script type="text/javascript">
-        window.onload = function(){
-    			var box1 = document.getElementById("box1");
-				var box2 = document.getElementById("box2");
-				var box3 = document.getElementById("box3");
-                var box4 = document.getElementById("box4");
-				var box5 = document.getElementById("box5");
-				var box6 = document.getElementById("box6");   
-                drag(box1);
-                drag(box2);
-                drag(box3);
-                drag(box4);
-                drag(box5);
-                drag(box6);
-
-                function drag(obj){
-				obj.onmousedown = function(event){
-
-					obj.setCapture && obj.setCapture();					
-					event = event || window.event;
-
-					var ol = event.clientX - obj.offsetLeft;
-					var ot = event.clientY - obj.offsetTop;					
-					
-					//Binding an onmousemove event document
-					document.onmousemove = function(event){
-						event = event || window.event;
-						var left = event.clientX - ol;
-						var top = event.clientY - ot;
-
-						obj.style.left = left+"px";
-						obj.style.top = top+"px";	
-					};
-					
-					//binding a mouseup event to document
-					document.onmouseup = function(){
-						document.onmousemove = null;
-						document.onmouseup = null;
-						obj.releaseCapture && obj.releaseCapture();
-					};
-
-					return false;					
-				};
-			}   
-        }        
-    </script> -->
-
-
-<html lang="zh-CN">
 
  <!-- Set the main content -->
  <!-- Adding a diary container -->
-   <ul>
+   <!-- <ul>
        <li>
            <a href="diary" id="box1" >
                <h2>Wednesday 6th September, 10:36pm</h2>
@@ -139,10 +89,12 @@
             </a>
          </li>
   
-  </ul>
+  </ul> -->
 
-   <!-- set a side bar -->
-   <div class="contact-info">
+
+
+<!-- set a side bar -->
+<div class="contact-info">
     <div class="option">
         <i class="fa fa-home"></i>
         <a class="text" href="#">Home</a>              
@@ -173,8 +125,16 @@
     <div class="option">
         <i class="fa fa-cog"></i>
         <a class="text" href="control">Control</a> 
-
     </div>
-  </div>  
+  </div>
 
-</html>
+
+  <!--dairy main content begin-->
+
+  <div id="label_container">
+
+
+  </div>
+
+<!--dairy main content end-->
+

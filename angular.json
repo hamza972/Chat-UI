@@ -25,18 +25,21 @@
             "aot": false,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/app"
             ],
             "styles": [
               "src/tab.css",
               "src/styles.scss",
+              "src/app/diary/draglabels.css",
               "node_modules/bootstrap/dist/css/bootstrap.css",
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/materialize-css/dist/css/materialize.css"
             ],
             "scripts": [
                 "node_modules/jquery/dist/jquery.js",
-                "node_modules/materialize-css/dist/js/materialize.js"
+                "node_modules/materialize-css/dist/js/materialize.js",
+                "src/app/diary/drag.js"
             ]
           },
           "configurations": {
