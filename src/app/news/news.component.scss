@@ -47,13 +47,13 @@ ul {
 #txtSearchNews
 {    
     float: right;
-    margin-right: 210px;
+    margin-right: 11%;
     border: none;
     background-color: #fafafa;
     // box-sizing: border-box;
-    width: 400px;
+    width: 30%;
     border: none;
-    padding: 0 10px;
+    // padding: 0 10px;
     height: 50px;
     font-size: 16px;
     // border: 1px solid rgb(224, 224, 224);
@@ -91,9 +91,10 @@ ul {
 input[type=text]:not(.browser-default)
 {
    background-color: #fafafa;
+   margin-left: 13%;
    border: none;
    height: 50px;
-   width: 500px;
+   width: 60%;
    float: left;
 
 }
@@ -102,9 +103,15 @@ input[type=text]:not(.browser-default)
 {
     width: 1040px;
     height: 200px;
+    margin-left: 13%;
     background-color: #fafafa;
     border: none;
 
+}
+// ==================  Adjust the news =========================
+.grey.lighten-5
+{
+  margin-left: 8%;
 }
 
 // ==================  Adjust the botton =========================
