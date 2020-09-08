@@ -1,9 +1,10 @@
+
 .input-wrapper
 {
 margin-top: 10px;
   height: 200px;
   width: 1040px;
-  background-color: #FAFAFA;
+  background-color: #FFFAE8;
   margin-left: 8%;
   box-shadow: 0 0 2px rgba(0, 0, 0, .3);
 }
@@ -32,14 +33,14 @@ button[type="submit"]
   outline: none ;
   height: 40px;
   font-size: 20px;    
-  background: rgb(81, 201, 248);
+  background: #FD999A;
   cursor: pointer;
   color:  #ffffff; 
 }
 button[type="submit"]:hover
 {
-    background-color: #6e7783;
-    color:#f2e9e1;
+    background-color: #8ABBDB;
+    color: #ffffff;
 }
 
 
@@ -100,7 +101,7 @@ button[type="submit"]:hover
   margin: 4px 2px;
 }
 .card-panel{
-  background-color: rgb(204,1961,196);
+  background-color: #E1EEF6;
   width: 1040px;
   font-size: 20px;
 }
