@@ -1,9 +1,11 @@
-
+body {
+  max-width: 100%;
+}
 .input-wrapper
 {
 margin-top: 10px;
   height: 200px;
-  width: 1040px;
+  width: 100%;
   background-color: #FFFAE8;
   margin-left: 8%;
   box-shadow: 0 0 2px rgba(0, 0, 0, .3);
@@ -26,8 +28,8 @@ input[type=text]
 button[type="submit"]
 {
   margin-top: 75px;
-  margin-left: 770px;
-  margin-right: 30px;
+  margin-left: 75%;
+  // margin-right: 30px;
   width: 15%;
   border: none;
   outline: none ;
@@ -46,7 +48,7 @@ button[type="submit"]:hover
 
 .grey.lighten-5
 {
-  width: 1040px;
+  width: 100%;
 }
 
 * {
@@ -102,7 +104,7 @@ button[type="submit"]:hover
 }
 .card-panel{
   background-color: #E1EEF6;
-  width: 1040px;
+  width: 100%;
   font-size: 20px;
 }
 
