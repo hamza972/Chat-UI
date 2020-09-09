@@ -1,4 +1,4 @@
-(function(global, noGlobal) {
+function myLabel(global, noGlobal) {
 
   //当前时间
   var t=new Date();
@@ -285,4 +285,4 @@
   domReady.ready(store.setup);
 
   window.store = store;
-})();
+}
