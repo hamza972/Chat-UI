@@ -91,8 +91,53 @@
 //   position:relative;
 //   z-index:5;
 // }
+// ============= button ===================================
+.button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #FD999A;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 15px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  margin-top:30px;
+  vertical-align:middle;
+}
 
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
 
+.button span:after {
+  content: '+';
+  font-size: 19px;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover{
+  background-color:#8ABBDB;
+}
+.button:hover span {
+  padding-right: 25px;
+  
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
 // ============= Adjust the Side-bar ===================================
 
 .contact-info{
