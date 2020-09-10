@@ -2,7 +2,7 @@
 {
     height: 100px;
     padding-left: 0;
-    color: #6e7783;
+    color: #454552;
 }
 h4
 {
@@ -19,7 +19,7 @@ input:not([type]), input[type=text]:not(.browser-default), input[type=password]:
 {
     margin-left: 0;
     padding-left: 0;
-    border-bottom: 1px solid  #6e7783;
+    border-bottom: 1px solid  #454552;
     font-size: 18px;
     padding-bottom: 10px;
 
@@ -29,7 +29,7 @@ select[type="text"]
 {
     margin-left: 0;
     padding-left: 0;
-    border-bottom: 1px solid  #6e7783;
+    border-bottom: 1px solid  #454552;
     font-size: 18px;
     padding-bottom: 15px;
     padding-top: 15px;
@@ -48,20 +48,20 @@ padding-left: 0;
 {
    
     margin-top: 15px;
-    margin-right: 30px;
+    margin-right: 70px;
     width: 20%;
-    border: 1px solid #6e7783;
+    border: 1px solid #8ABBDB;
     outline: none ;
     height: 40px;
     font-size: 16px;    
     background: transparent;
     cursor: pointer;
-    color:  #828282 ;
+    color:  #454552 ;
     font-weight: bold;    
 }
 .col-md-12 button[type="submit"]:hover,
 .col-md-12 button[type="button"]:hover
 {
-    background-color: #6e7783;
-    color:#f2e9e1;
+    background-color: #8ABBDB;
+    color:#ffffff;
 }

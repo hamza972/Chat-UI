@@ -1,28 +1,65 @@
-
-.image
+.button
 {
-    margin-top: 0px;
-    margin-bottom: 40px;
-    height: 42px;
-    width: 125px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    height: 40px;
     left: 0;
-    background-image: url("../../../assets/img/Role.png"); 
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #FD999A;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    width: 150px;
+    transition: all 0.5s;
+    cursor: pointer;
+    vertical-align:center;
 
 }
-.image:hover
-{
-    background-position: -126px 0;
-}
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: '+';
+    font-size: 15px;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover{
+    background-color:#8ABBDB;
+  }
+  .button:hover span {
+    padding-right: 25px;
+    
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+
 .table
 {
     width: 870px;
-    height: 1080px;
+    // height: 1080px;
 }
 .table .table-striped
 {
     border: none;
     border-bottom:1px solid  #6e7783;
 }
+
 td, th 
 {
     padding: 15px 5px;
@@ -38,17 +75,19 @@ td, th
 }
 .table-striped tbody tr:nth-of-type(odd)
 {
-    background-color: #f2e9e1;
+    background-color:  #E1EEF6;
 }
 
 // ===== button =======
 .btn, .btn-large, .btn-small
 {
-   color: #f2e9e1 ;
-   background-color: #6e7783 !important;
+    color: #ffffff;
+   background-color: #8ABBDB!important;
    border-radius: 10px;
 }
+
 .btn:hover
 {
     color: #ffffff;
+    background-color: #FD999A !important;
 }
