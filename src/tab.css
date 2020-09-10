@@ -1,7 +1,8 @@
 .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
     color: #fff!important;
-    background-color: #1987ba!important;
+    background-color: #8ABBDB !important;
 }
+
 .nav-tabs .nav-link{
   border: 1px solid transparent;
   border-top-left-radius:0px!important;
