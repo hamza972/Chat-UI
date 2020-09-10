@@ -15,11 +15,11 @@
   display: block;
   width: 60px;
   text-align: center;
-  height: 60px;
-  line-height: 60px;
+  height: 55px;
+  line-height: 40px;
   background: transition;
   color: #454552;
-  font-size: 20px;
+  font-size: 19px;
   transition: 0.6s;
 }
 .option:hover i{
@@ -35,7 +35,7 @@
   z-index: -1;
   left: -140px;
   color: #454552;
-  line-height: 60px;
+  line-height: 40px;
   text-align: center;
   transition: 0.6s;
   font: bold;
