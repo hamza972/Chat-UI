@@ -11,6 +11,7 @@ import { DiaryComponent } from './diary/diary.component';
 import { ChatComponent } from './chat/chat.component';
 import { EmailViewComponent } from './email-view/email-view.component';
 import { NewsPublishComponent } from './news-publish/news-publish.component';
+import { RolePageComponent } from './RolePage/RolePage.component';
 
 import { ControlComponent } from './components/control/control.component';
 import { ParticipantComponent } from './components/participant/participant.component';
@@ -38,6 +39,7 @@ const routes: Routes = [
 { path: 'diary', component: DiaryComponent},
 { path: 'role', component: RoleComponent},
 { path: 'role-add', component: RoleAddComponent},
+{ path: 'RolePage', component: RolePageComponent},
 { path: 'chat', component: ChatComponent},
 { path: 'participant', component:ParticipantComponent},
 { path: 'participant-add', component:ParticipantAddComponent},
