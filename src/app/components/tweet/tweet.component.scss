@@ -3,7 +3,7 @@
 margin-top: 10px;
   height: 200px;
   width: 100%;
-  background-color: #FAFAFA;
+  background-color: #FFFAE8;
   margin-left: 8%;
   box-shadow: 0 0 2px rgba(0, 0, 0, .3);
 }
@@ -13,7 +13,7 @@ input[type=text]
   margin-left: 20px;
   margin-top: 10px;
   border-bottom: none;
-  width: 600px;
+  width: 80%;
   word-break:break-all
 }
 ::placeholder
@@ -32,21 +32,15 @@ button[type="submit"]
   outline: none ;
   height: 40px;
   font-size: 18px;    
-  background: #c9d6de;
+  background: #FD999A;
   cursor: pointer;
-  color:  #6e7783;
+  color:  #FFFFFF;
   font-weight: bold;   
 }
 button[type="submit"]:hover
 {
-    background-color: #6e7783;
-    color:#f2e9e1;
-}
-
-
-.grey.lighten-5
-{
-  width: 100%;
+    background-color: #8ABBDB;
+    color:#FFFFFF;
 }
 
 * {
@@ -97,6 +91,15 @@ button[type="submit"]:hover
   display: inline-block;
   font-size: 16px;
   margin: 4px 2px;
+}
+.card-panel
+{
+  background-color: #E1EEF6;
+  font-size: 20px;
+  width: 100%;
+}
+a{
+  color:#B1B6B8;
 }
 
 
