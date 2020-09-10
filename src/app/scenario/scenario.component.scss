@@ -128,32 +128,34 @@ button[type="submit"]:hover
   text-align: center;
   height: 60px;
   line-height: 60px;
-  background: #f1f1f1;
-  color: #b9b9b9;
+  background: transition;
+  color: #454552;
   font-size: 20px;
   transition: 0.6s;
 }
 .option:hover i{
-  color: #6F7784;
+
+  color: #FD999A;
 }
 .text{
   position: absolute;
   height: 60px;
   width: 120px;
-  background: #6F7784;
+  background:  transition;
   top: 0;
   z-index: -1;
   left: -140px;
-  color: #f2e9e1;
+  color: #454552;
   line-height: 60px;
   text-align: center;
   transition: 0.6s;
+  font: bold;
 }
 option.a{
   position: absolute;
   height: 60px;
   width: 120px;
-  background: #6F7784;
+  background: #454552;
   top: 0;
   z-index: -1;
   left: -140px;
@@ -161,8 +163,9 @@ option.a{
   line-height: 60px;
   text-align: center;
   transition: 0.6s;
+  font: bold;
 }
 
 .option:hover .text{
-  left: 60px;
+  left: 40px;
 }
