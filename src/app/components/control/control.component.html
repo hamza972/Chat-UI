@@ -26,10 +26,10 @@
             </ng-template>
         </ngb-tab>
 
-        <ngb-tab *ngif="user.rolePosition === 'admin'" title="Statistics">
+        <ngb-tab  *ngIf="user.rolePosition === 'admin'" title="Statistics">
             <ng-template ngbTabContent>
                 <div class="col-8">
-                    <app-participant></app-participant>
+                    <app-statistics></app-statistics>
                 </div>
             </ng-template>
         </ngb-tab>
