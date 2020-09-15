@@ -12,6 +12,7 @@ import { ChatComponent } from './chat/chat.component';
 import { EmailViewComponent } from './email-view/email-view.component';
 import { NewsPublishComponent } from './news-publish/news-publish.component';
 import { RolePageComponent } from './RolePage/RolePage.component';
+import { roleProfile1Component } from './RolePage/roleProfile-1/roleProfile1.component';
 
 import { ControlComponent } from './components/control/control.component';
 import { ParticipantComponent } from './components/participant/participant.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
 { path: 'role', component: RoleComponent},
 { path: 'role-add', component: RoleAddComponent},
 { path: 'RolePage', component: RolePageComponent},
+{ path: 'roleProfile1', component: roleProfile1Component},
 { path: 'chat', component: ChatComponent},
 { path: 'participant', component:ParticipantComponent},
 { path: 'participant-add', component:ParticipantAddComponent},

@@ -53,6 +53,7 @@ import {Ng2SearchPipeModule} from 'ng2-search-filter';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DiaryComponent } from './diary/diary.component';
 import { RolePageComponent } from './RolePage/RolePage.component';
+import { roleProfile1Component} from './RolePage/roleProfile-1/roleProfile1.component';
 import { NgChatModule } from 'ng-chat';
 import { HttpModule } from '@angular/http';
 
@@ -91,7 +92,11 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ProfileComponent,
     DiaryComponent,
     RolePageComponent,
+<<<<<<< HEAD
     StatisticsComponent
+=======
+    roleProfile1Component
+>>>>>>> 6b7a51b0a647163e668aeaa13b6f323df7f019e3
   ],
   imports: [
     BrowserModule,
