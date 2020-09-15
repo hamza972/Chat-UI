@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ParticipantService } from '../../services/participant.service';
 import { Participant } from '../../models/participant';
+import { EmailService } from "../../services/email.service";
 
 @Component({
   selector: 'app-statistics',
