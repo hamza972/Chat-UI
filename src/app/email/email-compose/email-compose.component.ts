@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import * as Editor from "@ckeditor/ckeditor5-build-classic";
+import Base64Plugin from "./Base64Upload.js";
 import { ParticipantService } from "../../services/participant.service";
 import { Observable } from "rxjs";
 import { appUser as User } from "../../models/user";
@@ -15,6 +16,7 @@ import { NgForm } from '@angular/forms';
 })
 export class EmailComposeComponent implements OnInit {
   public Editor = Editor;
+  editorConfig =  {extraPlugins: [Base64Plugin]};
   participants: string[];
   sendTo: string = "";
   subject: string = "";
