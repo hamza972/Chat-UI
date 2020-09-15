@@ -92,11 +92,8 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ProfileComponent,
     DiaryComponent,
     RolePageComponent,
-<<<<<<< HEAD
-    StatisticsComponent
-=======
+    StatisticsComponent,
     roleProfile1Component
->>>>>>> 6b7a51b0a647163e668aeaa13b6f323df7f019e3
   ],
   imports: [
     BrowserModule,
