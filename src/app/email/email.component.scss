@@ -7,57 +7,62 @@
 // ============= Adjust the Side-bar ===================================
 
 .contact-info{
-    position: fixed;
-    top: 40%;
-    z-index: 99999;
-    left: 0;
-    
-  }
-  .option{
-    cursor: pointer;
-    position: relative;
-  }
-  .option i{
-    display: block;
-    width: 60px;
-    text-align: center;
-    height: 60px;
-    line-height: 60px;
-    background: #f1f1f1;
-    color: #b9b9b9;
-    font-size: 20px;
-    transition: 0.6s;
-  }
-  .option:hover i{
-    color: #6F7784;
-  }
-  .text{
-    position: absolute;
-    height: 60px;
-    width: 120px;
-    background: #6F7784;
-    top: 0;
-    z-index: -1;
-    left: -140px;
-    color: #f2e9e1;
-    line-height: 60px;
-    text-align: center;
-    transition: 0.6s;
-  }
-  option.a{
-    position: absolute;
-    height: 60px;
-    width: 120px;
-    background: #6F7784;
-    top: 0;
-    z-index: -1;
-    left: -140px;
-    color: #f2e9e1;
-    line-height: 60px;
-    text-align: center;
-    transition: 0.6s;
-  }
+  position: fixed;
+  top: 40%;
+  z-index: 99999;
+  left: 0;
   
-  .option:hover .text{
-    left: 60px;
-  }
+}
+.option{
+  cursor: pointer;
+  position: relative;
+}
+.option i{
+  display: block;
+  width: 60px;
+  text-align: center;
+  height: 55px;
+  line-height: 40px;
+  background: transition;
+  color: #454552;
+  font-size: 19px;
+  transition: 0.6s;
+}
+.option:hover i{
+
+  color: #FD999A;
+}
+.text{
+  position: absolute;
+  height: 60px;
+  width: 120px;
+  background:  transition;
+  top: 0;
+  z-index: -1;
+  left: -140px;
+  color: #454552;
+  line-height: 40px;
+  text-align: center;
+  transition: 0.6s;
+  font: bold;
+}
+option.a{
+  position: absolute;
+  height: 60px;
+  width: 120px;
+  background: #454552;
+  top: 0;
+  z-index: -1;
+  left: -140px;
+  color: #f2e9e1;
+  line-height: 60px;
+  text-align: center;
+  transition: 0.6s;
+  font: bold;
+}
+
+.option:hover .text{
+  left: 40px;
+}
+
+
