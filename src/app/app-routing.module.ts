@@ -13,6 +13,14 @@ import { EmailViewComponent } from './email-view/email-view.component';
 import { NewsPublishComponent } from './news-publish/news-publish.component';
 import { RolePageComponent } from './RolePage/RolePage.component';
 import { roleProfile1Component } from './RolePage/roleProfile-1/roleProfile1.component';
+import { roleProfile2Component } from './RolePage/roleProfile-2/roleProfile2.component';
+import { roleProfile3Component } from './RolePage/roleProfile-3/roleProfile3.component';
+import { roleProfile4Component } from './RolePage/roleProfile-4/roleProfile4.component';
+import { roleProfile5Component } from './RolePage/roleProfile-5/roleProfile5.component';
+import { roleProfile6Component } from './RolePage/roleProfile-6/roleProfile6.component';
+import { roleProfile7Component } from './RolePage/roleProfile-7/roleProfile7.component';
+import { roleProfile8Component } from './RolePage/roleProfile-8/roleProfile8.component';
+import { roleProfile9Component } from './RolePage/roleProfile-9/roleProfile9.component';
 
 import { ControlComponent } from './components/control/control.component';
 import { ParticipantComponent } from './components/participant/participant.component';
@@ -42,6 +50,14 @@ const routes: Routes = [
 { path: 'role-add', component: RoleAddComponent},
 { path: 'RolePage', component: RolePageComponent},
 { path: 'roleProfile1', component: roleProfile1Component},
+{ path: 'roleProfile2', component: roleProfile2Component},
+{ path: 'roleProfile3', component: roleProfile3Component},
+{ path: 'roleProfile4', component: roleProfile4Component},
+{ path: 'roleProfile5', component: roleProfile5Component},
+{ path: 'roleProfile6', component: roleProfile6Component},
+{ path: 'roleProfile7', component: roleProfile7Component},
+{ path: 'roleProfile8', component: roleProfile8Component},
+{ path: 'roleProfile9', component: roleProfile9Component},
 { path: 'chat', component: ChatComponent},
 { path: 'participant', component:ParticipantComponent},
 { path: 'participant-add', component:ParticipantAddComponent},
