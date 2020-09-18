@@ -4,8 +4,10 @@
         <thead>
             <tr>
                 <th scope="col">Student Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Number of Emails Sent</th>
+                <th scope="col">Email ID's</th>
+                <th scope="col">Emails Sent</th>
+                <th scope="col">Emails Recieved</th>
+                <th scope="col">Average time in application</th>
                 <th scope="col">Emails</th>
             </tr>
         </thead>
@@ -13,9 +15,8 @@
             <tr *ngFor="let participant of participants">
                 <td>{{participant.firstName}} {{participant.lastName}}</td>
                 <td>{{participant.email}}</td>
-                <td></td>
-                <td><button (click)="delete($event, participant)" value="Delete" class="btn red">Go to Email bodies</button></td>
             </tr>
+            
         </tbody>
       </table>
 </div>
