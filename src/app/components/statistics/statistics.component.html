@@ -37,9 +37,8 @@
                     <th scope="col">Emails Sent</th>
                     <th scope="col">Emails Recieved</th>
                     <th scope="col">Average time in application(minutes)</th>
+                    <th scope="col">Tweets</th> 
                     <th scope="col">Email bodies</th>
-                    <th scope="col">Graphical Representation</th>
-                    
                 </tr>
             </thead>
             <tbody>
@@ -49,10 +48,10 @@
                     <td>{{participant.emailSent}}</td>    
                     <td>{{participant.emailRecieved}}</td>
                     <td>{{participant.time}}</td>
+                    <td>coming soon</td>
                     <td><button (click)="delete($event, participant)" value="Delete" class="btn red">Bodies</button></td>
-                    <td><button (click)="delete($event, participant)" value="Delete" class="btn red">View</button></td>
                 </tr>
             </tbody>
           </table>
     </div>
-    
+  
