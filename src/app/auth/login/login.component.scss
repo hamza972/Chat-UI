@@ -5,7 +5,7 @@ body
    
     width:100%;
     height:100%;
-    // background-image: url("../../../assets/img/1.png");
+    background-image: url("../../../assets/img/1.png");
     background-size:100% 100%;
     // position: absolute;
     position: absolute;
@@ -61,7 +61,7 @@ h4
     margin-left: 73px;
     margin-top: 65px;
     padding: 0 0 63px;
-    color: #6e7783;
+    color: #454552;
 }
 
 .alert-danger
@@ -82,10 +82,10 @@ h4
 .loginBox input[type="password"]
 {
     border: none;   
-    border-bottom: 2px solid #6e7783; 
+    border-bottom: 2px solid #454552; 
     outline: none;
     height: 35px;
-    color: #6e7783;
+    color: #454552;
     background: transparent;
     font-size: 16px;
     padding-left: 10px;
@@ -112,6 +112,7 @@ h4
     // margin-top: 5px;;
     width: 20px;
     height: 20px;
+    // background-color:  #454552 ;
     
 }
 ::placeholder
@@ -125,17 +126,17 @@ h4
     margin-top: 10px;
     margin-bottom: 10px;
     padding: 0;
-    border: 1px solid #6e7783;
+    border: 1px solid #454552;
     outline: none ;
     height: 45px;
     font-size: 18px;    
     background: transparent;
     cursor: pointer;
-    color:  #6e7783 ;
+    color:  #454552 ;
     font-weight: bold;
 }
 .loginBox input[type="submit"]:hover
 {
-    background-color: #6e7783;
-    color:#f2e9e1;
+    background-color: #454552;
+    color:#fffff3;
 }
