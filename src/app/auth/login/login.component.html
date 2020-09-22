@@ -33,28 +33,18 @@
 </div> -->
 
 <html>
-
-
     <body >
-
-
         <div class="container" >
     
               <div class="imgBx">
               <img src="../../../assets/img/2-2.png" alt="">
-              </div>
-    
+              </div>   
                  <div class="loginBox">
-
 
                  <h4>Log in </h4>
                  
                  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" >  
-                   
-                    <!-- <div class="inputBox" *ngIf="authError">
-                        <div class="col-12 alert alert-danger">{{ authError?.message }}</div>
-                    </div >       -->
-    
+ 
                      <div class="inputBox">
            
                          <input ngModel #email="ngModel" name="email" type="email" class="form-control" placeholder="Your email"> 
@@ -80,8 +70,6 @@
             </div>
         </div>
     </body>
-
-
 
 </html>
 
