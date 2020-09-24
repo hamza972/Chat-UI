@@ -16,8 +16,8 @@
 
                         <!-- Set web logoo -->
                         <div class="logo" title="MEPS">
-                            <a class="Middle" href="#"></a>
-                            <a class="MEPS" href="#"></a>
+                            <a class="Middle" *ngIf="user" routerLink="/home"></a>
+                            <a class="MEPS" *ngIf="user" routerLink="/home"></a>
 
                         </div>
 
