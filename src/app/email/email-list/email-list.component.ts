@@ -4,6 +4,7 @@ import { Email } from "../../models/email";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { EmailService } from "../../services/email.service";
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: "app-email-list",
@@ -15,7 +16,7 @@ export class EmailListComponent implements OnInit {
   emails$: Observable<Email[]>;
   filter = new FormControl("");
 
-  constructor(private emailService: EmailService) {}
+  constructor(private sr: DomSanitizer,private emailService: EmailService) {}
 
   ngOnInit() {}
 
@@ -63,11 +64,16 @@ export class EmailListComponent implements OnInit {
     }
   }
 
-  cleanHtml(str: String) {
-    return str.replace(/(<([^>]+)>)/gi, "");
+  cleanHtml(str: string) {
+    return str;
   }
 
-  filterDeletePageSendReceive(from: String) {
+  public htmlProperty(str: string) : SafeHtml {
+
+         return this.sr.bypassSecurityTrustHtml(str);
+  }
+
+  filterDeletePageSendReceive(from: string) {
     if (from == localStorage.getItem("userEmail")) {
       return "me";
     }
