@@ -2,9 +2,11 @@
 .map
 {
     display: inline-block;
+    
     margin-top: 40px;
     margin-bottom: 20px;
-    margin-right:0;
+    // margin-left:20%;
+    margin-right:20%;
     height: 280px;
     width: 338px;
     background-image: url("../../assets/img/MiddleEast.png");
@@ -14,22 +16,22 @@
 {
     background-position: -338px 0;
 }
-.heading
-{
-    display: inline-block;
-    margin-left: 120px;
-    margin-bottom: 100px;
-    height: 140px;
-    width: 400px;
-    background-image: url("../../assets/img/Heading.png");
-}
-.heading:hover
-{
-    background-position: -407px 0;
-}
+// .heading
+// {
+//     display: inline-block;
+//     margin-left: 120px;
+//     margin-bottom: 100px;
+//     height: 140px;
+//     width: 400px;
+//     background-image: url("../../assets/img/Heading.png");
+// }
+// .heading:hover
+// {
+//     background-position: -407px 0;
+// }
 h3
 {
-    color: #6e7783;
+    color: #454552;
     margin-bottom: 40px;
 }
 .one
@@ -43,9 +45,66 @@ h3
     overflow:auto;
 }
 
+// ================ Button =====================
+
+.button
+{
+    // display: inline-block;
+    float: left;
+    // margin-top: 40px;
+    // margin-bottom: 200px;
+    height: 40px;
+    left: 0;
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #FD999A;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+    width: 150px;
+    transition: all 0.5s;
+    cursor: pointer;
+    vertical-align:center;
+
+}
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+  
+  .button span:after {
+    content: '+';
+    font-size: 15px;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+  .button:hover{
+    background-color:#8ABBDB;
+  }
+  .button:hover span {
+    padding-right: 25px;
+    
+  }
+  
+  .button:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
 
 
-
+.user-guide
+{
+    display: inline-block;
+    // margin-right: 20%;
+}
 // ================Select the login and registration page =====================
 body
 {
@@ -143,4 +202,15 @@ body
 {
     background-color: #454552;
     color:#FFFFF3;
+}
+
+
+.card-panel
+{
+  background-color: #E1EEF6;
+  font-size: 20px;
+  width: 100%;
+}
+a{
+  color:#B1B6B8;
 }

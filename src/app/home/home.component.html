@@ -3,7 +3,37 @@
 
 <!-- =====add map img======= -->
 <div class="map"></div>
-<div class="heading"></div>
+<!-- ===== user guide ======= -->
+<div class="user-guide">
+    <h5>What you can do ...</h5>
+    <!-- <br> -->
+    <div class="ui">    
+        <button class="button" (click)="add()"><span>Add Participant  </span> </button>
+    </div>
+    <h6>
+        <br>
+        <br>
+        <br>
+        Click the button to create a role.
+        <br>
+        <br>
+        Check out the backstory in <a  *ngIf="user" routerLink="/scenario">Scenario.</a>
+        <br>
+        <br>
+        Take a look at the existing <a  *ngIf="user" routerLink="/RolePage">Roles.</a>
+        <br>
+        <br>
+        Post a <a  *ngIf="user" routerLink="/tweet">tweet.</a>
+        <br>
+        <br>
+        Check your <a *ngIf="user" routerLink="/email">email </a>box.
+        <br>
+        <br>
+        Write down your role <a *ngIf="user" routerLink="/diary">diary</a> for today.
+        <br>
+      </h6>
+    
+    </div>
 
 <!--  five latest tweets and five latest news -->
 <div class="row" *ngIf="user">
@@ -17,7 +47,7 @@
                     <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
                 </div>
                 <div class="col-8">
-                    <div class="card-panel grey lighten-5 z-depth-1">
+                    <div class="card-panel ">
                         <div class="card-content">
                             <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}} {{tweet.roleLastName}}</p>
                             <p class="black-text">{{tweet.content}}</p>
@@ -39,7 +69,7 @@
         <div class="row" *ngFor="let news of newss; let i=index">
             <div *ngIf="i<5">
                 <div class="col-12">
-                    <div class="card-panel grey lighten-5 z-depth-1">
+                    <div class="card-panel ">
                         <div class="card-content">
                             <p class="grey-text" >{{news.newsHeadline}}</p>
                             <p class="black-text">{{news.newsDescription}}</p>

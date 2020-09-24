@@ -41,9 +41,9 @@
                                 </a>
                             </li>
                             <div ngbDropdownMenu aria-labelledby="userDropdown">
-                              <div ngbDropdownItem class="diary">  <a  href="roleProfile2">{{user.roleFirstName}} {{user.roleLastName}}</a> </div>                          
+                              <div ngbDropdownItem class="diary">  <a *ngIf="user" routerLink="/roleProfile2">{{user.roleFirstName}} {{user.roleLastName}}</a> </div>                          
                               <div ngbDropdownItem>{{user.rolePosition}} {{user.roleAffiliation}}</div>
-                              <div ngbDropdownItem class="diary">  <a  href="diary">Diary</a>  </div>
+                              <div ngbDropdownItem class="diary">  <a  *ngIf="user" routerLink="/diary">Diary</a>  </div>
                               <div ngbDropdownItem (click)="logout()" routerLink="/">Logout</div>
                             </div>
                         </ul>
