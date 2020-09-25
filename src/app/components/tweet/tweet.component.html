@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 
+
 <div class="row mt-4">
 
     <div class="col-12">
@@ -11,8 +12,14 @@
         <form #roleForm="ngForm" (ngSubmit)="add()">
             <div class="row">
                 <div class="input-wrapper">
-                    <input [(ngModel)]="tweet.content" name="content" type="text" class="form-control" id="content" placeholder="What's on your mind?">
-                    <div class="col-md-12">
+                  <ckeditor
+                    name="content"
+                    [editor]="Editor"
+                    [(ngModel)]="tweet.content"
+                    [config]="editorConfig"
+                    style="min-height: 500px;"
+                  ></ckeditor>
+                    <div class="col-md-9">
                            <button type="submit">Tweet</button>
                     </div>
                     <!-- <button type="button" (click)="cancel()">Cancel</button> -->
@@ -26,7 +33,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <button type="submit">Tweet</button>
-                        <!-- <button type="button" (click)="cancel()">Cancel</button> --> 
+                        <!-- <button type="button" (click)="cancel()">Cancel</button> -->
         </form>
     </div>
 
@@ -41,7 +48,7 @@
             <div class="card-content">
                 <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}} {{tweet.roleLastName}}</p>
                 <p class="deep-purple-text" *ngIf="user.rolePosition === 'admin'">{{tweet.firstName}} {{tweet.lastName}}</p>
-                <p class="black-text">{{tweet.content}}</p>
+                <div [innerHtml]="htmlProperty(tweet.content)"></div>
             </div>
             <div class="card-action">
                 <a>{{tweet.date.toDate() | date: 'medium'}}</a>
@@ -58,45 +65,45 @@
    <div class="contact-info">
     <div class="option">
         <i class="fa fa-home"></i>
-        <a class="text" href="#">Home</a>              
+        <a class="text" href="#">Home</a>
     </div>
 
     <div class="option">
         <i class="fas fa-book-open"></i>
-        <a class="text" href="scenario">Scenario</a>              
+        <a class="text" href="scenario">Scenario</a>
     </div>
 
     <div class="option">
         <i class="fas fa-user-alt"></i>
-        <a class="text" href="RolePage">Role</a>              
+        <a class="text" href="RolePage">Role</a>
     </div>
 
 
     <div class="option">
-        <i class="fa fa-envelope" ></i>   
-        <a class="text" href="email">Email</a>      
+        <i class="fa fa-envelope" ></i>
+        <a class="text" href="email">Email</a>
 
     </div>
 
     <div class="option">
         <i class="fab fa-twitter-square"></i>
-        <a class="text" href="tweet">Tweet</a>  
+        <a class="text" href="tweet">Tweet</a>
 
     </div>
 
     <div class="option">
         <i class="fas fa-newspaper"></i>
-        <a class="text" href="news">News</a>  
+        <a class="text" href="news">News</a>
     </div>
 
     <div class="option">
         <i class="fas fa-comment-alt"></i>
-        <a class="text" href="chat">Chat</a> 
+        <a class="text" href="chat">Chat</a>
     </div>
 
     <div class="option">
         <i class="fa fa-cog"></i>
-        <a class="text" href="control">Control</a> 
+        <a class="text" href="control">Control</a>
 
     </div>
 

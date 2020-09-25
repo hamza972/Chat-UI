@@ -53,7 +53,7 @@
       </td>
       <td>
         <ngb-highlight
-          [result]="cleanHtml(email.body)"
+          [innerHtml]="htmlProperty(email.body)"
           [term]="filter.value"
         ></ngb-highlight>
       </td>

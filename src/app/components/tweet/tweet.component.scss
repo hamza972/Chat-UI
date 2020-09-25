@@ -3,9 +3,7 @@
 margin-top: 10px;
   height: 200px;
   width: 100%;
-  background-color: #FFFAE8;
   margin-left: 8%;
-  box-shadow: 0 0 2px rgba(0, 0, 0, .3);
 }
 
 input[type=text]
@@ -31,11 +29,11 @@ button[type="submit"]
   border: none;
   outline: none ;
   height: 40px;
-  font-size: 18px;    
+  font-size: 18px;
   background: #FD999A;
   cursor: pointer;
   color:  #FFFFFF;
-  font-weight: bold;   
+  font-weight: bold;
 }
 button[type="submit"]:hover
 {
@@ -109,7 +107,7 @@ a{
   top: 40%;
   z-index: 99999;
   left: 0;
-  
+
 }
 .option{
   cursor: pointer;
@@ -162,7 +160,3 @@ option.a{
 .option:hover .text{
   left: 40px;
 }
-
-
-
-  
