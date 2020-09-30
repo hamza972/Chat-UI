@@ -30,16 +30,16 @@
         </div>
         <div class="content">
           Justin Pierre James Trudeau was born December 25, 1971 and is a Canadian politician who has served as the 23rd prime minister of Canada since 2015 and has been the leader of the Liberal Party since 2013.
-          Trudeau is the second-youngest Canadian prime minister after Joe Clark; he is also the first to be related to a previous holder of the post, as the eldest son of Pierre Trudeau. 
+          Trudeau is the second-youngest Canadian prime minister after Joe Clark; he is also the first to be related to a previous holder of the post, as the eldest son of Pierre Trudeau.
           <br>
           <br>
-          Born in Ottawa, Trudeau attended Collège Jean-de-Brébeuf, graduated from McGill University in 1994, and then the University of British Columbia in 1998. 
-          He has a bachelor of arts degree in literature and a bachelor of education degree. After graduating, he worked as a teacher in Vancouver, British Columbia. 
+          Born in Ottawa, Trudeau attended Collège Jean-de-Brébeuf, graduated from McGill University in 1994, and then the University of British Columbia in 1998.
+          He has a bachelor of arts degree in literature and a bachelor of education degree. After graduating, he worked as a teacher in Vancouver, British Columbia.
           He started studying engineering at Montreal's École Polytechnique in 2002 but dropped out in 2003. Beginning in 2004, he took one year of a master's program in environmental geography at McGill University but, again, left without graduating in 2005. He has also held jobs including camp counsellor, nightclub bouncer, and snowboard instructor.
          <br>
          <br>
-         In the 2008 federal election, he was elected to represent the riding of Papineau in the House of Commons. In 2009, he was appointed the Liberal Party's critic for youth and multiculturalism, and the following year, became critic for citizenship and immigration. In 2011, he was appointed as critic for secondary education and sport. 
-         Trudeau won the leadership of the Liberal Party in April 2013 and led his party to victory in the 2015 federal election, moving the third-placed Liberals from 36 seats to 184 seats, the largest-ever numerical increase by a party in a Canadian federal election. 
+         In the 2008 federal election, he was elected to represent the riding of Papineau in the House of Commons. In 2009, he was appointed the Liberal Party's critic for youth and multiculturalism, and the following year, became critic for citizenship and immigration. In 2011, he was appointed as critic for secondary education and sport.
+         Trudeau won the leadership of the Liberal Party in April 2013 and led his party to victory in the 2015 federal election, moving the third-placed Liberals from 36 seats to 184 seats, the largest-ever numerical increase by a party in a Canadian federal election.
          As Prime Minister, major government initiatives he undertook during his first term included legalizing recreational marijuana through the Cannabis Act; attempting Senate appointment reform by establishing the Independent Advisory Board for Senate Appointments; establishing the federal carbon tax and negotiating trade deals such as the United States-Mexico-Canada Agreement and the Comprehensive and Progressive Agreement for Trans-Pacific Partnership; while later grappling with controversies surrounding the SNC-Lavalin affair.
          <br>
          <br>
@@ -54,14 +54,14 @@
         <div class="dot"></div>
 
         <h6 class="title">
-            Allies ： 
+            Allies ：
         </h6>
       </div>
       <div class="content">
         Trudeau's Liberals supported the concept of a strong, central government, and fought Quebec separatism, other forms of Quebec nationalism, and the granting of "distinct society" status to Quebec. Such actions, however, served as rallying cries for sovereigntists and alienated many Francophone Quebeckers.
           <br>
           <br>
-                    
+
       </div>
 
     <li class="timeline__item">
@@ -71,7 +71,7 @@
             Enemies :
         </h6>
       </div>
-        
+
       <div class="content">
         Britain’s enemies (and often America’s enemies) have also been Canada’s enemies. Without the heroic counter-intelligence of the mysterious Agent X, Irish Americans at the turn of the century might have blasted British Columbia’s legislature and the Esquimalt naval base the way they blasted the Welland Canal.
       </div>
@@ -83,7 +83,7 @@
             Beliefs :
         </h6>
       </div>
-       
+
       <div class="content">
          Canadians together despite their differences. According to Trudeau, Laurier "knew that politics can be a positive force, and that's the message Canadians have sent today".
       </div>
@@ -95,7 +95,7 @@
             Ambitions :
         </h6>
       </div>
-       
+
       <div class="content">
          It heightened a question that has hung over Justin Trudeau's plans to build a new relationship between Canada and China. What is the big picture? What are Canada's goals and ambitions in devoting itself to a closer relationship with China
       </div>
@@ -113,47 +113,46 @@
    <div class="contact-info">
     <div class="option">
         <i class="fa fa-home"></i>
-        <a class="text" href="#">Home</a>              
+        <a class="text" href="#">Home</a>
     </div>
 
     <div class="option">
         <i class="fas fa-book-open"></i>
-        <a class="text" href="scenario">Scenario</a>              
+        <a class="text" *ngIf="user" routerLink="/scenario">Scenario</a>
     </div>
 
     <div class="option">
         <i class="fas fa-user-alt"></i>
-        <a class="text" href="RolePage">Role</a>              
+        <a class="text"  *ngIf="user" routerLink="/RolePage">Role</a>
     </div>
 
 
     <div class="option">
-        <i class="fa fa-envelope" ></i>   
-        <a class="text" href="email">Email</a>      
+        <i class="fa fa-envelope" ></i>
+        <a class="text"  *ngIf="user" routerLink="/email">Email</a>
 
     </div>
 
     <div class="option">
         <i class="fab fa-twitter-square"></i>
-        <a class="text" href="tweet">Tweet</a>  
+        <a class="text" *ngIf="user" routerLink="/tweet">Tweet</a>
 
     </div>
 
     <div class="option">
         <i class="fas fa-newspaper"></i>
-        <a class="text" href="news">News</a>  
+        <a class="text" *ngIf="user" routerLink="/news">News</a>
     </div>
 
     <div class="option">
         <i class="fas fa-comment-alt"></i>
-        <a class="text" href="chat">Chat</a> 
+        <a *ngIf="user" routerLink="/chat">Chat</a>
     </div>
 
     <div class="option">
         <i class="fa fa-cog"></i>
-        <a class="text" href="control">Control</a> 
+        <a class="text" *ngIf="user" routerLink="/control">Control</a>
 
     </div>
 
   </div>
-

@@ -49,7 +49,7 @@
         <div class="dot"></div>
 
         <h6 class="title">
-          Political career ： 
+          Political career ：
         </h6>
       </div>
       <div class="content">
@@ -75,7 +75,7 @@
         After announcing his candidacy for the 2014 elections, Ghani tapped General Abdul Rashid Dostum, a prominent Uzbek politician and former military official in Karzai's government and Sarwar Danish, an ethnic Hazara, who also served as the Justice Minister in Karzai's cabinet, as his vice presidential candidates.
           <br>
           <br>
-          Initial results from the run-off elections showed Ghani as the overwhelming favourite to win the elections. However, allegations of electoral fraud resulted in a stalemate, threats of violence and the formation of a parallel government by the camp of his opponent, Abdullah Abdullah. 
+          Initial results from the run-off elections showed Ghani as the overwhelming favourite to win the elections. However, allegations of electoral fraud resulted in a stalemate, threats of violence and the formation of a parallel government by the camp of his opponent, Abdullah Abdullah.
           <br>
           <br>
           Initial results from the run-off elections showed Ghani as the overwhelming favourite to win the elections. However, allegations of electoral fraud resulted in a stalemate, threats of violence and the formation of a parallel government by the camp of his opponent, Abdullah Abdullah. On 7 August 2014 US Secretary of State John Kerry flew to Kabul to broker a deal that outlined an extensive audit of nearly 8 million votes and formation of a national unity government with a new role for a chief executive officer who would carry out meaningful functions within the president's administration.
@@ -131,47 +131,46 @@
    <div class="contact-info">
     <div class="option">
         <i class="fa fa-home"></i>
-        <a class="text" href="#">Home</a>              
+        <a class="text" href="#">Home</a>
     </div>
 
     <div class="option">
         <i class="fas fa-book-open"></i>
-        <a class="text" href="scenario">Scenario</a>              
+        <a class="text" *ngIf="user" routerLink="/scenario">Scenario</a>
     </div>
 
     <div class="option">
         <i class="fas fa-user-alt"></i>
-        <a class="text" href="RolePage">Role</a>              
+        <a class="text"  *ngIf="user" routerLink="/RolePage">Role</a>
     </div>
 
 
     <div class="option">
-        <i class="fa fa-envelope" ></i>   
-        <a class="text" href="email">Email</a>      
+        <i class="fa fa-envelope" ></i>
+        <a class="text"  *ngIf="user" routerLink="/email">Email</a>
 
     </div>
 
     <div class="option">
         <i class="fab fa-twitter-square"></i>
-        <a class="text" href="tweet">Tweet</a>  
+        <a class="text" *ngIf="user" routerLink="/tweet">Tweet</a>
 
     </div>
 
     <div class="option">
         <i class="fas fa-newspaper"></i>
-        <a class="text" href="news">News</a>  
+        <a class="text" *ngIf="user" routerLink="/news">News</a>
     </div>
 
     <div class="option">
         <i class="fas fa-comment-alt"></i>
-        <a class="text" href="chat">Chat</a> 
+        <a *ngIf="user" routerLink="/chat">Chat</a>
     </div>
 
     <div class="option">
         <i class="fa fa-cog"></i>
-        <a class="text" href="control">Control</a> 
+        <a class="text" *ngIf="user" routerLink="/control">Control</a>
 
     </div>
 
   </div>
-

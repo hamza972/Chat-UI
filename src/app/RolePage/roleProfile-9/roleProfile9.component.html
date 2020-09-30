@@ -29,26 +29,26 @@
           </h6>
         </div>
         <div class="content">
-          Haitham bin Tariq Al was born 13 October 1954 and is the Sultan of Oman. He succeeded his cousin Qaboos bin Said on 11 January 2020. 
+          Haitham bin Tariq Al was born 13 October 1954 and is the Sultan of Oman. He succeeded his cousin Qaboos bin Said on 11 January 2020.
           He previously served as Minister of Heritage and Culture in the Sultanate of Oman.
           <br>
           <br>
-          Haitham bin Tariq attended Pembroke College, University of Oxford, graduating from the Foreign Service Programme (FSP) in 1979. Haitham's father was Tariq bin Taimur, son of Sultan Taimur bin Feisal. 
-          He has six brothers and two sisters. His half-brother Asa'ad bin Tariq is the Deputy Prime Minister for relations and international cooperation affairs, and his full brother Shihab bin Tariq is the Deputy Prime Minister for Defense Affairs. 
+          Haitham bin Tariq attended Pembroke College, University of Oxford, graduating from the Foreign Service Programme (FSP) in 1979. Haitham's father was Tariq bin Taimur, son of Sultan Taimur bin Feisal.
+          He has six brothers and two sisters. His half-brother Asa'ad bin Tariq is the Deputy Prime Minister for relations and international cooperation affairs, and his full brother Shihab bin Tariq is the Deputy Prime Minister for Defense Affairs.
           His other brothers, Talal, Qais, Adham and Faris are businessmen and are not involved in politics. He is described as "outward-looking and Western-oriented".
          <br>
          <br>
-         A sports enthusiast, he served as the first head of the Oman Football Association in the early 1980s. 
-         He served as the Undersecretary of the Ministry of Foreign Affairs for Political Affairs from 1986 to 1994, and was later appointed as the Secretary General for the Ministry of Foreign Affairs (1994–2002). 
+         A sports enthusiast, he served as the first head of the Oman Football Association in the early 1980s.
+         He served as the Undersecretary of the Ministry of Foreign Affairs for Political Affairs from 1986 to 1994, and was later appointed as the Secretary General for the Ministry of Foreign Affairs (1994–2002).
          He was later appointed as the Minister of Heritage and Culture in March 2002 and later chaired the national census committee in 2003. He usually represented Oman abroad in a diplomatic capacity; in 2016, he personally welcomed Prince Charles and Camilla on a visit to the country.
          <br>
          <br>
          He is also chairman of the committee for the future vision of "Oman 2040″ along with being honorary president of the Oman Association for the Disabled.
          <br>
          <br>
-         After the death of his first cousin Sultan Qaboos on 10 January 2020, Haitham bin Tariq was named by the royal family and Qaboos's will as Sultan of Oman the next day and took an oath before an emergency session of the Council of Oman in Al-Bustan. 
-         Oman state TV said the former sultan's letter was opened by the Defence Council and his identity was announced shortly thereafter. 
-         As sultan, he also held the positions of prime minister, supreme commander of the armed forces, minister of defence, minister of finance, and minister of foreign affairs until 18 August 2020 when he appointed Sayyid Badr bin Hamad bin Hamood AlBusaidi as minister of foreign affairs and Sultan bin Salem bin Saeed al-Habsi as minister of finance. 
+         After the death of his first cousin Sultan Qaboos on 10 January 2020, Haitham bin Tariq was named by the royal family and Qaboos's will as Sultan of Oman the next day and took an oath before an emergency session of the Council of Oman in Al-Bustan.
+         Oman state TV said the former sultan's letter was opened by the Defence Council and his identity was announced shortly thereafter.
+         As sultan, he also held the positions of prime minister, supreme commander of the armed forces, minister of defence, minister of finance, and minister of foreign affairs until 18 August 2020 when he appointed Sayyid Badr bin Hamad bin Hamood AlBusaidi as minister of foreign affairs and Sultan bin Salem bin Saeed al-Habsi as minister of finance.
          In his first public speech, he promised to uphold his predecessor's peace-making foreign policy and to further develop Oman's economy. Haitham bin Tariq is married and, unlike his predecessor, also has children, two sons and two daughters
         </div>
       </li>
@@ -57,11 +57,11 @@
         <div class="dot"></div>
 
         <h6 class="title">
-            Allies ： 
+            Allies ：
         </h6>
       </div>
       <div class="content">
-        The new leader, Haitham bin Tariq Al Said, succeeds Sultan Qaboos, a towering figure who ruled Oman for nearly 50 years. 
+        The new leader, Haitham bin Tariq Al Said, succeeds Sultan Qaboos, a towering figure who ruled Oman for nearly 50 years.
         He oversaw its development and pioneered a foreign policy based on good relations with a range of countries, including Saudi Arabia, Israel, the United States and Iran.
       </div>
 
@@ -87,7 +87,7 @@
         Haitham bin Tariq is a Muslim leader
         <br>
         <br>
-        His Majesty Sultan Haitham bin Tariq affirms that the Sultanate will continue to push for resolving disputes by peaceful means and dialogue. 
+        His Majesty Sultan Haitham bin Tariq affirms that the Sultanate will continue to push for resolving disputes by peaceful means and dialogue.
         His Majesty the Sultan made the statement after being proclaimed as the successor of Sultan Qaboos by the Defense Council.
       </div>
     </li>
@@ -115,47 +115,46 @@
    <div class="contact-info">
     <div class="option">
         <i class="fa fa-home"></i>
-        <a class="text" href="#">Home</a>              
+        <a class="text" href="#">Home</a>
     </div>
 
     <div class="option">
         <i class="fas fa-book-open"></i>
-        <a class="text" href="scenario">Scenario</a>              
+        <a class="text" *ngIf="user" routerLink="/scenario">Scenario</a>
     </div>
 
     <div class="option">
         <i class="fas fa-user-alt"></i>
-        <a class="text" href="RolePage">Role</a>              
+        <a class="text"  *ngIf="user" routerLink="/RolePage">Role</a>
     </div>
 
 
     <div class="option">
-        <i class="fa fa-envelope" ></i>   
-        <a class="text" href="email">Email</a>      
+        <i class="fa fa-envelope" ></i>
+        <a class="text"  *ngIf="user" routerLink="/email">Email</a>
 
     </div>
 
     <div class="option">
         <i class="fab fa-twitter-square"></i>
-        <a class="text" href="tweet">Tweet</a>  
+        <a class="text" *ngIf="user" routerLink="/tweet">Tweet</a>
 
     </div>
 
     <div class="option">
         <i class="fas fa-newspaper"></i>
-        <a class="text" href="news">News</a>  
+        <a class="text" *ngIf="user" routerLink="/news">News</a>
     </div>
 
     <div class="option">
         <i class="fas fa-comment-alt"></i>
-        <a class="text" href="chat">Chat</a> 
+        <a *ngIf="user" routerLink="/chat">Chat</a>
     </div>
 
     <div class="option">
         <i class="fa fa-cog"></i>
-        <a class="text" href="control">Control</a> 
+        <a class="text" *ngIf="user" routerLink="/control">Control</a>
 
     </div>
 
   </div>
-

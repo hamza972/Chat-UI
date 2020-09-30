@@ -11,7 +11,7 @@
 </thead>
 <tbody>
     <!-- <tr>
-   
+
         <td><a >Islamic State</a></td>
         <td>Insurgent</td>
         <td>International</td
@@ -114,45 +114,45 @@
    <div class="contact-info">
     <div class="option">
         <i class="fa fa-home"></i>
-        <a class="text" href="#">Home</a>              
+        <a class="text" href="#">Home</a>
     </div>
 
     <div class="option">
         <i class="fas fa-book-open"></i>
-        <a class="text" href="scenario">Scenario</a>              
+        <a class="text" *ngIf="user" routerLink="/scenario">Scenario</a>
     </div>
 
     <div class="option">
         <i class="fas fa-user-alt"></i>
-        <a class="text" href="RolePage">Role</a>              
+        <a class="text"  *ngIf="user" routerLink="/RolePage">Role</a>
     </div>
 
 
     <div class="option">
-        <i class="fa fa-envelope" ></i>   
-        <a class="text" href="email">Email</a>      
+        <i class="fa fa-envelope" ></i>
+        <a class="text"  *ngIf="user" routerLink="/email">Email</a>
 
     </div>
 
     <div class="option">
         <i class="fab fa-twitter-square"></i>
-        <a class="text" href="tweet">Tweet</a>  
+        <a class="text" *ngIf="user" routerLink="/tweet">Tweet</a>
 
     </div>
 
     <div class="option">
         <i class="fas fa-newspaper"></i>
-        <a class="text" href="news">News</a>  
+        <a class="text" *ngIf="user" routerLink="/news">News</a>
     </div>
 
     <div class="option">
         <i class="fas fa-comment-alt"></i>
-        <a class="text" href="chat">Chat</a> 
+        <a *ngIf="user" routerLink="/chat">Chat</a>
     </div>
 
     <div class="option">
         <i class="fa fa-cog"></i>
-        <a class="text" href="control">Control</a> 
+        <a class="text" *ngIf="user" routerLink="/control">Control</a>
 
     </div>
 
