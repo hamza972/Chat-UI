@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 <div class="row" *ngIf="user">
-    
+
     <ngb-tabset [destroyOnHide]="false">
         <ngb-tab title="Affiliation">
             <ng-template ngbTabContent>
@@ -26,7 +26,7 @@
             </ng-template>
         </ngb-tab>
 
-        <ngb-tab  *ngIf="user.rolePosition === 'admin'" title="Statistics">
+        <ngb-tab title="Statistics">
             <ng-template ngbTabContent>
                 <div class="col-8">
                     <app-statistics></app-statistics>
@@ -45,45 +45,45 @@
    <div class="contact-info">
     <div class="option">
         <i class="fa fa-home"></i>
-        <a class="text" href="#">Home</a>              
+        <a class="text" href="#">Home</a>
     </div>
 
     <div class="option">
         <i class="fas fa-book-open"></i>
-        <a class="text" href="scenario">Scenario</a>              
+        <a class="text" href="scenario">Scenario</a>
     </div>
 
     <div class="option">
         <i class="fas fa-user-alt"></i>
-        <a class="text" href="RolePage">Role</a>              
+        <a class="text" href="RolePage">Role</a>
     </div>
 
 
     <div class="option">
-        <i class="fa fa-envelope" ></i>   
-        <a class="text" href="email">Email</a>      
+        <i class="fa fa-envelope" ></i>
+        <a class="text" href="email">Email</a>
 
     </div>
 
     <div class="option">
         <i class="fab fa-twitter-square"></i>
-        <a class="text" href="tweet">Tweet</a>  
+        <a class="text" href="tweet">Tweet</a>
 
     </div>
 
     <div class="option">
         <i class="fas fa-newspaper"></i>
-        <a class="text" href="news">News</a>  
+        <a class="text" href="news">News</a>
     </div>
 
     <div class="option">
         <i class="fas fa-comment-alt"></i>
-        <a class="text" href="chat">Chat</a> 
+        <a class="text" href="chat">Chat</a>
     </div>
 
     <div class="option">
         <i class="fa fa-cog"></i>
-        <a class="text" href="control">Control</a> 
+        <a class="text" href="control">Control</a>
 
     </div>
 

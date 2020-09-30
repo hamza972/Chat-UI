@@ -1,5 +1,5 @@
 <!-- <div *ngIf="user">
- 
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -10,14 +10,14 @@
                 <th scope="col">Average time in application</th>
                 <th scope="col">Email bodies</th>
                 <th scope="col">Graphical Representation</th>
-                
+
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let participant of participants">
                 <td>{{participant.firstName}} {{participant.lastName}}</td>
                 <td>{{participant.email}}</td>
-                <td>3</td>    
+                <td>3</td>
                 <td>6</td>
                 <td>55 mintutes</td>
                 <td><button (click)="delete($event, participant)" value="Delete" class="btn red">Bodies</button></td>
@@ -28,7 +28,7 @@
 </div> -->
 
 <div *ngIf="user">
- 
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -37,7 +37,7 @@
                     <th scope="col">Emails Sent</th>
                     <th scope="col">Emails Recieved</th>
                     <th scope="col">Average time in application(minutes)</th>
-                    <th scope="col">Tweets</th> 
+                    <th scope="col">Tweets</th>
                     <th scope="col">Email bodies</th>
                 </tr>
             </thead>
@@ -45,15 +45,14 @@
                 <tr *ngFor="let participant of participants">
                     <td>{{participant.firstName}} {{participant.lastName}}</td>
                     <td>{{participant.email}}</td>
-                    <td>{{participant.emailSent}}</td>    
+                    <td>{{participant.emailSent}}</td>
                     <td>{{participant.emailRecieved}}</td>
                     <td>{{participant.time}}</td>
                     <td>coming soon</td>
-                    <td><button (click)="delete($event, participant)" value="Delete" class="btn red">Bodies</button></td>
+                    <td><button (click)="delete($event, participant)" class="btn red">Bodies</button></td>
                 </tr>
             </tbody>
           </table>
           <div class="img"></div>
           <div class="img1"></div>
     </div>
-  
