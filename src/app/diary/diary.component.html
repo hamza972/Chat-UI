@@ -1,4 +1,4 @@
- <meta http-equiv="refresh" content=5>
+ <!-- <meta http-equiv="refresh" content=15> -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 
 
@@ -58,11 +58,13 @@
 
   <!--dairy main content begin-->
 
-
+  <a  *ngIf="user" routerLink="/diary" title="Create Your First Note"class="button" >
+    <span>SHOW NOTE  </span>
+  </a>
 
   <div>
     <br>
-    1,The page will refresh in 5 seconds
+    1, if you close all your notes, please click the button
     <br>
     2, clicking the "X" will only close the note, not delete it.
     <br>
