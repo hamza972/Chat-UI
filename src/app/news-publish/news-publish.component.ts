@@ -18,14 +18,15 @@ export class NewsPublishComponent implements OnInit {
     /* added by xander */
 
   user$: Observable<appUser>;
-  constructor(private auth: LoginService,
+  constructor(
+    private auth: LoginService,
     private router: Router) { }
 
   ngOnInit() {
     this.user$ = this.auth.user$;
   }
 
-  btnClickBack= function () {
+  btnClickBack = function() {
     this.router.navigateByUrl('/news');
 };
 
