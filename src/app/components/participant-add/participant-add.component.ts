@@ -14,11 +14,11 @@ import { Role } from '../../models/role';
 export class ParticipantAddComponent implements OnInit {
 
     participant: Participant = {
-        firstName: "",
-        password: ""
+        firstName: '',
+        password: ''
     };
     roles: Role[];
-    editState: boolean = false;
+    editState = false;
     participantToEdit: Participant;
     roleDetails: Array<string>;
     user: firebase.User;
@@ -39,7 +39,7 @@ export class ParticipantAddComponent implements OnInit {
             } else {
                 this.user = user[0];
             }
-        })
+        });
 
         this.roleService.get().subscribe(role => {
             console.log(role);
@@ -48,7 +48,7 @@ export class ParticipantAddComponent implements OnInit {
     }
 
     selectionChanged(event) {
-        this.roleDetails = event.target.value.split("|");
+        this.roleDetails = event.target.value.split('|');
         console.log(this.roleDetails);
     }
 
@@ -57,13 +57,13 @@ export class ParticipantAddComponent implements OnInit {
     }
 
     add() {
-        if(this.participant.email != '') {
+        if(this.participant.email !== '') {
             this.participant.roleID = this.roleDetails[4];
             this.participant.roleFirstName = this.roleDetails[0];
             this.participant.roleLastName = this.roleDetails[1];
             this.participant.rolePosition = this.roleDetails[2];
             this.participant.roleAffiliation = this.roleDetails[3];
-            this.participant.systemRole = "participant";
+            this.participant.systemRole = 'participant';
             this.participantService.add(this.participant);
             this.router.navigate(['/control']);
         }

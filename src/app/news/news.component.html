@@ -1,199 +1,106 @@
 <body>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-   <!--
-<div class="grid-container">
-    <div id="div_a_1">
-        <div id="searchmenu">
-            <label>
-                <input [(ngModel)]="search.term" style="background-color: white; color: gray; height: 5%; width: 100%;
-                position: absolute; top: 0%; left: 0%; padding-left: 2%; border-bottom: solid 1px;"
-                placeholder="Search..."/>
-              </label>
-        </div>
-        <div>
-        <button type="submit" style="position: absolute; top: 85%; left: 8%; color: white; background-color: none;
-            border: solid 1px; height: auto; width: 50%; padding: 4px; border-color: black;" (click)="btnClick();">
-            <a routerLink="/email-view">Publish</a>
-        </button>
+    <div>
+        <div class="col-md-12">
+            <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="form-control" id="txtSearchNews"
+                placeholder="Enter title to search"></textarea>
+            <button class="search-btn">
+                <i class="fa fa-search"></i>
+            </button>
         </div>
     </div>
 
-
-    <div id="div_a_2">
-        <div id="news_view">
-            <ul *ngIf="(user$ | async).systemRole === 'participant'" style="list-style-type: none; position: absolute; height: auto; width: 95%; margin-left: 1%; margin-top: 2%; margin-right: 2%;">
-                <li><div *ngFor="let newsClass of newsArray" class="news_resource" style="background-color: white;  text-align: left; padding-left: 1%;
-                line-height: 10%;">
-                    <h5>Resource</h5><br/>
-                    <h6>Author <i class="newsDate">{{ newsClass.newsDate }}</i> </h6>
-                    <p class="news" style="margin-top: 1%;">{{ newsClass.newsDate }}</p>
-                </div></li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<div id="div_a_2">
-    <div id="news_view">
-        <ul *ngIf="(user$ | async).systemRole === 'admin'" style="list-style-type: none; position: absolute; height: auto; width: 95%; margin-left: 1%; margin-top: 2%; margin-right: 2%;">
-            <li><div *ngFor="let newsClass of newsArray" class="news_resource" style="background-color: white;  text-align: left; padding-left: 1%;
-            line-height: 10%;">
-                <h5>Resource</h5><br/>
-                <h6>Author <i class="newsDate">{{ newsClass.newsDate }}</i> </h6>
-                <p class="news" style="margin-top: 1%;">{{ newsClass.newsDate }}</p>
-            </div></li>
-        </ul>
-    </div>
-</div>
-</div>
-
-
-<div class="col-3">
-    <ul *ngIf="(user$ | async).systemRole === 'participant'" class="d-flex flex-row flex-wrap">
-        <li *ngFor="let newsClass of newsArray" class="list-group-item list-group-item-action">
-                <p class="news">{{ newsClass.newsDescription }}</p>
-                <p class="userOrRole">{{newsClass.userRole}} {{newsClass.userName}}</p>
-                <p class="tweetDate">{{newsClass.newsDate.toDate() | date: 'medium'}}</p>
-        </li>
-        </ul>
-    </div>
-        <div class="col-3">
-    <ul *ngIf="(user$ | async).systemRole === 'admin'" class="d-flex flex-row flex-wrap">
-    <li *ngFor="let newsClass of newsArray" class="list-group-item list-group-item-action">
-            <p class="news">{{ newsClass.newsDescription }}</p>
-            <p class="userOrRole"> {{newsClass.userRole}} ({{newsClass.userName}})</p>
-            <p class="newsDate">{{newsClass.newsDate.toDate() | date: 'medium'}}</p>
-    </li>
-    </ul>
-    </div>
--->
-
-<div>
-    <div class="col-md-12">
-              <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="form-control" id="txtSearchNews"  placeholder="Enter title to search"></textarea>
-
-              <button class="search-btn">
-                     <i class="fa fa-search"></i>
-             </button>
-
-    </div>
-
-</div>
-
-        <div class="row mt-4">
-
-            <div class="col-12">
-                <div class="row" *ngIf="authError">
-                    <div class="col-12 alert alert-danger">
-                        {{ authError?.message }}
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="row" *ngIf="authError">
+                <div class="col-12 alert alert-danger">
+                    {{ authError?.message }}
+                </div>
+            </div>
+            <form #newsCreateForm="ngForm" (ngSubmit)="createNews(newsDescription, newsHeadline)">
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <input ngModel #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control"
+                            id="newsHeadline" placeholder="Enter Headline">
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <textarea ngModel #newsDescription="ngModel" name="newsDescription" type="text"
+                            class="form-control" id="newsDescription" placeholder="Enter news description"></textarea>
                     </div>
                 </div>
-                <form #newsCreateForm="ngForm" (ngSubmit)="createNews(newsDescription, newsHeadline)">
+
+                <div>
                     <div class="row">
-                        <div class="col-md-12 mb-2">
-                            <input ngModel #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control" id="newsHeadline"  placeholder="Enter Headline">
-                        </div>
-                        <div class="col-md-12 mb-2">
-                            <textarea  ngModel #newsDescription="ngModel" name="newsDescription" type="text" class="form-control" id="newsDescription"  placeholder="Enter news description"></textarea>
+                        <div class="col-md-12">
+                            <button type="submit">Post as {{user2.roleFirstName}} {{user2.roleLastName}}</button>
+                            <!-- <button type="button" (click)="cancel()">Cancel</button> -->
                         </div>
                     </div>
-
-                    <div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <button type="submit">Post as {{user2.roleFirstName}} {{user2.roleLastName}}</button>
-                                <!-- <button type="button" (click)="cancel()">Cancel</button> -->
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
+                </div>
+            </form>
         </div>
 
+    </div>
+
     <div class="row" *ngFor="let newsClass of newsArray | filter : searchText">
-       <!-- <div class="col-1">
-            <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
-        </div>-->
         <div class="col-11">
             <div class="card-panel ">
                 <div class="card-content">
                     <p class="h1">{{ newsClass.newsHeadline }}</p>
-                    <p class="grey-text" >{{newsClass.userRole}} ({{newsClass.userName}})</p>
+                    <p class="grey-text">{{newsClass.userRole}} ({{newsClass.userName}})</p>
                     <div class="card-action">
                         <a>{{newsClass.newsDate.toDate() | date: 'medium'}}</a>
                     </div>
-                   <!-- <p class="deep-purple-text" *ngIf="user.rolePosition === 'admin'">{{newsClass.firstName}} {{newsClass.lastName}}</p>-->
                     <p class="black-text">{{newsClass.newsDescription}}</p>
                 </div>
 
             </div>
         </div>
     </div>
-
-
-   <!-- <form #newsCreateForm="ngForm" (ngSubmit)="createNews(newsDescription, newsHeadline)">
-        <div>
-            <div class="col-md-12">
-               <textarea ngModel #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control" id="newsHeadline"  placeholder="Enter title"></textarea>
-            </div>
-            <div class="col-md-12">
-                <textarea  ngModel #newsDescription="ngModel" name="newsDescription" type="text" class="form-control" id="newsDescription"  placeholder="Enter news description"></textarea>
-            </div>
-            <div class="col-md-12">
-                    <button type="submit">Post as {{newsUser.role}}</button>
-            </div>
+    
+    <div class="contact-info">
+        <div class="option">
+            <i class="fa fa-home"></i>
+            <a class="text" href="#">Home</a>
         </div>
-        </form>-->
+
+        <div class="option">
+            <i class="fas fa-book-open"></i>
+            <a class="text" routerLink="/scenario">Scenario</a>
+        </div>
+
+        <div class="option">
+            <i class="fas fa-user-alt"></i>
+            <a class="text" routerLink="/RolePage">Role</a>
+        </div>
 
 
-   <!-- set a side bar -->
+        <div class="option">
+            <i class="fa fa-envelope"></i>
+            <a class="text" routerLink="/email">Email</a>
 
+        </div>
 
+        <div class="option">
+            <i class="fab fa-twitter-square"></i>
+            <a class="text" routerLink="/tweet">Tweet</a>
 
-   <div class="contact-info">
-    <div class="option">
-        <i class="fa fa-home"></i>
-        <a class="text" href="#">Home</a>
-    </div>
+        </div>
 
-    <div class="option">
-        <i class="fas fa-book-open"></i>
-        <a class="text" routerLink="/scenario">Scenario</a>
-    </div>
+        <div class="option">
+            <i class="fas fa-newspaper"></i>
+            <a class="text" routerLink="/news">News</a>
+        </div>
 
-    <div class="option">
-        <i class="fas fa-user-alt"></i>
-        <a class="text" routerLink="/RolePage">Role</a>
-    </div>
+        <div class="option">
+            <i class="fas fa-comment-alt"></i>
+            <a class="text" routerLink="/chat">Chat</a>
+        </div>
 
+        <div class="option">
+            <i class="fa fa-cog"></i>
+            <a class="text" routerLink="/control">Control</a>
 
-    <div class="option">
-        <i class="fa fa-envelope" ></i>
-        <a class="text" routerLink="/email">Email</a>
-
-    </div>
-
-    <div class="option">
-        <i class="fab fa-twitter-square"></i>
-        <a class="text" routerLink="/tweet">Tweet</a>
-
-    </div>
-
-    <div class="option">
-        <i class="fas fa-newspaper"></i>
-        <a class="text" routerLink="/news">News</a>
-    </div>
-
-    <div class="option">
-        <i class="fas fa-comment-alt"></i>
-        <a class="text" routerLink="/chat">Chat</a>
-    </div>
-
-    <div class="option">
-        <i class="fa fa-cog"></i>
-        <a class="text" routerLink="/control">Control</a>
+        </div>
 
     </div>
-
-  </div>

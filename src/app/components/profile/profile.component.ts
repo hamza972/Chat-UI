@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { RoleService } from '../../services/role.service';
 import { Role } from '../../models/role';
@@ -15,7 +15,7 @@ export class ProfileComponent implements OnInit {
 
     userID: string;
     user: firebase.User;
-    role: Role = { firstName: "" };
+    role: Role = { firstName: '' };
 
     constructor(
         private auth: AuthService,
@@ -27,25 +27,25 @@ export class ProfileComponent implements OnInit {
     ngOnInit() {
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if(user === null) {
+            if (user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
-                console.log("this.user");
+                console.log('this.user');
                 console.log(this.user);
             }
-        })
+        });
 
-        this.userID = this.route.snapshot.queryParamMap.get("id");
+        this.userID = this.route.snapshot.queryParamMap.get('id');
 
         this.route.paramMap.subscribe(params => {
-            this.userID = params.get("id")
-        })
+            this.userID = params.get('id');
+        });
 
-        this.get(this.userID);
+        this.getRole(this.userID);
     }
 
-    get(userID) {
+    getRole(userID) {
         this.roleService.profile(userID).subscribe(role => {
             this.role = role;
         });

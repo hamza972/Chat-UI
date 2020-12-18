@@ -1,15 +1,15 @@
 export interface Email {
-  id?: String;
+  id?: string;
   date?: Date;
-  subject: String;
-  body: String;
-  draft?: Boolean;
+  subject: string;
+  body: string;
+  draft?: boolean;
   from: {
-    user: String;
-    deleted?: Boolean;
+    user: string;
+    deleted?: boolean;
   };
   to: {
-    user: String;
-    deleted?: Boolean;
+    user: string;
+    deleted?: boolean;
   };
 }

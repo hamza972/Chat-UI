@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { scenario } from '../models/scenario';
+import { Scenario } from '../models/scenario';
 import { Participant } from '../models/participant';
 import { ScenarioService } from '../services/scenario.service';
 import { AuthService } from '../services/auth.service';
@@ -15,9 +15,9 @@ import { NgForm } from '@angular/forms';
 
 export class ScenarioComponent implements OnInit {
 
-  scenario: scenario = { content: "" };
-  scenarios: scenario[];
-  user: Participant = { rolePosition: ""};
+  scenario: Scenario = { content: '' };
+  scenarios: Scenario[];
+  user: Participant = { rolePosition: ''};
   authError: any;
 
   constructor(
@@ -27,17 +27,16 @@ export class ScenarioComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
       /* Check if user is signed in, otherwise redirect to home */
       this.auth.getUserData().subscribe(user => {
-          if(user === null) {
+          if (user === null) {
               this.router.navigate(['/home']);
           } else {
               this.user = user[0];
-              console.log("this.user");
+              console.log('this.user');
               console.log(this.user);
-          }
-      })
+            }
+        });
 
       this.scenarioService.get().subscribe(scenario => {
           this.scenarios = scenario;
@@ -55,23 +54,16 @@ export class ScenarioComponent implements OnInit {
   }
 
   add(frm: NgForm) {
-      if(this.scenario.content != '') {
+      if (this.scenario.content !== '') {
 
           this.scenario = {
-
               date: new Date(),
               content: this.scenario.content,
-          }
-
-          console.log(this.scenario);
-
+          };
           this.scenarioService.add(this.scenario);
-          //this.router.navigate(['/control']);
-          alert("Your Email has been sent!!");
+          alert('Your Email has been sent!!');
           frm.reset();
       }
-
-      console.log(this.scenario )
   }
 
 }

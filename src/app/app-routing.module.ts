@@ -29,8 +29,8 @@ import { RoleComponent } from './components/role/role.component';
 import { RoleAddComponent } from './components/role-add/role-add.component';
 import { AffiliateComponent } from './components/affiliate/affiliate.component';
 import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
-import { TweetComponent } from "./components/tweet/tweet.component";
-import { ProfileComponent } from "./components/profile/profile.component";
+import { TweetComponent } from './components/tweet/tweet.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const routes: Routes = [
 { path: 'affiliate', component: AffiliateComponent },
@@ -59,9 +59,9 @@ const routes: Routes = [
 { path: 'roleProfile8', component: roleProfile8Component},
 { path: 'roleProfile9', component: roleProfile9Component},
 { path: 'chat', component: ChatComponent},
-{ path: 'participant', component:ParticipantComponent},
-{ path: 'participant-add', component:ParticipantAddComponent},
-{ path: 'profile/:id', component:ProfileComponent},
+{ path: 'participant', component: ParticipantComponent},
+{ path: 'participant-add', component: ParticipantAddComponent},
+{ path: 'profile/:id', component: ProfileComponent},
 { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 

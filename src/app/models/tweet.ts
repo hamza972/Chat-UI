@@ -7,7 +7,7 @@ export interface Tweet {
     if possible to retrieve data using ID,
     no need to include this */
     userID?: string;
-    firstName?:string;
+    firstName?: string;
     lastName?: string;
     email?: string;
     systemRole?: string;

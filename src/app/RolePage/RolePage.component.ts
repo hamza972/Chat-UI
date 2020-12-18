@@ -10,9 +10,9 @@ import { appUser } from '../models/user';
   styleUrls: ['./RolePage.component.scss']
 })
 export class RolePageComponent implements OnInit {
-  
   user$: Observable<appUser>;
-  constructor(private auth: LoginService,
+  constructor(
+    private auth: LoginService,
     private router: Router) { }
 
   ngOnInit() {

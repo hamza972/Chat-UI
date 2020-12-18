@@ -19,13 +19,13 @@ export class ControlComponent implements OnInit {
     ngOnInit() {
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if(user === null) {
+            if (user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
 
                 /* Check if user's role position is admin */
-                if(user[0].rolePosition != "admin") {
+                if (user[0].rolePosition !== 'admin') {
                     this.router.navigate(['/home']);
                 }
             }

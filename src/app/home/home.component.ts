@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
 import { Tweet } from './../models/tweet';
-import { newsClass } from './../models/newsClass';
+import { News } from '../models/news';
 import { TweetService } from './../services/tweet.service';
 import { NewsService } from './../services/news.service';
 
@@ -16,8 +16,8 @@ export class HomeComponent implements OnInit {
     tweet: Tweet = { content: "" };
     tweets: Tweet[];
 
-    news: newsClass = { newsDescription: "" };
-    newss: newsClass[];
+    news: News = { newsDescription: "" };
+    newss: News[];
 
     constructor(
         private auth: AuthService,

@@ -26,14 +26,15 @@ export class AuthService {
             switchMap((user) => {
                 if (user) {
 
-                    return this.db.collection("Users", (ref) => ref.where("email", "==", user.email)).snapshotChanges().pipe(map(changes => {
-                        return changes.map(a => {
-                            const data = a.payload.doc.data() as Participant;
-                            data.id = a.payload.doc.id;
-                            return data;
-                        });
-                    }));
-
+                    return this.db.collection(
+                        'Users', (ref) => ref.where(
+                            'email', '==', user.email)).snapshotChanges().pipe(map(changes => {
+                                return changes.map(a => {
+                                    const data = a.payload.doc.data() as Participant;
+                                    data.id = a.payload.doc.id;
+                                    return data;
+                                });
+                            }));
                 } else {
                     return of(null);
                 }
@@ -86,7 +87,7 @@ export class AuthService {
     }
 
     logout() {
-        this.router.navigate(["/home"]);
+        this.router.navigate(['/home']);
         window.location.reload();
         return this.afAuth.auth.signOut();
     }
