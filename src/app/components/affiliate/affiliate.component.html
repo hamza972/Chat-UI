@@ -1,9 +1,6 @@
 <div *ngIf="user">
     <div class="ui">
-        <button class="button" (click)="add()"><span>Add Affiliate  </span> </button>
-
-    
-        
+        <button class="button" (click)="add()"><span>Add Affiliate </span> </button>
     </div>
 
     <div class="row">
@@ -18,22 +15,24 @@
                 <tbody>
                     <!-- DOESN'T LOOK GOOD ON THE BROWSER BUT WORKS OK  -->
                     <tr *ngFor="let affiliate of affiliates">
-                        <td *ngIf="!editState">{{affiliate.countryName}}</td>
-                        <td *ngIf="!editState"><button (click)="edit($event, affiliate)" value="Edit" class="btn blue">Edit</button></td>
+                        <td *ngIf="!editState">{{affiliate.name}}</td>
+                        <td *ngIf="!editState"><button (click)="edit($event, affiliate)" value="Edit"
+                                class="btn blue">Edit</button></td>
 
                         <form (ngSubmit)="update(affiliate)">
-                        <td *ngIf="editState && itemToEdit.id == affiliate.id" id="abc">
+                            <td *ngIf="editState && itemToEdit.id == affiliate.id" id="abc">
 
-                                    <input *ngIf="itemToEdit.id == affiliate.id"  type="text" name="countryName" [(ngModel)]="affiliate.countryName">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        </td>
-                        <td *ngIf="editState && itemToEdit.id == affiliate.id" id="def">
+                                <input *ngIf="itemToEdit.id == affiliate.id" type="text" name="countryName"
+                                    [(ngModel)]="affiliate.name">
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            </td>
+                            <td *ngIf="editState && itemToEdit.id == affiliate.id" id="def">
 
-                                    <input type="submit" name="" value="Update" class="btn orange">
-                                    <button (click)="clearState()" value="Cancel" class="btn red">Cancel</button>
-                        </td>
+                                <input type="submit" name="" value="Update" class="btn orange">
+                                <button (click)="clearState()" value="Cancel" class="btn red">Cancel</button>
+                            </td>
                         </form>
                     </tr>
                 </tbody>
