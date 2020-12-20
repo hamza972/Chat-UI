@@ -1,93 +1,30 @@
-<!-- <p>profile works!</p> -->
 <body>
     <div class="Upper-part">
 
-         <div class="imgBox">
-               <img src="../../../assets/img/roles/bahrain_king.jpg" alt="Hamad bin Isa Al Khalifa">
-         </div>
+        <div class="imgBox">
+            <img src="../../../assets/img/roles/bahrain_king.jpg" alt="Hamad bin Isa Al Khalifa">
+        </div>
 
-    <div class="infoBox">
+        <div class="infoBox">
 
-         <table class="table">
-               <tr>
-                   <td>{{role.firstName}} {{role.lastName}}</td>
-               </tr>
-               <tr>
-                  <td>{{role.roleName}} {{role.ofCountry}}</td>
+            <table class="table">
+                <tr>
+                    <td>{{role.firstName}} {{role.lastName}}</td>
                 </tr>
-         </table>
+                <tr>
+                    <td>{{role.title}} of {{role.affiliation}}</td>
+                </tr>
+            </table>
 
-    </div>
+        </div>
 
 
     </div>
 
     <div class="Lower-part">
 
-     <div class="info">
-         <h5>King of Bahrain: Hamad bin Isa bin Salman al-Khalifa</h5>
-         <p>He has been the monarch of Bahrain since 6 March 1999, initially reigning as emir, and from 14 February 2002, as the first king.[1] He is the son of Isa bin Salman Al Khalifa, the previous and first emir. The country has been ruled by the Al Khalifa dynasty since 1783.</p>
-         <br>
-            <h5>Early life and education</h5>
-            <p>Hamad bin Isa Al Khalifa was born on 28 January 1950 in Riffa, Bahrain.[2] His parents were Isa bin Salman Al Khalifa, then Crown Prince, and Hessa bint Salman Al Khalifa.After attending Manama secondary school in Bahrain, Hamad was sent to England to attend Applegarth College in Godalming, Surrey before taking a place at The Leys School in Cambridge. Hamad then underwent military training, first with the British Army at Mons Officer Cadet School at Aldershot in Hampshire, graduating in September 1968. Four years later, in June 1972, Hamad attended the United States Army Command and General Staff College at Fort Leavenworth in Kansas, graduating the following June with a degree in leadership.</p>
-        <br>
-            <h5>Crown prince</h5>
-            <p>Hamad was designated as heir apparent by his father on 27 June 1964. In 1968, he was appointed as the chairman of the irrigation council and Manama municipal council. He was commissioned into the Bahrain National Guard on 16 February 1968 and appointed as its commander the same year, remaining in that post until 1969 when he was appointed as the commander-in-chief of the Bahrain Defence Force. In 1970, Hamad became the head of the Bahraini department of defence and the vice-chairman of the administrative council, remaining in both offices until 1971. From 1971 to 1988 he was the minister of state for defence.</p>
-            <p>In October 1977, Sheikh Hamad started learning to fly helicopters, successfully completing the training in January 1978. He then worked to establish the Bahrain Amiri Air Force,[4] which came into being in 1987 when the defence force air wing was reconstituted as an air force.</p>
-
-        <br>
-            <h5>Political turmoil</h5>
-            <p>After Hamad took power in 1999, he focused on attaining stability in a nation riddled with profound tensions after the 1990s uprising. The King succeeded in improving the living standards and in making Bahrain a financial hub. During the period 2003–2010 the Shi'ite community accused his government of corruption, discrimination in housing and jobs, recruiting foreigners to the military services and bringing Sunni tribes from Asia to change the demographic composition of the nation.</p>
-            <p>Although King Hamad's reign has seen the admittance of Shi'ites into positions in the government, there have still been calls for a more equitable distribution of positions and jobs. The Al Khalifa family lead a large number of ministerial and governmental posts including the Ministry of the Interior, Ministry of Justice, the Ministry of Finance, the Ministry of Culture, the Ministry of Foreign Affairs,the Bahrain Economic Development Board and the Supreme Council for Women. Also, the vast majority of significant positions in the Bahrain Defence Force are filled with Sunnis,[15] who account for around a third of the population.</p>
-            <p>In October 2010, Hamad's government accused 24 Shi'ite Bahraini citizens of forming a terrorist cell linked to Iran and trained in Syria intending to overthrow the regime, and for planning terrorist attacks. Opposition parties denounced the accusations and described it as propaganda. After a few weeks, tension rose again after the controversial 2010 Bahraini parliamentary election when the main opposition bloc Al Wefaq National Islamic Society with secularist National Democratic Action Society (Waad) complained that the election system was unfair and that there were aims to reduce the number of opposition chairs in the parliament, although the first party won nearly 40% of the available seats.</p>
+        <div class="info">
+            <h4> Profile </h4>
+            <p>{{role.description}}</p>
         </div>
-
-    </div>
-
-
-    <div class="contact-info">
-      <div class="option">
-          <i class="fa fa-home"></i>
-          <a class="text" href="#">Home</a>
-      </div>
-
-      <div class="option">
-          <i class="fas fa-book-open"></i>
-          <a class="text" routerLink="/scenario">Scenario</a>
-      </div>
-
-      <div class="option">
-          <i class="fas fa-user-alt"></i>
-          <a class="text" routerLink="/RolePage">Role</a>
-      </div>
-
-
-      <div class="option">
-          <i class="fa fa-envelope" ></i>
-          <a class="text" routerLink="/email">Email</a>
-
-      </div>
-
-      <div class="option">
-          <i class="fab fa-twitter-square"></i>
-          <a class="text" routerLink="/tweet">Tweet</a>
-
-      </div>
-
-      <div class="option">
-          <i class="fas fa-newspaper"></i>
-          <a class="text" routerLink="/news">News</a>
-      </div>
-
-      <div class="option">
-          <i class="fas fa-comment-alt"></i>
-          <a class="text" routerLink="/chat">Chat</a>
-      </div>
-
-      <div class="option">
-          <i class="fa fa-cog"></i>
-          <a class="text" routerLink="/control">Control</a>
-
-      </div>
-
     </div>

@@ -17,13 +17,11 @@
         </thead>
         <tbody>
             <tr *ngFor="let role of roles">
-                <td>{{role.ofCountry}}</td>
-                <td>{{role.roleName}}</td>
+                <td>{{role.affiliation}}</td>
+                <td>{{role.title}}</td>
                 <td>{{role.firstName}}</td>
                 <td>{{role.lastName}}</td>
-
-                <!-- trying /routerLink="profile/role.id" but not sure how-->
-                <td><button (click)="profile($event, role)" value="View" class="btn green">View</button></td>
+                <td><a [routerLink]="['/profile', role.id]"><button value="View" class="btn green">View</button></a></td>
             </tr>
         </tbody>
     </table>

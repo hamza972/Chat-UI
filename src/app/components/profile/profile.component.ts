@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { RoleService } from '../../services/role.service';
 import { Role } from '../../models/role';
-import { Participant } from '../../models/participant';
 
 @Component({
     selector: 'app-profile',
@@ -15,7 +14,7 @@ export class ProfileComponent implements OnInit {
 
     userID: string;
     user: firebase.User;
-    role: Role = { firstName: '' };
+    role: Role;
 
     constructor(
         private auth: AuthService,
@@ -31,8 +30,6 @@ export class ProfileComponent implements OnInit {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
-                console.log('this.user');
-                console.log(this.user);
             }
         });
 
@@ -42,13 +39,8 @@ export class ProfileComponent implements OnInit {
             this.userID = params.get('id');
         });
 
-        this.getRole(this.userID);
-    }
-
-    getRole(userID) {
-        this.roleService.profile(userID).subscribe(role => {
-            this.role = role;
+        this.roleService.getRole(this.userID).subscribe( dbRoles => {
+            this.role = dbRoles;
         });
     }
-
 }

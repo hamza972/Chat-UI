@@ -13,10 +13,10 @@ import { NewsService } from './../services/news.service';
 })
 export class HomeComponent implements OnInit {
     user: firebase.User;
-    tweet: Tweet = { content: "" };
+    tweet: Tweet = { content: '' };
     tweets: Tweet[];
 
-    news: News = { newsDescription: "" };
+    news: News = { newsDescription: '' };
     newss: News[];
 
     constructor(
@@ -30,12 +30,12 @@ export class HomeComponent implements OnInit {
 
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if(user === null) {
+            if (user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
             }
-        })
+        });
 
         /* Retrieve latest tweets */
         this.tweetService.get().subscribe(tweet => {

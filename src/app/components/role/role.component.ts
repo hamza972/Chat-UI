@@ -29,10 +29,10 @@ export class RoleComponent implements OnInit {
             } else {
                 this.user = user[0];
             }
-        })
+        });
 
-        this.roleService.get().subscribe(role => {
-            this.roles = role;
+        this.roleService.get().subscribe(dbRoles => {
+            this.roles = dbRoles;
         });
     }
 

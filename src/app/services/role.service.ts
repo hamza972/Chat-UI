@@ -27,7 +27,7 @@ export class RoleService {
         }));
     }
 
-    profile(id) {
+    getRole(id) {
         return this.afs.collection('Roles').doc(id).valueChanges();
     }
 

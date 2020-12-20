@@ -1,7 +1,7 @@
 export interface Role {
     id?: string;
-    roleName?: string;
-    ofCountry?: string;
+    title?: string;
+    affiliation?: string;
     firstName?: string;
     lastName?: string;
     description?: string;
