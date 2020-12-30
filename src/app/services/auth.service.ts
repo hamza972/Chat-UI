@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { switchMap, mergeMap, map } from "rxjs/operators";
+import { switchMap, mergeMap, map } from 'rxjs/operators';
 import { Participant } from '../models/participant';
 
 @Injectable({
@@ -55,7 +55,7 @@ export class AuthService {
         })
         .catch(error => {
             this.eventAuthError.next(error);
-        })
+        });
     }
 
     insertUserData(userCredential: firebase.auth.UserCredential) {
@@ -70,7 +70,7 @@ export class AuthService {
             roleLastName: this.newUser.roleLastName,
             rolePosition: this.newUser.rolePosition,
             roleAffiliation: this.newUser.roleAffiliation
-        })
+        });
     }
 
     login(email: string, password: string) {
@@ -83,7 +83,7 @@ export class AuthService {
                 this.router.navigate(['/home']);
             }
 
-        })
+        });
     }
 
     logout() {

@@ -11,7 +11,7 @@
         </div>
         <form #Form="ngForm" (ngSubmit)="add(Form)">
             <div class="row">
-                <div class="input-wrapper" *ngIf="user.rolePosition == 'admin'">
+                <div class="input-wrapper" *ngIf="user.systemRole == 'control'">
                     <input [(ngModel)]="scenario.content" name="content" type="text" class="form-control" id="content" placeholder="Add the next scenario task for the students!!!">
                     <div class="col-md-12">
                            <button  type="submit">Post </button>
@@ -31,8 +31,8 @@
             <div class="card-content">
                 <p class="black-text" style="font-family:Georgia"><i>{{scenario.content}}</i></p>
             </div>
-            <div class="card-action">
-                <a href="#">{{scenario.date.toDate() | date: 'medium'}}</a>
+            <div class="card-date">
+                <p>{{scenario.date.toDate() | date: 'medium'}}</p>
             </div>
         </div>
     </div>

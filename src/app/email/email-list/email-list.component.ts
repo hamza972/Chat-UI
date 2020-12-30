@@ -1,29 +1,29 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { FormControl } from "@angular/forms";
-import { Email } from "../../models/email";
-import { Observable } from "rxjs";
-import { map, startWith } from "rxjs/operators";
-import { EmailService } from "../../services/email.service";
+import { Component, OnInit, Input } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Email } from '../../models/email';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+import { EmailService } from '../../services/email.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
-  selector: "app-email-list",
-  templateUrl: "./email-list.component.html",
-  styleUrls: ["./email-list.component.scss"],
+  selector: 'app-email-list',
+  templateUrl: './email-list.component.html',
+  styleUrls: ['./email-list.component.scss'],
 })
 export class EmailListComponent implements OnInit {
   @Input() emails: Email[];
   emails$: Observable<Email[]>;
-  filter = new FormControl("");
+  filter = new FormControl('');
 
-  constructor(private sr: DomSanitizer,private emailService: EmailService) {}
+  constructor(private sr: DomSanitizer, private emailService: EmailService) {}
 
   ngOnInit() {}
 
   ngOnChanges() {
     if (this.emails !== undefined) {
       this.emails$ = this.filter.valueChanges.pipe(
-        startWith(""),
+        startWith(''),
         map((query) => this.search(query))
       );
     }
@@ -41,25 +41,25 @@ export class EmailListComponent implements OnInit {
   }
 
   getTab() {
-    return localStorage.getItem("tab");
+    return localStorage.getItem('tab');
   }
 
   delete(email: Email) {
-    if (this.getTab() === "inbox") {
+    if (this.getTab() === 'inbox') {
       email.to.deleted = true;
       this.emailService.delete(email);
     }
 
-    if (this.getTab() === "send") {
+    if (this.getTab() === 'send') {
       email.from.deleted = true;
       this.emailService.delete(email);
     }
 
-    if (this.getTab() === "draft") {
+    if (this.getTab() === 'draft') {
       this.emailService.hardDelete(email);
     }
 
-    if (this.getTab() === "delete") {
+    if (this.getTab() === 'delete') {
       this.emailService.hardDelete(email);
     }
   }
@@ -68,14 +68,13 @@ export class EmailListComponent implements OnInit {
     return str;
   }
 
-  public htmlProperty(str: string) : SafeHtml {
-
+  public htmlProperty(str: string): SafeHtml {
          return this.sr.bypassSecurityTrustHtml(str);
   }
 
   filterDeletePageSendReceive(from: string) {
-    if (from == localStorage.getItem("userEmail")) {
-      return "me";
+    if (from === localStorage.getItem('userEmail')) {
+      return 'me';
     }
     return from;
   }

@@ -17,7 +17,7 @@ export class ScenarioComponent implements OnInit {
 
   scenario: Scenario = { content: '' };
   scenarios: Scenario[];
-  user: Participant = { rolePosition: ''};
+  user: Participant = { roleTitle: ''};
   authError: any;
 
   constructor(

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { appUser } from '../models/user';
+import { AppUser } from '../models/user';
 import { LoginService } from '../auth/login.service';
 import { Router } from '@angular/router';
 import { News } from '../models/news';
@@ -16,14 +16,14 @@ export class NewsComponent implements OnInit {
 
   user: firebase.User;
   newUserNews: News;
-  newsUser: appUser;
+  newsUser: AppUser;
   userID: string;
-  user$: Observable<appUser>;
+  user$: Observable<AppUser>;
   newsArray: News[];
   sortedArray: News[];
   authError: any;
   searchText: string;
-  user2: Participant = { rolePosition: ''};
+  user2: Participant = { roleTitle: ''};
 
   constructor(
     private auth: LoginService,

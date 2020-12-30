@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../auth/login.service';
 import { Router } from '@angular/router';
-import { appUser } from '../models/user';
+import { AppUser } from '../models/user';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -17,7 +17,7 @@ export class NewsPublishComponent implements OnInit {
     subject: any;
     /* added by xander */
 
-  user$: Observable<appUser>;
+  user$: Observable<AppUser>;
   constructor(
     private auth: LoginService,
     private router: Router) { }

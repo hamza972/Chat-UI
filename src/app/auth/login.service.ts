@@ -3,9 +3,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { appUser } from '../models/user';
+import { AppUser } from '../models/user';
 import { switchMap } from 'rxjs/operators';
-import { country } from '../models/country';
+import { Country } from '../models/country';
 import { Role } from '../models/role';
 import { tweetClass } from '../models/tweetClass';
 import { News } from '../models/news';
@@ -16,11 +16,11 @@ import { News } from '../models/news';
 export class LoginService {
   private eventAuthError = new BehaviorSubject<string>('');
   eventAuthError$ = this.eventAuthError.asObservable();
-  newUser: appUser;
+  newUser: AppUser;
 
-  user$: Observable<appUser>;
-  userList$: Observable<appUser[]>;
-  countries$: Observable<country[]>;
+  user$: Observable<AppUser>;
+  userList$: Observable<AppUser[]>;
+  countries$: Observable<Country[]>;
   roles$: Observable<Role[]>;
   tweetSend: tweetClass;
   tweets$: Observable<tweetClass[]>;
@@ -52,7 +52,7 @@ export class LoginService {
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
-          return this.db.doc<appUser>(`Users/${user.uid}`).valueChanges();
+          return this.db.doc<AppUser>(`Users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
@@ -134,12 +134,12 @@ export class LoginService {
       systemRole: 'participant',
       roleFirstName: this.newUser.roleFirstName,
       roleLastName: this.newUser.roleLastName,
-      rolePosition: this.newUser.rolePosition,
+      rolePosition: this.newUser.roleTitle,
       roleAffiliation: this.newUser.roleAffiliation,
     });
   }
 
-  sendCountryData(newCountry: country) {
+  sendCountryData(newCountry: Country) {
     this.router.navigate(['/control']);
     return this.db.collection(`Countries`).add({
       countryName: newCountry.countryName,
@@ -149,8 +149,8 @@ export class LoginService {
   sendRoleData(newRole: Role) {
     this.router.navigate(['/control']);
     return this.db.collection(`Roles`).add({
-      roleName: newRole.roleName,
-      ofCountry: newRole.ofCountry,
+      roleName: newRole.title,
+      ofCountry: newRole.affiliation,
       firstName: newRole.firstName,
       lastName: newRole.lastName,
     });

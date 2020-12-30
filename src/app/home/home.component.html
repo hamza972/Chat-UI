@@ -8,7 +8,7 @@
     <h5>What you can do ...</h5>
     <!-- <br> -->
     <div class="ui">
-        <button class="button"><span>Add Participant  </span> </button>
+        <button class="button"><span>Add Participant </span> </button>
     </div>
     <h6>
         <br>
@@ -17,13 +17,13 @@
         Click the button to create a role.
         <br>
         <br>
-        Check out the backstory in <a  *ngIf="user" routerLink="/scenario">Scenario.</a>
+        Check out the backstory in <a *ngIf="user" routerLink="/scenario">Scenario.</a>
         <br>
         <br>
-        Take a look at the existing <a  *ngIf="user" routerLink="/RolePage">Roles.</a>
+        Take a look at the existing <a *ngIf="user" routerLink="/RolePage">Roles.</a>
         <br>
         <br>
-        Post a <a  *ngIf="user" routerLink="/tweet">tweet.</a>
+        Post a <a *ngIf="user" routerLink="/tweet">tweet.</a>
         <br>
         <br>
         Check your <a *ngIf="user" routerLink="/email">email </a>box.
@@ -31,9 +31,9 @@
         <br>
         Write down your role <a *ngIf="user" routerLink="/diary">diary</a> for today.
         <br>
-      </h6>
+    </h6>
 
-    </div>
+</div>
 
 <!--  five latest tweets and five latest news -->
 <div class="row" *ngIf="user">
@@ -41,62 +41,65 @@
 
         <h3>Latest Tweets</h3>
         <div class="one">
-        <div class="row" *ngFor="let tweet of tweets; let i=index">
-            <div *ngIf="i<5">
-                <div class="col-1">
-                    <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
-                </div>
-                <div class="col-8">
-                    <div class="card-panel ">
-                        <div class="card-content">
-                            <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}} {{tweet.roleLastName}}</p>
-                            <p class="black-text">{{tweet.content}}</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">{{tweet.date.toDate() | date: 'medium'}}</a>
+            <div class="row" *ngFor="let tweet of tweets; let i=index">
+                <div *ngIf="i<5">
+                    <div class="col-1">
+                        <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
+                    </div>
+                    <div class="col-8">
+                        <div class="card-panel ">
+                            <div class="card-content">
+                                <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}}
+                                    {{tweet.roleLastName}}</p>
+                                <p class="black-text">{{tweet.content}}</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">{{tweet.date.getDate() | date: 'medium'}}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-   </div>
 
     <div class="col-6">
 
         <h3>Latest News</h3>
         <div class="two">
-        <div class="row" *ngFor="let news of newss; let i=index">
-            <div *ngIf="i<5">
-                <div class="col-12">
-                    <div class="card-panel ">
-                        <div class="card-content">
-                            <p class="grey-text" >{{news.newsHeadline}}</p>
-                            <p class="black-text">{{news.newsDescription}}</p>
-                        </div>
-                        <div class="card-action">
-                            <a href="#">{{news.newsDate.toDate() | date: 'medium'}}</a>
+            <div class="row" *ngFor="let news of newss; let i=index">
+                <div *ngIf="i<5">
+                    <div class="col-12">
+                        <div class="card-panel ">
+                            <div class="card-content">
+                                <p class="grey-text">{{news.newsHeadline}}</p>
+                                <p class="black-text">{{news.newsDescription}}</p>
+                            </div>
+                            <div class="card-action">
+                                <a href="#">{{news.newsDate.getDate() | date: 'medium'}}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 </div>
 
 
 
-<!-- =====aAdd a page allowing users to select registration and login ======= -->
+<!-- =====Add a page allowing users to select registration and login ======= -->
+
 <body *ngIf="!user">
-    <div class="container" *ngIf="!user" >
+    <div class="container" *ngIf="!user">
 
-        <div class="imgBx" *ngIf="!user" >
+        <div class="imgBx" *ngIf="!user">
             <img src="../../../assets/img/2-2.png" alt="">
         </div>
-        <div class="select" *ngIf="!user" >
-            <button type="button" class="btn btn-primary mr-2 " *ngIf="!user" (click)="register()" name="button" autofocus>Register</button>
+        <div class="select" *ngIf="!user">
+            <button type="button" class="btn btn-primary mr-2 " *ngIf="!user" (click)="register()" name="button"
+                autofocus>Register</button>
             <button type="button" class="btn btn-primary" *ngIf="!user" (click)="login()" name="button">Login</button>
         </div>
 

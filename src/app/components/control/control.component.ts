@@ -23,13 +23,12 @@ export class ControlComponent implements OnInit {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
-
-                /* Check if user's role position is admin */
-                if (user[0].rolePosition !== 'admin') {
+                /* Check if user's role position is control */
+                if (user[0].systemRole !== 'control') {
                     this.router.navigate(['/home']);
                 }
             }
-        })
+        });
     }
 
 }

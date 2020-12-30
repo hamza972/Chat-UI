@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tweet } from '../../models/tweet';
-import * as Editor from "@ckeditor/ckeditor5-build-classic";
+import * as Editor from '@ckeditor/ckeditor5-build-classic';
 import { Participant } from '../../models/participant';
 import { TweetService } from '../../services/tweet.service';
 import { AuthService } from '../../services/auth.service';
-import Base64Plugin from "../../email/email-compose/Base64Upload.js";
+import Base64Plugin from '../../email/email-compose/Base64Upload.js';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
@@ -16,16 +16,14 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class TweetComponent implements OnInit {
     public Editor = Editor;
     editorConfig =  {extraPlugins: [Base64Plugin]};
-    tweet: Tweet = { content: "" };
+    tweet: Tweet = { content: '' };
     tweets: Tweet[];
-    user: Participant = { rolePosition: ""};
+    user: Participant = { roleTitle: '' };
     authError: any;
 
 
-    public htmlProperty(str: string) : SafeHtml {
-      console.log("str",str);
-
-           return this.sr.bypassSecurityTrustHtml(str);
+    public htmlProperty(str: string): SafeHtml {
+        return this.sr.bypassSecurityTrustHtml(str);
     }
 
     constructor(
@@ -40,13 +38,13 @@ export class TweetComponent implements OnInit {
 
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if(user === null) {
+            if (user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
 
             }
-        })
+        });
 
         this.tweetService.get().subscribe(tweet => {
             this.tweets = tweet;
@@ -56,7 +54,7 @@ export class TweetComponent implements OnInit {
 
     /* go to profile page */
     profile($event, tweet: Tweet) {
-        this.router.navigate(['/profile/'+tweet.roleID]);
+        this.router.navigate(['/profile/' + tweet.roleID]);
     }
 
     cancel() {
@@ -64,7 +62,7 @@ export class TweetComponent implements OnInit {
     }
 
     add() {
-        if(this.tweet.content != '') {
+        if (this.tweet.content !== '') {
 
 
             this.tweet = {
@@ -84,15 +82,12 @@ export class TweetComponent implements OnInit {
                 roleID: this.user.roleID,
                 roleFirstName: this.user.roleFirstName,
                 roleLastName: this.user.roleLastName,
-                rolePosition: this.user.rolePosition,
+                rolePosition: this.user.roleTitle,
                 roleAffiliation: this.user.roleAffiliation,
-                // profileImage: this.user.profileImage
-            }
+            };
 
 
             this.tweetService.add(this.tweet);
-            //this.router.navigate(['/control']);
         }
     }
-
 }
