@@ -2,7 +2,7 @@
     <div class="Upper-part">
 
         <div class="imgBox">
-            <img src="../../../assets/img/roles/bahrain_king.jpg" alt="Hamad bin Isa Al Khalifa">
+            <img src={{role.avatar}}>
         </div>
 
         <div class="infoBox">
@@ -18,13 +18,12 @@
 
         </div>
 
-
     </div>
 
     <div class="Lower-part">
 
         <div class="info">
             <h4> Profile </h4>
-            <p>{{role.description}}</p>
+            <div [innerHtml]="htmlProperty(role.description)"></div>
         </div>
     </div>

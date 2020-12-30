@@ -49,7 +49,7 @@ import { EmailDraftsComponent } from './email/email-drafts/email-drafts.componen
 import { EmailSentComponent } from './email/email-sent/email-sent.component';
 import { EmailListComponent } from './email/email-list/email-list.component';
 import { EmailService } from './services/email.service';
-import {Ng2SearchPipeModule} from 'ng2-search-filter';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DiaryComponent } from './diary/diary.component';
 import { RolePageComponent } from './RolePage/RolePage.component';
@@ -67,6 +67,7 @@ import { HttpModule } from '@angular/http';
 
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 
@@ -110,6 +111,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     roleProfile7Component,
     roleProfile8Component,
     roleProfile9Component,
+    ProfileEditComponent,
   ],
   imports: [
     BrowserModule,

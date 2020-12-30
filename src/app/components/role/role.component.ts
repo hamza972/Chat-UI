@@ -40,11 +40,6 @@ export class RoleComponent implements OnInit {
         this.router.navigate(['/role-add']);
     }
 
-    /* go to profile page */
-    profile($event, role: Role) {
-        this.router.navigate(['/profile/' + role.id]);
-    }
-
     /*
     deleteItem($event, participant: Participant) {
         this.clearState();

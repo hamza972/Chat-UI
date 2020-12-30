@@ -5,5 +5,6 @@ export interface Role {
     firstName?: string;
     lastName?: string;
     description?: string;
+    avatar?: string;
 }
 

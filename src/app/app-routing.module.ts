@@ -31,9 +31,10 @@ import { AffiliateComponent } from './components/affiliate/affiliate.component';
 import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
 import { TweetComponent } from './components/tweet/tweet.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 
 const routes: Routes = [
-{ path: 'affiliate', component: AffiliateComponent },
+{ path: 'control/affiliate', component: AffiliateComponent },
 { path: 'affiliate-add', component: AffiliateAddComponent },
 { path: 'login', component: LoginComponent },
 { path: 'registration', component: RegistrationComponent},
@@ -62,6 +63,7 @@ const routes: Routes = [
 { path: 'participant', component: ParticipantComponent},
 { path: 'participant-add', component: ParticipantAddComponent},
 { path: 'profile/:id', component: ProfileComponent},
+{ path: 'profile-edit/:id', component: ProfileEditComponent },
 { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 

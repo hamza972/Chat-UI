@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { RoleService } from '../../services/role.service';
 import { Role } from '../../models/role';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-profile',
@@ -12,16 +13,21 @@ import { Role } from '../../models/role';
 })
 export class ProfileComponent implements OnInit {
 
-    userID: string;
+    roleID: string;
     user: firebase.User;
     role: Role;
 
     constructor(
         private auth: AuthService,
         private roleService: RoleService,
+        private sr: DomSanitizer,
         private router: Router,
         private route: ActivatedRoute
     ) { }
+
+    public htmlProperty(str: string): SafeHtml {
+        return this.sr.bypassSecurityTrustHtml(str);
+    }
 
     ngOnInit() {
         /* Check if user is signed in, otherwise redirect to home */
@@ -33,14 +39,10 @@ export class ProfileComponent implements OnInit {
             }
         });
 
-        this.userID = this.route.snapshot.queryParamMap.get('id');
+        this.roleID = this.route.snapshot.paramMap.get('id');
 
-        this.route.paramMap.subscribe(params => {
-            this.userID = params.get('id');
-        });
-
-        this.roleService.getRole(this.userID).subscribe( dbRoles => {
-            this.role = dbRoles;
+        this.roleService.getRole(this.roleID).subscribe( rolesFromDB => {
+            this.role = rolesFromDB;
         });
     }
 }
