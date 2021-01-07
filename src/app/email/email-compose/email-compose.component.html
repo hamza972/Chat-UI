@@ -1,26 +1,26 @@
-<form [formGroup]="emailForm" (ngSubmit)="send(emailForm.value);">
-  <input
-    name="sender"
-    id="email-to"
-    type="text"
-    [formControlName]="'sendTo'"
-    placeholder="To..."
-    [ngbTypeahead]="searchUsers"
-  />
-  <br />
-  <input type="text" [formControlName]="'subject'" name="subject" placeholder="Subject..." />
-  <hr />
-  <h6>Body</h6>
-  <ckeditor
-    name="body"
-    [editor]="Editor"
-    [formControlName]="'body'"
-    [config]="editorConfig"
-    style="min-height: 500px;"
-  ></ckeditor>
-  
-  <br /><br />
-  
-  <button type="submit" name="sendEmail" [disabled]="!emailForm.valid">Send</button>
-  <button type="button" name="draftEmail" (click)="draft(emailForm.value)">Draft</button>
-  </form>
+<form #Form="ngForm" (ngSubmit)="send(Form);">
+<input
+  name="sender"
+  id="email-to"
+  type="text"
+  [(ngModel)]="sendTo"
+  placeholder="To..."
+  [ngbTypeahead]="searchUsers"
+/>
+<br />
+<input type="text" [(ngModel)]="subject" name="subject" placeholder="Subject..." />
+<hr />
+<h6>Body</h6>
+<ckeditor
+  name="body"
+  [editor]="Editor"
+  [(ngModel)]="body"
+  [config]="editorConfig"
+  style="min-height: 500px;"
+></ckeditor>
+
+<br /><br />
+
+<button type="submit" name="sendEmail">Send</button>
+<button type="button" name="draftEmail" (click)="draft(Form)">Draft</button>
+</form>

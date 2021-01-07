@@ -7,7 +7,7 @@ import { appUser as User } from "../../models/user";
 import { debounceTime, distinctUntilChanged, map } from "rxjs/operators";
 import { Email } from "src/app/models/email";
 import { EmailService } from "../../services/email.service";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: "app-email-compose",
@@ -18,21 +18,16 @@ export class EmailComposeComponent implements OnInit {
   public Editor = Editor;
   editorConfig =  {extraPlugins: [Base64Plugin]};
   participants: string[];
+  sendTo: string = "";
+  subject: string = "";
+  body: string = "";
   @Input() user: User;
   newEmail: Email;
-  emailForm: FormGroup;
 
   constructor(
     private participantService: ParticipantService,
-    private emailService: EmailService,
-    private formBuilder: FormBuilder
-  ) {
-    this.emailForm = this.formBuilder.group({
-      sendTo: [null, Validators.required],
-      subject: [null, Validators.required],
-      body: [null, Validators.required]
-    });
-  }
+    private emailService: EmailService
+  ) {}
 
   ngOnInit(): void {
     this.participantService.get().subscribe((participants) => {
@@ -56,30 +51,30 @@ export class EmailComposeComponent implements OnInit {
       )
     );
 
-    send(formdata) {
+  send(frm: NgForm) {
     this.newEmail = {
-      subject: formdata.subject,
-      body: formdata.body,
+      subject: this.subject,
+      body: this.body,
       to: {
-        user: formdata.sendTo,
+        user: this.sendTo,
       },
       from: {
         user: this.user.email,
       },
     };
-    this.emailForm.reset();
+    frm.reset();
     this.emailService.sendEmail(this.newEmail);
     console.log("sending");
     alert("Your Email has been sent!!");
     //var form = <HTMLInputElement>document.getElementById("Form").reset();
   }
 
-  draft(formdata) {
+  draft(frm: NgForm) {
     this.newEmail = {
-      subject: formdata.subject,
-      body: formdata.body,
+      subject: this.subject,
+      body: this.body,
       to: {
-        user: formdata.sendTo || " ",
+        user: this.sendTo || " ",
       },
       from: {
         user: this.user.email,
@@ -88,6 +83,6 @@ export class EmailComposeComponent implements OnInit {
     this.emailService.draftEmail(this.newEmail);
     console.log("drafting");
     alert("Your Email has been been moved to the drafts!!");
-    this.emailForm.reset();
+    frm.reset();
   }
 }
