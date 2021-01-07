@@ -2,52 +2,54 @@
 <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
 
+<script>
 
+  var firebaseConfig = {
+      apiKey: "AIzaSyBpZP0vtQZIKZrkZuHwNfIW4GXzVZlvt60",
+      authDomain: "m-e-p-s.firebaseapp.com",
+      databaseURL: "https://m-e-p-s.firebaseio.com",
+      projectId: "m-e-p-s",
+      storageBucket: "m-e-p-s.appspot.com",
+      messagingSenderId: "976589682380",
+      appId: "1:976589682380:web:ca2135138b6f1a3d",
+      measurementId: "G-ECJLLF7W41"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    var db = firebase.firestore();
+  
+  
+    
+      db.collection("Roles").doc("JTL3Ll6I3lt1FRQo5rKW").get().then(function(doc) {
+      if (doc.exists) {
+          console.log("Document data:", doc.data());
+      } else {
+          // doc.data() will be undefined in this case
+          console.log("No such document!");
+      }
+  }).catch(function(error) {
+      console.log("Error getting document:", error);
+  });
+  
+  </script>
+  
+  <script type="text/javascript">
+    var abc = 123;
+  </script>
 
 <div class ="left">
 <div class="img"></div>
 
 <div class="info">
       <h5>Vladimir Putin</h5>
-      <h5 id="name-list"></h5>
+      <h5>
+        <script type="text/javascript">
+          document.write(abc)
+        </script>
+      </h5>
       <h6>President,   Europe - Russia</h6>
 
-      <script>
 
-var firebaseConfig = {
-    apiKey: "AIzaSyBpZP0vtQZIKZrkZuHwNfIW4GXzVZlvt60",
-    authDomain: "m-e-p-s.firebaseapp.com",
-    databaseURL: "https://m-e-p-s.firebaseio.com",
-    projectId: "m-e-p-s",
-    storageBucket: "m-e-p-s.appspot.com",
-    messagingSenderId: "976589682380",
-    appId: "1:976589682380:web:ca2135138b6f1a3d",
-    measurementId: "G-ECJLLF7W41"
-  };
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
-  var db = firebase.firestore();
-
-  db.collection('users').get().then((snapshot)=>{
-    getInfo(snapshot.docs);
-});
-
-var html = "";
-     var el = document.getElementById("name-list");
-function getInfo(data){
-  data.forEach(doc => {
-     var info = doc.data();
-      console.log(info.firstName);
-      
-      html += "<div>" + info.firstName + "</div>";
-      
-});
-   el.innerHTML = html;
-}
-       
- 
-       
-       </script>
 
 </div>
 </div>
