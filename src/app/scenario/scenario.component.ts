@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { scenario } from '../models/scenario';
-import { Participant } from '../models/participant';
+//import { Participant } from '../models/participant';
+import { Control } from '../models/control'; // importing controls from the models
 import { ScenarioService } from '../services/scenario.service';
 import { AuthService } from '../services/auth.service';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
@@ -17,7 +18,8 @@ export class ScenarioComponent implements OnInit {
 
   scenario: scenario = { content: "" };
   scenarios: scenario[];
-  user: Participant = { rolePosition: ""};
+  //user: Participant = { rolePosition: ""}; .. removing access from the participant users
+  user: Control = { rolePosition: ""}; // Access only to the control users
   authError: any;
 
   constructor(
