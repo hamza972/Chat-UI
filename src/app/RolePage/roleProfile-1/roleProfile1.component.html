@@ -17,17 +17,15 @@ var db = firebase.firestore();
 
 var docRef = db.collection("Roles").doc("JTL3Ll6I3lt1FRQo5rKW");
 
-String affiliation = docRef.getString("affiliation");
+var affiliation = docRef.getString("affiliation");
 
-String firstname = docRef.getString("firstName");
-String lastname = docRef.getString("lastName");
-String ofcountry = docRef.getString("ofCountry");
-String rolename = docRef.getString("roleName");
-String title = docRef.getString("title");
+var firstname = docRef.getString("firstName");
+var lastname = docRef.getString("lastName");
+var ofcountry = docRef.getString("ofCountry");
+var rolename = docRef.getString("roleName");
+var title = docRef.getString("title");
 
-function docWrite(variable) {
-    document.write(variable);
-}
+document.getElementById("output1").innerHTML=firstname;
 
 </script>
 
@@ -36,7 +34,7 @@ function docWrite(variable) {
 
 <div class="info">
       <h5>Vladimir Putin</h5>
-      <h5><script>docWrite(firstname)</script> <script>docWrite(lastname)</script></h5>
+      <h5 id="output1"></h5>
       <h6>President,   Europe - Russia</h6>
 </div>
 </div>
