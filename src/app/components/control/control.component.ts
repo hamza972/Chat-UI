@@ -24,8 +24,8 @@ export class ControlComponent implements OnInit {
             } else {
                 this.user = user[0];
 
-                /* Check if user's role position is admin */
-                if(user[0].rolePosition != "admin") {
+                /* Check if user's role position is admin and isOwner condition is ture or false*/
+                if(user[0].rolePosition != "admin" && (user[0].isOwner != "true")) {
                     this.router.navigate(['/home']);
                 }
             }
