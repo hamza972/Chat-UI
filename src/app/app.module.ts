@@ -53,15 +53,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DiaryComponent } from './diary/diary.component';
 import { RolePageComponent } from './RolePage/RolePage.component';
-import { roleProfile1Component} from './RolePage/roleProfile-1/roleProfile1.component';
-import { roleProfile2Component} from './RolePage/roleProfile-2/roleProfile2.component';
-import { roleProfile3Component} from './RolePage/roleProfile-3/roleProfile3.component';
-import { roleProfile4Component} from './RolePage/roleProfile-4/roleProfile4.component';
-import { roleProfile5Component} from './RolePage/roleProfile-5/roleProfile5.component';
-import { roleProfile6Component} from './RolePage/roleProfile-6/roleProfile6.component';
-import { roleProfile7Component} from './RolePage/roleProfile-7/roleProfile7.component';
-import { roleProfile8Component} from './RolePage/roleProfile-8/roleProfile8.component';
-import { roleProfile9Component} from './RolePage/roleProfile-9/roleProfile9.component';
 import { NgChatModule } from 'ng-chat';
 import { HttpModule } from '@angular/http';
 
@@ -102,15 +93,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     DiaryComponent,
     RolePageComponent,
     StatisticsComponent,
-    roleProfile1Component,
-    roleProfile2Component,
-    roleProfile3Component,
-    roleProfile4Component,
-    roleProfile5Component,
-    roleProfile6Component,
-    roleProfile7Component,
-    roleProfile8Component,
-    roleProfile9Component,
     ProfileEditComponent,
   ],
   imports: [
