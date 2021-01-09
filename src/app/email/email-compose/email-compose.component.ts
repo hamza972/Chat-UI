@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
 import { ParticipantService } from '../../services/participant.service';
 import { Observable } from 'rxjs';
-import { appUser as User } from '../../models/user';
+import { AppUser as User } from '../../models/user';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Email } from 'src/app/models/email';
 import { EmailService } from '../../services/email.service';
-import { NgForm } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-email-compose',
@@ -32,16 +32,21 @@ export class EmailComposeComponent implements OnInit {
     language: 'en'
   };
   participants: string[];
-  sendTo = '';
-  subject = '';
-  body = '';
   @Input() user: User;
   newEmail: Email;
+  emailForm: FormGroup;
 
   constructor(
     private participantService: ParticipantService,
-    private emailService: EmailService
-  ) { }
+    private emailService: EmailService,
+    private formBuilder: FormBuilder
+  ) {
+    this.emailForm = this.formBuilder.group({
+      sendTo: [null, Validators.required],
+      subject: [null, Validators.required],
+      body: [null, Validators.required]
+    });
+  }
 
   ngOnInit(): void {
     this.participantService.get().subscribe((participants) => {
@@ -65,35 +70,36 @@ export class EmailComposeComponent implements OnInit {
       )
     )
 
-  send(frm: NgForm) {
+    send(formdata) {
     this.newEmail = {
-      subject: this.subject,
-      body: this.body,
+      subject: formdata.subject,
+      body: formdata.body,
       to: {
-        user: this.sendTo,
+        user: formdata.sendTo,
       },
       from: {
         user: this.user.email,
       },
     };
-    frm.reset();
+    this.emailForm.reset();
     this.emailService.sendEmail(this.newEmail);
     alert('Your Email has been sent!!');
   }
 
-  draft(frm: NgForm) {
+  draft(formdata) {
     this.newEmail = {
-      subject: this.subject,
-      body: this.body,
+      subject: formdata.subject,
+      body: formdata.body,
       to: {
-        user: this.sendTo || ' ',
+        user: formdata.sendTo || ' ',
       },
       from: {
         user: this.user.email,
       },
     };
     this.emailService.draftEmail(this.newEmail);
+    console.log('drafting');
     alert('Your Email has been been moved to the drafts!!');
-    frm.reset();
+    this.emailForm.reset();
   }
 }
