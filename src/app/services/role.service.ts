@@ -14,7 +14,6 @@ export class RoleService {
     roleDoc: AngularFirestoreDocument<Role>;
 
     constructor(public afs: AngularFirestore) {
-        //this.items = this.afs.collection('items').valueChanges();
         this.roleCollection = this.afs.collection('Roles', ref => ref.orderBy('roleName', 'asc'));
     }
 
