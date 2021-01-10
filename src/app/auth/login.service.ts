@@ -59,6 +59,8 @@ export class LoginService {
       })
     );
   }
+  
+
 
   getUserCurrent() {
     return this.afAuth.authState;
@@ -76,6 +78,28 @@ export class LoginService {
         }
       });
   }
+
+  
+  createOwnerUser(user) {
+    this.afAuth.auth
+      .createUserWithEmailAndPassword(user.email, user.password)
+      .then((userCredential) => {
+        this.newUser = user;
+
+        userCredential.user.updateProfile({
+          displayName: user.firstName + user.lastName,
+        });
+
+        this.sendOwnerUserData(userCredential).then(() => {
+          this.router.navigate(["/home"]);
+        });
+      })
+      .catch((error) => {
+        this.eventAuthError.next(error);
+      });
+  }
+
+
 
   createControlUser(user) {
     this.afAuth.auth
@@ -96,6 +120,8 @@ export class LoginService {
       });
   }
 
+
+
   createParticipantUser(userP) {
     this.afAuth.auth
       .createUserWithEmailAndPassword(userP.email, userP.password)
@@ -114,6 +140,18 @@ export class LoginService {
         this.eventAuthError.next(error);
       });
   }
+
+
+  sendOwnerUserData(userCredential: firebase.auth.UserCredential) {
+    return this.db.doc(`Users/${userCredential.user.uid}`).set({
+      email: this.newUser.email,
+      firstName: this.newUser.firstName,
+      lastName: this.newUser.lastName,
+      role: "Control",
+      systemRole: "owner",
+    });
+  }
+
 
   sendControlUserData(userCredential: firebase.auth.UserCredential) {
     return this.db.doc(`Users/${userCredential.user.uid}`).set({
@@ -140,14 +178,14 @@ export class LoginService {
   }
 
   sendCountryData(newCountry: country) {
-    this.router.navigate(["/control"]);
+    this.router.navigate(["/Control Panel"]);
     return this.db.collection(`Countries`).add({
       countryName: newCountry.countryName,
     });
   }
 
   sendRoleData(newRole: Role) {
-    this.router.navigate(["/control"]);
+    this.router.navigate(["/Control Panel"]);
     return this.db.collection(`Roles`).add({
       roleName: newRole.roleName,
       ofCountry: newRole.ofCountry,

@@ -1,0 +1,167 @@
+<div *ngIf="user">
+ 
+    <div class="ui">    
+        <button class="button" (click)="add()"><span>Add Owner  </span> </button>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Control User/ Owner Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Role Name</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let owner of owner">
+                <td>{{owner.firstName}} {{owner.lastName}}</td>
+                <td>{{owner.email}}</td>
+                <td>{{owner.rolePosition}}, {{owner.roleAffiliation}}</td>
+                <td>{{owner.roleFirstName}} {{owner.roleLastName}}</td>
+                <td><button (click)="delete($event, owner)" value="Delete" class="btn red">Delete</button></td>
+            </tr>
+        </tbody>
+      </table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<div class="row" *ngIf="user">
+
+    <ngb-tabset [destroyOnHide]="false">
+        <ngb-tab title="Affiliation">
+            <ng-template ngbTabContent>
+                <div class="col-3">
+                    <app-affiliate></app-affiliate>
+                </div>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="Role">
+            <ng-template ngbTabContent>
+                <div class="col-8">
+                    <app-role></app-role>
+                </div>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="Participant">
+            <ng-template ngbTabContent>
+                <div class="col-8">
+                    <app-participant></app-participant>
+                </div>
+            </ng-template>
+        </ngb-tab>
+
+        <ngb-tab title="Statistics">
+            <ng-template ngbTabContent>
+                <div class="col-8">
+                    <app-statistics></app-statistics>
+                </div>
+            </ng-template>
+        </ngb-tab>
+
+    </ngb-tabset>
+</div>
+
+
+
+   set a side bar -->
+
+
+   <!-- <div class="contact-info">
+    <div class="option">
+        <i class="fa fa-home"></i>
+        <a class="text" href="#">Home</a>
+    </div>
+
+    <div class="option">
+        <i class="fas fa-book-open"></i>
+        <a class="text" routerLink="/scenario">Scenario</a>
+    </div>
+
+    <div class="option">
+        <i class="fas fa-user-alt"></i>
+        <a class="text" routerLink="/RolePage">Role</a>
+    </div>
+
+
+    <div class="option">
+        <i class="fa fa-envelope" ></i>
+        <a class="text" routerLink="/email">Email</a>
+
+    </div>
+
+    <div class="option">
+        <i class="fab fa-twitter-square"></i>
+        <a class="text" routerLink="/tweet">Tweet</a>
+
+    </div>
+
+    <div class="option">
+        <i class="fas fa-newspaper"></i>
+        <a class="text" routerLink="/news">News</a>
+    </div>
+
+    <div class="option">
+        <i class="fas fa-comment-alt"></i>
+        <a class="text" routerLink="/chat">Chat</a>
+    </div>
+
+    <div class="option">
+        <i class="fa fa-cog"></i>
+        <a class="text" routerLink="/control">Control</a>
+
+    </div>
+
+  </div> -->

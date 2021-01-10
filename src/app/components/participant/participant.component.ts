@@ -36,14 +36,14 @@ export class ParticipantComponent implements OnInit {
         });
     }
 
-    add() {
-        this.router.navigate(['/participant-add']);
-    }
+    // add() {
+    //     this.router.navigate(['/participant-add']);
+    // }
 
 
-    delete($event, participant: Participant) {
-        this.participantService.delete(participant);
-    }
+    // delete($event, participant: Participant) {
+    //     this.participantService.delete(participant);
+    // }
 
     /*
     edit($event, participant: Participant) {
