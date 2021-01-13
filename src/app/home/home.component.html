@@ -3,37 +3,6 @@
 
 <!-- =====add map img======= -->
 <div class="map"></div>
-<!-- ===== user guide ======= -->
-<div class="user-guide">
-    <h5>What you can do ...</h5>
-    <!-- <br> -->
-    <div class="ui">
-        <button class="button"><span>Add Participant  </span> </button>
-    </div>
-    <h6>
-        <br>
-        <br>
-        <br>
-        Click the button to create a role.
-        <br>
-        <br>
-        Check out the backstory in <a  *ngIf="user" routerLink="/scenario">Scenario.</a>
-        <br>
-        <br>
-        Take a look at the existing <a  *ngIf="user" routerLink="/RolePage">Roles.</a>
-        <br>
-        <br>
-        Post a <a  *ngIf="user" routerLink="/tweet">tweet.</a>
-        <br>
-        <br>
-        Check your <a *ngIf="user" routerLink="/email">email </a>box.
-        <br>
-        <br>
-        Write down your role <a *ngIf="user" routerLink="/diary">diary</a> for today.
-        <br>
-      </h6>
-
-    </div>
 
 <!--  five latest tweets and five latest news -->
 <div class="row" *ngIf="user">
