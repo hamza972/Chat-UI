@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
 import { ParticipantService } from '../../services/participant.service';
 import { Observable } from 'rxjs';
-import { AppUser as User } from '../../models/user';
+import { appUser as User } from '../../models/user';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Email } from 'src/app/models/email';
 import { EmailService } from '../../services/email.service';
