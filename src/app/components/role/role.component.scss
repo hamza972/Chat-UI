@@ -52,7 +52,6 @@
 .table
 {
     width: 870px;
-    // height: 1080px;
 }
 .table .table-striped
 {
@@ -71,7 +70,7 @@ td, th
 .table th, .table td
 {
     border-top: none;
-    border-bottom:1px solid  #6e7783;
+    border-bottom: 1px solid  #6e7783;
 }
 .table-striped tbody tr:nth-of-type(odd)
 {

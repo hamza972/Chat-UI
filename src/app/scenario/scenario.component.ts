@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { scenario } from '../models/scenario';
+import { Scenario } from '../models/scenario';
 import { Participant } from '../models/participant';
 import { ScenarioService } from '../services/scenario.service';
 import { AuthService } from '../services/auth.service';
@@ -38,9 +38,9 @@ export class ScenarioComponent implements OnInit {
         },
         language: 'en'
     };
-    scenario: scenario = { content: '' };
-    scenarios: scenario[];
-    user: Participant = { rolePosition: '' };
+    scenario: Scenario = { content: '' };
+    scenarios: Scenario[];
+    user: Participant = { systemRole: '' };
     authError: any;
 
     constructor(

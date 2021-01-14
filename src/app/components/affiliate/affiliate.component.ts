@@ -12,7 +12,7 @@ import { Affiliate } from '../../models/affiliate';
 export class AffiliateComponent implements OnInit {
     affiliates: Affiliate[];
     user: firebase.User;
-    editState: boolean = false;
+    editState = false;
     itemToEdit: Affiliate;
 
     constructor(
@@ -25,16 +25,16 @@ export class AffiliateComponent implements OnInit {
 
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if(user === null) {
+            if (user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
             }
-        })
+        });
 
         /* Get list of affiliates */
-        this.affiliateService.get().subscribe(affiliate => {
-            this.affiliates = affiliate;
+        this.affiliateService.get().subscribe(dbAffiliates => {
+            this.affiliates = dbAffiliates;
         });
     }
 

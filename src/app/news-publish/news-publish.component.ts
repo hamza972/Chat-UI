@@ -19,13 +19,13 @@ export class NewsPublishComponent implements OnInit {
 
   user$: Observable<AppUser>;
   constructor(private auth: LoginService,
-    private router: Router) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.user$ = this.auth.user$;
   }
 
-  btnClickBack= function () {
+  btnClickBack = function() {
     this.router.navigateByUrl('/news');
 };
 

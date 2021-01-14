@@ -14,7 +14,6 @@ export class AffiliateService {
     affiliateDoc: AngularFirestoreDocument<Affiliate>;
 
     constructor(public afs: AngularFirestore) {
-        //this.items = this.afs.collection('items').valueChanges();
         this.affiliateCollection = this.afs.collection('Countries', ref => ref.orderBy('countryName', 'asc'));
     }
 

@@ -18,7 +18,6 @@ export class ParticipantService {
         public afs: AngularFirestore,
         private auth: AuthService
     ) {
-        //this.items = this.afs.collection('items').valueChanges();
         this.participantCollection = this.afs.collection('Users', ref => ref.orderBy('firstName', 'asc'));
     }
 
@@ -34,7 +33,6 @@ export class ParticipantService {
 
     add(participant: Participant) {
         return this.auth.createUser(participant);
-        //return this.participantCollection.add(participant);
     }
 
     delete(participant: Participant) {

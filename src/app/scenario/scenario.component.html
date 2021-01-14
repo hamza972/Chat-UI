@@ -12,7 +12,7 @@
             </div>
             <form #Form="ngForm" (ngSubmit)="add(Form)">
                 <div class="row">
-                    <div class="input-wrapper" *ngIf="user.rolePosition == 'admin'">
+                    <div class="input-wrapper" *ngIf="user.systemRole == 'admin'">
                         <!-- <input [(ngModel)]="scenario.content" name="content" type="text" class="form-control"
                             id="content" placeholder="Add the next scenario task for the students!!!"> -->
                         <ckeditor name="content" [editor]="Editor" [config]="editorConfig" style="min-height: 500px;"
