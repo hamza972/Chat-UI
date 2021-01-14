@@ -1,11 +1,55 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+
+<script>
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBpZP0vtQZIKZrkZuHwNfIW4GXzVZlvt60",
+  authDomain: "m-e-p-s.firebaseapp.com",
+  databaseURL: "https://m-e-p-s.firebaseio.com",
+  projectId: "m-e-p-s",
+  storageBucket: "m-e-p-s.appspot.com",
+  messagingSenderId: "976589682380",
+  appId: "1:976589682380:web:ca2135138b6f1a3d",
+  measurementId: "G-ECJLLF7W41"
+};
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    db.settings({timestampsInSnapshots: true});
+    
+ 
+     db.collection("Roles").doc("JTL3Ll6I3lt1FRQo5rKW").get().then(function(doc) {
+      if (doc.exists) {
+          console.log("Document data:", doc.data());
+      } else {
+           //doc.data() will be undefined in this case
+          console.log("No such document!");
+      }
+  }).catch(function(error) {
+      console.log("Error getting document:", error);
+  });
+  
+  </script>
+  
+  <script src="app.js>"></script>>
+ 
 
 <div class ="left">
 <div class="img"></div>
 
 <div class="info">
       <h5>Vladimir Putin</h5>
+      <h5>
+        <script type="text/javascript">
+          document.write(abc)
+        </script>
+      </h5>
       <h6>President,   Europe - Russia</h6>
+
+
+
 </div>
 </div>
 

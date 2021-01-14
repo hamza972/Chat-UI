@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../auth/login.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { appUser } from '../models/user';
+import { AppUser } from '../models/user';
 
 declare var  myLabel: any;
 @Component({
@@ -11,26 +11,22 @@ declare var  myLabel: any;
   styleUrls: ['./diary.component.scss']
 })
 export class DiaryComponent implements OnInit {
-  
-  user$: Observable<appUser>;
+  user$: Observable<AppUser>;
   constructor(private auth: LoginService,
-    private router: Router) { }
+              private router: Router) { }
 
   ngOnInit() {
     this.user$ = this.auth.user$;
-
-     console.log("aaa");
-     myLabel();
-
+    myLabel();
   }
 
-  ngOnDestroy(){
-    console.log("leave");
-    let aaa=document.querySelectorAll('.note-container');
+  ngOnDestroy() {
+    console.log('leave');
+    const aaa = document.querySelectorAll('.note-container');
     console.log(aaa.length);
 
-    if(aaa.length>0){
-      for(let i=0;i<aaa.length;i++){
+    if (aaa.length > 0) {
+      for (let i = 0; i < aaa.length; i++) {
          document.body.removeChild(aaa[i]);
       }
     }

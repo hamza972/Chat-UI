@@ -3,8 +3,9 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { switchMap, mergeMap, map } from "rxjs/operators";
+import { switchMap, mergeMap, map } from 'rxjs/operators';
 import { Owner } from '../models/owner';
+import { Participant } from '../models/participant';
 
 
 @Injectable({
@@ -26,8 +27,9 @@ export class AuthService {
         return this.afAuth.authState.pipe(
             switchMap((user) => {
                 if (user) {
-
-                    return this.db.collection("Users", (ref) => ref.where("email", "==", user.email)).snapshotChanges().pipe(map(changes => {
+                    return this.db.collection('Users',
+                    (ref) => ref.where('email', '==', user.email))
+                    .snapshotChanges().pipe(map(changes => {
                         return changes.map(a => {
                             const data = a.payload.doc.data() as Owner;
                             data.id = a.payload.doc.id;
@@ -44,18 +46,18 @@ export class AuthService {
 
     createUser(user) {
         this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
-        .then(userCredential => {
-            this.newUser = user;
+            .then(userCredential => {
+                this.newUser = user;
 
-            userCredential.user.updateProfile({displayName: user.firstName});
+                userCredential.user.updateProfile({ displayName: user.firstName });
 
-            this.insertUserData(userCredential).then(() => {
-                this.router.navigate(['/home']);
+                this.insertUserData(userCredential).then(() => {
+                    this.router.navigate(['/home']);
+                });
+            })
+            .catch(error => {
+                this.eventAuthError.next(error);
             });
-        })
-        .catch(error => {
-            this.eventAuthError.next(error);
-        })
     }
 
     insertUserData(userCredential: firebase.auth.UserCredential) {
@@ -66,24 +68,24 @@ export class AuthService {
             systemRole: this.newUser.systemRole,
             role: this.newUser.role,
             roleAffiliation: this.newUser.roleAffiliation
-        })
+        });
     }
 
     login(email: string, password: string) {
         this.afAuth.auth.signInWithEmailAndPassword(email, password)
-        .catch(error => {
-            this.eventAuthError.next(error);
-        })
-        .then(userCredential => {
-            if(userCredential) {
-                this.router.navigate(['/home']);
-            }
+            .catch(error => {
+                this.eventAuthError.next(error);
+            })
+            .then(userCredential => {
+                if (userCredential) {
+                    this.router.navigate(['/home']);
+                }
 
-        })
+            });
     }
 
     logout() {
-        this.router.navigate(["/home"]);
+        this.router.navigate(['/home']);
         window.location.reload();
         return this.afAuth.auth.signOut();
     }

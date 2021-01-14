@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { appUser } from '../models/user';
+import { AppUser } from '../models/user';
 import { LoginService } from '../auth/login.service';
 import { Router } from '@angular/router';
-import { newsClass } from '../models/newsClass';
+import { News } from '../models/News';
 import { Participant } from '../models/participant';
 import { AuthService } from '../services/auth.service';
 import * as Editor from '../../assets/custom-ckeditor/ckeditor';
@@ -16,15 +16,15 @@ import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 export class NewsComponent implements OnInit {
   public Editor = Editor;
   user: firebase.User;
-  newUserNews: newsClass;
-  newsUser: appUser;
+  newUserNews: News;
+  newsUser: AppUser;
   userID: string;
-  user$: Observable<appUser>;
-  newsArray: newsClass[];
-  sortedArray: newsClass[];
+  user$: Observable<AppUser>;
+  newsArray: News[];
+  sortedArray: News[];
   authError: any;
   searchText: string;
-  user2: Participant = { rolePosition: '' };
+  user2: Participant = { systemRole: '' };
   editorConfig = {
     toolbar: {
       items: [

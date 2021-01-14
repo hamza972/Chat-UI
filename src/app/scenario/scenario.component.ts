@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { scenario } from '../models/scenario';
-import { Participant } from '../models/participant';
+import { Scenario } from '../models/scenario';
 import { ScenarioService } from '../services/scenario.service';
 import { AuthService } from '../services/auth.service';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { NgForm } from '@angular/forms';
 import { Owner } from '../models/owner';
 import * as Editor from '../../assets/custom-ckeditor/ckeditor';
@@ -16,11 +14,10 @@ import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 })
 
 export class ScenarioComponent implements OnInit {
-    scenario: scenario = { content: '' };
-    scenarios: scenario[];
+    scenario: Scenario = { content: '' };
+    scenarios: Scenario[];
     user: Owner = { rolePosition: '' };
     authError: any;
-
     public Editor = Editor;
     editorConfig = {
         toolbar: {
@@ -60,10 +57,10 @@ export class ScenarioComponent implements OnInit {
             } else {
                 this.user = user[0];
             }
-        })
+        });
 
-        this.scenarioService.get().subscribe(scenario => {
-            this.scenarios = scenario;
+        this.scenarioService.get().subscribe(dbScenarios => {
+            this.scenarios = dbScenarios;
         });
 
     }
