@@ -1,14 +1,14 @@
-import { Injectable, DoBootstrap } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { AppUser } from '../models/user';
-import { switchMap } from 'rxjs/operators';
-import { Country } from '../models/country';
-import { Role } from '../models/role';
-import { tweetClass } from '../models/tweetClass';
-import { News } from '../models/news';
+import { Injectable, DoBootstrap } from "@angular/core";
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore } from "@angular/fire/firestore";
+import { Router } from "@angular/router";
+import { BehaviorSubject, Observable, of } from "rxjs";
+import { AppUser } from "../models/user";
+import { switchMap } from "rxjs/operators";
+import { Country } from "../models/country";
+import { Role } from "../models/role";
+import { tweetClass } from "../models/tweetClass";
+import { News } from "../models/news";
 
 @Injectable({
   providedIn: 'root',

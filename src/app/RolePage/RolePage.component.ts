@@ -30,9 +30,8 @@ export class RolePageComponent implements OnInit {
       }
   });
 
-  this.roleService.get().subscribe(dbRoles => {
-      this.roles = dbRoles;
-  });
+    this.roleService.get().subscribe(dbRoles => {
+                                  this.roles = dbRoles;
+    });
   }
-
 }

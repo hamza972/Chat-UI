@@ -1,16 +1,42 @@
 <body>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <!--
+<div class="grid-container">
+    <div id="div_a_1">
+        <div id="searchmenu">
+            <label>
+                <input [(ngModel)]="search.term" style="background-color: white; color: gray; height: 5%; width: 100%;
+                position: absolute; top: 0%; left: 0%; padding-left: 2%; border-bottom: solid 1px;"
+                placeholder="Search..."/>
+              </label>
+        </div>
+    </div>
+        <div class="col-3">
+    <ul *ngIf="(user$ | async).systemRole === 'admin'" class="d-flex flex-row flex-wrap">
+    <li *ngFor="let newsClass of newsArray" class="list-group-item list-group-item-action">
+            <p class="news">{{ newsClass.newsDescription }}</p>
+            <p class="userOrRole"> {{newsClass.userRole}} ({{newsClass.userName}})</p>
+            <p class="newsDate">{{newsClass.newsDate.toDate() | date: 'medium'}}</p>
+    </li>
+    </ul>
+    </div>
+-->
+
     <div>
         <div class="col-md-12">
             <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="form-control" id="txtSearchNews"
                 placeholder="Enter title to search"></textarea>
+
             <button class="search-btn">
                 <i class="fa fa-search"></i>
             </button>
+
         </div>
+
     </div>
 
     <div class="row mt-4">
+
         <div class="col-12">
             <div class="row" *ngIf="authError">
                 <div class="col-12 alert alert-danger">
@@ -24,8 +50,12 @@
                             id="newsHeadline" placeholder="Enter Headline">
                     </div>
                     <div class="col-md-12 mb-2">
-                        <textarea ngModel #newsDescription="ngModel" name="newsDescription" type="text"
-                            class="form-control" id="newsDescription" placeholder="Enter news description"></textarea>
+                        <div class="input-wrapper">
+                            <!-- <textarea  ngModel #newsDescription="ngModel" name="newsDescription" type="text" class="form-control" id="newsDescription"  placeholder="Enter news description"></textarea> -->
+                            <ckeditor name="content" [editor]="Editor" [config]="editorConfig"
+                                style="min-height: 500px; max-height: 500px;" ngModel #newsDescription="ngModel">
+                            </ckeditor>
+                        </div>
                     </div>
                 </div>
 
@@ -43,6 +73,9 @@
     </div>
 
     <div class="row" *ngFor="let newsClass of newsArray | filter : searchText">
+        <!-- <div class="col-1">
+            <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
+        </div>-->
         <div class="col-11">
             <div class="card-panel ">
                 <div class="card-content">
@@ -51,13 +84,32 @@
                     <div class="card-action">
                         <a>{{newsClass.newsDate.toDate() | date: 'medium'}}</a>
                     </div>
+                    <!-- <p class="deep-purple-text" *ngIf="user.rolePosition === 'admin'">{{newsClass.firstName}} {{newsClass.lastName}}</p>-->
                     <p class="black-text">{{newsClass.newsDescription}}</p>
                 </div>
 
             </div>
         </div>
     </div>
-    
+
+
+    <!-- <form #newsCreateForm="ngForm" (ngSubmit)="createNews(newsDescription, newsHeadline)">
+        <div>
+            <div class="col-md-12">
+               <textarea ngModel #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control" id="newsHeadline"  placeholder="Enter title"></textarea>
+            </div>
+            <div class="col-md-12">
+                <textarea  ngModel #newsDescription="ngModel" name="newsDescription" type="text" class="form-control" id="newsDescription"  placeholder="Enter news description"></textarea>
+            </div>
+            <div class="col-md-12">
+                    <button type="submit">Post as {{newsUser.role}}</button>
+            </div>
+        </div>
+
+    <!-- set a side bar -->
+
+
+
     <div class="contact-info">
         <div class="option">
             <i class="fa fa-home"></i>

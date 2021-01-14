@@ -12,15 +12,10 @@
         <form #roleForm="ngForm" (ngSubmit)="add()">
             <div class="row">
                 <div class="input-wrapper">
-                  <ckeditor
-                    name="content"
-                    [editor]="Editor"
-                    [(ngModel)]="tweet.content"
-                    [config]="editorConfig"
-                    style="min-height: 500px;"
-                  ></ckeditor>
+                    <ckeditor name="content" [editor]="Editor" [(ngModel)]="tweet.content" style="min-height: 500px;"
+                        [config]="editorConfig"></ckeditor>
                     <div class="col-md-9">
-                           <button type="submit">Tweet</button>
+                        <button type="submit">Tweet</button>
                     </div>
                 </div>
             </div>
@@ -31,13 +26,16 @@
 
 <div class="row" *ngFor="let tweet of tweets">
     <div class="col-1">
-        <img (click)="profile($event, tweet)" src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
+        <img (click)="profile($event, tweet)" src="assets/img/roles/bahrain_king.jpg" alt=""
+            class="circle responsive-img role-img">
     </div>
     <div class="col-11">
         <div class="card-panel">
             <div class="card-content">
-                <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}} {{tweet.roleLastName}}</p>
-                <p class="deep-purple-text" *ngIf="user.systemRole === 'control'">{{tweet.firstName}} {{tweet.lastName}}</p>
+                <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}}
+                    {{tweet.roleLastName}}</p>
+                <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.firstName}} {{tweet.lastName}}
+                </p>
                 <div [innerHtml]="htmlProperty(tweet.content)"></div>
             </div>
             <div class="card-date">

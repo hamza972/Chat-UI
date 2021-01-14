@@ -18,9 +18,8 @@ export class NewsPublishComponent implements OnInit {
     /* added by xander */
 
   user$: Observable<AppUser>;
-  constructor(
-    private auth: LoginService,
-    private router: Router) { }
+  constructor(private auth: LoginService,
+              private router: Router) { }
 
   ngOnInit() {
     this.user$ = this.auth.user$;

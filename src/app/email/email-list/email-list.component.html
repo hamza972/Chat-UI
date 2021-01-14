@@ -63,7 +63,7 @@
       <td>
         <button
           class="btn waves-effect waves-light red"
-          (click)="delete(email)"
+          (click)="deleteEmail(email, content)"
         >
           Delete
         </button>
@@ -71,3 +71,19 @@
     </tr>
   </tbody>
 </table>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Confirm</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <h5>Are you sure you want to delete this email?</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn waves-effect waves-light red" (click)="modal.close(true)">Yes</button>
+    <button type="button" class="btn waves-effect waves-light no-btn white" (click)="modal.close(false)">No</button>
+  </div>
+</ng-template>

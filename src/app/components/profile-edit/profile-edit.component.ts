@@ -6,7 +6,7 @@ import { RoleService } from '../../services/role.service';
 import { AffiliateService } from '../../services/affiliate.service';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
-import * as Editor from '@ckeditor/ckeditor5-build-classic';
+import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
 import Base64Plugin from '../../email/email-compose/Base64Upload.js';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
@@ -20,7 +20,20 @@ export class ProfileEditComponent implements OnInit {
   user: firebase.User;
   role: Role;
   public Editor = Editor;
-  editorConfig =  {extraPlugins: [Base64Plugin]};
+  editorConfig = {
+      toolbar: {
+        items: [
+          'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
+          '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'undo', 'redo' ]
+      },
+      image: {
+        toolbar: [
+          'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight' ],
+        styles: [
+          'alignLeft', 'alignCenter', 'alignRight'],
+      },
+      language: 'en'
+  };
   affiliates: Affiliate[];
   authError: any;
 

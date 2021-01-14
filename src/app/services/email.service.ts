@@ -3,12 +3,12 @@ import {
   AngularFirestore,
   AngularFirestoreCollection,
   AngularFirestoreDocument,
-} from '@angular/fire/firestore';
-import { Email } from '../models/email';
-import { AppUser as User } from '../models/user';
-import { LoginService } from '../auth/login.service';
-import { Observable } from 'rxjs/Rx';
-import { map } from 'rxjs/operators';
+} from "@angular/fire/firestore";
+import { Email } from "../models/email";
+import { AppUser as User } from "../models/user";
+import { LoginService } from "../auth/login.service";
+import { Observable } from "rxjs";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root',

@@ -6,64 +6,87 @@ import { ScenarioService } from '../services/scenario.service';
 import { AuthService } from '../services/auth.service';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { NgForm } from '@angular/forms';
+import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 
 @Component({
-  selector: 'app-scenario',
-  templateUrl: './scenario.component.html',
-  styleUrls: ['./scenario.component.scss']
+    selector: 'app-scenario',
+    templateUrl: './scenario.component.html',
+    styleUrls: ['./scenario.component.scss']
 })
 
 export class ScenarioComponent implements OnInit {
+    public Editor = Editor;
+    editorConfig = {
+        toolbar: {
+          items: [
+            'heading', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
+            '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'insertTable', 'undo', 'redo']
+        },
+        image: {
+          toolbar: [
+            'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+            '|',
+            'imageTextAlternative'],
+          styles: [
+            'alignLeft', 'alignCenter', 'alignRight'],
+        },
+        table: {
+            contentToolbar: [
+              'tableColumn',
+              'tableRow',
+              'mergeTableCells']
+        },
+        language: 'en'
+    };
+    scenario: Scenario = { content: '' };
+    scenarios: Scenario[];
+    user: Participant = { systemRole: '' };
+    authError: any;
 
-  scenario: Scenario = { content: '' };
-  scenarios: Scenario[];
-  user: Participant = { roleTitle: ''};
-  authError: any;
+    constructor(
+        private auth: AuthService,
+        private scenarioService: ScenarioService,
+        private router: Router
+    ) { }
 
-  constructor(
-      private auth: AuthService,
-      private scenarioService: ScenarioService,
-      private router: Router
-  ) {}
+    ngOnInit() {
 
-  ngOnInit() {
-      /* Check if user is signed in, otherwise redirect to home */
-      this.auth.getUserData().subscribe(user => {
-          if (user === null) {
-              this.router.navigate(['/home']);
-          } else {
-              this.user = user[0];
-              console.log('this.user');
-              console.log(this.user);
+        /* Check if user is signed in, otherwise redirect to home */
+        this.auth.getUserData().subscribe(user => {
+            if (user === null) {
+                this.router.navigate(['/home']);
+            } else {
+                this.user = user[0];
+                console.log('this.user');
+                console.log(this.user);
             }
+        })
+
+        this.scenarioService.get().subscribe(dbScenarios => {
+            this.scenarios = dbScenarios;
         });
 
-      this.scenarioService.get().subscribe(scenario => {
-          this.scenarios = scenario;
-      });
+    }
 
-  }
+    cancel() {
+        this.router.navigate(['/scenario']);
+    }
 
-  /* go to profile page */
-  /*profile($event, scenario: scenario) {
-      this.router.navigate(['/profile/'+scenario.roleID]);
-  }
-*/
-  cancel() {
-      this.router.navigate(['/scenario']);
-  }
+    add(frm: NgForm) {
+        if (this.scenario.content !== '') {
 
-  add(frm: NgForm) {
-      if (this.scenario.content !== '') {
+            this.scenario = {
 
-          this.scenario = {
-              date: new Date(),
-              content: this.scenario.content,
-          };
-          this.scenarioService.add(this.scenario);
-          alert('Your Email has been sent!!');
-          frm.reset();
-      }
-  }
+                date: new Date(),
+                content: this.scenario.content,
+            }
+
+            console.log(this.scenario);
+
+            this.scenarioService.add(this.scenario);
+            alert('Your Email has been sent!!');
+            frm.reset();
+        }
+    }
 
 }

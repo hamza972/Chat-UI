@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Email } from '../../models/email';
-import { EmailService } from '../../services/email.service';
-import { AppUser as User } from '../../models/user';
+import { Component, OnInit, Input } from "@angular/core";
+import { Email } from "../../models/email";
+import { EmailService } from "../../services/email.service";
+import { AppUser as User } from "../../models/user";
+import "rxjs/Rx";
 
 @Component({
   selector: 'app-email-deleted',
