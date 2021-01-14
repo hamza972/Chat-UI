@@ -1,4 +1,4 @@
 export interface Affiliate {
-    id?:string;
-    countryName?:string;
+    id?: string;
+    name?: string;
   }

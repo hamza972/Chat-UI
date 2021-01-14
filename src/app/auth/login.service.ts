@@ -3,28 +3,28 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 import { BehaviorSubject, Observable, of } from "rxjs";
-import { appUser } from "../models/user";
+import { AppUser } from "../models/user";
 import { switchMap } from "rxjs/operators";
-import { country } from "../models/country";
+import { Country } from "../models/country";
 import { Role } from "../models/role";
 import { tweetClass } from "../models/tweetClass";
-import { newsClass } from "../models/newsClass";
+import { News } from "../models/news";
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class LoginService {
-  private eventAuthError = new BehaviorSubject<string>("");
+  private eventAuthError = new BehaviorSubject<string>('');
   eventAuthError$ = this.eventAuthError.asObservable();
-  newUser: appUser;
+  newUser: AppUser;
 
-  user$: Observable<appUser>;
-  userList$: Observable<appUser[]>;
-  countries$: Observable<country[]>;
+  user$: Observable<AppUser>;
+  userList$: Observable<AppUser[]>;
+  countries$: Observable<Country[]>;
   roles$: Observable<Role[]>;
   tweetSend: tweetClass;
   tweets$: Observable<tweetClass[]>;
-  news$: Observable<newsClass[]>;
+  news$: Observable<News[]>;
   tweetsOrdered$: Observable<tweetClass[]>;
   tweetDate = new Date();
   tweetDateString: string;
@@ -35,24 +35,24 @@ export class LoginService {
     private router: Router
   ) {
     this.countries$ = this.db
-      .collection("Countries", (ref) => ref.orderBy("countryName", "asc"))
+      .collection('Countries', (ref) => ref.orderBy('countryName', 'asc'))
       .valueChanges();
     this.tweets$ = this.db
-      .collection("Tweets", (ref) => ref.orderBy("tweetDate", "desc"))
+      .collection('Tweets', (ref) => ref.orderBy('tweetDate', 'desc'))
       .valueChanges();
     this.news$ = this.db
-      .collection("News", (ref) => ref.orderBy("newsDate", "desc"))
+      .collection('News', (ref) => ref.orderBy('newsDate', 'desc'))
       .valueChanges();
     this.roles$ = this.db
-      .collection("Roles", (ref) => ref.orderBy("roleName", "asc"))
+      .collection('Roles', (ref) => ref.orderBy('roleName', 'asc'))
       .valueChanges();
     this.userList$ = this.db
-      .collection("Users", (ref) => ref.orderBy("role", "asc"))
+      .collection('Users', (ref) => ref.orderBy('role', 'asc'))
       .valueChanges();
     this.user$ = this.afAuth.authState.pipe(
       switchMap((user) => {
         if (user) {
-          return this.db.doc<appUser>(`Users/${user.uid}`).valueChanges();
+          return this.db.doc<AppUser>(`Users/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
@@ -72,7 +72,7 @@ export class LoginService {
       })
       .then((userCredential) => {
         if (userCredential) {
-          this.router.navigate(["/home"]);
+          this.router.navigate(['/home']);
         }
       });
   }
@@ -84,11 +84,11 @@ export class LoginService {
         this.newUser = user;
 
         userCredential.user.updateProfile({
-          displayName: user.firstName + " " + user.lastName,
+          displayName: user.firstName + ' ' + user.lastName,
         });
 
         this.sendControlUserData(userCredential).then(() => {
-          this.router.navigate(["/home"]);
+          this.router.navigate(['/home']);
         });
       })
       .catch((error) => {
@@ -103,11 +103,11 @@ export class LoginService {
         this.newUser = userP;
 
         userCredential.user.updateProfile({
-          displayName: userP.firstName + " " + userP.lastName,
+          displayName: userP.firstName + ' ' + userP.lastName,
         });
 
         this.sendParticipantUserData(userCredential).then(() => {
-          this.router.navigate(["/home"]);
+          this.router.navigate(['/home']);
         });
       })
       .catch((error) => {
@@ -120,8 +120,8 @@ export class LoginService {
       email: this.newUser.email,
       firstName: this.newUser.firstName,
       lastName: this.newUser.lastName,
-      role: "Control",
-      systemRole: "admin",
+      role: 'Control',
+      systemRole: 'admin',
     });
   }
 
@@ -131,26 +131,26 @@ export class LoginService {
       firstName: this.newUser.firstName,
       lastName: this.newUser.lastName,
       role: this.newUser.role,
-      systemRole: "participant",
+      systemRole: 'participant',
       roleFirstName: this.newUser.roleFirstName,
       roleLastName: this.newUser.roleLastName,
-      rolePosition: this.newUser.rolePosition,
+      rolePosition: this.newUser.roleTitle,
       roleAffiliation: this.newUser.roleAffiliation,
     });
   }
 
-  sendCountryData(newCountry: country) {
-    this.router.navigate(["/control"]);
+  sendCountryData(newCountry: Country) {
+    this.router.navigate(['/control']);
     return this.db.collection(`Countries`).add({
       countryName: newCountry.countryName,
     });
   }
 
   sendRoleData(newRole: Role) {
-    this.router.navigate(["/control"]);
+    this.router.navigate(['/control']);
     return this.db.collection(`Roles`).add({
-      roleName: newRole.roleName,
-      ofCountry: newRole.ofCountry,
+      roleName: newRole.title,
+      ofCountry: newRole.affiliation,
       firstName: newRole.firstName,
       lastName: newRole.lastName,
     });
@@ -166,7 +166,7 @@ export class LoginService {
     });
   }
 
-  sendNewsData(newNews: newsClass) {
+  sendNewsData(newNews: News) {
     return this.db.collection(`News`).add({
       userName: newNews.userName,
       userEmail: newNews.userEmail,
@@ -198,7 +198,7 @@ export class LoginService {
   }
 
   logout() {
-    this.router.navigate(["/home"]);
+    this.router.navigate(['/home']);
     window.location.reload();
     return this.afAuth.auth.signOut();
   }

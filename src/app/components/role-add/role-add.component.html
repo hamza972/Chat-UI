@@ -1,6 +1,6 @@
 <div class="row mt-4">
     <div class="col-12">
-        <h4>Role Tool</h4>
+        <h4>Create Role</h4>
     </div>
 
     <div class="col-12">
@@ -12,12 +12,12 @@
         <form #roleForm="ngForm" (ngSubmit)="add()">
             <div class="row">
                 <div class="col-md-12 mb-2">
-                    <input [(ngModel)]="role.roleName" name="roleName" type="text" class="form-control" id="roleName" placeholder="Position">
+                    <input [(ngModel)]="role.title" name="title" type="text" class="form-control" id="title" placeholder="Title">
                 </div>
                 <div class="col-md-12 mb-2">
-                    <select [(ngModel)]="role.ofCountry" name="ofCountry" type="text" class="form-control" id="ofCountry">
-                        <option value="" disabled selected>Select an affiliate or country</option>
-                        <option *ngFor="let affiliate of affiliates" [value]="affiliate.countryName">{{affiliate.countryName}}</option>
+                    <select name="affiliation" type="text" class="form-control" id="affiliation">
+                        <option  value="" selected disabled>Select an affiliate</option>
+                        <option *ngFor="let affiliate of affiliates" [value]="affiliate.name">{{affiliate.name}}</option>
                     </select>
                 </div>
 

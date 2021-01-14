@@ -10,7 +10,7 @@ import { Participant } from '../models/participant';
 })
 export class NavigationComponent implements OnInit {
 
-    user: Participant = { rolePosition: ""};
+    user: Participant = { roleTitle: ''};
 
     constructor(
         private auth: AuthService,
@@ -20,12 +20,12 @@ export class NavigationComponent implements OnInit {
     ngOnInit(): void {
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if(user === null) {
+            if (user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
             }
-        })
+        });
     }
 
     login() {

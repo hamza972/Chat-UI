@@ -10,52 +10,6 @@
                 placeholder="Search..."/>
               </label>
         </div>
-        <div>
-        <button type="submit" style="position: absolute; top: 85%; left: 8%; color: white; background-color: none;
-            border: solid 1px; height: auto; width: 50%; padding: 4px; border-color: black;" (click)="btnClick();">
-            <a routerLink="/email-view">Publish</a>
-        </button>
-        </div>
-    </div>
-
-
-    <div id="div_a_2">
-        <div id="news_view">
-            <ul *ngIf="(user$ | async).systemRole === 'participant'" style="list-style-type: none; position: absolute; height: auto; width: 95%; margin-left: 1%; margin-top: 2%; margin-right: 2%;">
-                <li><div *ngFor="let newsClass of newsArray" class="news_resource" style="background-color: white;  text-align: left; padding-left: 1%;
-                line-height: 10%;">
-                    <h5>Resource</h5><br/>
-                    <h6>Author <i class="newsDate">{{ newsClass.newsDate }}</i> </h6>
-                    <p class="news" style="margin-top: 1%;">{{ newsClass.newsDate }}</p>
-                </div></li>
-            </ul>
-        </div>
-    </div>
-</div>
-
-<div id="div_a_2">
-    <div id="news_view">
-        <ul *ngIf="(user$ | async).systemRole === 'admin'" style="list-style-type: none; position: absolute; height: auto; width: 95%; margin-left: 1%; margin-top: 2%; margin-right: 2%;">
-            <li><div *ngFor="let newsClass of newsArray" class="news_resource" style="background-color: white;  text-align: left; padding-left: 1%;
-            line-height: 10%;">
-                <h5>Resource</h5><br/>
-                <h6>Author <i class="newsDate">{{ newsClass.newsDate }}</i> </h6>
-                <p class="news" style="margin-top: 1%;">{{ newsClass.newsDate }}</p>
-            </div></li>
-        </ul>
-    </div>
-</div>
-</div>
-
-
-<div class="col-3">
-    <ul *ngIf="(user$ | async).systemRole === 'participant'" class="d-flex flex-row flex-wrap">
-        <li *ngFor="let newsClass of newsArray" class="list-group-item list-group-item-action">
-                <p class="news">{{ newsClass.newsDescription }}</p>
-                <p class="userOrRole">{{newsClass.userRole}} {{newsClass.userName}}</p>
-                <p class="tweetDate">{{newsClass.newsDate.toDate() | date: 'medium'}}</p>
-        </li>
-        </ul>
     </div>
         <div class="col-3">
     <ul *ngIf="(user$ | async).systemRole === 'admin'" class="d-flex flex-row flex-wrap">
@@ -151,4 +105,54 @@
                     <button type="submit">Post as {{newsUser.role}}</button>
             </div>
         </div>
-        </form>-->
+
+    <!-- set a side bar -->
+
+
+
+    <div class="contact-info">
+        <div class="option">
+            <i class="fa fa-home"></i>
+            <a class="text" href="#">Home</a>
+        </div>
+
+        <div class="option">
+            <i class="fas fa-book-open"></i>
+            <a class="text" routerLink="/scenario">Scenario</a>
+        </div>
+
+        <div class="option">
+            <i class="fas fa-user-alt"></i>
+            <a class="text" routerLink="/RolePage">Role</a>
+        </div>
+
+
+        <div class="option">
+            <i class="fa fa-envelope"></i>
+            <a class="text" routerLink="/email">Email</a>
+
+        </div>
+
+        <div class="option">
+            <i class="fab fa-twitter-square"></i>
+            <a class="text" routerLink="/tweet">Tweet</a>
+
+        </div>
+
+        <div class="option">
+            <i class="fas fa-newspaper"></i>
+            <a class="text" routerLink="/news">News</a>
+        </div>
+
+        <div class="option">
+            <i class="fas fa-comment-alt"></i>
+            <a class="text" routerLink="/chat">Chat</a>
+        </div>
+
+        <div class="option">
+            <i class="fa fa-cog"></i>
+            <a class="text" routerLink="/control">Control</a>
+
+        </div>
+
+    </div>

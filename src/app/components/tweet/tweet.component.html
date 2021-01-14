@@ -34,12 +34,12 @@
             <div class="card-content">
                 <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}}
                     {{tweet.roleLastName}}</p>
-                <p class="deep-purple-text" *ngIf="user.rolePosition === 'admin'">{{tweet.firstName}} {{tweet.lastName}}
+                <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.firstName}} {{tweet.lastName}}
                 </p>
                 <div [innerHtml]="htmlProperty(tweet.content)"></div>
             </div>
-            <div class="card-action">
-                <a>{{tweet.date.toDate() | date: 'medium'}}</a>
+            <div class="card-date">
+                <p>{{tweet.date.toDate() | date: 'medium'}}</p>
             </div>
         </div>
     </div>
