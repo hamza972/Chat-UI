@@ -5,7 +5,7 @@ import {
   AngularFirestoreDocument,
 } from "@angular/fire/firestore";
 import { Email } from "../models/email";
-import { appUser as User } from "../models/user";
+import { AppUser as User } from "../models/user";
 import { LoginService } from "../auth/login.service";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";

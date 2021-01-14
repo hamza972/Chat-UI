@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { LoginService } from "../auth/login.service";
 import { Router } from "@angular/router";
-import { appUser as User } from "../models/user";
+import { AppUser as User } from "../models/user";
 
 @Component({
   selector: "app-email",

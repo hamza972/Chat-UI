@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestoreCollection } from '@angular/fire/firestore';
-import { appUser } from './models/user';
+import { AppUser } from './models/user';
 import { ChatAdapter } from 'ng-chat';
 import { SocketIOAdapter } from './services/socketio-adapter'
 import { Socket } from 'ng-socket-io';
