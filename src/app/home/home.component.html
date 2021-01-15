@@ -18,12 +18,14 @@
                     <div class="col-8">
                         <div class="card-panel ">
                             <div class="card-content">
-                                <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}}
-                                    {{tweet.roleLastName}}</p>
+                                <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">
+                                    {{tweet.roleFirstName}}
+                                    {{tweet.roleLastName}}
+                                </p>
                                 <p class="black-text">{{tweet.content}}</p>
                             </div>
                             <div class="card-action">
-                                <a href="#">{{tweet.date.getDate() | date: 'medium'}}</a>
+                                <p>{{tweet.date.toDate() | date: 'medium'}}</p>
                             </div>
                         </div>
                     </div>
@@ -36,16 +38,16 @@
 
         <h3>Latest News</h3>
         <div class="two">
-            <div class="row" *ngFor="let news of newss; let i=index">
+            <div class="row" *ngFor="let newsItem of news; let i=index">
                 <div *ngIf="i<5">
-                    <div class="col-12">
+                    <div class="col-8">
                         <div class="card-panel ">
                             <div class="card-content">
-                                <p class="grey-text">{{news.newsHeadline}}</p>
-                                <p class="black-text">{{news.newsDescription}}</p>
+                                <p class="grey-text">{{newsItem.newsHeadline}}</p>
+                                <p class="black-text">{{newsItem.newsDescription}}</p>
                             </div>
                             <div class="card-action">
-                                <a href="#">{{news.newsDate.getDate() | date: 'medium'}}</a>
+                                <p>{{newsItem.newsDate.toDate() | date: 'medium'}}</p>
                             </div>
                         </div>
                     </div>
