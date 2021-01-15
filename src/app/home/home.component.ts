@@ -13,11 +13,8 @@ import { NewsService } from './../services/news.service';
 })
 export class HomeComponent implements OnInit {
     user: firebase.User;
-    tweet: Tweet = { content: '' };
     tweets: Tweet[];
-
-    news: News = { newsDescription: '' };
-    newss: News[];
+    news: News[];
 
     constructor(
         private auth: AuthService,
@@ -44,7 +41,7 @@ export class HomeComponent implements OnInit {
 
         /* Retrieve latest news */
         this.newsService.get().subscribe(news => {
-            this.newss = news;
+            this.news = news;
         });
     }
 
