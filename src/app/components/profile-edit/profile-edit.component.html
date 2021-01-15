@@ -12,22 +12,26 @@
                 <div class="row">
                     <div class="col-md-12 mb-2">
                         <h6>Title</h6>
-                        <input [(ngModel)]="role.title" name="title" type="text" class="form-control">
+                        <input *ngIf="user.systemRole == 'admin'; else elseTitle" [(ngModel)]="role.title" name="title" type="text" class="form-control">
+                        <ng-template #elseTitle><p>{{role.title}}</p></ng-template>
                     </div>
                     <div class="col-md-12 mb-2">
                         <h6>Affiliation</h6>
-                        <select name="affiliation" type="text" class="form-control">
+                        <select *ngIf="user.systemRole == 'admin'; else elseAffiliation" name="affiliation" type="text" class="form-control">
                             <option *ngFor="let affiliate of affiliates" [value]="affiliate.name" [selected]="affiliate.name==role.affiliation">{{affiliate.name}}</option>
                         </select>
+                        <ng-template #elseAffiliation><p>{{role.affiliation}}</p></ng-template>
                     </div>
 
                     <div class="col-md-12 mb-2">
                         <h6>First Name</h6>
-                        <input [(ngModel)]="role.firstName" name="firstName" type="text" class="form-control">
+                        <input *ngIf="user.systemRole == 'admin'; else elseFirstName" [(ngModel)]="role.firstName" name="firstName" type="text" class="form-control">
+                        <ng-template #elseFirstName><p>{{role.firstName}}</p></ng-template>
                     </div>
                     <div class="col-md-12 mb-2">
                         <h6>Last Name</h6>
-                        <input [(ngModel)]="role.lastName" name="lastName" type="text" class="form-control">
+                        <input *ngIf="user.systemRole == 'admin'; else elseLastName" [(ngModel)]="role.lastName" name="lastName" type="text" class="form-control">
+                        <ng-template #elseLastName><p>{{role.lastName}}</p></ng-template>
                     </div>
                 </div>
         </div>
