@@ -134,7 +134,7 @@ export class LoginService {
       systemRole: 'participant',
       roleFirstName: this.newUser.roleFirstName,
       roleLastName: this.newUser.roleLastName,
-      rolePosition: this.newUser.roleTitle,
+      roleTitle: this.newUser.roleTitle,
       roleAffiliation: this.newUser.roleAffiliation,
     });
   }
