@@ -32,7 +32,7 @@
     <div class="col-11">
         <div class="card-panel">
             <div class="card-content">
-                <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}}
+                <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">{{tweet.roleFirstName}}
                     {{tweet.roleLastName}}</p>
                 <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.firstName}} {{tweet.lastName}}
                 </p>
