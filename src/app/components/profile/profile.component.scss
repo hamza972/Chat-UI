@@ -1,16 +1,15 @@
 // =============== Upper-part =====================
-
-.Upper-part
-{
+.Upper-part {
     display: flex;
     height: 300px;
     width: 1080px;
-    margin-top: 20px;;
+    margin-top: 20px;
+    ;
     background-color: #FAFAFA;
     box-shadow: 0 0 2.5px rgba(0, 0, 0, .3);
 }
 
-img{
+img {
     
     width: 280px;
     height: 280px;
@@ -19,15 +18,13 @@ img{
     vertical-align: bottom;
 }
 
-.infoBox
-{
+.infoBox {
     padding-left: 45px;
     padding-top: 20px;
     width: 70%;
     border: none;
 }
-.table
-{
+.table {
     font-size: 18px;
     
 }
@@ -35,18 +32,25 @@ img{
 
 
 // =============== Lower-part =====================
-.Lower-part
-{
+.Lower-part {
   
     height: 1100px;
     width: 1080px;
-    margin-top: 30px;;
+    margin-top: 30px;
+    ;
     background-color: #FAFAFA;
     box-shadow: 0 0 2.5px rgba(0, 0, 0, .3);
 }
-.info
-{
+
+.info {
     padding-top: 10px;
     padding-right: 20px;
     padding-left: 20px;
+}
+
+.bloghtml {
+    display: inline-flex;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
 }

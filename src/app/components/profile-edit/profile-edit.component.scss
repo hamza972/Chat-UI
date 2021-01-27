@@ -1,3 +1,14 @@
+.Upper-part
+{
+    display:contents;
+    height: 1080px;
+    width: 500px;
+    margin-top: 20px;;
+    background-color: #dbe1e9;
+    box-shadow: 0 0 2.5px rgba(0, 0, 0, .3);
+}
+
+//======================================
 .col-12 
 {
     height: 100px;
@@ -60,4 +71,26 @@ padding-left: 0;
 {
     background-color: #8ABBDB;
     color:#ffffff;
+}
+
+// ===== button =======
+.btn, .btn-large, .btn-small
+{
+    color: #ffffff;
+   background-color: #8ABBDB!important;
+   border-radius: 10px;
+}
+
+.btn:hover
+{
+    color: #ffffff;
+    background-color: #FD999A !important;
+}
+
+
+.input-wrapper
+{
+  height: 200px;
+  width: 800px;
+  
 }

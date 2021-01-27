@@ -37,11 +37,11 @@
         </div>
         <div class="col-6">
             <img src={{role.avatar}} class="row">
-            <button (click)="uploadAvatar()" class="row">Upload Avatar Image</button>
+            <button (click)="uploadAvatar()" class="btn">Upload Avatar Image</button>
         </div>
     </div>
     <div class="row mt-4">
-        <div class="row">
+        <div class="row mt-4">
             <div class="input-wrapper">
                 <h6>Profile Description</h6>
                 <ckeditor
@@ -51,11 +51,16 @@
                     [config]="editorConfig"
                     style="min-height: 500px;">
                 </ckeditor>
+                <div class="row">
+                    <button type="submit" class="btn">Save</button>
+                    <p>  </p>
+                    <button type="button" (click)="cancel()" class="btn">Cancel</button>
             </div>
         </div>
     </div>
-    <div class="row mt-4">
-        <button type="submit" class="col-md-6">Save</button>
-        <button type="button" (click)="cancel()" class="col-md-6">Cancel</button>
+   
+
+
     </div>
+    
 </form>
