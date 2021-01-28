@@ -9,58 +9,61 @@
 <form #profileForm="ngForm" (ngSubmit)="update(profileForm.value)">
     <div class="row mt-4">
         <div class="col-6">
-                <div class="row">
-                    <div class="col-md-12 mb-2">
-                        <h6>Title</h6>
-                        <input *ngIf="user.systemRole == 'admin'; else elseTitle" [(ngModel)]="role.title" name="title" type="text" class="form-control">
-                        <ng-template #elseTitle><p>{{role.title}}</p></ng-template>
-                    </div>
-                    <div class="col-md-12 mb-2">
-                        <h6>Affiliation</h6>
-                        <select *ngIf="user.systemRole == 'admin'; else elseAffiliation" name="affiliation" type="text" class="form-control">
+            <div class="row">
+                <div class="col-md-12 mb-2">
+                    <h6>Title</h6>
+                    <input *ngIf="user.systemRole == 'admin'; else elseTitle" [(ngModel)]="role.title" name="title" type="text" class="form-control">
+                    <ng-template #elseTitle>
+                        <p>{{role.title}}</p>
+                    </ng-template>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <h6>Affiliation</h6>
+                    <select *ngIf="user.systemRole == 'admin'; else elseAffiliation" name="affiliation" type="text" class="form-control">
                             <option *ngFor="let affiliate of affiliates" [value]="affiliate.name" [selected]="affiliate.name==role.affiliation">{{affiliate.name}}</option>
                         </select>
-                        <ng-template #elseAffiliation><p>{{role.affiliation}}</p></ng-template>
-                    </div>
-
-                    <div class="col-md-12 mb-2">
-                        <h6>First Name</h6>
-                        <input *ngIf="user.systemRole == 'admin'; else elseFirstName" [(ngModel)]="role.firstName" name="firstName" type="text" class="form-control">
-                        <ng-template #elseFirstName><p>{{role.firstName}}</p></ng-template>
-                    </div>
-                    <div class="col-md-12 mb-2">
-                        <h6>Last Name</h6>
-                        <input *ngIf="user.systemRole == 'admin'; else elseLastName" [(ngModel)]="role.lastName" name="lastName" type="text" class="form-control">
-                        <ng-template #elseLastName><p>{{role.lastName}}</p></ng-template>
-                    </div>
+                    <ng-template #elseAffiliation>
+                        <p>{{role.affiliation}}</p>
+                    </ng-template>
                 </div>
+
+                <div class="col-md-12 mb-2">
+                    <h6>First Name</h6>
+                    <input *ngIf="user.systemRole == 'admin'; else elseFirstName" [(ngModel)]="role.firstName" name="firstName" type="text" class="form-control">
+                    <ng-template #elseFirstName>
+                        <p>{{role.firstName}}</p>
+                    </ng-template>
+                </div>
+                <div class="col-md-12 mb-2">
+                    <h6>Last Name</h6>
+                    <input *ngIf="user.systemRole == 'admin'; else elseLastName" [(ngModel)]="role.lastName" name="lastName" type="text" class="form-control">
+                    <ng-template #elseLastName>
+                        <p>{{role.lastName}}</p>
+                    </ng-template>
+                </div>
+            </div>
+
         </div>
-        <div class="col-6">
+        <div>
             <img src={{role.avatar}} class="row">
-            <button (click)="uploadAvatar()" class="btn">Upload Avatar Image</button>
+            <button (click)="uploadAvatar()" class="row btn blue">Upload Avatar Image</button>
         </div>
+
     </div>
     <div class="row mt-4">
-        <div class="row mt-4">
-            <div class="input-wrapper">
+        <div class="row">
+            <div class="input-wrapper Lower-part">
                 <h6>Profile Description</h6>
-                <ckeditor
-                    name="description"
-                    [editor]="Editor"
-                    [(ngModel)]="role.description"
-                    [config]="editorConfig"
-                    style="min-height: 500px;">
+                <ckeditor name="description " [editor]="Editor " [(ngModel)]="role.description " [config]="editorConfig " style="min-height: 500px; ">
                 </ckeditor>
-                <div class="row">
-                    <button type="submit" class="btn">Save</button>
-                    <p>  </p>
-                    <button type="button" (click)="cancel()" class="btn">Cancel</button>
             </div>
         </div>
-    </div>
-   
-
 
     </div>
-    
+    <div class="row">
+        <button type="submit " class="btn blue ">Save</button> &nbsp;
+        <button type="button " (click)="cancel() " class="btn blue ">Cancel</button>
+    </div>
+
+
 </form>
