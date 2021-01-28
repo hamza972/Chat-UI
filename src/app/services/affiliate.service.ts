@@ -27,6 +27,10 @@ export class AffiliateService {
         }));
     }
 
+    getAffiliate(countryName:string){
+        return this.afs.collection('Countries').doc(countryName).valueChanges();
+    }
+
     add(affiliate: Affiliate) {
         this.affiliateCollection.add(affiliate);
     }

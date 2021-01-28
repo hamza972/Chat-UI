@@ -29,6 +29,7 @@ import { RoleComponent } from './components/role/role.component';
 import { RoleAddComponent } from './components/role-add/role-add.component';
 import { AffiliateComponent } from './components/affiliate/affiliate.component';
 import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
+import { AffiliateEditComponent } from './components/affiliate-edit/affiliate-edit.component';
 import { TweetComponent } from './components/tweet/tweet.component';
 
 
@@ -83,6 +84,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     RoleAddComponent,
     AffiliateComponent,
     AffiliateAddComponent,
+    AffiliateEditComponent,
     EmailComposeComponent,
     EmailInboxComponent,
     EmailDeletedComponent,
