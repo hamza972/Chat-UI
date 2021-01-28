@@ -68,7 +68,7 @@ export class AuthService {
             roleID: this.newUser.roleID,
             roleFirstName: this.newUser.roleFirstName,
             roleLastName: this.newUser.roleLastName,
-            rolePosition: this.newUser.rolePosition,
+            roleTitle: this.newUser.roleTitle,
             roleAffiliation: this.newUser.roleAffiliation
         });
     }
