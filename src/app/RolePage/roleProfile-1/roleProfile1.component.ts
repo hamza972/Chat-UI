@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from '../../auth/login.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AppUser } from '../..//models/user';
+import { AppUser } from '../../models/user';
 
 @Component({
   selector: 'app-roleProfile1',

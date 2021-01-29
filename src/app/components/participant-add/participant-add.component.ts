@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ParticipantService } from '../../services/participant.service';
 import { RoleService } from '../../services/role.service';
-import { Participant } from '../../models/participant';
+import { AppUser } from '../../models/user';
 import { Role } from '../../models/role';
 
 @Component({
@@ -13,10 +13,10 @@ import { Role } from '../../models/role';
 })
 export class ParticipantAddComponent implements OnInit {
 
-    participant: Participant;
+    participant: AppUser;
     roles: Role[];
     editState = false;
-    participantToEdit: Participant;
+    participantToEdit: AppUser;
     roleDetails: Array<string>;
     user: firebase.User;
     authError: any;

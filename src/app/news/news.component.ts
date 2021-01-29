@@ -4,7 +4,6 @@ import { AppUser } from '../models/user';
 import { LoginService } from '../auth/login.service';
 import { Router } from '@angular/router';
 import { News } from '../models/News';
-import { Participant } from '../models/participant';
 import { AuthService } from '../services/auth.service';
 import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 
@@ -24,7 +23,7 @@ export class NewsComponent implements OnInit {
   sortedArray: News[];
   authError: any;
   searchText: string;
-  user2: Participant = { systemRole: '' };
+  user2: AppUser = { systemRole: '' };
   editorConfig = {
     toolbar: {
       items: [

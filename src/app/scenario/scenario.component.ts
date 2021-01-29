@@ -4,7 +4,7 @@ import { Scenario } from '../models/scenario';
 import { ScenarioService } from '../services/scenario.service';
 import { AuthService } from '../services/auth.service';
 import { NgForm } from '@angular/forms';
-import { Owner } from '../models/owner';
+import { AppUser } from '../models/user';
 import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 
 @Component({
@@ -16,7 +16,7 @@ import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 export class ScenarioComponent implements OnInit {
     scenario: Scenario = { content: '' };
     scenarios: Scenario[];
-    user: Owner = { rolePosition: '' };
+    user: AppUser = { rolePosition: '' };
     authError: any;
     public Editor = Editor;
     editorConfig = {

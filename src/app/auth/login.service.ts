@@ -80,7 +80,7 @@ export class LoginService {
   }
 
   
-  createOwnerUser(user) {
+  createAdminUser(user) {
     this.afAuth.auth
       .createUserWithEmailAndPassword(user.email, user.password)
       .then((userCredential) => {
@@ -90,7 +90,7 @@ export class LoginService {
           displayName: user.firstName + user.lastName,
         });
 
-        this.sendOwnerUserData(userCredential).then(() => {
+        this.sendAdminUserData(userCredential).then(() => {
           this.router.navigate(['/home']);
         });
       })
@@ -142,7 +142,7 @@ export class LoginService {
   }
 
 
-  sendOwnerUserData(userCredential: firebase.auth.UserCredential) {
+  sendAdminUserData(userCredential: firebase.auth.UserCredential) {
     return this.db.doc(`Users/${userCredential.user.uid}`).set({
       email: this.newUser.email,
       firstName: this.newUser.firstName,

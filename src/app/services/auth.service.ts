@@ -4,8 +4,8 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { switchMap, mergeMap, map } from 'rxjs/operators';
-import { Owner } from '../models/owner';
-import { Participant } from '../models/participant';
+import { AppUser } from '../models/user';
+
 
 
 @Injectable({
@@ -31,7 +31,7 @@ export class AuthService {
                     (ref) => ref.where('email', '==', user.email))
                     .snapshotChanges().pipe(map(changes => {
                         return changes.map(a => {
-                            const data = a.payload.doc.data() as Owner;
+                            const data = a.payload.doc.data() as AppUser;
                             data.id = a.payload.doc.id;
                             return data;
                         });

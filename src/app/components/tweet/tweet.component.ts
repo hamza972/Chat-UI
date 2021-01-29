@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tweet } from '../../models/tweet';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
-import { Participant } from '../../models/participant';
+import { AppUser } from '../../models/user';
 import { TweetService } from '../../services/tweet.service';
 import { AuthService } from '../../services/auth.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -16,7 +16,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class TweetComponent implements OnInit {
     tweet: Tweet = { content: '' };
     tweets: Tweet[];
-    user: Participant = { systemRole: '' };
+    user: AppUser = { systemRole: '' };
     authError: any;
 
     public Editor = Editor;

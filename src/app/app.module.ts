@@ -23,7 +23,7 @@ import { EmailViewComponent } from './email-view/email-view.component';
 import { NewsPublishComponent } from './news-publish/news-publish.component';
 
 import { ControlComponent } from './components/control/control.component';
-import { OwnerComponent } from './components/owner/owner.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { ParticipantComponent } from './components/participant/participant.component';
 import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
 import { RoleComponent } from './components/role/role.component';
@@ -36,7 +36,7 @@ import { TweetComponent } from './components/tweet/tweet.component';
 import { AffiliateService } from './services/affiliate.service';
 import { AuthService } from './services/auth.service';
 import { ParticipantService } from './services/participant.service';
-import { OwnerService } from './services/owner.service';
+import { AdminService } from './services/admin.service';
 import { RoleService } from './services/role.service';
 
 
@@ -81,7 +81,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     EmailViewComponent,
     NewsPublishComponent,
     ParticipantComponent,
-    OwnerComponent,
+    AdminComponent,
     ParticipantAddComponent,
     RoleAddComponent,
     AffiliateComponent,
@@ -118,7 +118,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     AuthService,
     AffiliateService,
     ParticipantService,
-    OwnerService,
+    AdminService,
     RoleService,
     EmailService,
   ],

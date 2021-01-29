@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ParticipantService } from '../../services/participant.service';
-import { Participant } from '../../models/participant';
+import { AppUser } from '../../models/user';
 import { EmailService } from "../../services/email.service";
 
 @Component({
@@ -12,9 +12,9 @@ import { EmailService } from "../../services/email.service";
 })
 export class StatisticsComponent implements OnInit {
 
-  participants: Participant[];
+  participants: AppUser[];
   editState: boolean = false;
-  participantToEdit: Participant;
+  participantToEdit: AppUser;
   user: firebase.User;
 
   constructor(
