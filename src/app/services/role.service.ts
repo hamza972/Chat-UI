@@ -10,11 +10,8 @@ import { map } from 'rxjs/operators';
 export class RoleService {
 
     roleCollection: AngularFirestoreCollection<Role>;
-    role: Observable<Role[]>;
-    roleDoc: AngularFirestoreDocument<Role>;
 
     constructor(public afs: AngularFirestore) {
-        //this.items = this.afs.collection('items').valueChanges();
         this.roleCollection = this.afs.collection('Roles', ref => ref.orderBy('roleName', 'asc'));
     }
 
@@ -28,7 +25,7 @@ export class RoleService {
         }));
     }
 
-    profile(id) {
+    getRole(id: string) {
         return this.afs.collection('Roles').doc(id).valueChanges();
     }
 
@@ -37,12 +34,10 @@ export class RoleService {
     }
 
     delete(role: Role) {
-        this.roleDoc = this.afs.doc(`Roles/${role.id}`);
-        this.roleDoc.delete();
+        this.roleCollection.doc(role.id).delete();
     }
 
     update(role: Role) {
-        this.roleDoc = this.afs.doc(`Roles/${role.id}`);
-        this.roleDoc.update(role);
+        this.roleCollection.doc(role.id).update(role);
     }
 }

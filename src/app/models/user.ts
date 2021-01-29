@@ -1,4 +1,4 @@
-export interface appUser {
+export interface AppUser {
     id?:string;
     firstName?:string;
     lastName?: string;
@@ -7,6 +7,6 @@ export interface appUser {
     role?: string;
     roleFirstName?: string;
     roleLastName?: string;
-    rolePosition?: string;
+    roleTitle?: string;
     roleAffiliation?: string;
   }

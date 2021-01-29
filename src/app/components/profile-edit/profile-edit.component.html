@@ -1,0 +1,57 @@
+<div class="row mt-4">
+    <h4>Edit Role</h4>
+    <div class="row" *ngIf="authError">
+        <div class="col-12 alert alert-danger">
+            {{ authError?.message }}
+        </div>
+    </div>
+</div>
+<form #profileForm="ngForm" (ngSubmit)="update(profileForm.value)">
+    <div class="row mt-4">
+        <div class="col-6">
+                <div class="row">
+                    <div class="col-md-12 mb-2">
+                        <h6>Title</h6>
+                        <input [(ngModel)]="role.title" name="title" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <h6>Affiliation</h6>
+                        <select name="affiliation" type="text" class="form-control">
+                            <option *ngFor="let affiliate of affiliates" [value]="affiliate.name" [selected]="affiliate.name==role.affiliation">{{affiliate.name}}</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-12 mb-2">
+                        <h6>First Name</h6>
+                        <input [(ngModel)]="role.firstName" name="firstName" type="text" class="form-control">
+                    </div>
+                    <div class="col-md-12 mb-2">
+                        <h6>Last Name</h6>
+                        <input [(ngModel)]="role.lastName" name="lastName" type="text" class="form-control">
+                    </div>
+                </div>
+        </div>
+        <div class="col-6">
+            <img src={{role.avatar}} class="row">
+            <button (click)="uploadAvatar()" class="row">Upload Avatar Image</button>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="row">
+            <div class="input-wrapper">
+                <h6>Profile Description</h6>
+                <ckeditor
+                    name="description"
+                    [editor]="Editor"
+                    [(ngModel)]="role.description"
+                    [config]="editorConfig"
+                    style="min-height: 500px;">
+                </ckeditor>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <button type="submit" class="col-md-6">Save</button>
+        <button type="button" (click)="cancel()" class="col-md-6">Cancel</button>
+    </div>
+</form>

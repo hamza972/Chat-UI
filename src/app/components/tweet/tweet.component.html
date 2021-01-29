@@ -12,28 +12,13 @@
         <form #roleForm="ngForm" (ngSubmit)="add()">
             <div class="row">
                 <div class="input-wrapper">
-                  <ckeditor
-                    name="content"
-                    [editor]="Editor"
-                    [(ngModel)]="tweet.content"
-                    [config]="editorConfig"
-                    style="min-height: 500px;"
-                  ></ckeditor>
+                    <ckeditor name="content" [editor]="Editor" [(ngModel)]="tweet.content" style="min-height: 500px;"
+                        [config]="editorConfig"></ckeditor>
                     <div class="col-md-9">
-                           <button type="submit">Tweet</button>
-                    </div>
-                    <!-- <button type="button" (click)="cancel()">Cancel</button> -->
-                </div>
-                <!-- <div class="col-md-12 mb-2">
-                    <input [(ngModel)]="tweet.content" name="content" type="text" class="form-control" id="content" placeholder="What's on your mind?">
-                </div> -->
-            </div>
-
-            <!-- <div>
-                <div class="row">
-                    <div class="col-md-12">
                         <button type="submit">Tweet</button>
-                        <!-- <button type="button" (click)="cancel()">Cancel</button> -->
+                    </div>
+                </div>
+            </div>
         </form>
     </div>
 
@@ -41,72 +26,21 @@
 
 <div class="row" *ngFor="let tweet of tweets">
     <div class="col-1">
-        <img (click)="profile($event, tweet)" src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
+        <img (click)="profile($event, tweet)" src="assets/img/roles/bahrain_king.jpg" alt=""
+            class="circle responsive-img role-img">
     </div>
     <div class="col-11">
         <div class="card-panel">
             <div class="card-content">
-                <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">{{tweet.roleFirstName}} {{tweet.roleLastName}}</p>
-                <p class="deep-purple-text" *ngIf="user.rolePosition === 'admin'">{{tweet.firstName}} {{tweet.lastName}}</p>
+                <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">{{tweet.roleFirstName}}
+                    {{tweet.roleLastName}}</p>
+                <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.firstName}} {{tweet.lastName}}
+                </p>
                 <div [innerHtml]="htmlProperty(tweet.content)"></div>
             </div>
-            <div class="card-action">
-                <a>{{tweet.date.toDate() | date: 'medium'}}</a>
+            <div class="card-date">
+                <p>{{tweet.date.toDate() | date: 'medium'}}</p>
             </div>
         </div>
     </div>
 </div>
-
-
-
-   <!-- set a side bar -->
-
-
-
-   <div class="contact-info">
-    <div class="option">
-        <i class="fa fa-home"></i>
-        <a class="text" href="#">Home</a>
-    </div>
-
-    <div class="option">
-        <i class="fas fa-book-open"></i>
-        <a class="text" routerLink="/scenario">Scenario</a>
-    </div>
-
-    <div class="option">
-        <i class="fas fa-user-alt"></i>
-        <a class="text" routerLink="/RolePage">Role</a>
-    </div>
-
-
-    <div class="option">
-        <i class="fa fa-envelope" ></i>
-        <a class="text" routerLink="/email">Email</a>
-
-    </div>
-
-    <div class="option">
-        <i class="fab fa-twitter-square"></i>
-        <a class="text" routerLink="/tweet">Tweet</a>
-
-    </div>
-
-    <div class="option">
-        <i class="fas fa-newspaper"></i>
-        <a class="text" routerLink="/news">News</a>
-    </div>
-
-    <div class="option">
-        <i class="fas fa-comment-alt"></i>
-        <a class="text" routerLink="/chat">Chat</a>
-    </div>
-
-    <div class="option">
-        <i class="fa fa-cog"></i>
-        <a class="text" routerLink="/control">Control</a>
-
-    </div>
-
-  </div>
-
