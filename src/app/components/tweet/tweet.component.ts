@@ -90,7 +90,7 @@ export class TweetComponent implements OnInit {
                 roleID: this.user.roleID,
                 roleFirstName: this.user.roleFirstName,
                 roleLastName: this.user.roleLastName,
-                rolePosition: this.user.roleTitle,
+                roleTitle: this.user.roleTitle,
                 roleAffiliation: this.user.roleAffiliation,
             };
             this.tweetService.add(this.tweet);
