@@ -26,7 +26,7 @@
 
 <div class="row" *ngFor="let tweet of tweets">
     <div class="col-1">
-        <img (click)="profile($event, tweet)" src="assets/img/roles/bahrain_king.jpg" alt=""
+        <img (click)="profile($event, tweet)" src={{tweet.roleAvatar}} alt=""
             class="circle responsive-img role-img">
     </div>
     <div class="col-11">

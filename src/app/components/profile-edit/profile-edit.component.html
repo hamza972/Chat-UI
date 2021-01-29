@@ -32,8 +32,15 @@
                 </div>
         </div>
         <div class="col-6">
-            <img src={{role.avatar}} class="row">
-            <button (click)="uploadAvatar()" class="row">Upload Avatar Image</button>
+            <image-cropper *ngIf="imageConfirmed === false && imageHasChanged===true" [imageChangedEvent]="imageChangedEvent"
+                [maintainAspectRatio]="true" [aspectRatio]="3 / 4"
+                (imageCropped)="imageCropped($event)">
+            </image-cropper>
+            <img *ngIf="imageHasChanged === false" src={{imageDisplayed}} class="row">
+            <input type="file" *ngIf="imageHasChanged === false" (change)="fileChangeEvent($event)" accept="image/*">
+            <button type="button" *ngIf="imageConfirmed" (click)="undoImage()" class="col-md-6">Undo</button>
+            <button type="button" *ngIf="imageHasChanged" (click)="confirmImage()" class="col-md-6">Confirm</button>
+            <button type="button" *ngIf="imageHasChanged" (click)="cancelImage()" class="col-md-6">cancel</button>
         </div>
     </div>
     <div class="row mt-4">
