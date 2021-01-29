@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Participant } from '../../models/participant';
 import { Role } from '../../models/role';
 import { Affiliate } from '../../models/affiliate';
 import { RoleService } from '../../services/role.service';
@@ -9,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
 import { ImageCroppedEvent, base64ToFile } from 'ngx-image-cropper';
 import { StorageService } from '../../services/storage.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -19,7 +20,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class ProfileEditComponent implements OnInit {
   roleID: string;
-  user: firebase.User;
+  user: Participant;
   role: Role;
   affiliates: Affiliate[];
   authError: any;
@@ -29,18 +30,18 @@ export class ProfileEditComponent implements OnInit {
 
   public Editor = Editor;
   editorConfig = {
-      toolbar: {
-        items: [
-          'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
-          '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'undo', 'redo' ]
-      },
-      image: {
-        toolbar: [
-          'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight' ],
-        styles: [
-          'alignLeft', 'alignCenter', 'alignRight'],
-      },
-      language: 'en'
+    toolbar: {
+      items: [
+        'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
+        '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'undo', 'redo']
+    },
+    image: {
+      toolbar: [
+        'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight'],
+      styles: [
+        'alignLeft', 'alignCenter', 'alignRight'],
+    },
+    language: 'en'
   };
 
   imageDisplayed: any = ''; // cloud storage url or base64 string
@@ -75,7 +76,6 @@ export class ProfileEditComponent implements OnInit {
     this.imageHasChanged = false;
   }
 
-  // storageRef = firebase.storage().ref();
   constructor(
     private auth: AuthService,
     private roleService: RoleService,
@@ -85,10 +85,6 @@ export class ProfileEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
   ) { }
-
-  public htmlProperty(str: string): SafeHtml {
-    return this.sr.bypassSecurityTrustHtml(str);
-  }
 
   ngOnInit() {
     /* Check if user is signed in, otherwise redirect to home */
@@ -101,7 +97,6 @@ export class ProfileEditComponent implements OnInit {
     });
 
     this.roleID = this.route.snapshot.paramMap.get('id');
-    console.log(this.roleID);
     this.roleService.getRole(this.roleID).subscribe(rolesFromDB => {
       this.role = rolesFromDB;
       this.imageDisplayed = this.role.avatar;
@@ -111,19 +106,6 @@ export class ProfileEditComponent implements OnInit {
       this.affiliates = affiliate;
     });
   }
-
-  // uploadImage() {
-  //   const fileRef = this.storage.ref('avatars/' + this.role.id);
-  //   this.storage.upload('avatars/' + this.role.id, this.selectedImage).snapshotChanges().pipe(
-  //     finalize(() => {
-  //       fileRef.getDownloadURL().subscribe((url) => {
-  //         console.log(url);
-  //         this.uploadImageUrl = url.toString();
-  //         alert('Upload Successful');
-  //       });
-  //     })
-  //   ).subscribe();
-  // }
 
   async update(editedRole) {
     if (editedRole.title !== '') {
@@ -135,7 +117,6 @@ export class ProfileEditComponent implements OnInit {
         this.uploadImageUrl = url;
         editedRole.avatar = this.uploadImageUrl;
       }
-      console.log(editedRole);
       this.roleService.update(editedRole);
       this.router.navigate(['/control']);
     }
