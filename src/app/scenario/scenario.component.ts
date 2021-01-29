@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Scenario } from '../models/scenario';
-import { Participant } from '../models/participant';
+import { Control } from '../models/control';
 import { ScenarioService } from '../services/scenario.service';
 import { AuthService } from '../services/auth.service';
-import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { NgForm } from '@angular/forms';
 import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 
@@ -40,7 +39,7 @@ export class ScenarioComponent implements OnInit {
     };
     scenario: Scenario = { content: '' };
     scenarios: Scenario[];
-    user: Participant = { systemRole: '' };
+    user: Control = { systemRole: '' };
     authError: any;
 
     constructor(
