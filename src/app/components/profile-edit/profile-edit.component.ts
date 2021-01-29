@@ -101,7 +101,7 @@ export class ProfileEditComponent implements OnInit {
     });
 
     this.roleID = this.route.snapshot.paramMap.get('id');
-
+    console.log(this.roleID);
     this.roleService.getRole(this.roleID).subscribe(rolesFromDB => {
       this.role = rolesFromDB;
       this.imageDisplayed = this.role.avatar;
@@ -125,18 +125,16 @@ export class ProfileEditComponent implements OnInit {
   //   ).subscribe();
   // }
 
-  update(editedRole) {
+  async update(editedRole) {
     if (editedRole.title !== '') {
       editedRole.id = this.roleID;
       // update avatar if we have an image confirmed
       if (this.imageConfirmed) {
         this.selectedImage = base64ToFile(this.croppedImage);
-        this.uploadImageUrl = this.storageService.uploadAvatar(this.role.id, this.selectedImage).toString();
-        //this.uploadImageUrl = this.storageService.downloadURL;
-        console.log(this.uploadImageUrl);
+        const url = await this.storageService.uploadAvatar(this.roleID, this.selectedImage);
+        this.uploadImageUrl = url;
         editedRole.avatar = this.uploadImageUrl;
       }
-      console.log('hello world');
       console.log(editedRole);
       this.roleService.update(editedRole);
       this.router.navigate(['/control']);
