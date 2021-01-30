@@ -10,19 +10,19 @@
 
         <h3>Latest Tweets</h3>
         <div class="one">
-            <div class="row" *ngFor="let tweet of tweets; let i=index">
+            <div class="row text-fix" *ngFor="let tweet of tweets; let i=index">
                 <div *ngIf="i<5">
                     <div class="col-1">
                         <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
                     </div>
-                    <div class="col-8">
-                        <div class="card-panel ">
+                    <div class="col-12">
+                        <div class="card-panel">
                             <div class="card-content">
                                 <p class="grey-text" *ngIf="tweet.rolePosition !== 'admin'">
                                     {{tweet.roleFirstName}}
                                     {{tweet.roleLastName}}
                                 </p>
-                                <p class="black-text">{{tweet.content}}</p>
+                                <p class="black-text" [innerHtml]="tweet.content"></p>
                             </div>
                             <div class="card-action">
                                 <p>{{tweet.date.toDate() | date: 'medium'}}</p>
@@ -38,13 +38,13 @@
 
         <h3>Latest News</h3>
         <div class="two">
-            <div class="row" *ngFor="let newsItem of news; let i=index">
+            <div class="row text-fix" *ngFor="let newsItem of news; let i=index">
                 <div *ngIf="i<5">
-                    <div class="col-8">
+                    <div class="col-12">
                         <div class="card-panel ">
                             <div class="card-content">
-                                <p class="grey-text">{{newsItem.newsHeadline}}</p>
-                                <p class="black-text">{{newsItem.newsDescription}}</p>
+                                <p class="bold-text" [innerHtml]="newsItem.newsHeadline"></p>
+                                <p class="black-text" [innerHtml]="newsItem.newsDescription"></p>
                             </div>
                             <div class="card-action">
                                 <p>{{newsItem.newsDate.toDate() | date: 'medium'}}</p>

@@ -1,6 +1,5 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 
-
 <div class="row mt-4">
 
     <div class="col-12">
@@ -14,8 +13,8 @@
                 <div class="input-wrapper">
                     <ckeditor name="content" [editor]="Editor" [(ngModel)]="tweet.content" style="min-height: 500px;"
                         [config]="editorConfig"></ckeditor>
-                    <div class="col-md-9">
-                        <button type="submit">Tweet</button>
+                    <div class="col-md-12">
+                        <button type="submit" class="tweet-button">Tweet</button>
                     </div>
                 </div>
             </div>
@@ -24,7 +23,7 @@
 
 </div>
 
-<div class="row" *ngFor="let tweet of tweets">
+<div class="row text-fix" *ngFor="let tweet of tweets">
     <div class="col-1">
         <img (click)="profile($event, tweet)" src="assets/img/roles/bahrain_king.jpg" alt=""
             class="circle responsive-img role-img">
@@ -36,7 +35,7 @@
                     {{tweet.roleLastName}}</p>
                 <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.firstName}} {{tweet.lastName}}
                 </p>
-                <div [innerHtml]="htmlProperty(tweet.content)"></div>
+                <div [innerHtml]="tweet.content"></div>
             </div>
             <div class="card-date">
                 <p>{{tweet.date.toDate() | date: 'medium'}}</p>

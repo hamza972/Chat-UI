@@ -5,7 +5,6 @@ import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
 import { Participant } from '../../models/participant';
 import { TweetService } from '../../services/tweet.service';
 import { AuthService } from '../../services/auth.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-tweet',
@@ -23,8 +22,11 @@ export class TweetComponent implements OnInit {
     editorConfig = {
         toolbar: {
           items: [
-            'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
-            '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'undo', 'redo' ]
+            'heading', 'fontFamily', 'fontSize', 'fontColor', '|',
+            'bold', 'italic', 'underline', 'strikethrough', '|',
+            'link', 'bulletedList', 'numberedList', '|',
+            'alignment', 'indent', 'outdent', '|',
+            'blockQuote', 'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo']
         },
         image: {
           toolbar: [
@@ -35,12 +37,7 @@ export class TweetComponent implements OnInit {
         language: 'en'
     };
 
-    public htmlProperty(str: string): SafeHtml {
-        return this.sr.bypassSecurityTrustHtml(str);
-    }
-
     constructor(
-        private sr: DomSanitizer,
         private auth: AuthService,
         private tweetService: TweetService,
         private router: Router

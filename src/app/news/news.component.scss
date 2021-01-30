@@ -37,7 +37,6 @@ ul {
 .card-panel 
 {
   background-color: #E1EEF6;
-  width: 1040px;
   font-size: 20px;
   margin-left: 8%;
 
@@ -45,6 +44,11 @@ ul {
 
 a{
   color:#B1B6B8;
+}
+
+.text-fix
+{
+  overflow-wrap: break-word;
 }
 
 // ============= Adjust the search box ===================================
@@ -131,7 +135,7 @@ button[type="submit"]
   cursor: pointer;
   color:  #FFFFFF;
   font-weight: bold;   
-  margin-left: 690px;
+  margin-left: 600px;
 }
 button[type="submit"]:hover
 {
