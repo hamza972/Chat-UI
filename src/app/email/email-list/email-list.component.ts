@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewEncapsulation } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { Component, OnInit, Input, ViewEncapsulation,  } from "@angular/core";
+import { FormControl, Validators } from "@angular/forms";
 import { Email } from "../../models/email";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
@@ -16,7 +16,10 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class EmailListComponent implements OnInit {
   @Input() emails: Email[];
   emails$: Observable<Email[]>;
-  filter = new FormControl("");
+  //filter = new FormControl("");
+  filter = new FormControl('',[
+    Validators.required,
+    Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")])
   constructor(private sr: DomSanitizer, private emailService: EmailService, private modalService: NgbModal) { }
 
 
