@@ -25,7 +25,7 @@ export class EmailService {
   ) {}
 
   sendEmail(email: Email) {
-    return this.db.collection(`Emails`).add({
+    return this.db.collection(`Emails/SendEmails`).add({
       subject: email.subject,
       date: new Date(),
       draft: false,
@@ -42,7 +42,7 @@ export class EmailService {
   }
 
   draftEmail(email: Email) {
-    return this.db.collection(`Emails`).add({
+    return this.db.collection(`Emails/DraftEmails`).add({
       subject: email.subject,
       date: new Date(),
       draft: true,
@@ -59,7 +59,7 @@ export class EmailService {
   }
 
   inbox(user: User) {
-    this.emailCollection = this.afs.collection('Emails', (ref) =>
+    this.emailCollection = this.afs.collection('Emails/Inbox/', (ref) =>
       ref
         .where('to.user', '==', user.email)
         .where('to.deleted', '==', false)
@@ -78,7 +78,7 @@ export class EmailService {
   }
 
   sent(user: User) {
-    this.emailCollection = this.afs.collection('Emails', (ref) =>
+    this.emailCollection = this.afs.collection('Emails/Sent', (ref) =>
       ref
         .where('from.user', '==', user.email)
         .where('from.deleted', '==', false)
@@ -97,7 +97,7 @@ export class EmailService {
   }
 
   drafts(user: User) {
-    this.emailCollection = this.afs.collection('Emails', (ref) =>
+    this.emailCollection = this.afs.collection('Emails/Drafts', (ref) =>
       ref
         .where('from.user', '==', user.email)
         .where('from.deleted', '==', false)
@@ -123,7 +123,7 @@ export class EmailService {
   }
 
   inboxDeleted(user: User) {
-    this.emailCollection = this.afs.collection('Emails', (ref) =>
+    this.emailCollection = this.afs.collection('Emails/InboxDeleted', (ref) =>
       ref.where('to.user', '==', user.email).where('to.deleted', '==', true)
     );
 
@@ -139,7 +139,7 @@ export class EmailService {
   }
 
   sentDeleted(user: User) {
-    this.emailCollection = this.afs.collection('Emails', (ref) =>
+    this.emailCollection = this.afs.collection('Emails/SentDeleted', (ref) =>
       ref.where('from.user', '==', user.email).where('from.deleted', '==', true)
     );
 
@@ -155,12 +155,12 @@ export class EmailService {
   }
 
   delete(email: Email) {
-    this.emailDoc = this.afs.doc(`Emails/${email.id}`);
+    this.emailDoc = this.afs.doc(`Emails/Delete/${email.id}`);
     this.emailDoc.update(email);
   }
 
   hardDelete(email: Email) {
-    this.emailDoc = this.afs.doc(`Emails/${email.id}`);
+    this.emailDoc = this.afs.doc(`Emails/HardDelete/${email.id}`);
     this.emailDoc.delete();
   }
 }

@@ -19,7 +19,7 @@ export class AdminService {
         private auth: AuthService
     ) {
         //this.items = this.afs.collection('items').valueChanges();
-        this.userCollection = this.afs.collection('Users/Admins/All', ref => ref.where('systemRole', '==', 'control'));
+        this.userCollection = this.afs.collection('Users/Admins/All', ref => ref.where('systemRole', '==', 'admin'));
         
     }
     

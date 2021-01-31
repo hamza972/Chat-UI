@@ -154,7 +154,7 @@ export class LoginService {
 
 
   sendControlUserData(userCredential: firebase.auth.UserCredential) {
-    return this.db.doc(`Users/${userCredential.user.uid}`).set({
+    return this.db.doc(`Users/Admins/All${userCredential.user.uid}`).set({
       email: this.newUser.email,
       firstName: this.newUser.firstName,
       lastName: this.newUser.lastName,
@@ -164,7 +164,7 @@ export class LoginService {
   }
 
   sendParticipantUserData(userCredential: firebase.auth.UserCredential) {
-    return this.db.doc(`Users/${userCredential.user.uid}`).set({
+    return this.db.doc(`Users/Participants/All${userCredential.user.uid}`).set({
       email: this.newUser.email,
       firstName: this.newUser.firstName,
       lastName: this.newUser.lastName,
