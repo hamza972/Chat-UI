@@ -24,7 +24,12 @@
 
         <div class="info">
             <h4> Profile </h4>
-            <div [innerHtml]="htmlProperty(role.description)"></div>
+            
+            <div class="bloghtml">
+                <div style="height: 500px; overflow: hidden;" [innerHtml]="role.description">
+
+                </div>
+            </div>
         </div>
 
     </div>
