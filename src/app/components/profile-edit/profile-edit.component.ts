@@ -1,6 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Participant } from '../../models/participant';
 import { Role } from '../../models/role';
 import { Affiliate } from '../../models/affiliate';
 import { RoleService } from '../../services/role.service';
@@ -8,10 +7,8 @@ import { AffiliateService } from '../../services/affiliate.service';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
-import { ImageCroppedEvent, base64ToFile } from 'ngx-image-cropper';
-import { StorageService } from '../../services/storage.service';
-import { DomSanitizer } from '@angular/platform-browser';
-
+import Base64Plugin from '../../email/email-compose/Base64Upload.js';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile-edit',
@@ -20,71 +17,39 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class ProfileEditComponent implements OnInit {
   roleID: string;
-  user: Participant;
+  user: firebase.User;
   role: Role;
-  affiliates: Affiliate[];
-  authError: any;
-  selectedImage: any = null;
-  uploadImageUrl: string;
-  uploadImageFile: string;
-
   public Editor = Editor;
   editorConfig = {
-    toolbar: {
-      items: [
-        'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
-        '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'undo', 'redo']
-    },
-    image: {
-      toolbar: [
-        'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight'],
-      styles: [
-        'alignLeft', 'alignCenter', 'alignRight'],
-    },
-    language: 'en'
+      toolbar: {
+        items: [
+          'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
+          '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'undo', 'redo' ]
+      },
+      image: {
+        toolbar: [
+          'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight' ],
+        styles: [
+          'alignLeft', 'alignCenter', 'alignRight'],
+      },
+      language: 'en'
   };
+  affiliates: Affiliate[];
+  authError: any;
 
-  imageDisplayed: any = ''; // cloud storage url or base64 string
-  imageChangedEvent: any = '';
-  croppedImage: any = ''; // cropped event file
-  imageHasChanged = false;
-  imageConfirmed = false;
-  fileChangeEvent(event: any): void {
-    this.imageChangedEvent = event;
-    this.imageHasChanged = true;
-    this.imageConfirmed = false;
-  }
-  imageCropped(event: ImageCroppedEvent) {
-    this.croppedImage = event.base64;
-  }
-  imageLoaded() {
-    this.imageHasChanged = true;
-    // show cropper
-  }
-  undoImage() {
-    this.imageDisplayed = this.role.avatar;
-    this.imageConfirmed = false;
-  }
-  confirmImage() {
-    this.imageDisplayed = this.croppedImage;
-    this.imageHasChanged = false;
-    this.imageConfirmed = true;
-  }
-  cancelImage() {
-    this.imageChangedEvent = '';
-    this.croppedImage = '';
-    this.imageHasChanged = false;
-  }
-
+  // storageRef = firebase.storage().ref();
   constructor(
     private auth: AuthService,
     private roleService: RoleService,
-    @Inject(StorageService) private storageService: StorageService,
     private sr: DomSanitizer,
     private affiliateService: AffiliateService,
     private route: ActivatedRoute,
     private router: Router,
   ) { }
+
+  public htmlProperty(str: string): SafeHtml {
+    return this.sr.bypassSecurityTrustHtml(str);
+  }
 
   ngOnInit() {
     /* Check if user is signed in, otherwise redirect to home */
@@ -97,26 +62,20 @@ export class ProfileEditComponent implements OnInit {
     });
 
     this.roleID = this.route.snapshot.paramMap.get('id');
+
     this.roleService.getRole(this.roleID).subscribe(rolesFromDB => {
       this.role = rolesFromDB;
-      this.imageDisplayed = this.role.avatar;
     });
 
     this.affiliateService.get().subscribe(affiliate => {
+      console.log(affiliate);
       this.affiliates = affiliate;
     });
   }
 
-  async update(editedRole) {
+  update(editedRole) {
     if (editedRole.title !== '') {
       editedRole.id = this.roleID;
-      // update avatar if we have an image confirmed
-      if (this.imageConfirmed) {
-        this.selectedImage = base64ToFile(this.croppedImage);
-        const url = await this.storageService.uploadAvatar(this.roleID, this.selectedImage);
-        this.uploadImageUrl = url;
-        editedRole.avatar = this.uploadImageUrl;
-      }
       this.roleService.update(editedRole);
       this.router.navigate(['/control']);
     }
@@ -124,5 +83,9 @@ export class ProfileEditComponent implements OnInit {
 
   cancel() {
     this.router.navigate(['/control']);
+  }
+
+  uploadAvatar() {
+    alert('Upload image not implemented');
   }
 }

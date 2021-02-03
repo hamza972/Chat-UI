@@ -1,23 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { AngularFireStorage, AngularFireStorageReference } from '@angular/fire/storage';
-
+import { AngularFireStorage } from '@angular/fire/storage';
 @Injectable({
   providedIn: 'root'
 })
 export class StorageService {
-  uploadProgress: Observable<number>;
-  downloadURL: string;
+  file: File;
+  url = '';
 
   constructor(private afStorage: AngularFireStorage) { }
 
-  async uploadAvatar(id, imageFile): Promise<string> {
-    const uploadTask = this.afStorage.upload('avatars/' + id, imageFile);
-    const ref = this.afStorage.ref('avatars/' + id);
-    this.uploadProgress = uploadTask.percentageChanges();
-    await uploadTask;
-    return ref.getDownloadURL().toPromise().then((url) => {
-      return url;
-    });
+  handleFiles(event) {
+    this.file = event.target.files[0];
+  }
+
+  // method to upload file at firebase storage
+  async uploadFile(basePath: string) {
+    if (this.file) {
+      const filePath = '${basePath}/${this.file.name}';    // path at which image will be stored in the firebase storage
+      const snap = await this.afStorage.upload(filePath, this.file);    // upload task
+      this.getUrl(snap);
+    } else {alert('Please select an image'); }
+  }
+
+  // method to retrieve download url
+  private async getUrl(snap: firebase.storage.UploadTaskSnapshot) {
+    const url = await snap.ref.getDownloadURL();
+    this.url = url;  // store the URL
+    console.log(this.url);
   }
 }

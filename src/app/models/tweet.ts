@@ -17,5 +17,4 @@ export interface Tweet {
     roleLastName?: string;
     roleTitle?: string;
     roleAffiliation?: string;
-    roleAvatar?: string;
   }

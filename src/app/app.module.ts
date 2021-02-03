@@ -8,10 +8,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AngularFireStorage } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { ImageCropperModule } from 'ngx-image-cropper';
-
 import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { HomeComponent } from './home/home.component';
@@ -39,7 +36,7 @@ import { AffiliateService } from './services/affiliate.service';
 import { AuthService } from './services/auth.service';
 import { ParticipantService } from './services/participant.service';
 import { RoleService } from './services/role.service';
-import { StorageService } from './services/storage.service';
+
 
 /*
  * All imports for emails including services and external componenets
@@ -104,7 +101,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     FormsModule,
     ReactiveFormsModule,
     CKEditorModule,
-    AngularFireModule.initializeApp(environment.firebase, 'm-e-p-s'),
+    AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     AngularFireDatabaseModule,
@@ -113,7 +110,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     HttpModule,
     NgChatModule,
     SocketIoModule.forRoot(config),
-    ImageCropperModule,
   ],
   providers: [
     AuthService,
@@ -121,8 +117,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ParticipantService,
     RoleService,
     EmailService,
-    StorageService,
-    AngularFireStorage,
   ],
   bootstrap: [AppComponent],
 })
