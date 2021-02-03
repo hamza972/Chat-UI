@@ -68,10 +68,15 @@
         <div class="imgBx" *ngIf="!user">
             <img src="../../../assets/img/2-2.png" alt="">
         </div>
+
+
+
+
         <div class="select" *ngIf="!user">
-            <button type="button" class="btn btn-primary mr-2 " *ngIf="!user" (click)="register()" name="button"
-                autofocus>Register</button>
-            <button type="button" class="btn btn-primary" *ngIf="!user" (click)="login()" name="button">Login</button>
+            <!-- <button type="button" class="btn btn-primary mr-2 " *ngIf="!user" (click)="register()" name="button"
+                autofocus>Register</button> -->
+            <button type="button" class="btn btn-primary mr-2" *ngIf="!user" (click)="login()" name="button"
+            autofocus>Login</button>
         </div>
 
     </div>

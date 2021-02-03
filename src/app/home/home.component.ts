@@ -49,10 +49,10 @@ export class HomeComponent implements OnInit {
         this.router.navigate(['/login']);
     }
 
-    register() {
-        console.log('here');
-        this.router.navigate(['/registration']);
-    }
+    // register() {
+    //     console.log('here');
+    //     this.router.navigate(['/registration']);
+    // }
 
     logout() {
         this.auth.logout();

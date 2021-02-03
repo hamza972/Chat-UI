@@ -54,7 +54,7 @@ export class ParticipantAddComponent implements OnInit {
     }
 
     add() {
-        if(this.participant.email !== '') {
+        if(this.participant.systemRole !== 'participant') {
             this.participant.roleAffiliation = this.roleDetails[3];
             this.participant.systemRole = 'participant';
             this.participantService.add(this.participant);

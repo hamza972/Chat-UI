@@ -10,7 +10,6 @@
                 <th scope="col">Control User/ Admin Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Role</th>
-                <th scope="col">Role Name</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
@@ -18,8 +17,7 @@
             <tr *ngFor="let admins of admins">
                 <td>{{admins.firstName}} {{admins.lastName}}</td>
                 <td>{{admins.email}}</td>
-                <td>{{admins.rolePosition}}, {{admins.roleAffiliation}}</td>
-                <td>{{admins.roleFirstName}} {{admins.roleLastName}}</td>
+                <td>{{admins.rolePosition}}</td>
                 <td><button (click)="delete($event, owner)" value="Delete" class="btn red">Delete</button></td>
             </tr>
         </tbody>
