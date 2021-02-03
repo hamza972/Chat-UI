@@ -13,11 +13,12 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
     styleUrls: ['./affiliate-edit.component.scss']
 })
 export class AffiliateEditComponent implements OnInit {
-    countryName: string;
+    
     user: firebase.User;
     name: string;
     affiliate: Affiliate;
     authError: any;
+    countryName: string;
     affiliateCollection: AngularFirestoreCollection<Affiliate>;
     constructor(
         private auth: AuthService,
@@ -48,8 +49,7 @@ export class AffiliateEditComponent implements OnInit {
     if(text.length==0){
       alert("please use valid input")
     }else{
-      this.afs.collection('Countries').doc(this.countryName).update({
-        countryName: text,
+      this.afs.collection('Affiliates').doc(this.countryName).update({
         name: text
        }).then(function(){
          console.log("update document, line 53");
@@ -57,18 +57,8 @@ export class AffiliateEditComponent implements OnInit {
        })
     }
     this.router.navigate(['./control'])
-  }
-
-      
+  } 
     cancel() {
         this.router.navigate(['/control']);
     }
-
-    add() {
-        if (this.affiliate.name !== '') {
-            this.affiliateService.add(this.affiliate);
-            this.router.navigate(['/control']);
-        }
-    }
-
 }

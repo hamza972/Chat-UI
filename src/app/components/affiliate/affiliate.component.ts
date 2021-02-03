@@ -32,6 +32,10 @@ export class AffiliateComponent implements OnInit {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
+                /* Check if user's role position is control */
+                if (user[0].systemRole !== 'admin') {
+                    this.router.navigate(['/home']);
+                }
             }
         });
 
@@ -49,7 +53,6 @@ export class AffiliateComponent implements OnInit {
         console.log("line 47");
         console.log(affiliate);
         this.editState = true;
-        //this.itemToEdit = affiliate;
         this.router.navigate(['/affiliate-edit']);
     }
 
@@ -64,13 +67,8 @@ export class AffiliateComponent implements OnInit {
     }
 
     delete(countryId){
-        /*console.log(countryName);
-        console.log("line 71")
-        this.afs.collection('Countries').doc(countryName).delete().then(function(){
-            console.log(countryName+" has been deleted")
-        })*/
         console.log("countryId is : "+countryId);
-        this.afs.collection('Countries').doc(countryId).delete().then(function(){
+        this.afs.collection('Affiliates').doc(countryId).delete().then(function(){
             console.log(countryId + " has been deleted")
             console.log("line 77")
         })
