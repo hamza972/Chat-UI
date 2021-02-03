@@ -7,6 +7,6 @@ export interface AppUser {
     role?: string;
     roleFirstName?: string;
     roleLastName?: string;
-    roleTitle?: string;
+    rolePosition?: string;
     roleAffiliation?: string;
   }

@@ -13,7 +13,7 @@ import { AffiliateService } from '../../services/affiliate.service';
 })
 export class RoleAddComponent implements OnInit {
 
-    role: Role = { };
+    role: Role = { firstName: "" };
     affiliates: Affiliate[];
     user: firebase.User;
     authError: any;
@@ -29,12 +29,12 @@ export class RoleAddComponent implements OnInit {
 
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if (user === null) {
+            if(user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
             }
-        });
+        })
 
         this.affiliateService.get().subscribe(affiliate => {
             console.log(affiliate);
@@ -47,7 +47,7 @@ export class RoleAddComponent implements OnInit {
     }
 
     add() {
-        if (this.role.title !== '') {
+        if(this.role.roleName != '') {
             this.roleService.add(this.role);
             this.router.navigate(['/control']);
         }

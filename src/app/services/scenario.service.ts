@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Scenario } from '../models/scenario';
+import { scenario } from '../models/scenario';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,16 +9,18 @@ import { map } from 'rxjs/operators';
 })
 export class ScenarioService {
 
-    scenarioCollection: AngularFirestoreCollection<Scenario>;
-    scenario: Observable<Scenario[]>;
-    scenarioDoc: AngularFirestoreDocument<Scenario>;
+    scenarioCollection: AngularFirestoreCollection<scenario>;
+    scenario: Observable<scenario[]>;
+    scenarioDoc: AngularFirestoreDocument<scenario>;
 
     constructor(public afs: AngularFirestore) {
+        //this.items = this.afs.collection('items').valueChanges();
+
         this.scenarioCollection = this.afs.collection('Scenario', ref => ref.orderBy('date', 'desc'));
 
         this.scenario = this.scenarioCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
-                const data = a.payload.doc.data() as Scenario;
+                const data = a.payload.doc.data() as scenario;
                 data.id = a.payload.doc.id;
                 return data;
             });
@@ -29,16 +31,16 @@ export class ScenarioService {
         return this.scenarioCollection.valueChanges();
     }
 
-    add(scenario: Scenario) {
+    add(scenario: scenario) {
         this.scenarioCollection.add(scenario);
     }
 
-    delete(scenario: Scenario) {
+    delete(scenario: scenario) {
         this.scenarioDoc = this.afs.doc(`scenario/${scenario.id}`);
         this.scenarioDoc.delete();
     }
 
-    update(scenario: Scenario) {
+    update(scenario: scenario) {
         this.scenarioDoc = this.afs.doc(`scenario/${scenario.id}`);
         this.scenarioDoc.update(scenario);
     }

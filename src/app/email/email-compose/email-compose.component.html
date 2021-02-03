@@ -1,28 +1,13 @@
-<form [formGroup]="emailform" (ngSubmit)="send(emailform.value);">
+<form [formGroup]="emailForm" (ngSubmit)="send(emailForm.value);">
   <input
     name="sender"
     id="email-to"
-    type="email"
-    Class= "form-control"
-    [formControlName]="'email'"
-    placeholder="To"
-    [ngbTypeahead]="searchUsers">
-  <span class="error" *ngIf = "email.invalid && email.touched" >Email is Invalid</span>
-  
-
+    type="text"
+    [formControlName]="'sendTo'"
+    placeholder="To..."
+    [ngbTypeahead]="searchUsers"
+  />
   <br />
-  <input
-  name="sender"
-  id="email-to"
-  type="text"
-  [formControlName]="'sendTo'"
-  placeholder="CC"
-  [ngbTypeahead]="searchUsers"
-/>
-
-<br />
-
-
   <input type="text" [formControlName]="'subject'" name="subject" placeholder="Subject..." />
   <hr />
   <h6>Body</h6>

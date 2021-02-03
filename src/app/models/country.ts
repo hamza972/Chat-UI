@@ -1,4 +1,4 @@
-export interface Country {
-    id?: string;
-    countryName?: string;
-}
+export interface country {
+    id?:string;
+    countryName?:string;
+  }

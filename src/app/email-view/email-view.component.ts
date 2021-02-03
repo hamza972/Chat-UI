@@ -11,13 +11,16 @@ import { Observable } from 'rxjs';
   styleUrls: ['./email-view.component.scss']
 })
 export class EmailViewComponent implements OnInit {
+
+    /* added by xander */
     search: any;
     recipient: any;
     subject: any;
+    /* added by xander */
 
   user$: Observable<AppUser>;
   constructor(private auth: LoginService,
-              private router: Router) { }
+    private router: Router) { }
 
   ngOnInit() {
     this.user$ = this.auth.user$;

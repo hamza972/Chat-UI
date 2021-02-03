@@ -6,25 +6,14 @@ import { AppUser as User } from '../../models/user';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Email } from 'src/app/models/email';
 import { EmailService } from '../../services/email.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormControl, Validators } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-email-compose',
   templateUrl: './email-compose.component.html',
   styleUrls: ['./email-compose.component.scss'],
 })
-
-
 export class EmailComposeComponent implements OnInit {
-  emailform = new FormGroup({
-    email: new FormControl('',[Validators.required,Validators.email])
-  })
-  
-  get email(){return this.emailform.get('email')}
-  
-  
-  
   public Editor = Editor;
   editorConfig = {
     toolbar: {
@@ -53,13 +42,11 @@ export class EmailComposeComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.emailForm = this.formBuilder.group({
-      sendTo: [null, Validators.required,
-        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")],
+      sendTo: [null, Validators.required],
       subject: [null, Validators.required],
       body: [null, Validators.required]
     });
   }
-  
 
   ngOnInit(): void {
     this.participantService.get().subscribe((participants) => {

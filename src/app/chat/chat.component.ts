@@ -14,9 +14,14 @@ export class ChatComponent implements OnInit {
   user$: Observable<AppUser>;
 
 constructor(private auth: LoginService,
-            private router: Router) { }
+    private router: Router) { }
+
   ngOnInit() {
     this.user$ = this.auth.user$;
+    
   }
+
+  
+ 
 
 }

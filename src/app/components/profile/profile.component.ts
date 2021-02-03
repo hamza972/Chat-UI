@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from "@angular/router";
 import { AuthService } from '../../services/auth.service';
 import { RoleService } from '../../services/role.service';
 import { Role } from '../../models/role';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Participant } from '../../models/participant';
 
 @Component({
     selector: 'app-profile',
@@ -13,36 +13,42 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class ProfileComponent implements OnInit {
 
-    roleID: string;
+    userID: string;
     user: firebase.User;
-    role: Role;
+    role: Role = { firstName: "" };
 
     constructor(
         private auth: AuthService,
         private roleService: RoleService,
-        private sr: DomSanitizer,
         private router: Router,
         private route: ActivatedRoute
     ) { }
 
-    public htmlProperty(str: string): SafeHtml {
-        return this.sr.bypassSecurityTrustHtml(str);
-    }
-
     ngOnInit() {
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if (user === null) {
+            if(user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
+                console.log("this.user");
+                console.log(this.user);
             }
-        });
+        })
 
-        this.roleID = this.route.snapshot.paramMap.get('id');
+        this.userID = this.route.snapshot.queryParamMap.get("id");
 
-        this.roleService.getRole(this.roleID).subscribe( rolesFromDB => {
-            this.role = rolesFromDB;
+        this.route.paramMap.subscribe(params => {
+            this.userID = params.get("id")
+        })
+
+        this.get(this.userID);
+    }
+
+    get(userID) {
+        this.roleService.profile(userID).subscribe(role => {
+            this.role = role;
         });
     }
+
 }

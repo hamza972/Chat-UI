@@ -4,9 +4,9 @@ import { EmailService } from "../../services/email.service";
 import { AppUser as User } from "../../models/user";
 
 @Component({
-  selector: 'app-email-sent',
-  templateUrl: './email-sent.component.html',
-  styleUrls: ['./email-sent.component.scss'],
+  selector: "app-email-sent",
+  templateUrl: "./email-sent.component.html",
+  styleUrls: ["./email-sent.component.scss"],
 })
 export class EmailSentComponent implements OnInit {
   emails: Email[];

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, ViewEncapsulation,  } from "@angular/core";
-import { FormControl, Validators } from "@angular/forms";
+import { Component, OnInit, Input, ViewEncapsulation } from "@angular/core";
+import { FormControl } from "@angular/forms";
 import { Email } from "../../models/email";
 import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
@@ -16,10 +16,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 export class EmailListComponent implements OnInit {
   @Input() emails: Email[];
   emails$: Observable<Email[]>;
-  //filter = new FormControl("");
-  filter = new FormControl('',[
-    Validators.required,
-    Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")])
+  filter = new FormControl("");
   constructor(private sr: DomSanitizer, private emailService: EmailService, private modalService: NgbModal) { }
 
 
@@ -28,7 +25,7 @@ export class EmailListComponent implements OnInit {
   ngOnChanges() {
     if (this.emails !== undefined) {
       this.emails$ = this.filter.valueChanges.pipe(
-        startWith(''),
+        startWith(""),
         map((query) => this.search(query))
       );
     }
@@ -46,7 +43,7 @@ export class EmailListComponent implements OnInit {
   }
 
   getTab() {
-    return localStorage.getItem('tab');
+    return localStorage.getItem("tab");
   }
 
   deleteEmail(email: Email, content) {
@@ -79,13 +76,14 @@ export class EmailListComponent implements OnInit {
     return str;
   }
 
-  public htmlProperty(str: string): SafeHtml {
+  public htmlProperty(str: string) : SafeHtml {
+
          return this.sr.bypassSecurityTrustHtml(str);
   }
 
   filterDeletePageSendReceive(from: string) {
-    if (from === localStorage.getItem('userEmail')) {
-      return 'me';
+    if (from == localStorage.getItem("userEmail")) {
+      return "me";
     }
     return from;
   }

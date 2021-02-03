@@ -1,6 +1,6 @@
 export interface Participant {
-    id?: string;
-    firstName?: string;
+    id?:string;
+    firstName?:string;
     lastName?: string;
     email?: string;
     systemRole?: string;
@@ -8,11 +8,8 @@ export interface Participant {
     roleID?: string;
     roleFirstName?: string;
     roleLastName?: string;
-    roleTitle?: string;
+    rolePosition?: string;
     roleAffiliation?: string;
     profileImage?: string;
     password?: string;
-    emailSent?: number;
-    emailRecieved?: number;
-    time?: number;
   }

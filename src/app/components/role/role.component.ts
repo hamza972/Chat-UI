@@ -11,7 +11,7 @@ import { Role } from '../../models/role';
 })
 export class RoleComponent implements OnInit {
     roles: Role[];
-    editState = false;
+    editState: boolean = false;
     roleToEdit: Role;
     user: firebase.User;
 
@@ -24,20 +24,25 @@ export class RoleComponent implements OnInit {
     ngOnInit(): void {
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if (user === null) {
+            if(user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
             }
-        });
+        })
 
-        this.roleService.get().subscribe(dbRoles => {
-            this.roles = dbRoles;
+        this.roleService.get().subscribe(role => {
+            this.roles = role;
         });
     }
 
     add() {
         this.router.navigate(['/role-add']);
+    }
+
+    /* go to profile page */
+    profile($event, role: Role) {
+        this.router.navigate(['/profile/'+role.id]);
     }
 
     /*

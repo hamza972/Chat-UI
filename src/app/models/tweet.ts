@@ -1,5 +1,5 @@
 export interface Tweet {
-    id?: string;
+    id?:string;
     date?: Date;
     content?: string;
 
@@ -7,7 +7,7 @@ export interface Tweet {
     if possible to retrieve data using ID,
     no need to include this */
     userID?: string;
-    firstName?: string;
+    firstName?:string;
     lastName?: string;
     email?: string;
     systemRole?: string;
@@ -15,6 +15,6 @@ export interface Tweet {
     roleID?: string;
     roleFirstName?: string;
     roleLastName?: string;
-    roleTitle?: string;
+    rolePosition?: string;
     roleAffiliation?: string;
   }

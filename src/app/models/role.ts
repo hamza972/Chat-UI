@@ -1,10 +1,7 @@
 export interface Role {
-    id?: string;
-    title?: string;
-    affiliation?: string;
-    firstName?: string;
-    lastName?: string;
-    description?: string;
-    avatar?: string;
-}
-
+    id?:string;
+    roleName?:string;
+    ofCountry?:string;
+    firstName?:string;
+    lastName?:string;
+  }
