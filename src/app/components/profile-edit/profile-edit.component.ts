@@ -7,8 +7,8 @@ import { AffiliateService } from '../../services/affiliate.service';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
-import Base64Plugin from '../../email/email-compose/Base64Upload.js';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Participant } from '../../models/participant';
 
 @Component({
   selector: 'app-profile-edit',
@@ -17,7 +17,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 })
 export class ProfileEditComponent implements OnInit {
   roleID: string;
-  user: firebase.User;
+  user: Participant;
   role: Role;
   public Editor = Editor;
   editorConfig = {
@@ -62,6 +62,11 @@ export class ProfileEditComponent implements OnInit {
     });
 
     this.roleID = this.route.snapshot.paramMap.get('id');
+
+    if (this.user.roleID !== this.roleID || this.user.systemRole !== 'admin') {
+      // user is not and admin nor playing the role of this profile
+      this.router.navigate(['/profile', this.roleID]);
+    }
 
     this.roleService.getRole(this.roleID).subscribe(rolesFromDB => {
       this.role = rolesFromDB;
