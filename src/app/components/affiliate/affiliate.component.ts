@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AffiliateService } from '../../services/affiliate.service';
 import { Affiliate } from '../../models/affiliate';
-
+import { ActivatedRoute } from '@angular/router';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 @Component({
     selector: 'app-affiliate',
     templateUrl: './affiliate.component.html',
@@ -14,11 +15,13 @@ export class AffiliateComponent implements OnInit {
     user: firebase.User;
     editState: boolean = false;
     itemToEdit: Affiliate;
-
+    affiliateCollection: AngularFirestoreCollection<Affiliate>;
     constructor(
         private auth: AuthService,
         private affiliateService: AffiliateService,
-        private router: Router
+        private router: Router,
+        private route: ActivatedRoute,
+        public afs: AngularFirestore
     ) {}
 
     ngOnInit(): void {
@@ -29,6 +32,10 @@ export class AffiliateComponent implements OnInit {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
+                /* Check if user's role position is control */
+                if (user[0].systemRole !== 'admin') {
+                    this.router.navigate(['/home']);
+                }
             }
         })
 
@@ -42,10 +49,11 @@ export class AffiliateComponent implements OnInit {
         this.router.navigate(['/affiliate-add']);
     }
 
-    edit($event, affiliate: Affiliate) {
-        console.log(123);
+    edit(affiliate: Affiliate) {
+        console.log("line 47");
+        console.log(affiliate);
         this.editState = true;
-        this.itemToEdit = affiliate;
+        this.router.navigate(['/affiliate-edit']);
     }
 
     update(affiliate: Affiliate) {
@@ -58,4 +66,12 @@ export class AffiliateComponent implements OnInit {
         this.itemToEdit = null;
     }
 
+    delete(countryId){
+        console.log("countryId is : "+countryId);
+        this.afs.collection('Affiliates').doc(countryId).delete().then(function(){
+            console.log(countryId + " has been deleted")
+            console.log("line 77")
+        })
+        
+    }
 }
