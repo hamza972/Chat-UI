@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AppUser } from '../models/user';
-import { LoginService } from '../auth/login.service';
+import { NewsService } from '../services/news.service';
 import { Router } from '@angular/router';
 import { News } from '../models/News';
 import { Participant } from '../models/participant';
@@ -16,16 +14,11 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewsComponent implements OnInit {
   public Editor = Editor;
-  user: firebase.User;
-  newUserNews: News;
-  newsUser: AppUser;
-  userID: string;
-  user$: Observable<AppUser>;
-  newsArray: News[];
-  sortedArray: News[];
+  user: Participant;
+  newsItems: News[];
+  newsItemEntry: News;
   authError: any;
   searchText: string;
-  user2: Participant = { systemRole: '' };
   editorConfig = {
     toolbar: {
       items: [
@@ -44,48 +37,39 @@ export class NewsComponent implements OnInit {
   };
 
   constructor(
-    private auth: LoginService,
-    private auth2: AuthService,
+    private auth: AuthService,
+    private newsService: NewsService,
     private router: Router,
     private modalService: NgbModal) { }
 
 
   ngOnInit() {
     /* Check if user is signed in, otherwise redirect to home */
-    this.auth2.getUserData().subscribe(user => {
+    this.auth.getUserData().subscribe(user => {
       if (user === null) {
         this.router.navigate(['/home']);
       } else {
-        this.user2 = user[0];
+        this.user = user[0];
       }
     });
 
-    this.user$ = this.auth.user$;
-    this.auth.getNews().subscribe(dbNews => { this.newsArray = dbNews; });
-
-    this.user$ = this.auth.user$;
-    this.user$.subscribe(userT => {
-      console.log(userT);
-      this.newsUser = userT;
+    this.newsService.get().subscribe(news => {
+      this.newsItems = news;
     });
   }
 
 
   createNews(frm, frm2, content) {
-    this.newUserNews = {
-      userName: this.newsUser.firstName + ' ' + this.newsUser.lastName,
+    this.newsItemEntry = {
+      userName: this.user.firstName + ' ' + this.user.lastName,
       newsDate: new Date(),
       newsDescription: frm.value,
       newsHeadline: frm2.value,
-      userEmail: this.newsUser.email,
-      userRole: this.newsUser.role 
-  };
-  this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
-
-}
-
-  btnClick = function() {
-    this.router.navigateByUrl('/news-publish');
-  };
+      userEmail: this.user.email,
+      userRole: this.user.roleFirstName
+    };
+    this.newsService.add(this.newsItemEntry);
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
+  }
 
 }
