@@ -23,7 +23,7 @@ export class TweetComponent implements OnInit {
     editorConfig = {
         toolbar: {
           items: [
-            'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
+            'bold', 'italic', 'link', 'bulletedList', 'numberedList',
             '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'undo', 'redo' ]
         },
         image: {

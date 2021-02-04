@@ -14,6 +14,10 @@ import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 })
 
 export class ScenarioComponent implements OnInit {
+    scenario: Scenario = { content: '' };
+    scenarios: Scenario[];
+    user: Control;
+    authError: any;
     public Editor = Editor;
     editorConfig = {
         toolbar: {
@@ -37,10 +41,6 @@ export class ScenarioComponent implements OnInit {
         },
         language: 'en'
     };
-    scenario: Scenario = { content: '' };
-    scenarios: Scenario[];
-    user: Control = { systemRole: '' };
-    authError: any;
 
     constructor(
         private auth: AuthService,
@@ -49,17 +49,14 @@ export class ScenarioComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
             if (user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
-                console.log('this.user');
-                console.log(this.user);
             }
-        })
+        });
 
         this.scenarioService.get().subscribe(dbScenarios => {
             this.scenarios = dbScenarios;
@@ -75,12 +72,9 @@ export class ScenarioComponent implements OnInit {
         if (this.scenario.content !== '') {
 
             this.scenario = {
-
                 date: new Date(),
                 content: this.scenario.content,
-            }
-
-            console.log(this.scenario);
+            };
 
             this.scenarioService.add(this.scenario);
             alert('Your Email has been sent!!');

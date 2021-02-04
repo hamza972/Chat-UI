@@ -13,7 +13,7 @@
             <div class="row" *ngFor="let tweet of tweets; let i=index">
                 <div *ngIf="i<5">
                     <div class="col-1">
-                        <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
+                        <img src={{tweet.roleAvatar}} alt="" class="circle responsive-img role-img">
                     </div>
                     <div class="col-8">
                         <div class="card-panel ">
