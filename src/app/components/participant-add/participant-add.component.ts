@@ -13,9 +13,12 @@ import { Role } from '../../models/role';
 })
 export class ParticipantAddComponent implements OnInit {
 
-    participant: Participant;
+    participant: Participant = {
+        firstName: "",
+        password: ""
+    };
     roles: Role[];
-    editState = false;
+    editState: boolean = false;
     participantToEdit: Participant;
     roleDetails: Array<string>;
     user: firebase.User;
@@ -31,12 +34,12 @@ export class ParticipantAddComponent implements OnInit {
     ngOnInit(): void {
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if (user === null) {
+            if(user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
             }
-        });
+        })
 
         this.roleService.get().subscribe(role => {
             console.log(role);
@@ -45,7 +48,8 @@ export class ParticipantAddComponent implements OnInit {
     }
 
     selectionChanged(event) {
-        this.roleDetails = event.target.value.split('|');
+        this.roleDetails = event.target.value.split("|");
+        console.log("testing");
         console.log(this.roleDetails);
     }
 
@@ -54,10 +58,13 @@ export class ParticipantAddComponent implements OnInit {
     }
 
     add() {
-        if (this.participant.email !== '') {
+        if(this.participant.email != '.+@deakin.edu.au') {
+            this.participant.roleFirstName = this.roleDetails[0];
+            this.participant.roleLastName = this.roleDetails[1];
+            this.participant.rolePosition = this.roleDetails[2];
+            this.participant.roleAffiliation = this.roleDetails[3];
             this.participant.roleID = this.roleDetails[4];
-            this.participant.systemRole = 'participant';
-            this.participantService.add(this.participant);
+            this.participant.systemRole = "participant";
             this.router.navigate(['/control']);
         }
     }

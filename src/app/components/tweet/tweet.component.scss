@@ -73,7 +73,7 @@ button[type="submit"]:hover
 {
   display:grid;
   height:400px;
-  align-content:end;
+  align-contnet:end;
   grid-template-columns: auto auto auto;
   grid-gap: 10px;
   background-color: none;
@@ -94,13 +94,6 @@ button[type="submit"]:hover
 {
   background-color: #E1EEF6;
   font-size: 20px;
-  width: 100%;
-}
-.card-date
-{
-  background-color: #E1EEF6;
-  font-size: 20px;
-  color: #4eadda;
   width: 100%;
 }
 a{

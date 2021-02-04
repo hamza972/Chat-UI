@@ -13,7 +13,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 export class AffiliateComponent implements OnInit {
     affiliates: Affiliate[];
     user: firebase.User;
-    editState = false;
+    editState: boolean = false;
     itemToEdit: Affiliate;
     affiliateCollection: AngularFirestoreCollection<Affiliate>;
     constructor(
@@ -28,7 +28,7 @@ export class AffiliateComponent implements OnInit {
 
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if (user === null) {
+            if(user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
@@ -37,11 +37,11 @@ export class AffiliateComponent implements OnInit {
                     this.router.navigate(['/home']);
                 }
             }
-        });
+        })
 
         /* Get list of affiliates */
-        this.affiliateService.get().subscribe(dbAffiliates => {
-            this.affiliates = dbAffiliates;
+        this.affiliateService.get().subscribe(affiliate => {
+            this.affiliates = affiliate;
         });
     }
 

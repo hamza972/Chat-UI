@@ -23,6 +23,7 @@
         <p style="font-size: 32px;">Inbox</p>
       </div>
       <div style="position: relative; top: 60%; right: 1%;">
+        <!-- <div style=" background-color: blue; color: gray; float: right; width: 15%; height: 15%; border: solid 1px;"></div> -->
         <label>
           <input [(ngModel)]="search.term" style=" background-color: white; color: gray; 
           float: right; width: auto; height: 15%; border: solid 1px; position: absolute; top: 2%; right: 2%;" 
@@ -57,11 +58,16 @@
         </div>
         <div id="div_d_2">
           <label>
+            <!-- <input [(ngModel)]="recipient-email-body" style=" background-color: white; color: gray; 
+            width: 90%; height: 85%; border: solid 1px; position: absolute; top: 49%; left: 10%; top: 8%; left: 2.5%;
+            padding-top: 0; padding-left: 0;" 
+            placeholder=""/> -->
             <textarea style="background-color: white; color: gray; 
             width: 90%; height: 85%; border: solid 1px; position: absolute; top: 49%; left: 10%; top: 8%; left: 2.5%;
             padding-top: 0; padding-left: 0;">
             </textarea>
           </label>
+          <!--<div id="email_content_display"></div>-->
           <div>
             <button type="button" style="position: absolute; top: 2%; right: 8%; color: white; background-color: none;
             border: solid 1px; height: auto; width: auto; padding: 4px; border-color: black;">Send</button>

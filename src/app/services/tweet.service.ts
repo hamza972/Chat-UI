@@ -10,13 +10,15 @@ import { map } from 'rxjs/operators';
 export class TweetService {
 
     tweetCollection: AngularFirestoreCollection<Tweet>;
-    tweets: Observable<Tweet[]>;
+    tweet: Observable<Tweet[]>;
     tweetDoc: AngularFirestoreDocument<Tweet>;
 
     constructor(public afs: AngularFirestore) {
+        //this.items = this.afs.collection('items').valueChanges();
+
         this.tweetCollection = this.afs.collection('Tweets', ref => ref.orderBy('date', 'desc'));
 
-        this.tweets = this.tweetCollection.snapshotChanges().pipe(map(changes => {
+        this.tweet = this.tweetCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
                 const data = a.payload.doc.data() as Tweet;
                 data.id = a.payload.doc.id;

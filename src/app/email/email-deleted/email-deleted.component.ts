@@ -5,9 +5,9 @@ import { AppUser as User } from "../../models/user";
 import "rxjs/Rx";
 
 @Component({
-  selector: 'app-email-deleted',
-  templateUrl: './email-deleted.component.html',
-  styleUrls: ['./email-deleted.component.scss'],
+  selector: "app-email-deleted",
+  templateUrl: "./email-deleted.component.html",
+  styleUrls: ["./email-deleted.component.scss"],
 })
 export class EmailDeletedComponent implements OnInit {
   emails: Email[];

@@ -3,7 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { switchMap, mergeMap, map } from 'rxjs/operators';
+import { switchMap, mergeMap, map } from "rxjs/operators";
 import { Participant } from '../models/participant';
 
 @Injectable({
@@ -26,15 +26,14 @@ export class AuthService {
             switchMap((user) => {
                 if (user) {
 
-                    return this.db.collection(
-                        'Users', (ref) => ref.where(
-                            'email', '==', user.email)).snapshotChanges().pipe(map(changes => {
-                                return changes.map(a => {
-                                    const data = a.payload.doc.data() as Participant;
-                                    data.id = a.payload.doc.id;
-                                    return data;
-                                });
-                            }));
+                    return this.db.collection("Users", (ref) => ref.where("email", "==", user.email)).snapshotChanges().pipe(map(changes => {
+                        return changes.map(a => {
+                            const data = a.payload.doc.data() as Participant;
+                            data.id = a.payload.doc.id;
+                            return data;
+                        });
+                    }));
+
                 } else {
                     return of(null);
                 }
@@ -55,7 +54,7 @@ export class AuthService {
         })
         .catch(error => {
             this.eventAuthError.next(error);
-        });
+        })
     }
 
     insertUserData(userCredential: firebase.auth.UserCredential) {
@@ -68,9 +67,9 @@ export class AuthService {
             roleID: this.newUser.roleID,
             roleFirstName: this.newUser.roleFirstName,
             roleLastName: this.newUser.roleLastName,
-            roleTitle: this.newUser.roleTitle,
+            rolePosition: this.newUser.rolePosition,
             roleAffiliation: this.newUser.roleAffiliation
-        });
+        })
     }
 
     login(email: string, password: string) {
@@ -83,11 +82,11 @@ export class AuthService {
                 this.router.navigate(['/home']);
             }
 
-        });
+        })
     }
 
     logout() {
-        this.router.navigate(['/home']);
+        this.router.navigate(["/home"]);
         window.location.reload();
         return this.afAuth.auth.signOut();
     }
