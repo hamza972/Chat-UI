@@ -14,7 +14,7 @@ export class AffiliateAddComponent implements OnInit {
     user: firebase.User;
 
     affiliate: Affiliate = {
-        countryName: ""
+        name: ''
     };
     authError: any;
 
@@ -40,7 +40,7 @@ export class AffiliateAddComponent implements OnInit {
     }
 
     add() {
-        if(this.affiliate.countryName != '') {
+        if(this.affiliate.name !== '') {
             this.affiliateService.add(this.affiliate);
             this.router.navigate(['/control']);
         }

@@ -31,8 +31,6 @@ export class ProfileComponent implements OnInit {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
-                console.log("this.user");
-                console.log(this.user);
             }
         })
 
@@ -46,7 +44,7 @@ export class ProfileComponent implements OnInit {
     }
 
     get(userID) {
-        this.roleService.profile(userID).subscribe(role => {
+        this.roleService.getRole(userID).subscribe(role => {
             this.role = role;
         });
     }
