@@ -15,12 +15,12 @@
                 <tbody>
                     <tr *ngFor="let affiliate of affiliates">
                         <td *ngIf="!editState">{{affiliate.name}}</td>
-                        <td *ngIf="!editState"><a [routerLink]="['/affiliate-edit',affiliate.id]">
-                                <button value="Edit" class="btn blue">Edit</button></a>
-                        </td>
                         <td *ngIf="!editState">
-                            <button value="{{affiliate.name}}" class="btn blue"
-                                (click)="delete(affiliate.id)">Delete</button>
+                            <a [routerLink]="['/affiliate-edit', affiliate.id]">
+                                <button value="Edit" class="btn blue">Edit</button>
+                            </a>
+                            <p></p>
+                            <button value="{{affiliate.name}}" class="btn blue" (click)="delete(affiliate.id)">Delete</button>
                         </td>
                     </tr>
                 </tbody>
