@@ -56,11 +56,16 @@ padding-left: 0;
     color:  #454552 ;
     font-weight: bold; 
 }
-.col-md-6 button:hover
-{
+.col-md-6 button:hover {
     background-color: #8ABBDB;
     color:#ffffff;
 }
-p{
+
+p {
     padding: 10px;
+}
+
+// =============== image =====================
+.imagebox {
+    width: 300px;
 }

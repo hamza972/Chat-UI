@@ -29,7 +29,7 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
 const routes: Routes = [
 { path: 'control/affiliate', component: AffiliateComponent },
 { path: 'affiliate-add', component: AffiliateAddComponent },
-{ path: 'affiliate-edit/:affiliateID', component: AffiliateEditComponent },
+{ path: 'affiliate-edit/:id', component: AffiliateEditComponent },
 { path: 'login', component: LoginComponent },
 { path: 'registration', component: RegistrationComponent},
 { path: 'home', component: HomeComponent},

@@ -1,18 +1,13 @@
 <div class="row mt-4">
     <h4>Edit Role</h4>
-    <div class="row" *ngIf="authError">
-        <div class="col-12 alert alert-danger">
-            {{ authError?.message }}
-        </div>
-    </div>
 </div>
-<form #profileForm="ngForm" (ngSubmit)="update(profileForm.value)">
+<form *ngIf="user" #profileForm="ngForm" (ngSubmit)="update(profileForm.value)">
     <div class="row mt-4">
         <div class="col-6">
             <div class="row">
                 <div class="col-md-12 mb-2">
                     <h6>Title</h6>
-                    <input *ngIf="user.systemRole == 'admin'; else elseTitle" [(ngModel)]="role.title" name="title"
+                    <input *ngIf="user.systemRole == 'admin'; else elseTitle" [ngModel]="role?.title" name="title"
                         type="text" class="form-control">
                     <ng-template #elseTitle>
                         <p>{{role.title}}</p>
@@ -23,16 +18,16 @@
                     <select *ngIf="user.systemRole == 'admin'; else elseAffiliation" name="affiliation" type="text"
                         class="form-control">
                         <option *ngFor="let affiliate of affiliates" [value]="affiliate.name"
-                            [selected]="affiliate.name==role.affiliation">{{affiliate.name}}</option>
+                            [selected]="affiliate.name==role?.affiliation">{{affiliate.name}}</option>
                     </select>
                     <ng-template #elseAffiliation>
-                        <p>{{role.affiliation}}</p>
+                        <p>{{role?.affiliation}}</p>
                     </ng-template>
                 </div>
 
                 <div class="col-md-12 mb-2">
                     <h6>First Name</h6>
-                    <input *ngIf="user.systemRole == 'admin'; else elseFirstName" [(ngModel)]="role.firstName"
+                    <input *ngIf="user.systemRole == 'admin'; else elseFirstName" [ngModel]="role?.firstName"
                         name="firstName" type="text" class="form-control">
                     <ng-template #elseFirstName>
                         <p>{{role.firstName}}</p>
@@ -40,7 +35,7 @@
                 </div>
                 <div class="col-md-12 mb-2">
                     <h6>Last Name</h6>
-                    <input *ngIf="user.systemRole == 'admin'; else elseLastName" [(ngModel)]="role.lastName"
+                    <input *ngIf="user.systemRole == 'admin'; else elseLastName" [ngModel]="role?.lastName"
                         name="lastName" type="text" class="form-control">
                     <ng-template #elseLastName>
                         <p>{{role.lastName}}</p>
@@ -66,7 +61,7 @@
         <div class="row">
             <div class="input-wrapper Lower-part">
                 <h6>Profile Description</h6>
-                <ckeditor name="description" [editor]="Editor " [(ngModel)]="role.description "
+                <ckeditor name="description" [editor]="Editor " [ngModel]="role?.description"
                     [config]="editorConfig" style="min-height: 500px;">
                 </ckeditor>
             </div>
@@ -77,6 +72,5 @@
         <button type="submit" class="btn blue">Save</button> &nbsp;
         <button type="button" (click)="cancel() " class="btn blue">Cancel</button>
     </div>
-
 
 </form>

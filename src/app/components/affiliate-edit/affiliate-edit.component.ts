@@ -17,7 +17,6 @@ export class AffiliateEditComponent implements OnInit {
   @Input() affiliateToEdit: Affiliate;
   user: firebase.User;
   affiliate: Affiliate;
-  authError: any;
   affiliateID: string;
   selectedImage: any = null;
   uploadImageUrl: string;
@@ -28,6 +27,7 @@ export class AffiliateEditComponent implements OnInit {
   croppedImage: any = ''; // cropped event file
   imageHasChanged = false;
   imageConfirmed = false;
+
   fileChangeEvent(event: any): void {
     this.imageChangedEvent = event;
     this.imageHasChanged = true;
@@ -73,16 +73,16 @@ export class AffiliateEditComponent implements OnInit {
         this.user = user[0];
       }
     });
-    this.affiliateID = this.route.snapshot.paramMap.get('affiliateID');
+    this.affiliateID = this.route.snapshot.paramMap.get('id');
     this.affiliateService.getAffiliate(this.affiliateID).subscribe(dbAffiliate => {
       this.affiliate = dbAffiliate;
       this.imageDisplayed = this.affiliate.avatar;
-      console.log(this.affiliate);
     });
   }
 
 
   async update(editedAffiliate) {
+    console.log(editedAffiliate);
     if (editedAffiliate.title !== '') {
       editedAffiliate.id = this.affiliateID;
       // update avatar if we have an image confirmed

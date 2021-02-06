@@ -21,7 +21,6 @@ export class ProfileEditComponent implements OnInit {
   user: AppUser;
   role: Role;
   affiliates: Affiliate[];
-  authError: any;
   selectedImage: any = null;
   uploadImageUrl: string;
   uploadImageFile: string;
