@@ -31,6 +31,10 @@ export class AffiliateAddComponent implements OnInit {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
+                /* Check if user's role position is control */
+                if (user[0].systemRole !== 'admin') {
+                    this.router.navigate(['/home']);
+                }
             }
         });
     }

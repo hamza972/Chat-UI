@@ -35,10 +35,6 @@ export class TweetComponent implements OnInit {
         language: 'en'
     };
 
-    public htmlProperty(str: string): SafeHtml {
-        return this.sr.bypassSecurityTrustHtml(str);
-    }
-
     constructor(
         private sr: DomSanitizer,
         private auth: AuthService,

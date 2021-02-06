@@ -25,7 +25,7 @@ export class EmailListComponent implements OnInit {
   ngOnChanges() {
     if (this.emails !== undefined) {
       this.emails$ = this.filter.valueChanges.pipe(
-        startWith(''),
+        startWith(""),
         map((query) => this.search(query))
       );
     }
@@ -43,7 +43,7 @@ export class EmailListComponent implements OnInit {
   }
 
   getTab() {
-    return localStorage.getItem('tab');
+    return localStorage.getItem("tab");
   }
 
   deleteEmail(email: Email, content) {
@@ -76,13 +76,14 @@ export class EmailListComponent implements OnInit {
     return str;
   }
 
-  public htmlProperty(str: string): SafeHtml {
+  public htmlProperty(str: string) : SafeHtml {
+
          return this.sr.bypassSecurityTrustHtml(str);
   }
 
   filterDeletePageSendReceive(from: string) {
-    if (from === localStorage.getItem('userEmail')) {
-      return 'me';
+    if (from == localStorage.getItem("userEmail")) {
+      return "me";
     }
     return from;
   }

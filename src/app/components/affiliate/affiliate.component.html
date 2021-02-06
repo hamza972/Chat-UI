@@ -13,25 +13,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- DOESN'T LOOK GOOD ON THE BROWSER BUT WORKS OK  -->
                     <tr *ngFor="let affiliate of affiliates">
-                        <td *ngIf="!editState">{{affiliate.countryName}}</td>
-                        <td *ngIf="!editState"><button (click)="edit($event, affiliate)" value="Edit" class="btn blue">Edit</button></td>
-
-                        <form (ngSubmit)="update(affiliate)">
-                        <td *ngIf="editState && itemToEdit.id == affiliate.id" id="abc">
-
-                                    <input *ngIf="itemToEdit.id == affiliate.id"  type="text" name="countryName" [(ngModel)]="affiliate.countryName">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <td *ngIf="!editState">{{affiliate.name}}</td>
+                        <td *ngIf="!editState">
+                            <a [routerLink]="['/affiliate-edit', affiliate.id]">
+                                <button value="Edit" class="btn blue">Edit</button>
+                            </a>
+                            <p></p>
+                            <button value="{{affiliate.name}}" class="btn blue" (click)="delete(affiliate.id)">Delete</button>
                         </td>
-                        <td *ngIf="editState && itemToEdit.id == affiliate.id" id="def">
-
-                                    <input type="submit" name="" value="Update" class="btn orange">
-                                    <button (click)="clearState()" value="Cancel" class="btn red">Cancel</button>
-                        </td>
-                        </form>
                     </tr>
                 </tbody>
             </table>

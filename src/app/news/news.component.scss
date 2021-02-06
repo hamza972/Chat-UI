@@ -1,6 +1,4 @@
-body {
-  max-width: 100%;
-}
+
 ul {
   list-style-type: none;
   margin: 0;
@@ -37,10 +35,8 @@ ul {
 .card-panel 
 {
   background-color: #E1EEF6;
-  width: 1040px;
+  width: 100%;
   font-size: 20px;
-  margin-left: 8%;
-
 }
 
 a{
@@ -55,11 +51,10 @@ a{
 #txtSearchNews
 {    
     float: right;
-    margin-right: 10%;
     border: none;
     background-color: #FFFAE8;
     // box-sizing: border-box;
-    width: 30%;
+    //width: 30%;
     border: none;
     // padding: 0 10px;
     height: 50px;
@@ -70,7 +65,6 @@ a{
 
 .search-btn
 {
-    float: right;
     height: 50px;
     width: 52px;
     padding: 0;
@@ -100,11 +94,11 @@ a{
 input[type=text]:not(.browser-default)
 {
    background-color: #FFFAE8;
-   margin-left: 13%;
+   //margin-left: 13%;
    border: none;
    height: 50px;
    width: 60%;
-   float: left;
+   //float: left;
 
 }
 // ==================  Adjust the news description box  =========================
@@ -121,8 +115,6 @@ input[type=text]:not(.browser-default)
 // ==================  Adjust the botton =========================
 button[type="submit"]
 {
- display: inline-block;
-  width: 60%;
   border: none;
   outline: none ;
   height: 40px;
@@ -130,8 +122,9 @@ button[type="submit"]
   background: #FD999A;
   cursor: pointer;
   color:  #FFFFFF;
-  font-weight: bold;   
-  margin-left: 690px;
+  font-weight: bold;
+  padding: 0px 25px;
+  float: right;
 }
 button[type="submit"]:hover
 {
@@ -209,4 +202,24 @@ margin-top: 10px;
   // height: 200px;
   width: 152%;
   margin-left: 13%;
+}
+
+.modal{
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+.modal .modal-footer{
+  border-bottom: unset !important;
+}
+.modal .modal-footer{
+  border-radius: 0px !important;
+  background-color: unset !important;
+  padding: unset !important;
+  height: unset !important;
+  width: 100%;
+  text-align: unset !important;
+  border-top: unset !important;
+}
+.modal button:focus{
+  background-color: unset !important;
 }
