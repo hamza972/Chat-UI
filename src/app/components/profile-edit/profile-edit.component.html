@@ -42,7 +42,6 @@
                     </ng-template>
                 </div>
             </div>
-
         </div>
         <div class="col-6">
             <image-cropper *ngIf="imageConfirmed === false && imageHasChanged===true" [imageChangedEvent]="imageChangedEvent"
@@ -55,7 +54,6 @@
             <button type="button" *ngIf="imageHasChanged" (click)="confirmImage()" class="col-md-6">Confirm</button>
             <button type="button" *ngIf="imageHasChanged" (click)="cancelImage()" class="col-md-6">cancel</button>
         </div>
-
     </div>
     <div class="row mt-4">
         <div class="row">

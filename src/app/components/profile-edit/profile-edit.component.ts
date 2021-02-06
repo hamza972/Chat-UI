@@ -10,8 +10,6 @@ import { ActivatedRoute } from '@angular/router';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
 import { ImageCroppedEvent, base64ToFile } from 'ngx-image-cropper';
 import { StorageService } from '../../services/storage.service';
-import { DomSanitizer } from '@angular/platform-browser';
-
 
 @Component({
   selector: 'app-profile-edit',
@@ -80,7 +78,6 @@ export class ProfileEditComponent implements OnInit {
     private auth: AuthService,
     private roleService: RoleService,
     @Inject(StorageService) private storageService: StorageService,
-    private sr: DomSanitizer,
     private affiliateService: AffiliateService,
     private route: ActivatedRoute,
     private router: Router,
@@ -103,13 +100,13 @@ export class ProfileEditComponent implements OnInit {
       this.router.navigate(['/profile', this.roleID]);
     }
 
-    this.roleService.getRole(this.roleID).subscribe(rolesFromDB => {
-      this.role = rolesFromDB;
+    this.roleService.getRole(this.roleID).subscribe(dbRole => {
+      this.role = dbRole;
       this.imageDisplayed = this.role.avatar;
     });
 
-    this.affiliateService.get().subscribe(affiliate => {
-      this.affiliates = affiliate;
+    this.affiliateService.get().subscribe(dbAffiliates => {
+      this.affiliates = dbAffiliates;
     });
   }
 
