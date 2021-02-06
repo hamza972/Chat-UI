@@ -1,26 +1,25 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { newsClass } from '../models/newsClass';
+import { News } from '../models/news';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
+
 export class NewsService {
 
-    newsCollection: AngularFirestoreCollection<newsClass>;
-    news: Observable<newsClass[]>;
-    newsDoc: AngularFirestoreDocument<newsClass>;
+    newsCollection: AngularFirestoreCollection<News>;
+    news: Observable<News[]>;
+    newsDoc: AngularFirestoreDocument<News>;
 
     constructor(public afs: AngularFirestore) {
-        //this.items = this.afs.collection('items').valueChanges();
-
         this.newsCollection = this.afs.collection('News', ref => ref.orderBy('newsDate', 'desc'));
 
         this.news = this.newsCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
-                const data = a.payload.doc.data() as newsClass;
+                const data = a.payload.doc.data() as News;
                 data.id = a.payload.doc.id;
                 return data;
             });
@@ -31,16 +30,16 @@ export class NewsService {
         return this.newsCollection.valueChanges();
     }
 
-    add(news: newsClass) {
+    add(news: News) {
         this.newsCollection.add(news);
     }
 
-    delete(news: newsClass) {
+    delete(news: News) {
         this.newsDoc = this.afs.doc(`News/${news.id}`);
         this.newsDoc.delete();
     }
 
-    update(news: newsClass) {
+    update(news: News) {
         this.newsDoc = this.afs.doc(`News/${news.id}`);
         this.newsDoc.update(news);
     }

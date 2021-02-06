@@ -1,5 +1,5 @@
 export interface Affiliate {
     id?: string;
-    avatar?: string;
+    countryName?: string;
     name?: string;
   }

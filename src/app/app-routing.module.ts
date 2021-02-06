@@ -13,6 +13,7 @@ import { EmailViewComponent } from './email-view/email-view.component';
 import { NewsPublishComponent } from './news-publish/news-publish.component';
 import { RolePageComponent } from './RolePage/RolePage.component';
 
+
 import { ControlComponent } from './components/control/control.component';
 import { ParticipantComponent } from './components/participant/participant.component';
 import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
@@ -20,14 +21,13 @@ import { RoleComponent } from './components/role/role.component';
 import { RoleAddComponent } from './components/role-add/role-add.component';
 import { AffiliateComponent } from './components/affiliate/affiliate.component';
 import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
-import { AffiliateEditComponent } from './components/affiliate-edit/affiliate-edit.component';
 import { TweetComponent } from './components/tweet/tweet.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
 
 const routes: Routes = [
-{ path: 'affiliate', component: AffiliateComponent },
+{ path: 'control/affiliate', component: AffiliateComponent },
 { path: 'affiliate-add', component: AffiliateAddComponent },
-{ path: 'affiliate-edit/:affiliatecountryName', component: AffiliateEditComponent },
 { path: 'login', component: LoginComponent },
 { path: 'registration', component: RegistrationComponent},
 { path: 'home', component: HomeComponent},
@@ -46,6 +46,7 @@ const routes: Routes = [
 { path: 'participant', component: ParticipantComponent},
 { path: 'participant-add', component: ParticipantAddComponent},
 { path: 'profile/:id', component: ProfileComponent},
+{ path: 'profile-edit/:id', component: ProfileEditComponent },
 { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 

@@ -14,7 +14,8 @@ export class AffiliateService {
     affiliateDoc: AngularFirestoreDocument<Affiliate>;
 
     constructor(public afs: AngularFirestore) {
-        this.affiliateCollection = this.afs.collection('Affiliates', ref => ref.orderBy('name', 'asc'));
+        //this.items = this.afs.collection('items').valueChanges();
+        this.affiliateCollection = this.afs.collection('Countries', ref => ref.orderBy('countryName', 'asc'));
     }
 
     get() {
@@ -27,21 +28,17 @@ export class AffiliateService {
         }));
     }
 
-    getAffiliate(name:string){
-        return this.afs.collection('Affiliates').doc(name).valueChanges();
-    }
-
     add(affiliate: Affiliate) {
         this.affiliateCollection.add(affiliate);
     }
 
     delete(affiliate: Affiliate) {
-        this.affiliateDoc = this.afs.doc(`Affiliates/${affiliate.id}`);
+        this.affiliateDoc = this.afs.doc(`Countries/${affiliate.id}`);
         this.affiliateDoc.delete();
     }
 
     update(affiliate: Affiliate) {
-        this.affiliateDoc = this.afs.doc(`Affiliates/${affiliate.id}`);
+        this.affiliateDoc = this.afs.doc(`Countries/${affiliate.id}`);
         this.affiliateDoc.update(affiliate);
     }
 }

@@ -74,14 +74,12 @@ padding: 0;
 
 }
 
-.table th
+.table th, .table td
 {
-    border: none;
+    border-top: none;
+    border-bottom:1px solid  #6e7783;
 }
-.table td {
-  border-top: none;
-  border-bottom:1px solid  #6e7783;
-}
+
 td, th 
 {
     padding: 15px 5px;

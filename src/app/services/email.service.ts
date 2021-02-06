@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   AngularFirestore,
   AngularFirestoreCollection,
@@ -11,7 +11,7 @@ import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class EmailService {
   emailCollection: AngularFirestoreCollection<Email>;
@@ -59,11 +59,11 @@ export class EmailService {
   }
 
   inbox(user: User) {
-    this.emailCollection = this.afs.collection("Emails", (ref) =>
+    this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
-        .where("to.user", "==", user.email)
-        .where("to.deleted", "==", false)
-        .where("draft", "==", false)
+        .where('to.user', '==', user.email)
+        .where('to.deleted', '==', false)
+        .where('draft', '==', false)
     );
 
     return this.emailCollection.snapshotChanges().pipe(
@@ -78,11 +78,11 @@ export class EmailService {
   }
 
   sent(user: User) {
-    this.emailCollection = this.afs.collection("Emails", (ref) =>
+    this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
-        .where("from.user", "==", user.email)
-        .where("from.deleted", "==", false)
-        .where("draft", "==", false)
+        .where('from.user', '==', user.email)
+        .where('from.deleted', '==', false)
+        .where('draft', '==', false)
     );
 
     return this.emailCollection.snapshotChanges().pipe(
@@ -97,11 +97,11 @@ export class EmailService {
   }
 
   drafts(user: User) {
-    this.emailCollection = this.afs.collection("Emails", (ref) =>
+    this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
-        .where("from.user", "==", user.email)
-        .where("from.deleted", "==", false)
-        .where("draft", "==", true)
+        .where('from.user', '==', user.email)
+        .where('from.deleted', '==', false)
+        .where('draft', '==', true)
     );
 
     return this.emailCollection.snapshotChanges().pipe(
@@ -123,8 +123,8 @@ export class EmailService {
   }
 
   inboxDeleted(user: User) {
-    this.emailCollection = this.afs.collection("Emails", (ref) =>
-      ref.where("to.user", "==", user.email).where("to.deleted", "==", true)
+    this.emailCollection = this.afs.collection('Emails', (ref) =>
+      ref.where('to.user', '==', user.email).where('to.deleted', '==', true)
     );
 
     return this.emailCollection.snapshotChanges().pipe(
@@ -139,8 +139,8 @@ export class EmailService {
   }
 
   sentDeleted(user: User) {
-    this.emailCollection = this.afs.collection("Emails", (ref) =>
-      ref.where("from.user", "==", user.email).where("from.deleted", "==", true)
+    this.emailCollection = this.afs.collection('Emails', (ref) =>
+      ref.where('from.user', '==', user.email).where('from.deleted', '==', true)
     );
 
     return this.emailCollection.snapshotChanges().pipe(

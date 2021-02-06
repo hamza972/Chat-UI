@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { AppUser } from '../models/user';
 import { LoginService } from '../auth/login.service';
 import { Router } from '@angular/router';
-import { newsClass } from '../models/newsClass';
+import { News } from '../models/News';
 import { Participant } from '../models/participant';
 import { AuthService } from '../services/auth.service';
 import * as Editor from '../../assets/custom-ckeditor/ckeditor';
@@ -16,15 +16,15 @@ import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 export class NewsComponent implements OnInit {
   public Editor = Editor;
   user: firebase.User;
-  newUserNews: newsClass;
+  newUserNews: News;
   newsUser: AppUser;
   userID: string;
   user$: Observable<AppUser>;
-  newsArray: newsClass[];
-  sortedArray: newsClass[];
+  newsArray: News[];
+  sortedArray: News[];
   authError: any;
   searchText: string;
-  user2: Participant = { rolePosition: '' };
+  user2: Participant = { systemRole: '' };
   editorConfig = {
     toolbar: {
       items: [

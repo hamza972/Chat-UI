@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { LoginService } from "../auth/login.service";
-import { Router } from "@angular/router";
-import { AppUser as User } from "../models/user";
+import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../auth/login.service';
+import { Router } from '@angular/router';
+import { AppUser as User } from '../models/user';
 
 @Component({
-  selector: "app-email",
-  templateUrl: "./email.component.html",
-  styleUrls: ["./email.component.scss"],
+  selector: 'app-email',
+  templateUrl: './email.component.html',
+  styleUrls: ['./email.component.scss'],
 })
 export class EmailComponent implements OnInit {
   user: User;
@@ -21,6 +21,6 @@ export class EmailComponent implements OnInit {
   }
 
   setTab(event): void {
-    localStorage.setItem("tab", event.nextId);
+    localStorage.setItem('tab', event.nextId);
   }
 }
