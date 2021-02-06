@@ -1,34 +1,33 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-
 <body>
 
     <div class="row mt-4">
-
         <div class="col-12">
+
             <div class="row" *ngIf="authError">
                 <div class="col-12 alert alert-danger">
                     {{ authError?.message }}
                 </div>
             </div>
+
             <form #Form="ngForm" (ngSubmit)="add(Form)">
                 <div class="row">
                     <div class="input-wrapper" *ngIf="user.systemRole == 'admin'">
-                        <ckeditor name="content" [editor]="Editor" [config]="editorConfig"style="min-height: 500px;"
+                        <ckeditor name="content" [editor]="Editor" [config]="editorConfig" style="min-height: 500px;"
                             [(ngModel)]="scenario.content">
                         </ckeditor>
                         <div class="col-md-12">
-                            <button type="submit">Post </button>
+                            <button type="submit">Post</button>
                         </div>
                     </div>
                 </div>
             </form>
-        </div>
 
+        </div>
     </div>
 
     <div class="row" *ngFor="let scenario of scenarios">
-        <div class="col-1">
-        </div>
+        <div class="col-1"></div>
         <div class="col-11">
             <div class="card-panel">
                 <div class="card-content">
@@ -40,3 +39,5 @@
             </div>
         </div>
     </div>
+
+</body>
