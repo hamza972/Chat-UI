@@ -62,6 +62,7 @@ import { HttpModule } from '@angular/http';
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+import { AffiliateEditComponent } from './components/affiliate-edit/affiliate-edit.component';
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 
@@ -97,6 +98,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     RolePageComponent,
     StatisticsComponent,
     ProfileEditComponent,
+    AffiliateEditComponent,
   ],
   imports: [
     BrowserModule,

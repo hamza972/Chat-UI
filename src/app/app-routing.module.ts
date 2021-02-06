@@ -21,6 +21,7 @@ import { RoleComponent } from './components/role/role.component';
 import { RoleAddComponent } from './components/role-add/role-add.component';
 import { AffiliateComponent } from './components/affiliate/affiliate.component';
 import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
+import { AffiliateEditComponent } from './components/affiliate-edit/affiliate-edit.component';
 import { TweetComponent } from './components/tweet/tweet.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
@@ -28,6 +29,7 @@ import { ProfileEditComponent } from './components/profile-edit/profile-edit.com
 const routes: Routes = [
 { path: 'control/affiliate', component: AffiliateComponent },
 { path: 'affiliate-add', component: AffiliateAddComponent },
+{ path: 'affiliate-edit/:affiliateID', component: AffiliateEditComponent },
 { path: 'login', component: LoginComponent },
 { path: 'registration', component: RegistrationComponent},
 { path: 'home', component: HomeComponent},

@@ -1,0 +1,66 @@
+.col-12 
+{
+    height: 100px;
+    padding-left: 0;
+    color: #454552;
+}
+h4
+{
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.mb-2, .my-2 
+{
+    margin-left: 0;
+    padding-left: 0;
+}
+input:not([type]), input[type=text]:not(.browser-default), input[type=password]:not(.browser-default), input[type=email]:not(.browser-default), input[type=url]:not(.browser-default), input[type=time]:not(.browser-default), input[type=date]:not(.browser-default), input[type=datetime]:not(.browser-default), input[type=datetime-local]:not(.browser-default), input[type=tel]:not(.browser-default), input[type=number]:not(.browser-default), input[type=search]:not(.browser-default), textarea.materialize-textarea
+{
+    margin-left: 0;
+    padding-left: 0;
+    border-bottom: 1px solid  #454552;
+    font-size: 18px;
+    padding-bottom: 10px;
+
+    width: 100%;
+}
+select[type="text"]
+{
+    margin-left: 0;
+    padding-left: 0;
+    border-bottom: 1px solid  #454552;
+    font-size: 18px;
+    width: 100%;
+}
+.col-md-12 {
+padding-left: 0;
+}
+
+::placeholder
+{
+    color: rgba(0, 0, 0, .3);
+}
+
+.col-md-6 button
+{
+    margin-top: 15px;
+    margin-right: 70px;
+    width: 20%;
+    border: 1px solid #8ABBDB;
+    outline: none ;
+    height: 40px;
+    font-size: 16px;    
+    background: transparent;
+    cursor: pointer;
+    color:  #454552 ;
+    font-weight: bold; 
+}
+.col-md-6 button:hover
+{
+    background-color: #8ABBDB;
+    color:#ffffff;
+}
+p{
+    padding: 10px;
+}
