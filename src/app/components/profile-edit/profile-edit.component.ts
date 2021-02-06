@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Participant } from '../../models/participant';
+import { AppUser } from '../../models/user';
 import { Role } from '../../models/role';
 import { Affiliate } from '../../models/affiliate';
 import { RoleService } from '../../services/role.service';
@@ -18,7 +18,7 @@ import { StorageService } from '../../services/storage.service';
 })
 export class ProfileEditComponent implements OnInit {
   roleID: string;
-  user: Participant;
+  user: AppUser;
   role: Role;
   affiliates: Affiliate[];
   authError: any;
@@ -90,19 +90,16 @@ export class ProfileEditComponent implements OnInit {
         this.router.navigate(['/home']);
       } else {
         this.user = user[0];
+        this.roleID = this.route.snapshot.paramMap.get('id');
+        if (this.user.roleID !== this.roleID && this.user.systemRole !== 'admin') {
+          // user is not and admin nor playing the role of this profile
+          this.router.navigate(['/profile', this.roleID]);
+        }
+        this.roleService.getRole(this.roleID).subscribe(dbRole => {
+          this.role = dbRole;
+          this.imageDisplayed = this.role.avatar;
+        });
       }
-    });
-
-    this.roleID = this.route.snapshot.paramMap.get('id');
-
-    if (this.user.roleID !== this.roleID || this.user.systemRole !== 'admin') {
-      // user is not and admin nor playing the role of this profile
-      this.router.navigate(['/profile', this.roleID]);
-    }
-
-    this.roleService.getRole(this.roleID).subscribe(dbRole => {
-      this.role = dbRole;
-      this.imageDisplayed = this.role.avatar;
     });
 
     this.affiliateService.get().subscribe(dbAffiliates => {

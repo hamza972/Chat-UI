@@ -1,9 +1,8 @@
-#fileInput
-{
+#fileInput {
     display: none;
 }
-.col-12 
-{
+
+.col-12 {
     height: 100px;
     padding-left: 0;
     color: #454552;
@@ -38,7 +37,6 @@ textarea.materialize-textarea {
     border-bottom: 1px solid #454552;
     font-size: 18px;
     padding-bottom: 10px;
-   
     width: 100%;
 }
 
@@ -94,4 +92,9 @@ select[type="text"] {
 // =============== Lower-part =====================
 .Lower-part {
     width: 1200px;
+}
+
+// =============== image =====================
+.imagebox {
+    width: 300px;
 }
