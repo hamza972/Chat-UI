@@ -14,7 +14,7 @@ export class AffiliateAddComponent implements OnInit {
     user: firebase.User;
 
     affiliate: Affiliate = {
-        countryName: ""
+        name: ''
     };
     authError: any;
 
@@ -27,12 +27,16 @@ export class AffiliateAddComponent implements OnInit {
     ngOnInit(): void {
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
-            if(user === null) {
+            if (user === null) {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
+                /* Check if user's role position is control */
+                if (user[0].systemRole !== 'admin') {
+                    this.router.navigate(['/home']);
+                }
             }
-        })
+        });
     }
 
     cancel() {
@@ -40,7 +44,7 @@ export class AffiliateAddComponent implements OnInit {
     }
 
     add() {
-        if(this.affiliate.countryName != '') {
+        if (this.affiliate.name !== '') {
             this.affiliateService.add(this.affiliate);
             this.router.navigate(['/control']);
         }

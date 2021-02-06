@@ -16,7 +16,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class TweetComponent implements OnInit {
     tweet: Tweet = { content: '' };
     tweets: Tweet[];
-    user: Participant = { rolePosition: '' };
+    user: Participant = { systemRole: '' };
     authError: any;
 
     public Editor = Editor;
@@ -35,10 +35,6 @@ export class TweetComponent implements OnInit {
         language: 'en'
     };
 
-    public htmlProperty(str: string): SafeHtml {
-        return this.sr.bypassSecurityTrustHtml(str);
-    }
-
     constructor(
         private sr: DomSanitizer,
         private auth: AuthService,
@@ -55,7 +51,7 @@ export class TweetComponent implements OnInit {
             } else {
                 this.user = user[0];
             }
-        })
+        });
 
         this.tweetService.get().subscribe(tweet => {
             this.tweets = tweet;
@@ -90,9 +86,8 @@ export class TweetComponent implements OnInit {
                 roleID: this.user.roleID,
                 roleFirstName: this.user.roleFirstName,
                 roleLastName: this.user.roleLastName,
-                rolePosition: this.user.rolePosition,
+                roleTitle: this.user.roleTitle,
                 roleAffiliation: this.user.roleAffiliation,
-                // profileImage: this.user.profileImage
             };
             this.tweetService.add(this.tweet);
         }

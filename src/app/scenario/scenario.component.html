@@ -1,94 +1,43 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-
 <body>
 
     <div class="row mt-4">
-
         <div class="col-12">
+
             <div class="row" *ngIf="authError">
                 <div class="col-12 alert alert-danger">
                     {{ authError?.message }}
                 </div>
             </div>
+
             <form #Form="ngForm" (ngSubmit)="add(Form)">
                 <div class="row">
-                    <div class="input-wrapper" *ngIf="user.rolePosition == 'admin'">
-                        <!-- <input [(ngModel)]="scenario.content" name="content" type="text" class="form-control"
-                            id="content" placeholder="Add the next scenario task for the students!!!"> -->
+                    <div class="input-wrapper" *ngIf="user.systemRole == 'admin'">
                         <ckeditor name="content" [editor]="Editor" [config]="editorConfig" style="min-height: 500px;"
-                            [(ngModel)]="scenario.content"></ckeditor>
+                            [(ngModel)]="scenario.content">
+                        </ckeditor>
                         <div class="col-md-12">
-                            <button type="submit">Post </button>
+                            <button type="submit">Post</button>
                         </div>
                     </div>
                 </div>
             </form>
-        </div>
 
+        </div>
     </div>
 
     <div class="row" *ngFor="let scenario of scenarios">
-        <div class="col-1">
-        </div>
+        <div class="col-1"></div>
         <div class="col-11">
             <div class="card-panel">
                 <div class="card-content">
-                    <p class="black-text" style="font-family:Georgia"><i>{{scenario.content}}</i></p>
+                    <p class="black-text" style="font-family:Georgia"><i [innerHtml]="scenario.content"></i></p>
                 </div>
                 <div class="card-action">
-                    <a href="#">{{scenario.date.toDate() | date: 'medium'}}</a>
+                    <a class="card-date">{{scenario.date.toDate() | date: 'medium'}}</a>
                 </div>
             </div>
         </div>
     </div>
 
-
-
-    <!-- set a side bar -->
-
-    <div class="contact-info">
-        <div class="option">
-            <i class="fa fa-home"></i>
-            <a class="text" href="#">Home</a>
-        </div>
-
-        <div class="option">
-            <i class="fas fa-book-open"></i>
-            <a class="text" routerLink="/scenario">Scenario</a>
-        </div>
-
-        <div class="option">
-            <i class="fas fa-user-alt"></i>
-            <a class="text" routerLink="/RolePage">Role</a>
-        </div>
-
-
-        <div class="option">
-            <i class="fa fa-envelope"></i>
-            <a class="text" routerLink="/email">Email</a>
-
-        </div>
-
-        <div class="option">
-            <i class="fab fa-twitter-square"></i>
-            <a class="text" routerLink="/tweet">Tweet</a>
-
-        </div>
-
-        <div class="option">
-            <i class="fas fa-newspaper"></i>
-            <a class="text" routerLink="/news">News</a>
-        </div>
-
-        <div class="option">
-            <i class="fas fa-comment-alt"></i>
-            <a class="text" routerLink="/chat">Chat</a>
-        </div>
-
-        <div class="option">
-            <i class="fa fa-cog"></i>
-            <a class="text" routerLink="/control">Control</a>
-
-        </div>
-
-    </div>
+</body>
