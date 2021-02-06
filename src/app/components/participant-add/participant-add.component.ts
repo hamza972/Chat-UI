@@ -16,7 +16,6 @@ export class ParticipantAddComponent implements OnInit {
     participant: Participant;
     roles: Role[];
     editState = false;
-    participantToEdit: Participant;
     roleDetails: Array<string>;
     user: firebase.User;
     authError: any;
@@ -35,30 +34,43 @@ export class ParticipantAddComponent implements OnInit {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
+                /* Check if user's role position is admin */
+                if (user[0].systemRole !== 'admin') {
+                    this.router.navigate(['/home']);
+                }
             }
         });
 
-        this.roleService.get().subscribe(role => {
-            console.log(role);
-            this.roles = role;
+        this.roleService.get().subscribe(dbRoles => {
+            this.roles = dbRoles;
         });
-    }
-
-    selectionChanged(event) {
-        this.roleDetails = event.target.value.split('|');
-        console.log(this.roleDetails);
     }
 
     cancel() {
         this.router.navigate(['/control']);
     }
 
-    add() {
-        if (this.participant.email !== '') {
-            this.participant.roleID = this.roleDetails[4];
-            this.participant.systemRole = 'participant';
-            this.participantService.add(this.participant);
-            this.router.navigate(['/control']);
+    add(participant: Participant) {
+        console.log('participant', participant);
+        const deakinEmailRgx = new RegExp('@deakin.edu.au$');
+        if (participant.email !== null) {
+            if (deakinEmailRgx.test(participant.email)) {
+                const task = this.roleService.getRole(participant.roleID).subscribe(dbRole => {
+                    const role: Role = dbRole;
+                    console.log('dbRole', dbRole);
+                    console.log('role', role);
+                    participant.roleFirstName = role.firstName;
+                    participant.roleLastName = role.lastName;
+                    participant.roleAffiliation = role.affiliation;
+                    participant.systemRole = 'participant';
+                    this.participantService.add(participant);
+                    this.router.navigate(['/control']);
+                }).unsubscribe();
+            } else {
+                alert('Invalid email entry.');
+            }
+        } else {
+            alert('Error.');
         }
     }
 
@@ -82,8 +94,7 @@ export class ParticipantAddComponent implements OnInit {
         this.editState = false;
         this.participantToEdit = null;
     }
-    */               
-   
+    */
     //
 
 }

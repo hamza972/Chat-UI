@@ -25,7 +25,6 @@ export class AuthService {
         return this.afAuth.authState.pipe(
             switchMap((user) => {
                 if (user) {
-
                     return this.db.collection(
                         'Users', (ref) => ref.where(
                             'email', '==', user.email)).snapshotChanges().pipe(map(changes => {
@@ -46,9 +45,7 @@ export class AuthService {
         this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
         .then(userCredential => {
             this.newUser = user;
-
             userCredential.user.updateProfile({displayName: user.firstName});
-
             this.insertUserData(userCredential).then(() => {
                 this.router.navigate(['/home']);
             });
@@ -64,7 +61,6 @@ export class AuthService {
             firstName: this.newUser.firstName,
             lastName: this.newUser.lastName,
             systemRole: this.newUser.systemRole,
-            role: this.newUser.role,
             roleID: this.newUser.roleID,
             roleFirstName: this.newUser.roleFirstName,
             roleLastName: this.newUser.roleLastName,
