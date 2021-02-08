@@ -34,24 +34,26 @@
     </div>
 </div>
 
-<div class="row" *ngFor="let newsItem of newsItems | filter : searchText">
-    <!-- <div class="col-1">
-                <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
-    </div>-->
-    <div class="col-12">
-        <div class="card-panel">
-            <div class="card-content">
-                <p class="h1">{{ newsItem.newsHeadline }}</p>
-                <p class="grey-text">{{newsItem.userRole}} ({{newsItem.userName}})</p>
-                <div class="card-action">
-                    <a>{{newsItem.newsDate.toDate() | date: 'medium'}}</a>
+    <div class="row text-fix" *ngFor="let newsItem of newsItems | filter : searchText">
+        <!-- <div class="col-1">
+            <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
+        </div>-->
+        <div class="col-12">
+            <div class="card-panel ">
+                <div class="card-content">
+                    <p class="h1" [innerHtml]="newsItem.newsHeadline"></p>
+                    <p class="grey-text">{{newsItem.userRole}} ({{newsItem.userName}})</p>
+                    <div class="card-action">
+                        <a>{{newsItem.newsDate.toDate() | date: 'medium'}}</a>
+                    </div>
+                    <!-- <p class="deep-purple-text" *ngIf="user.rolePosition === 'admin'">{{newsItem.firstName}} {{newsItem.lastName}}</p>-->
+                    <p class="black-text" [innerHtml]="newsItem.newsDescription"></p>
                 </div>
                 <p class="deep-purple-text" >{{newsItem.firstName}} {{newsItem.lastName}}</p>
-                <div [innerHtml]="newsItem.newsDescription"></div>
             </div>
         </div>
     </div>
-</div>
+
 
 <!-- alert box -->
 <ng-template #content let-modal>
