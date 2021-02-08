@@ -130,11 +130,11 @@ export class LoginService {
       email: this.newUser.email,
       firstName: this.newUser.firstName,
       lastName: this.newUser.lastName,
-      role: this.newUser.role,
+      role: this.newUser.roleID,
       systemRole: 'participant',
       roleFirstName: this.newUser.roleFirstName,
       roleLastName: this.newUser.roleLastName,
-      rolePosition: this.newUser.roleTitle,
+      roleTitle: this.newUser.roleTitle,
       roleAffiliation: this.newUser.roleAffiliation,
     });
   }

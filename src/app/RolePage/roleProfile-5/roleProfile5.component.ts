@@ -18,4 +18,5 @@ export class roleProfile5Component implements OnInit {
   ngOnInit() {
     this.user$ = this.auth.user$;
   }
+
 }
