@@ -15,8 +15,8 @@
                 </div>
                 <div class="col-md-12 mb-2">
                     <h6>Affiliation</h6>
-                    <select *ngIf="user.systemRole == 'admin'; else elseAffiliation" name="affiliation" type="text"
-                        class="form-control">
+                    <select *ngIf="user.systemRole == 'admin'; else elseAffiliation"
+                    name="affiliation" type="text" class="form-control">
                         <option *ngFor="let affiliate of affiliates" [value]="affiliate.name"
                             [selected]="affiliate.name==role?.affiliation">{{affiliate.name}}</option>
                     </select>

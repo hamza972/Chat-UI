@@ -96,14 +96,14 @@ export class LoginService {
       });
   }
 
-  createParticipantUser(userP) {
+  createParticipantUser(user) {
     this.afAuth.auth
-      .createUserWithEmailAndPassword(userP.email, userP.password)
+      .createUserWithEmailAndPassword(user.email, user.password)
       .then((userCredential) => {
-        this.newUser = userP;
+        this.newUser = user;
 
         userCredential.user.updateProfile({
-          displayName: userP.firstName + ' ' + userP.lastName,
+          displayName: user.firstName + ' ' + user.lastName,
         });
 
         this.sendParticipantUserData(userCredential).then(() => {
@@ -114,6 +114,8 @@ export class LoginService {
         this.eventAuthError.next(error);
       });
   }
+
+  createAdminUser
 
   sendControlUserData(userCredential: firebase.auth.UserCredential) {
     return this.db.doc(`Users/${userCredential.user.uid}`).set({

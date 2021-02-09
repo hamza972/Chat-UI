@@ -69,7 +69,7 @@ export class NewsComponent implements OnInit {
       newsDescription: frm.value,
       newsHeadline: frm2.value,
       userEmail: this.user.email,
-      userRole: this.user.roleFirstName
+      userRole: this.user.firstName,
     };
     this.newsService.add(this.newsItemEntry);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
