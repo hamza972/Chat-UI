@@ -214,3 +214,24 @@ body
 a{
   color:#B1B6B8;
 }
+
+.text-fix
+{
+  overflow-wrap:break-word;
+  word-wrap:break-word;
+}
+
+.bold-text
+{
+    color: black;
+    font-size:xx-large;
+}
+
+.fit-box
+{
+    width: 100%;
+}
+
+::ng-deep img {
+    max-width: 100%;
+  }

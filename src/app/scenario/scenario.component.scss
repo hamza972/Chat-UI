@@ -80,6 +80,11 @@ button[type="submit"]:hover
 
 }
 
+.text-fix
+{
+  overflow-wrap: break-word;
+}
+
 .row-container
 {
   display:grid;

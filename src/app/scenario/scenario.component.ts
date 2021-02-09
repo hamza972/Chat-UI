@@ -22,8 +22,11 @@ export class ScenarioComponent implements OnInit {
     editorConfig = {
         toolbar: {
           items: [
-            'heading', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
-            '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'insertTable', 'undo', 'redo']
+            'heading', 'fontFamily', 'fontSize', 'fontColor', '|',
+            'bold', 'italic', 'underline', 'strikethrough', '|',
+            'link', 'bulletedList', 'numberedList', '|',
+            'alignment', 'indent', 'outdent', '|',
+            'blockQuote', 'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo']
         },
         image: {
           toolbar: [
@@ -41,7 +44,6 @@ export class ScenarioComponent implements OnInit {
         },
         language: 'en'
     };
-
     constructor(
         private auth: AuthService,
         private scenarioService: ScenarioService,

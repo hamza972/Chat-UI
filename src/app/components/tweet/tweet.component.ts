@@ -25,8 +25,11 @@ export class TweetComponent implements OnInit {
     editorConfig = {
         toolbar: {
           items: [
-            'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
-            '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'undo', 'redo' ]
+            'heading', 'fontFamily', 'fontSize', 'fontColor', '|',
+            'bold', 'italic', 'underline', 'strikethrough', '|',
+            'link', 'bulletedList', 'numberedList', '|',
+            'alignment', 'indent', 'outdent', '|',
+            'blockQuote', 'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo']
         },
         image: {
           toolbar: [

@@ -2,7 +2,6 @@
 {
 margin-top: 10px;
   height: 200px;
-  width: 100%;
   margin-left: 8%;
 }
 
@@ -45,6 +44,10 @@ button[type="submit"]:hover
   box-sizing: border-box;
 }
 
+.row {
+  display: block;
+}
+
 .row::after {
   content: "";
   clear:both;
@@ -68,6 +71,12 @@ button[type="submit"]:hover
   .color-12{width:100%;}
 
 }
+
+.text-fix
+{
+  overflow-wrap: break-word;
+}
+
 .row-container
 {
   display:grid;
@@ -165,4 +174,22 @@ option.a{
 
 .option:hover .text{
   left: 40px;
+}
+
+.tweet-button {
+  float: right;
+}
+
+::ng-deep img {
+  max-width: 100%;
+}
+
+::ng-deep .ck.ck-content ul,
+::ng-deep .ck.ck-content ul li{
+  list-style-type: inherit;
+}
+
+.ck.ck-content ul {
+  /* Default user agent stylesheet, you can change it to your needs. */
+  padding-left: 40px;
 }

@@ -22,8 +22,11 @@ export class NewsComponent implements OnInit {
   editorConfig = {
     toolbar: {
       items: [
-        'heading', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
-        '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'undo', 'redo',]
+        'heading', 'fontFamily', 'fontSize', 'fontColor', '|',
+        'bold', 'italic', 'underline', 'strikethrough', '|',
+        'link', 'bulletedList', 'numberedList', '|',
+        'alignment', 'indent', 'outdent', '|',
+        'blockQuote', 'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo']
     },
     image: {
       toolbar: [
@@ -66,7 +69,7 @@ export class NewsComponent implements OnInit {
       newsDescription: frm.value,
       newsHeadline: frm2.value,
       userEmail: this.user.email,
-      userRole: this.user.roleFirstName
+      userRole: this.user.firstName,
     };
     this.newsService.add(this.newsItemEntry);
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
