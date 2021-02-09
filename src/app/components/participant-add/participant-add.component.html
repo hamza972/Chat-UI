@@ -5,37 +5,37 @@
                 <h4>Participant Creation</h4>
             </div>
             <div class="col-12">
-                <form #participantForm="ngForm" (ngSubmit)="add(participantForm.value)">
+                <form #participantForm="ngForm" (ngSubmit)="add()">
                     <div class="row">
                         <div class="col-md-12 mb-2">
-                            <input [ngModel]="participant?.firstName" name="firstName" type="text" class="form-control"
+                            <input [(ngModel)]="participant.firstName" name="firstName" type="text" class="form-control"
                                 placeholder="First Name" required>
                         </div>
                         <div class="col-md-12 mb-2">
-                            <input [ngModel]="participant?.lastName" name="lastName" type="text" class="form-control"
+                            <input [(ngModel)]="participant.lastName" name="lastName" type="text" class="form-control"
                                 id="lastName" placeholder="Last Name" required>
                         </div>
                         <div class="col-md-12 mb-2">
-                            <select [ngModel]="participant?.roleID" name="roleID" type="text" class="form-control">
+                            <select [(ngModel)]="participant.roleID" name="roleID" type="text" class="form-control">
                                 <option *ngFor="let role of roles" [value]="role.id">
                                     {{role.firstName}} {{role.lastName}} - {{role.title}} of {{role.affiliation}}
                                 </option>
                             </select>
                         </div>
                         <div class="col-md-12 mb-2">
-                            <input [ngModel]="participant?.email" name="email" type="email" class="form-control"
+                            <input [(ngModel)]="participant.email" name="email" type="email" class="form-control"
                                 placeholder="Deakin Email Address" required>
                         </div>
                         <div class="col-md-12 mb-2">
-                            <input [ngModel]="participant?.password" name="password" type="password"
+                            <input [(ngModel)]="participant.password" name="password" type="password"
                                 class="form-control" placeholder="Password" required>
                         </div>
                         <div class="col-md-12 mb-2">
-                            <input [ngModel]="participant?.password" name="password" type="password"
+                            <input [(ngModel)]="participant.password" name="password" type="password"
                                 class="form-control" placeholder="Confirm Password" required>
                         </div>
                         <div class="col-md-12">
-                            <button type="submit" (click)="add()">Create</button>
+                            <button type="submit">Create</button>
                             <button type="button" (click)="cancel()">Cancel</button>
                         </div>
                     </div>

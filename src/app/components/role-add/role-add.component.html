@@ -4,11 +4,6 @@
     </div>
 
     <div class="col-12">
-        <div class="row" *ngIf="authError">
-            <div class="col-12 alert alert-danger">
-                {{ authError?.message }}
-            </div>
-        </div>
         <form #roleForm="ngForm" (ngSubmit)="add()">
             <div class="row">
                 <div class="col-md-12 mb-2">

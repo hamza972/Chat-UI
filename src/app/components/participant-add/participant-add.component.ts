@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { ParticipantService } from '../../services/participant.service';
 import { RoleService } from '../../services/role.service';
 import { Participant } from '../../models/participant';
 import { Role } from '../../models/role';
@@ -13,23 +12,19 @@ import { Role } from '../../models/role';
 })
 export class ParticipantAddComponent implements OnInit {
 
-    participant: Participant;
+    participant: Participant = {};
     roles: Role[];
     editState = false;
-    roleDetails: Array<string>;
     user: firebase.User;
-    authError: any;
-
     constructor(
-        private auth: AuthService,
-        private participantService: ParticipantService,
+        private authService: AuthService,
         private roleService: RoleService,
         private router: Router
     ) {}
 
     ngOnInit(): void {
         /* Check if user is signed in, otherwise redirect to home */
-        this.auth.getUserData().subscribe(user => {
+        this.authService.getUserData().subscribe(user => {
             if (user === null) {
                 this.router.navigate(['/home']);
             } else {
@@ -40,7 +35,6 @@ export class ParticipantAddComponent implements OnInit {
                 }
             }
         });
-
         this.roleService.get().subscribe(dbRoles => {
             this.roles = dbRoles;
         });
@@ -50,24 +44,28 @@ export class ParticipantAddComponent implements OnInit {
         this.router.navigate(['/control']);
     }
 
-    add(participant: Participant) {
-        console.log('participant', participant);
+    add() {
         const deakinEmailRgx = new RegExp('@deakin.edu.au$');
-        if (participant.email !== null) {
-            if (deakinEmailRgx.test(participant.email)) {
-                const task = this.roleService.getRole(participant.roleID).subscribe(dbRole => {
-                    const role: Role = dbRole;
-                    console.log('dbRole', dbRole);
-                    console.log('role', role);
-                    participant.roleFirstName = role.firstName;
-                    participant.roleLastName = role.lastName;
-                    participant.roleAffiliation = role.affiliation;
-                    participant.systemRole = 'participant';
-                    this.participantService.add(participant);
-                    this.router.navigate(['/control']);
-                }).unsubscribe();
+        if (this.participant.email !== undefined) {
+            if (deakinEmailRgx.test(this.participant.email)) {
+                for (const role of this.roles) {
+                    if (this.participant.roleID === role.id) {
+                        this.participant.roleFirstName = role.firstName;
+                        this.participant.roleLastName = role.lastName;
+                        this.participant.roleTitle = role.title;
+                        this.participant.roleAffiliation = role.affiliation;
+                        this.participant.systemRole = 'participant';
+                        this.authService.createUser(this.participant)
+                        .catch(error => {
+                            alert(error.message);
+                        });
+                    }
+                }
+                if (this.participant.roleFirstName === undefined ) {
+                    alert('Issue with role selection');
+                }
             } else {
-                alert('Invalid email entry.');
+                alert('Invalid Deakin email: ' + this.participant.email);
             }
         } else {
             alert('Error.');

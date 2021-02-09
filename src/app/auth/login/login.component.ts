@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.auth.eventAuthError$.subscribe( data=> {
+        this.auth.eventAuthError$.subscribe( data => {
             this.authError = data;
         })
     }

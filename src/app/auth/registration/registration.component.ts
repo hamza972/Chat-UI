@@ -25,12 +25,7 @@ export class RegistrationComponent implements OnInit {
     create(frm) {
         //frm.value.systemRole = frm.value.syr == "cc" ? "control" : "participant";
         frm.value.systemRole = "control";
-        frm.value.role = "admin";
-        frm.value.roleID = "admin";
-        frm.value.roleFirstName = "admin";
-        frm.value.roleLastName = "admin";
-        frm.value.rolePosition = "admin";
-        frm.value.roleAffiliation = "admin";
+        frm.value.isOwner = false;
         console.log(frm.value);
         this.auth.createUser(frm.value);
     }
