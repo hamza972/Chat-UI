@@ -29,7 +29,23 @@
                             <li><a *ngIf="user" [ngClass]="getClass('/chat')" routerLink="/chat">Chat</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/diary')" routerLink="/diary">Team Diary</a></li>
                             <li *ngIf="user.systemRole === 'admin'"><a *ngIf="user" [ngClass]="getClass('/control')" routerLink="/control">Control</a></li>
-                            <li  *ngIf="user.systemRole === 'participant'"><a *ngIf="user" [ngClass]="getClass('/profile-edit')" [routerLink]="['/profile-edit', user.roleID]">Update Role Profile</a></li>
+                            <!-- <li *ngIf="user.systemRole === 'participant'"><a *ngIf="user" [ngClass]="getClass('/profile-edit')" [routerLink]="['/profile-edit', user.roleID]">Update Role Profile</a></li> -->
+                        </ul>
+
+                         <!-- set right side content -->
+                         <ul class="user" ngbDropdown>
+                            <li id="userDropdown" ngbDropdownToggle><a>
+                                <i class="fa fa-user"> </i>
+                                {{user.firstName}}
+                                <i class="fa fa-angle-down"> </i>
+                                </a>
+                            </li>
+                            <div ngbDropdownMenu aria-labelledby="userDropdown">
+                              <div *ngIf="user.systemRole === 'participant'" ngbDropdownItem class="diary">  <a [routerLink]="['/profile-edit', user.roleID]">Update Role Profile</a> </div>                          
+                              <div *ngIf="user.systemRole === 'admin'" ngbDropdownItem class="diary">  <a routerLink="/control">{{user.firstName}} {{user.lastName}}</a> </div>                          
+                              <!-- <div ngbDropdownItem>{{user.rolePosition}} {{user.roleAffiliation}}</div> -->
+                              <div ngbDropdownItem (click)="logout()" routerLink="/">Logout</div>
+                            </div>
                         </ul>
                     </div>
 
