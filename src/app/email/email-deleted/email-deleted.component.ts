@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Email } from "../../models/email";
-import { EmailService } from "../../services/email.service";
-import { AppUser as User } from "../../models/user";
-import "rxjs/Rx";
+import { Component, OnInit, Input } from '@angular/core';
+import { Email } from '../../models/email';
+import { EmailService } from '../../services/email.service';
+import { AppUser as User } from '../../models/user';
 
 @Component({
   selector: 'app-email-deleted',
@@ -19,5 +18,6 @@ export class EmailDeletedComponent implements OnInit {
     this.emailService.deleted(this.user).subscribe(([inbox, sent]) => {
       this.emails = inbox.concat(sent);
     });
+    console.log(this.user);
   }
 }

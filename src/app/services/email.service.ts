@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-  AngularFirestoreDocument,
-} from "@angular/fire/firestore";
-import { Email } from "../models/email";
-import { AppUser as User } from "../models/user";
-import { LoginService } from "../auth/login.service";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Email } from '../models/email';
+import { AppUser as User } from '../models/user';
+import { LoginService } from '../auth/login.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +22,7 @@ export class EmailService {
   ) {}
 
   sendEmail(email: Email) {
-    return this.db.collection(`Emails/SendEmails`).add({
+    return this.db.collection(`Emails`).add({
       subject: email.subject,
       date: new Date(),
       draft: false,
@@ -42,7 +39,7 @@ export class EmailService {
   }
 
   draftEmail(email: Email) {
-    return this.db.collection(`Emails/DraftEmails`).add({
+    return this.db.collection(`Emails`).add({
       subject: email.subject,
       date: new Date(),
       draft: true,
@@ -59,7 +56,7 @@ export class EmailService {
   }
 
   inbox(user: User) {
-    this.emailCollection = this.afs.collection('Emails/Inbox/', (ref) =>
+    this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
         .where('to.user', '==', user.email)
         .where('to.deleted', '==', false)
@@ -78,7 +75,7 @@ export class EmailService {
   }
 
   sent(user: User) {
-    this.emailCollection = this.afs.collection('Emails/Sent', (ref) =>
+    this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
         .where('from.user', '==', user.email)
         .where('from.deleted', '==', false)
@@ -97,7 +94,7 @@ export class EmailService {
   }
 
   drafts(user: User) {
-    this.emailCollection = this.afs.collection('Emails/Drafts', (ref) =>
+    this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
         .where('from.user', '==', user.email)
         .where('from.deleted', '==', false)
@@ -116,14 +113,14 @@ export class EmailService {
   }
 
   deleted(user: User) {
-    return Observable.combineLatest([
+    return combineLatest([
       this.inboxDeleted(user),
       this.sentDeleted(user),
     ]);
   }
 
   inboxDeleted(user: User) {
-    this.emailCollection = this.afs.collection('Emails/InboxDeleted', (ref) =>
+    this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref.where('to.user', '==', user.email).where('to.deleted', '==', true)
     );
 
@@ -139,7 +136,7 @@ export class EmailService {
   }
 
   sentDeleted(user: User) {
-    this.emailCollection = this.afs.collection('Emails/SentDeleted', (ref) =>
+    this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref.where('from.user', '==', user.email).where('from.deleted', '==', true)
     );
 
@@ -155,12 +152,12 @@ export class EmailService {
   }
 
   delete(email: Email) {
-    this.emailDoc = this.afs.doc(`Emails/Delete/${email.id}`);
+    this.emailDoc = this.afs.doc(`Emails/${email.id}`);
     this.emailDoc.update(email);
   }
 
   hardDelete(email: Email) {
-    this.emailDoc = this.afs.doc(`Emails/HardDelete/${email.id}`);
+    this.emailDoc = this.afs.doc(`Emails/${email.id}`);
     this.emailDoc.delete();
   }
 }

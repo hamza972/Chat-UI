@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Email } from '../../models/email';
 import { EmailService } from '../../services/email.service';
-import { AppUser as User } from '../../models/user';
+import { AppUser } from '../../models/user';
 
 @Component({
   selector: 'app-email-drafts',
@@ -10,7 +10,7 @@ import { AppUser as User } from '../../models/user';
 })
 export class EmailDraftsComponent implements OnInit {
   emails: Email[];
-  @Input() user: User;
+  @Input() user: AppUser;
 
   constructor(private emailService: EmailService) {}
 
