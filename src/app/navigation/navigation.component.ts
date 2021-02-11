@@ -39,10 +39,10 @@ export class NavigationComponent implements OnInit {
 
     logout() {
         this.auth.logout();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
     }
 
-    getClass = function (path) {
-        return (window.location.pathname == path) ? 'active' : '';
+    getClass = (path) => {
+        return (window.location.pathname === path) ? 'active' : '';
     }
 }
