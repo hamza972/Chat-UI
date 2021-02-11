@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { ParticipantService } from '../../services/participant.service';
 import { AppUser } from '../../models/user';
 import { RoleService } from '../../services/role.service';
@@ -16,26 +15,15 @@ export class ParticipantComponent implements OnInit {
     participants: AppUser[];
     editState = false;
     participantToEdit: AppUser;
-    user: firebase.User;
     roles: Role[];
 
     constructor(
-        private auth: AuthService,
         private participantService: ParticipantService,
         private roleService: RoleService,
         private router: Router
     ) {}
 
     ngOnInit(): void {
-        /* Check if user is signed in, otherwise redirect to home */
-        this.auth.getUserData().subscribe(user => {
-            if (user === null) {
-                this.router.navigate(['/home']);
-            } else {
-                this.user = user[0];
-            }
-        });
-
         this.participantService.get().subscribe(participant => {
             this.participants = participant;
         });
@@ -45,30 +33,11 @@ export class ParticipantComponent implements OnInit {
         });
     }
 
-    // add() {
-    //     this.router.navigate(['/participant-add']);
-    // }
-
-
-    // delete($event, participant: Participant) {
-    //     this.participantService.delete(participant);
-    // }
-
-    /*
-    edit($event, participant: Participant) {
-        this.editState = true;
-        this.participantToEdit = item;
+    add() {
+        this.router.navigate(['/participant-add']);
     }
 
-    updateItem(participant: Participant) {
-        this.participantService.updateItem(item);
-        this.clearState();
+    delete($event, participant: AppUser) {
+        this.participantService.delete(participant);
     }
-
-    clearState() {
-        this.editState = false;
-        this.participantToEdit = null;
-    }
-    */
-
 }

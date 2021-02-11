@@ -71,28 +71,4 @@ export class ParticipantAddComponent implements OnInit {
             alert('Error.');
         }
     }
-
-    /*
-    deleteItem($event, participant: Participant) {
-        this.clearState();
-        this.participantService.deleteItem(item);
-    }
-
-    edit($event, participant: Participant) {
-        this.editState = true;
-        this.participantToEdit = item;
-    }
-
-    updateItem(participant: Participant) {
-        this.participantService.updateItem(item);
-        this.clearState();
-    }
-
-    clearState() {
-        this.editState = false;
-        this.participantToEdit = null;
-    }
-    */
-    //
-
 }

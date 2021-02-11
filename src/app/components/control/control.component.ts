@@ -2,17 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 
-
-
 @Component({
     selector: 'app-control',
     templateUrl: './control.component.html',
     styleUrls: ['./control.component.scss']
 })
 export class ControlComponent implements OnInit {
-
     user: firebase.User;
-
     constructor(
         private auth: AuthService,
         private router: Router
