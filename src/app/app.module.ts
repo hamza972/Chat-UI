@@ -16,7 +16,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegistrationComponent } from './auth/registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { NavigationComponent } from './navigation/navigation.component';
-
+import { TweetComponent } from './components/tweet/tweet.component';
 import { EmailComponent } from './email/email.component';
 import { NewsComponent } from './news/news.component';
 import { ScenarioComponent } from './scenario/scenario.component';
@@ -27,13 +27,18 @@ import { NewsPublishComponent } from './news-publish/news-publish.component';
 
 import { ControlComponent } from './components/control/control.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { AdminAddComponent } from './components/admin-add/admin-add.component';
+
 import { ParticipantComponent } from './components/participant/participant.component';
 import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
+
 import { RoleComponent } from './components/role/role.component';
 import { RoleAddComponent } from './components/role-add/role-add.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+
 import { AffiliateComponent } from './components/affiliate/affiliate.component';
 import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
-import { TweetComponent } from './components/tweet/tweet.component';
+import { AffiliateEditComponent } from './components/affiliate-edit/affiliate-edit.component';
 
 
 import { AffiliateService } from './services/affiliate.service';
@@ -63,8 +68,7 @@ import { HttpModule } from '@angular/http';
 
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { StatisticsComponent } from './components/statistics/statistics.component';
-import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
-import { AffiliateEditComponent } from './components/affiliate-edit/affiliate-edit.component';
+
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 
@@ -102,6 +106,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     StatisticsComponent,
     ProfileEditComponent,
     AffiliateEditComponent,
+    AdminAddComponent,
   ],
   imports: [
     BrowserModule,

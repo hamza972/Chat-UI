@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { AdminService } from '../../services/admin.service';
 import { AppUser } from '../../models/user';
 
@@ -14,7 +15,8 @@ export class AdminComponent implements OnInit {
     ownerToEdit: AppUser;
 
     constructor(
-        private adminService: AdminService
+        private adminService: AdminService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -23,19 +25,13 @@ export class AdminComponent implements OnInit {
         });
     }
 
-    delete($event, admin: AppUser) {
+    delete(admin: AppUser) {
         this.clearState();
-        this.adminService.delete(admin);
+        throw Error ('Delete admin not implemented.');
     }
 
-    edit($event, admin: AppUser) {
-        this.editState = true;
-        this.ownerToEdit = admin;
-    }
-
-    updateItem(admin: AppUser) {
-        this.adminService.update(admin);
-        this.clearState();
+    add() {
+        this.router.navigate(['/admin-add']);
     }
 
     clearState() {

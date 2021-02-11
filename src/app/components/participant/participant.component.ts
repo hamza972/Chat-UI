@@ -37,7 +37,7 @@ export class ParticipantComponent implements OnInit {
         this.router.navigate(['/participant-add']);
     }
 
-    delete($event, participant: AppUser) {
-        this.participantService.delete(participant);
+    delete(participant: AppUser) {
+        throw Error ('Delete participant not implemented');
     }
 }

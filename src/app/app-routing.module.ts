@@ -1,4 +1,4 @@
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './auth/login/login.component';
@@ -12,19 +12,23 @@ import { ChatComponent } from './chat/chat.component';
 import { EmailViewComponent } from './email-view/email-view.component';
 import { NewsPublishComponent } from './news-publish/news-publish.component';
 import { RolePageComponent } from './RolePage/RolePage.component';
-
+import { TweetComponent } from './components/tweet/tweet.component';
 
 import { ControlComponent } from './components/control/control.component';
+import { AdminAddComponent } from './components/admin-add/admin-add.component';
+
 import { ParticipantComponent } from './components/participant/participant.component';
 import { ParticipantAddComponent } from './components/participant-add/participant-add.component';
+
 import { RoleComponent } from './components/role/role.component';
 import { RoleAddComponent } from './components/role-add/role-add.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+
 import { AffiliateComponent } from './components/affiliate/affiliate.component';
 import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
 import { AffiliateEditComponent } from './components/affiliate-edit/affiliate-edit.component';
-import { TweetComponent } from './components/tweet/tweet.component';
-import { ProfileComponent } from './components/profile/profile.component';
-import { ProfileEditComponent } from './components/profile-edit/profile-edit.component';
+
 
 const routes: Routes = [
 { path: 'control/affiliate', component: AffiliateComponent },
@@ -49,6 +53,7 @@ const routes: Routes = [
 { path: 'participant-add', component: ParticipantAddComponent},
 { path: 'profile/:id', component: ProfileComponent},
 { path: 'profile-edit/:id', component: ProfileEditComponent },
+{ path: 'admin-add', component: AdminAddComponent },
 { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
