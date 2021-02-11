@@ -54,16 +54,13 @@ export class EmailListComponent implements OnInit {
           email.to.deleted = true;
           this.emailService.delete(email);
         }
-    
         if (this.getTab() === "send") {
           email.from.deleted = true;
           this.emailService.delete(email);
         }
-    
         if (this.getTab() === "draft") {
           this.emailService.hardDelete(email);
         }
-    
         if (this.getTab() === "delete") {
           this.emailService.hardDelete(email);
         }
