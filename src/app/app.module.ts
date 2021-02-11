@@ -43,7 +43,7 @@ import { AffiliateEditComponent } from './components/affiliate-edit/affiliate-ed
 
 import { AffiliateService } from './services/affiliate.service';
 import { AuthService } from './services/auth.service';
-import { ParticipantService } from './services/participant.service';
+import { UserService } from './services/user.service';
 import { AdminService } from './services/admin.service';
 import { RoleService } from './services/role.service';
 import { StorageService } from './services/storage.service';
@@ -128,7 +128,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
   providers: [
     AuthService,
     AffiliateService,
-    ParticipantService,
+    UserService,
     AdminService,
     RoleService,
     EmailService,

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { AdminService } from '../../services/admin.service';
+import { UserService } from '../../services/user.service';
 import { AppUser } from '../../models/user';
 
 @Component({
@@ -15,14 +15,14 @@ export class AdminComponent implements OnInit {
     ownerToEdit: AppUser;
 
     constructor(
-        private adminService: AdminService,
+        private userService: UserService,
         private router: Router
     ) { }
 
     ngOnInit() {
-        this.adminService.get().subscribe(admin => {
-            this.admins = admin;
-        });
+        this.userService.getAdmins().subscribe((admins) => {
+            this.admins = admins;
+          });
     }
 
     delete(admin: AppUser) {

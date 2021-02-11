@@ -44,7 +44,7 @@ export class AdminAddComponent implements OnInit {
       .catch(error => {
           alert(error.message);
       });
-      this.router.navigate(['/control']);
     }
+    this.router.navigate(['/control']);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
-import { ParticipantService } from '../../services/participant.service';
+import { UserService } from '../../services/user.service';
 import { Observable } from 'rxjs';
 import { AppUser } from '../../models/user';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
@@ -37,7 +37,7 @@ export class EmailComposeComponent implements OnInit {
   emailForm: FormGroup;
 
   constructor(
-    private participantService: ParticipantService,
+    private userService: UserService,
     private emailService: EmailService,
     private formBuilder: FormBuilder
   ) {
@@ -49,7 +49,7 @@ export class EmailComposeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.participantService.get().subscribe((participants) => {
+    this.userService.get().subscribe((participants) => {
       this.participants = participants.map((participant) => participant.email);
     });
   }

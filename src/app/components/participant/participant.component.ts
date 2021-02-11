@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ParticipantService } from '../../services/participant.service';
+import { UserService } from '../../services/user.service';
 import { AppUser } from '../../models/user';
 import { RoleService } from '../../services/role.service';
 import { Role } from '../../models/role';
@@ -18,14 +18,15 @@ export class ParticipantComponent implements OnInit {
     roles: Role[];
 
     constructor(
-        private participantService: ParticipantService,
+        private userService: UserService,
         private roleService: RoleService,
         private router: Router
     ) {}
 
     ngOnInit(): void {
-        this.participantService.get().subscribe(participant => {
+        this.userService.getParticipants().subscribe(participant => {
             this.participants = participant;
+            console.log(participant);
         });
 
         this.roleService.get().subscribe(role => {

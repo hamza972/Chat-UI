@@ -2,7 +2,7 @@
 <div class="row" *ngIf="user">
 
     <ngb-tabset [destroyOnHide]="false">
-        <ngb-tab title="Affiliation">
+        <ngb-tab title="Affiliations">
             <ng-template ngbTabContent>
                 <div class="col-3">
                     <app-affiliate></app-affiliate>
@@ -10,7 +10,7 @@
             </ng-template>
         </ngb-tab>
 
-        <ngb-tab title="Role">
+        <ngb-tab title="Roles">
             <ng-template ngbTabContent>
                 <div class="col-8">
                     <app-role></app-role>
@@ -18,7 +18,7 @@
             </ng-template>
         </ngb-tab>
 
-        <ngb-tab title="Participant">
+        <ngb-tab title="Participants">
             <ng-template ngbTabContent>
                 <div class="col-8">
                     <app-participant></app-participant>
@@ -26,7 +26,7 @@
             </ng-template>
         </ngb-tab>
 
-        <ngb-tab title="Admin">
+        <ngb-tab title="Admins">
             <ng-template ngbTabContent>
                 <div class="col-8">
                     <app-owner [user]="user"></app-owner>
@@ -37,7 +37,7 @@
         <ngb-tab title="Statistics">
             <ng-template ngbTabContent>
                 <div class="col-8">
-                    <app-statistics></app-statistics>
+                    <app-statistics [user]="user"></app-statistics>
                 </div>
             </ng-template>
         </ngb-tab>

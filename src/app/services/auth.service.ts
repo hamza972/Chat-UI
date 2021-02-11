@@ -10,7 +10,6 @@ import { AppUser } from '../models/user';
     providedIn: 'root'
 })
 export class AuthService {
-
     private eventAuthError = new BehaviorSubject<string>('');
     eventAuthError$ = this.eventAuthError.asObservable();
     newUser: any;
@@ -58,6 +57,7 @@ export class AuthService {
         switch (this.newUser.systemRole) {
             case 'admin': {
                 return this.db.doc('Users/' + userCredential.user.uid).set({
+                    id: userCredential.user.uid,
                     email: this.newUser.email,
                     firstName: this.newUser.firstName,
                     lastName: this.newUser.lastName,
@@ -66,6 +66,7 @@ export class AuthService {
             }
             case 'participant': {
                 return this.db.doc('Users/' + userCredential.user.uid).set({
+                    id: userCredential.user.uid,
                     email: this.newUser.email,
                     firstName: this.newUser.firstName,
                     lastName: this.newUser.lastName,
