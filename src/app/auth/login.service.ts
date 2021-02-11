@@ -59,7 +59,7 @@ export class LoginService {
       })
     );
   }
-  
+
 
 
   getUserCurrent() {
@@ -79,7 +79,7 @@ export class LoginService {
       });
   }
 
-  
+
   createAdminUser(user) {
     this.afAuth.auth
       .createUserWithEmailAndPassword(user.email, user.password)
@@ -120,16 +120,14 @@ export class LoginService {
       });
   }
 
-
-
-  createParticipantUser(userP) {
+  createParticipantUser(user) {
     this.afAuth.auth
-      .createUserWithEmailAndPassword(userP.email, userP.password)
+      .createUserWithEmailAndPassword(user.email, user.password)
       .then((userCredential) => {
-        this.newUser = userP;
+        this.newUser = user;
 
         userCredential.user.updateProfile({
-          displayName: userP.firstName + ' ' + userP.lastName,
+          displayName: user.firstName + ' ' + user.lastName,
         });
 
         this.sendParticipantUserData(userCredential).then(() => {
@@ -168,11 +166,11 @@ export class LoginService {
       email: this.newUser.email,
       firstName: this.newUser.firstName,
       lastName: this.newUser.lastName,
-      role: this.newUser.role,
+      role: this.newUser.roleID,
       systemRole: 'participant',
       roleFirstName: this.newUser.roleFirstName,
       roleLastName: this.newUser.roleLastName,
-      rolePosition: this.newUser.roleTitle,
+      roleTitle: this.newUser.roleTitle,
       roleAffiliation: this.newUser.roleAffiliation,
     });
   }

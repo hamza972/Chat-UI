@@ -23,29 +23,29 @@ input:not([type]), input[type=text]:not(.browser-default), input[type=password]:
     font-size: 18px;
     padding-bottom: 10px;
 
-    width: 500px;
+    width: 100%;
 }
-select[type="text"] {
+select[type="text"]
+{
     margin-left: 0;
     padding-left: 0;
-    border-bottom: 1px solid #454552;
+    border-bottom: 1px solid  #454552;
     font-size: 18px;
     width: 100%;
 }
 .col-md-12 {
-    padding-left: 0;
+padding-left: 0;
 }
+
 ::placeholder
 {
     color: rgba(0, 0, 0, .3);
 }
 
-.col-md-12 button[type="submit"],
-.col-md-12 button[type="button"]
+.col-md-6 button
 {
-   
     margin-top: 15px;
-    margin-right: 60px;
+    margin-right: 70px;
     width: 20%;
     border: 1px solid #8ABBDB;
     outline: none ;
@@ -53,12 +53,19 @@ select[type="text"] {
     font-size: 16px;    
     background: transparent;
     cursor: pointer;
-    color:  #454552  ;
-    font-weight: bold;    
+    color:  #454552 ;
+    font-weight: bold; 
 }
-.col-md-12 button[type="submit"]:hover,
-.col-md-12 button[type="button"]:hover
-{
+.col-md-6 button:hover {
     background-color: #8ABBDB;
     color:#ffffff;
+}
+
+p {
+    padding: 10px;
+}
+
+// =============== image =====================
+.imagebox {
+    width: 300px;
 }

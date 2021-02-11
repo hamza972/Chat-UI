@@ -37,7 +37,6 @@ export class RoleAddComponent implements OnInit {
         });
 
         this.affiliateService.get().subscribe(affiliate => {
-            console.log(affiliate);
             this.affiliates = affiliate;
         });
     }

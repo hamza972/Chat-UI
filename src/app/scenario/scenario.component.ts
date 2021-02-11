@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Scenario } from '../models/scenario';
+import { AppUser } from '../models/user';
 import { ScenarioService } from '../services/scenario.service';
 import { AuthService } from '../services/auth.service';
 import { NgForm } from '@angular/forms';
-import { AppUser } from '../models/user';
 import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 
 @Component({
@@ -16,14 +16,17 @@ import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 export class ScenarioComponent implements OnInit {
     scenario: Scenario = { content: '' };
     scenarios: Scenario[];
-    user: AppUser = { rolePosition: '' };
+    user: AppUser;
     authError: any;
     public Editor = Editor;
     editorConfig = {
         toolbar: {
           items: [
-            'heading', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
-            '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'insertTable', 'undo', 'redo']
+            'heading', 'fontFamily', 'fontSize', 'fontColor', '|',
+            'bold', 'italic', 'underline', 'strikethrough', '|',
+            'link', 'bulletedList', 'numberedList', '|',
+            'alignment', 'indent', 'outdent', '|',
+            'blockQuote', 'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo']
         },
         image: {
           toolbar: [
@@ -41,7 +44,6 @@ export class ScenarioComponent implements OnInit {
         },
         language: 'en'
     };
-
     constructor(
         private auth: AuthService,
         private scenarioService: ScenarioService,
@@ -49,7 +51,6 @@ export class ScenarioComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
         /* Check if user is signed in, otherwise redirect to home */
         this.auth.getUserData().subscribe(user => {
             if (user === null) {
@@ -73,15 +74,12 @@ export class ScenarioComponent implements OnInit {
         if (this.scenario.content !== '') {
 
             this.scenario = {
-
                 date: new Date(),
                 content: this.scenario.content,
-            }
-
-            console.log(this.scenario);
+            };
 
             this.scenarioService.add(this.scenario);
-            alert('Your Email has been sent!!');
+            alert('Your scenario has been published!');
             frm.reset();
         }
     }

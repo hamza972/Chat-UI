@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { switchMap, mergeMap, map } from 'rxjs/operators';
+import { BehaviorSubject, of } from 'rxjs';
+import { switchMap, map } from 'rxjs/operators';
 import { AppUser } from '../models/user';
-
-
 
 @Injectable({
     providedIn: 'root'
@@ -45,30 +43,41 @@ export class AuthService {
     }
 
     createUser(user) {
-        this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
-            .then(userCredential => {
-                this.newUser = user;
-
-                userCredential.user.updateProfile({ displayName: user.firstName });
-
-                this.insertUserData(userCredential).then(() => {
-                    this.router.navigate(['/home']);
-                });
-            })
-            .catch(error => {
-                this.eventAuthError.next(error);
-            });
+        return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password)
+        .then(userCredential => {
+            this.newUser = user;
+            userCredential.user.updateProfile({displayName: user.firstName});
+            this.insertUserData(userCredential);
+        })
+        .catch(error => {
+            throw(error);
+        });
     }
 
     insertUserData(userCredential: firebase.auth.UserCredential) {
-        return this.db.doc(`Users/${userCredential.user.uid}`).set({
-            email: this.newUser.email,
-            firstName: this.newUser.firstName,
-            lastName: this.newUser.lastName,
-            systemRole: this.newUser.systemRole,
-            role: this.newUser.role,
-            roleAffiliation: this.newUser.roleAffiliation
-        });
+        switch (this.newUser.systemRole) {
+            case 'admin': {
+                return this.db.doc('Users/' + userCredential.user.uid).set({
+                    email: this.newUser.email,
+                    firstName: this.newUser.firstName,
+                    lastName: this.newUser.lastName,
+                    systemRole: this.newUser.systemRole,
+                });
+            }
+            case 'participant': {
+                return this.db.doc('Users/' + userCredential.user.uid).set({
+                    email: this.newUser.email,
+                    firstName: this.newUser.firstName,
+                    lastName: this.newUser.lastName,
+                    systemRole: this.newUser.systemRole,
+                    roleID: this.newUser.roleID,
+                    roleFirstName: this.newUser.roleFirstName,
+                    roleLastName: this.newUser.roleLastName,
+                    roleTitle: this.newUser.roleTitle,
+                    roleAffiliation: this.newUser.roleAffiliation
+                });
+            }
+        }
     }
 
     login(email: string, password: string) {

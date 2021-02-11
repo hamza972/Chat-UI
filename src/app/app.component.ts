@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
       if (user === null) {
       } else {
           this.user = user[0];
-          this.username = this.user.firstName + ' ' + this.user.role ;
+          this.username = this.user.firstName + ' ' + this.user.lastName;
           this.socket.emit('join', this.username);
       }
     });

@@ -2,7 +2,6 @@
 {
 margin-top: 10px;
   height: 200px;
-  width: 100%;
   margin-left: 8%;
 }
 
@@ -22,28 +21,31 @@ input[type=text]
 
 button[type="submit"]
 {
-  margin-top: 75px;
-  margin-left: 770px;
-  margin-right: 30px;
+  margin-top: 40px;
+  margin-left: 84%;
+  // margin-right: 30px;
   width: 15%;
   border: none;
   outline: none ;
   height: 40px;
-  font-size: 18px;
+  font-size: 20px;    
   background: #FD999A;
   cursor: pointer;
-  color:  #FFFFFF;
-  font-weight: bold;
+  color:  #ffffff; 
 }
 button[type="submit"]:hover
 {
     background-color: #8ABBDB;
-    color:#FFFFFF;
+    color: #ffffff;
 }
 
 * {
 
   box-sizing: border-box;
+}
+
+.row {
+  display: block;
 }
 
 .row::after {
@@ -69,6 +71,12 @@ button[type="submit"]:hover
   .color-12{width:100%;}
 
 }
+
+.text-fix
+{
+  overflow-wrap: break-word;
+}
+
 .row-container
 {
   display:grid;
@@ -166,4 +174,22 @@ option.a{
 
 .option:hover .text{
   left: 40px;
+}
+
+.tweet-button {
+  float: right;
+}
+
+::ng-deep img {
+  max-width: 100%;
+}
+
+::ng-deep .ck.ck-content ul,
+::ng-deep .ck.ck-content ul li{
+  list-style-type: inherit;
+}
+
+.ck.ck-content ul {
+  /* Default user agent stylesheet, you can change it to your needs. */
+  padding-left: 40px;
 }

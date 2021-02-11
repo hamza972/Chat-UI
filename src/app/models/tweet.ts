@@ -11,10 +11,10 @@ export interface Tweet {
     lastName?: string;
     email?: string;
     systemRole?: string;
-    role?: string;
     roleID?: string;
     roleFirstName?: string;
     roleLastName?: string;
-    rolePosition?: string;
+    roleTitle?: string;
     roleAffiliation?: string;
+    roleAvatar?: string;
   }

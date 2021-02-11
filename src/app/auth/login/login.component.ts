@@ -1,3 +1,4 @@
+// redundant component
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.auth.eventAuthError$.subscribe( data=> {
+        this.auth.eventAuthError$.subscribe( data => {
             this.authError = data;
         })
     }

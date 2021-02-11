@@ -32,16 +32,17 @@ export class ParticipantService {
     }
 
     add(participant: AppUser) {
+        console.log('participantService', participant);
         return this.auth.createUser(participant);
     }
 
     delete(participant: AppUser) {
-        this.participantDoc = this.afs.doc(`Users/${participant.id}`);
+        this.participantDoc = this.afs.doc('Users/${participant.id}');
         this.participantDoc.delete();
     }
 
     update(participant: AppUser) {
-        this.participantDoc = this.afs.doc(`Users/${participant.id}`);
+        this.participantDoc = this.afs.doc('Users/${participant.id}');
         this.participantDoc.update(participant);
     }
 }

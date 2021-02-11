@@ -34,12 +34,12 @@ export class TweetService {
     }
 
     delete(tweet: Tweet) {
-        this.tweetDoc = this.afs.doc(`Tweet/${tweet.id}`);
+        this.tweetDoc = this.afs.doc('Tweet/' + tweet.id);
         this.tweetDoc.delete();
     }
 
     update(tweet: Tweet) {
-        this.tweetDoc = this.afs.doc(`Tweet/${tweet.id}`);
+        this.tweetDoc = this.afs.doc('Tweet/' + tweet.id);
         this.tweetDoc.update(tweet);
     }
 }

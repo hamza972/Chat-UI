@@ -23,41 +23,19 @@
                         <ul class="right hide-on-med-and-down">
                             <li><a *ngIf="user" [ngClass]="getClass('/scenario')" routerLink="/scenario">Scenario</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/RolePage')" routerLink="/RolePage">Roles</a></li>
-                            <li><a *ngIf="user" [ngClass]="getClass('/profile-edit')" routerLink="/profile-edit">Update Role Profile</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/email')" routerLink="/email">Email</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/tweet')" routerLink="/tweet">Tweet Board</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/news')" routerLink="/news">News</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/chat')" routerLink="/chat">Chat</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/diary')" routerLink="/diary">Team Diary</a></li>
-                            <li *ngIf="user.systemRole === 'control'"><a *ngIf="user" [ngClass]="getClass('/control')" routerLink="/control">Control</a></li>
+                            <li *ngIf="user.systemRole === 'admin'"><a *ngIf="user" [ngClass]="getClass('/control')" routerLink="/control">Control</a></li>
+                            <li  *ngIf="user.systemRole === 'participant'"><a *ngIf="user" [ngClass]="getClass('/profile-edit')" [routerLink]="['/profile-edit', user.roleID]">Update Role Profile</a></li>
                         </ul>
-
-                        <!-- set right side content -->
-                        <!--<ul class="user" ngbDropdown>
-                            <li id="userDropdown" ngbDropdownToggle><a>
-                                    <i class="fa fa-user"> </i>
-                                    {{user.firstName}}
-                                    <i class="fa fa-angle-down"> </i>
-                                </a>
-                            </li>
-                            <div ngbDropdownMenu aria-labelledby="userDropdown">
-                                <div ngbDropdownItem class="diary"> <a *ngIf="user"
-                                        routerLink="/roleProfile2">{{user.roleFirstName}} {{user.roleLastName}}</a>
-                                </div>
-                                <div ngbDropdownItem>{{user.roleTitle}} {{user.roleAffiliation}}</div>
-                                <div ngbDropdownItem class="diary"> <a *ngIf="user" routerLink="/diary">Diary</a> </div>
-                                <div ngbDropdownItem (click)="logout()" routerLink="/">Logout</div>
-                            </div>
-                        </ul>-->
-
                     </div>
 
                 </div>
 
             </div>
         </div>
-
     </nav>
-
-    <!-- end Navigation -->
 </header>

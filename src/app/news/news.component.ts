@@ -1,34 +1,32 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AppUser } from '../models/user';
-import { LoginService } from '../auth/login.service';
+import { NewsService } from '../services/news.service';
 import { Router } from '@angular/router';
 import { News } from '../models/News';
 import { AuthService } from '../services/auth.service';
+import { AppUser } from '../models/user';
 import * as Editor from '../../assets/custom-ckeditor/ckeditor';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.scss']
+  styleUrls: ['./news.component.scss'],
 })
 export class NewsComponent implements OnInit {
   public Editor = Editor;
-  user: firebase.User;
-  newUserNews: News;
-  newsUser: AppUser;
-  userID: string;
-  user$: Observable<AppUser>;
-  newsArray: News[];
-  sortedArray: News[];
+  user: AppUser;
+  newsItems: News[];
+  newsItemEntry: News;
   authError: any;
   searchText: string;
-  user2: AppUser = { systemRole: '' };
   editorConfig = {
     toolbar: {
       items: [
-        'heading', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
-        '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'undo', 'redo',]
+        'heading', 'fontFamily', 'fontSize', 'fontColor', '|',
+        'bold', 'italic', 'underline', 'strikethrough', '|',
+        'link', 'bulletedList', 'numberedList', '|',
+        'alignment', 'indent', 'outdent', '|',
+        'blockQuote', 'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo']
     },
     image: {
       toolbar: [
@@ -42,43 +40,39 @@ export class NewsComponent implements OnInit {
   };
 
   constructor(
-    private auth: LoginService,
-    private auth2: AuthService,
-    private router: Router ) { }
+    private auth: AuthService,
+    private newsService: NewsService,
+    private router: Router,
+    private modalService: NgbModal) { }
+
 
   ngOnInit() {
     /* Check if user is signed in, otherwise redirect to home */
-    this.auth2.getUserData().subscribe(user => {
+    this.auth.getUserData().subscribe(user => {
       if (user === null) {
         this.router.navigate(['/home']);
       } else {
-        this.user2 = user[0];
+        this.user = user[0];
       }
     });
 
-    this.user$ = this.auth.user$;
-    this.auth.getNews().subscribe(dbNews => { this.newsArray = dbNews; });
-
-    this.user$ = this.auth.user$;
-    this.user$.subscribe(userT => {
-      console.log(userT);
-      this.newsUser = userT;
+    this.newsService.get().subscribe(news => {
+      this.newsItems = news;
     });
   }
 
 
-  createNews(frm, frm2) {
-    this.newUserNews = {
-      userName: this.newsUser.firstName + ' ' + this.newsUser.lastName,
+  createNews(frm, frm2, content) {
+    this.newsItemEntry = {
+      userName: this.user.firstName + ' ' + this.user.lastName,
       newsDate: new Date(),
       newsDescription: frm.value,
       newsHeadline: frm2.value,
-      userEmail: this.newsUser.email,
-      userRole: this.newsUser.role };
+      userEmail: this.user.email,
+      userRole: this.user.firstName,
+    };
+    this.newsService.add(this.newsItemEntry);
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
   }
-
-  btnClick = function() {
-    this.router.navigateByUrl('/news-publish');
-  };
 
 }

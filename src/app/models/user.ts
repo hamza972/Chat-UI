@@ -11,7 +11,7 @@ export interface AppUser {
   roleLastName?: string;
   roleTitle?: string;
   roleAffiliation?: string;
-  rolePosition?:string;
+  rolePosition?: string;
   profileImage?: string;
   password?: string;
   emailSent?: number;

@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import { Tweet } from '../../models/tweet';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
 import { AppUser } from '../../models/user';
+import { RoleService } from '../../services/role.service';
 import { TweetService } from '../../services/tweet.service';
 import { AuthService } from '../../services/auth.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Role } from '../../models/role';
 
 @Component({
     selector: 'app-tweet',
@@ -17,14 +18,18 @@ export class TweetComponent implements OnInit {
     tweet: Tweet = { content: '' };
     tweets: Tweet[];
     user: AppUser = { systemRole: '' };
+    userRole: Role;
     authError: any;
 
     public Editor = Editor;
     editorConfig = {
         toolbar: {
           items: [
-            'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList',
-            '|', 'indent', 'outdent', '|', 'blockQuote', 'imageUpload', 'mediaEmbed', 'undo', 'redo' ]
+            'heading', 'fontFamily', 'fontSize', 'fontColor', '|',
+            'bold', 'italic', 'underline', 'strikethrough', '|',
+            'link', 'bulletedList', 'numberedList', '|',
+            'alignment', 'indent', 'outdent', '|',
+            'blockQuote', 'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo']
         },
         image: {
           toolbar: [
@@ -35,14 +40,10 @@ export class TweetComponent implements OnInit {
         language: 'en'
     };
 
-    public htmlProperty(str: string): SafeHtml {
-        return this.sr.bypassSecurityTrustHtml(str);
-    }
-
     constructor(
-        private sr: DomSanitizer,
         private auth: AuthService,
         private tweetService: TweetService,
+        private roleService: RoleService,
         private router: Router
     ) { }
 
@@ -54,6 +55,11 @@ export class TweetComponent implements OnInit {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
+                if (this.user.systemRole === 'participant') {
+                    this.roleService.getRole(this.user.roleID).subscribe( role => {
+                        this.userRole = role;
+                    });
+                }
             }
         });
 
@@ -86,12 +92,12 @@ export class TweetComponent implements OnInit {
                 lastName: this.user.lastName,
                 email: this.user.email,
                 systemRole: this.user.systemRole,
-                role: this.user.role,
                 roleID: this.user.roleID,
-                roleFirstName: this.user.roleFirstName,
-                roleLastName: this.user.roleLastName,
-                rolePosition: this.user.roleTitle,
-                roleAffiliation: this.user.roleAffiliation,
+                roleFirstName: this.userRole.firstName,
+                roleLastName: this.userRole.lastName,
+                roleTitle: this.userRole.title,
+                roleAffiliation: this.userRole.affiliation,
+                roleAvatar: this.userRole.avatar
             };
             this.tweetService.add(this.tweet);
         }
