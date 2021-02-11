@@ -193,3 +193,23 @@ option.a{
   /* Default user agent stylesheet, you can change it to your needs. */
   padding-left: 40px;
 }
+
+.modal{
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+.modal .modal-footer{
+  border-bottom: unset !important;
+}
+.modal .modal-footer{
+  border-radius: 0px !important;
+  background-color: unset !important;
+  padding: unset !important;
+  height: unset !important;
+  width: 100%;
+  text-align: unset !important;
+  border-top: unset !important;
+}
+.modal button:focus{
+  background-color: unset !important;
+}
