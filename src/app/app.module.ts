@@ -13,7 +13,6 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { ImageCropperModule } from 'ngx-image-cropper';
 
 import { LoginComponent } from './auth/login/login.component';
-import { RegistrationComponent } from './auth/registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { TweetComponent } from './components/tweet/tweet.component';
@@ -76,7 +75,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistrationComponent,
     HomeComponent,
     NavigationComponent,
     TweetComponent,

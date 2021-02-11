@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './auth/login/login.component';
-import { RegistrationComponent } from './auth/registration/registration.component';
 import { HomeComponent } from './home/home.component';
 import { EmailComponent } from './email/email.component';
 import { NewsComponent } from './news/news.component';
@@ -35,7 +34,6 @@ const routes: Routes = [
 { path: 'affiliate-add', component: AffiliateAddComponent },
 { path: 'affiliate-edit/:id', component: AffiliateEditComponent },
 { path: 'login', component: LoginComponent },
-{ path: 'registration', component: RegistrationComponent},
 { path: 'home', component: HomeComponent},
 { path: 'tweet', component: TweetComponent},
 { path: 'email', component: EmailComponent},
