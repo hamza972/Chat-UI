@@ -5,7 +5,6 @@ import { ChatAdapter } from 'ng-chat';
 import { SocketIOAdapter } from './services/socketio-adapter';
 import { Socket } from 'ng-socket-io';
 import { Http } from '@angular/http';
-import { Participant } from './models/participant';
 import { AuthService } from './services/auth.service';
 
 @Component({

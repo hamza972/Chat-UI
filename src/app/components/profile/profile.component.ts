@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { RoleService } from '../../services/role.service';
 import { Role } from '../../models/role';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-profile',
@@ -20,14 +19,9 @@ export class ProfileComponent implements OnInit {
     constructor(
         private auth: AuthService,
         private roleService: RoleService,
-        private sr: DomSanitizer,
         private router: Router,
         private route: ActivatedRoute
     ) { }
-
-    public htmlProperty(str: string): SafeHtml {
-        return this.sr.bypassSecurityTrustHtml(str);
-    }
 
     ngOnInit() {
         /* Check if user is signed in, otherwise redirect to home */

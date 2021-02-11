@@ -8,9 +8,7 @@ import { AuthService } from '../../services/auth.service';
     styleUrls: ['./control.component.scss']
 })
 export class ControlComponent implements OnInit {
-
     user: firebase.User;
-
     constructor(
         private auth: AuthService,
         private router: Router

@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { LoginService } from "../auth/login.service";
-import { Router } from "@angular/router";
 import { AppUser as User } from "../models/user";
 
 @Component({
@@ -12,7 +11,7 @@ export class EmailComponent implements OnInit {
   user: User;
   tabstatus = {};
 
-  constructor(private auth: LoginService, private router: Router) {}
+  constructor(private auth: LoginService) {}
 
   ngOnInit() {
     this.auth.getUserCurrent().subscribe((user) => {

@@ -1,0 +1,24 @@
+<div>
+ 
+    <div class="ui">    
+        <button class="button" (click)="add()"><span>Add Control User</span> </button>
+    </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Control User Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let admin of admins">
+                <td>{{admin.firstName}} {{admin.lastName}}</td>
+                <td>{{admin.email}}</td>
+                <td><button (click)="delete(admin)" value="Delete" class="btn red">Delete</button></td>
+            </tr>
+        </tbody>
+      </table>
+</div>
+

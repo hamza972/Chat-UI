@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { EmailService } from "../../services/email.service";
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: "app-email-list",

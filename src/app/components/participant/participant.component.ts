@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { ParticipantService } from '../../services/participant.service';
-import { Participant } from '../../models/participant';
+import { UserService } from '../../services/user.service';
+import { AppUser } from '../../models/user';
 import { RoleService } from '../../services/role.service';
 import { Role } from '../../models/role';
 
@@ -13,31 +12,21 @@ import { Role } from '../../models/role';
 })
 
 export class ParticipantComponent implements OnInit {
-    participants: Participant[];
+    participants: AppUser[];
     editState = false;
-    participantToEdit: Participant;
-    user: firebase.User;
+    participantToEdit: AppUser;
     roles: Role[];
 
     constructor(
-        private auth: AuthService,
-        private participantService: ParticipantService,
+        private userService: UserService,
         private roleService: RoleService,
         private router: Router
     ) {}
 
     ngOnInit(): void {
-        /* Check if user is signed in, otherwise redirect to home */
-        this.auth.getUserData().subscribe(user => {
-            if (user === null) {
-                this.router.navigate(['/home']);
-            } else {
-                this.user = user[0];
-            }
-        });
-
-        this.participantService.get().subscribe(participant => {
+        this.userService.getParticipants().subscribe(participant => {
             this.participants = participant;
+            console.log(participant);
         });
 
         this.roleService.get().subscribe(role => {
@@ -49,26 +38,7 @@ export class ParticipantComponent implements OnInit {
         this.router.navigate(['/participant-add']);
     }
 
-
-    delete($event, participant: Participant) {
-        this.participantService.delete(participant);
+    delete(participant: AppUser) {
+        throw Error ('Delete participant not implemented');
     }
-
-    /*
-    edit($event, participant: Participant) {
-        this.editState = true;
-        this.participantToEdit = item;
-    }
-
-    updateItem(participant: Participant) {
-        this.participantService.updateItem(item);
-        this.clearState();
-    }
-
-    clearState() {
-        this.editState = false;
-        this.participantToEdit = null;
-    }
-    */
-
 }

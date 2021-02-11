@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../services/news.service';
 import { Router } from '@angular/router';
 import { News } from '../models/News';
-import { Participant } from '../models/participant';
 import { AuthService } from '../services/auth.service';
+import { AppUser } from '../models/user';
 import * as Editor from '../../assets/custom-ckeditor/ckeditor';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -14,7 +14,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NewsComponent implements OnInit {
   public Editor = Editor;
-  user: Participant;
+  user: AppUser;
   newsItems: News[];
   newsItemEntry: News;
   authError: any;
