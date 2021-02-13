@@ -47,7 +47,12 @@ export class RoleAddComponent implements OnInit {
 
     add() {
         if (this.role.title !== '') {
-            this.roleService.add(this.role);
+            console.log(this.role.affiliateID);
+            this.affiliateService.getAffiliate(this.role.affiliateID).subscribe((dbAffiliate) => {
+                const affiliate: Affiliate = dbAffiliate;
+                this.role.affiliation = affiliate.name;
+                this.roleService.add(this.role);
+            });
             this.router.navigate(['/control']);
         }
     }

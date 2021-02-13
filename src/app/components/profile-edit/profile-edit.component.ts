@@ -106,7 +106,7 @@ export class ProfileEditComponent implements OnInit {
     });
   }
 
-  async update(editedRole) {
+  async update(editedRole: Role) {
     if (editedRole.title !== '') {
       editedRole.id = this.roleID;
       // update avatar if we have an image confirmed

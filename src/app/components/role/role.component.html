@@ -7,19 +7,17 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">Affiliation</th>
+                <th scope="col">Name</th>
                 <th scope="col">Title</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
+                <th scope="col">Affiliation</th>
                 <th scope="col">Action</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let role of roles">
-                <td>{{role.affiliation}}</td>
+                <td>{{role.firstName}} {{role.lastName}}</td>
                 <td>{{role.title}}</td>
-                <td>{{role.firstName}}</td>
-                <td>{{role.lastName}}</td>
+                <td>{{role.affiliation}}</td>
                 <td>
                     <a [routerLink]="['/profile', role.id]">
                         <button value="View" class="btn">View</button>

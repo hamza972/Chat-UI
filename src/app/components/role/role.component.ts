@@ -20,8 +20,10 @@ export class RoleComponent implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        /* Get list of roles */
         this.roleService.get().subscribe(dbRoles => {
             this.roles = dbRoles;
+            console.log(this.roles);
         });
     }
 
