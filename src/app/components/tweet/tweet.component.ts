@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tweet } from '../../models/tweet';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
@@ -7,11 +7,13 @@ import { RoleService } from '../../services/role.service';
 import { TweetService } from '../../services/tweet.service';
 import { AuthService } from '../../services/auth.service';
 import { Role } from '../../models/role';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'app-tweet',
     templateUrl: './tweet.component.html',
-    styleUrls: ['./tweet.component.scss']
+    styleUrls: ['./tweet.component.scss'],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class TweetComponent implements OnInit {
@@ -44,7 +46,8 @@ export class TweetComponent implements OnInit {
         private auth: AuthService,
         private tweetService: TweetService,
         private roleService: RoleService,
-        private router: Router
+        private router: Router,
+        private modalService: NgbModal
     ) { }
 
 
@@ -78,7 +81,7 @@ export class TweetComponent implements OnInit {
         this.router.navigate(['/tweet']);
     }
 
-    add() {
+    add(content) {
         if (this.tweet.content !== '') {
             this.tweet = {
                 date: new Date(),
@@ -93,13 +96,14 @@ export class TweetComponent implements OnInit {
                 email: this.user.email,
                 systemRole: this.user.systemRole,
                 roleID: this.user.roleID,
-                roleFirstName: this.userRole.firstName,
-                roleLastName: this.userRole.lastName,
-                roleTitle: this.userRole.title,
-                roleAffiliation: this.userRole.affiliation,
-                roleAvatar: this.userRole.avatar
+                roleFirstName: this.user.roleFirstName,
+                roleLastName: this.user.roleLastName,
+                roleTitle: this.user.roleTitle,
+                roleAffiliation: this.user.roleAffiliation,
+                // roleAvatar: this.userRole.avatar
             };
-            this.tweetService.add(this.tweet);
+            //this.tweetService.add(this.tweet);
+            this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
         }
     }
 }

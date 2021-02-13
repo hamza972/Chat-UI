@@ -10,7 +10,7 @@
                     {{ authError?.message }}
                 </div>
             </div>
-            <form #roleForm="ngForm" (ngSubmit)="add()">
+            <form #roleForm="ngForm" (ngSubmit)="add(content)">
                 <div class="row">
                     <div class="input-wrapper">
                         <ckeditor name="content" [editor]="Editor" [(ngModel)]="tweet.content"
@@ -45,5 +45,18 @@
         </div>
 
     </div>
+
+     <!-- alert -->
+     <ng-template #content let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Alert</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <h6>Tweet has been posted successfully</h6>
+        </div>
+    </ng-template>
 
 </body>
