@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tweet } from '../../models/tweet';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
-import { Participant } from '../../models/participant';
+import { AppUser } from '../../models/user';
 import { RoleService } from '../../services/role.service';
 import { TweetService } from '../../services/tweet.service';
 import { AuthService } from '../../services/auth.service';
@@ -19,7 +19,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class TweetComponent implements OnInit {
     tweet: Tweet = { content: '' };
     tweets: Tweet[];
-    user: Participant = { systemRole: '' };
+    user: AppUser = { systemRole: '' };
     userRole: Role;
     authError: any;
 

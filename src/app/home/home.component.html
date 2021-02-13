@@ -1,13 +1,11 @@
-<!-- <h1 *ngIf="!user">MEPS</h1> -->
-<!-- <p *ngIf="user">Logged in as: {{user?.email}} - {{user?.displayName}}</p> -->
+<!-- ===== Logged In View ======= -->
 
-<!-- =====add map img======= -->
+<!-- map imag -->
 <div class="map"></div>
-
-<!--  five latest tweets and five latest news -->
+<!-- user is logged in -->
 <div class="row" *ngIf="user">
+<!--  five latest tweets and five latest news -->
     <div class="col-6">
-
         <h3>Latest Tweets</h3>
         <div class="one">
             <div class="row text-fix" *ngFor="let tweet of tweets; let i=index">
@@ -35,7 +33,6 @@
     </div>
 
     <div class="col-6">
-
         <h3>Latest News</h3>
         <div class="two">
             <div class="row text-fix" *ngFor="let newsItem of news; let i=index">
@@ -55,24 +52,17 @@
             </div>
         </div>
     </div>
-
 </div>
 
-
-
-<!-- =====Add a page allowing users to select registration and login ======= -->
-
+<!-- ===== Not Logged In View ======= -->
 <body *ngIf="!user">
     <div class="container" *ngIf="!user">
-
         <div class="imgBx" *ngIf="!user">
             <img src="../../../assets/img/2-2.png" alt="">
         </div>
         <div class="select" *ngIf="!user">
-            <button type="button" class="btn btn-primary mr-2 " *ngIf="!user" (click)="register()" name="button"
-                autofocus>Register</button>
-            <button type="button" class="btn btn-primary" *ngIf="!user" (click)="login()" name="button">Login</button>
+            <button type="button" class="btn btn-primary mr-2" *ngIf="!user" (click)="login()" name="button"
+            autofocus>Login</button>
         </div>
-
     </div>
 </body>

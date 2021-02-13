@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { RoleService } from '../../services/role.service';
-import { Participant } from '../../models/participant';
+import { AppUser } from '../../models/user';
 import { Role } from '../../models/role';
 
 @Component({
@@ -12,7 +12,7 @@ import { Role } from '../../models/role';
 })
 export class ParticipantAddComponent implements OnInit {
 
-    participant: Participant = {};
+    participant: AppUser = {};
     roles: Role[];
     editState = false;
     user: firebase.User;
@@ -71,28 +71,4 @@ export class ParticipantAddComponent implements OnInit {
             alert('Error.');
         }
     }
-
-    /*
-    deleteItem($event, participant: Participant) {
-        this.clearState();
-        this.participantService.deleteItem(item);
-    }
-
-    edit($event, participant: Participant) {
-        this.editState = true;
-        this.participantToEdit = item;
-    }
-
-    updateItem(participant: Participant) {
-        this.participantService.updateItem(item);
-        this.clearState();
-    }
-
-    clearState() {
-        this.editState = false;
-        this.participantToEdit = null;
-    }
-    */
-    //
-
 }

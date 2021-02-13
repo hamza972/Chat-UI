@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
-import { Participant } from '../models/participant';
+import { AppUser } from '../models/user';
 
 @Component({
     selector: 'app-navigation',
@@ -10,7 +10,7 @@ import { Participant } from '../models/participant';
 })
 export class NavigationComponent implements OnInit {
 
-    user: Participant = { roleTitle: ''};
+    user: AppUser = { roleTitle: ''};
 
     constructor(
         private auth: AuthService,
@@ -39,10 +39,10 @@ export class NavigationComponent implements OnInit {
 
     logout() {
         this.auth.logout();
-        this.router.navigate(['/home']);
+        this.router.navigate(['/']);
     }
 
-    getClass = function (path) {
-        return (window.location.pathname == path) ? 'active' : '';
+    getClass = (path) => {
+        return (window.location.pathname === path) ? 'active' : '';
     }
 }

@@ -1,0 +1,40 @@
+<body>
+    <div *ngIf="user">
+        <div class="row mt-4">
+            <div class="col-12">
+                <h4>Admin Creation</h4>
+            </div>
+            <div class="col-12">
+                <form #adminForm="ngForm" (ngSubmit)="add()">
+                    <div class="row">
+                        <div class="col-md-12 mb-2">
+                            <input [(ngModel)]="admin.firstName" name="firstName" type="text" class="form-control"
+                                placeholder="First Name" required>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <input [(ngModel)]="admin.lastName" name="lastName" type="text" class="form-control"
+                                id="lastName" placeholder="Last Name" required>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <input [(ngModel)]="admin.email" name="email" type="email" class="form-control"
+                                placeholder="Email Address" required>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <input [(ngModel)]="admin.password" name="password" type="password"
+                                class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="col-md-12 mb-2">
+                            <input [(ngModel)]="admin.password" name="password" type="password"
+                                class="form-control" placeholder="Confirm Password" required>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit">Create</button>
+                            <button type="button" (click)="cancel()">Cancel</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</body>

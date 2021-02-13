@@ -1,3 +1,8 @@
+.modal{
+    box-shadow: none !important;
+    background-color: transparent !important;
+}
+
 body
 {
     // margin: 0;
@@ -139,4 +144,9 @@ h4
 {
     background-color: #454552;
     color:#fffff3;
+}
+
+
+.forgot:hover{
+    cursor: pointer;   
 }

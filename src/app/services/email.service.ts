@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-  AngularFirestoreDocument,
-} from "@angular/fire/firestore";
-import { Email } from "../models/email";
-import { AppUser as User } from "../models/user";
-import { LoginService } from "../auth/login.service";
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { Email } from '../models/email';
+import { AppUser as User } from '../models/user';
+import { LoginService } from '../auth/login.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -116,7 +113,7 @@ export class EmailService {
   }
 
   deleted(user: User) {
-    return Observable.combineLatest([
+    return combineLatest([
       this.inboxDeleted(user),
       this.sentDeleted(user),
     ]);

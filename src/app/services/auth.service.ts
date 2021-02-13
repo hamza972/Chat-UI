@@ -10,7 +10,6 @@ import { AppUser } from '../models/user';
     providedIn: 'root'
 })
 export class AuthService {
-
     private eventAuthError = new BehaviorSubject<string>('');
     eventAuthError$ = this.eventAuthError.asObservable();
     newUser: any;
@@ -25,15 +24,16 @@ export class AuthService {
         return this.afAuth.authState.pipe(
             switchMap((user) => {
                 if (user) {
-                    return this.db.collection(
-                        'Users', (ref) => ref.where(
-                            'email', '==', user.email)).snapshotChanges().pipe(map(changes => {
-                                return changes.map(a => {
-                                    const data = a.payload.doc.data() as AppUser;
-                                    data.id = a.payload.doc.id;
-                                    return data;
-                                });
-                            }));
+                    return this.db.collection('Users',
+                    (ref) => ref.where('email', '==', user.email))
+                    .snapshotChanges().pipe(map(changes => {
+                        return changes.map(a => {
+                            const data = a.payload.doc.data() as AppUser;
+                            data.id = a.payload.doc.id;
+                            return data;
+                        });
+                    }));
+
                 } else {
                     return of(null);
                 }
@@ -57,6 +57,7 @@ export class AuthService {
         switch (this.newUser.systemRole) {
             case 'admin': {
                 return this.db.doc('Users/' + userCredential.user.uid).set({
+                    id: userCredential.user.uid,
                     email: this.newUser.email,
                     firstName: this.newUser.firstName,
                     lastName: this.newUser.lastName,
@@ -65,6 +66,7 @@ export class AuthService {
             }
             case 'participant': {
                 return this.db.doc('Users/' + userCredential.user.uid).set({
+                    id: userCredential.user.uid,
                     email: this.newUser.email,
                     firstName: this.newUser.firstName,
                     lastName: this.newUser.lastName,
@@ -81,15 +83,15 @@ export class AuthService {
 
     login(email: string, password: string) {
         this.afAuth.auth.signInWithEmailAndPassword(email, password)
-        .catch(error => {
-            this.eventAuthError.next(error);
-        })
-        .then(userCredential => {
-            if(userCredential) {
-                this.router.navigate(['/home']);
-            }
+            .catch(error => {
+                this.eventAuthError.next(error);
+            })
+            .then(userCredential => {
+                if (userCredential) {
+                    this.router.navigate(['/home']);
+                }
 
-        });
+            });
     }
 
     logout() {

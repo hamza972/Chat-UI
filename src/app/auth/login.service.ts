@@ -1,14 +1,14 @@
-import { Injectable, DoBootstrap } from "@angular/core";
-import { AngularFireAuth } from "@angular/fire/auth";
-import { AngularFirestore } from "@angular/fire/firestore";
-import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, of } from "rxjs";
-import { AppUser } from "../models/user";
-import { switchMap } from "rxjs/operators";
-import { Country } from "../models/country";
-import { Role } from "../models/role";
-import { tweetClass } from "../models/tweetClass";
-import { News } from "../models/news";
+import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { AppUser } from '../models/user';
+import { switchMap } from 'rxjs/operators';
+import { Country } from '../models/country';
+import { Role } from '../models/role';
+import { tweetClass } from '../models/tweetClass';
+import { News } from '../models/news';
 
 @Injectable({
   providedIn: 'root',
@@ -60,6 +60,8 @@ export class LoginService {
     );
   }
 
+
+
   getUserCurrent() {
     return this.afAuth.authState;
   }
@@ -76,6 +78,28 @@ export class LoginService {
         }
       });
   }
+
+
+  createAdminUser(user) {
+    this.afAuth.auth
+      .createUserWithEmailAndPassword(user.email, user.password)
+      .then((userCredential) => {
+        this.newUser = user;
+
+        userCredential.user.updateProfile({
+          displayName: user.firstName + user.lastName,
+        });
+
+        this.sendAdminUserData(userCredential).then(() => {
+          this.router.navigate(['/home']);
+        });
+      })
+      .catch((error) => {
+        this.eventAuthError.next(error);
+      });
+  }
+
+
 
   createControlUser(user) {
     this.afAuth.auth
@@ -115,10 +139,20 @@ export class LoginService {
       });
   }
 
-  createAdminUser
+
+  sendAdminUserData(userCredential: firebase.auth.UserCredential) {
+    return this.db.doc(`Users/${userCredential.user.uid}`).set({
+      email: this.newUser.email,
+      firstName: this.newUser.firstName,
+      lastName: this.newUser.lastName,
+      role: 'Control',
+      systemRole: 'owner',
+    });
+  }
+
 
   sendControlUserData(userCredential: firebase.auth.UserCredential) {
-    return this.db.doc(`Users/${userCredential.user.uid}`).set({
+    return this.db.doc(`Users/Admins/All${userCredential.user.uid}`).set({
       email: this.newUser.email,
       firstName: this.newUser.firstName,
       lastName: this.newUser.lastName,
@@ -128,7 +162,7 @@ export class LoginService {
   }
 
   sendParticipantUserData(userCredential: firebase.auth.UserCredential) {
-    return this.db.doc(`Users/${userCredential.user.uid}`).set({
+    return this.db.doc(`Users/Participants/All${userCredential.user.uid}`).set({
       email: this.newUser.email,
       firstName: this.newUser.firstName,
       lastName: this.newUser.lastName,
@@ -150,7 +184,7 @@ export class LoginService {
 
   sendRoleData(newRole: Role) {
     this.router.navigate(['/control']);
-    return this.db.collection(`Roles`).add({
+    return this.db.collection('Roles').add({
       roleName: newRole.title,
       ofCountry: newRole.affiliation,
       firstName: newRole.firstName,
@@ -159,7 +193,7 @@ export class LoginService {
   }
 
   sendTweetData(newTweet: tweetClass) {
-    return this.db.collection(`Tweets`).add({
+    return this.db.collection('Tweets').add({
       userName: newTweet.userName,
       userEmail: newTweet.userEmail,
       userRole: newTweet.userRole,
@@ -169,7 +203,7 @@ export class LoginService {
   }
 
   sendNewsData(newNews: News) {
-    return this.db.collection(`News`).add({
+    return this.db.collection('News').add({
       userName: newNews.userName,
       userEmail: newNews.userEmail,
       userRole: newNews.userRole,

@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { ParticipantService } from '../../services/participant.service';
-import { Participant } from '../../models/participant';
-import { EmailService } from "../../services/email.service";
+import { Component, OnInit, Input } from '@angular/core';
+import { UserService } from '../../services/user.service';
+import { AppUser } from '../../models/user';
 
 @Component({
   selector: 'app-statistics',
@@ -11,30 +8,19 @@ import { EmailService } from "../../services/email.service";
   styleUrls: ['./statistics.component.scss']
 })
 export class StatisticsComponent implements OnInit {
-
-  participants: Participant[];
-  editState: boolean = false;
-  participantToEdit: Participant;
-  user: firebase.User;
+  @Input() user: AppUser;
+  participants: AppUser[];
+  editState = false;
+  participantToEdit: AppUser;
 
   constructor(
-    private auth: AuthService,
-    private participantService: ParticipantService,
-    private router: Router
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    this.auth.getUserData().subscribe(user => {
-      if(user === null) {
-          this.router.navigate(['/home']);
-      } else {
-          this.user = user[0];
-      }
-      
-      this.participantService.get().subscribe(participant => {
+      this.userService.getParticipants().subscribe(participant => {
         this.participants = participant;
     });
-  })
   }
 
 }

@@ -5,7 +5,7 @@ import { Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { EmailService } from "../../services/email.service";
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: "app-email-list",
@@ -54,16 +54,13 @@ export class EmailListComponent implements OnInit {
           email.to.deleted = true;
           this.emailService.delete(email);
         }
-    
         if (this.getTab() === "send") {
           email.from.deleted = true;
           this.emailService.delete(email);
         }
-    
         if (this.getTab() === "draft") {
           this.emailService.hardDelete(email);
         }
-    
         if (this.getTab() === "delete") {
           this.emailService.hardDelete(email);
         }
