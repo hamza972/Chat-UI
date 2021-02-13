@@ -100,9 +100,9 @@ export class TweetComponent implements OnInit {
                 roleLastName: this.user.roleLastName,
                 roleTitle: this.user.roleTitle,
                 roleAffiliation: this.user.roleAffiliation,
-                // roleAvatar: this.userRole.avatar
+                roleAvatar: this.userRole.avatar
             };
-            //this.tweetService.add(this.tweet);
+            this.tweetService.add(this.tweet);
             this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
         }
     }
