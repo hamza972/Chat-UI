@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 export class AffiliateService {
 
     affiliateCollection: AngularFirestoreCollection<Affiliate>;
-    affiliate: Observable<Affiliate[]>;
+    affiliates: Observable<Affiliate[]>;
     affiliateDoc: AngularFirestoreDocument<Affiliate>;
 
     constructor(public afs: AngularFirestore) {
@@ -18,7 +18,7 @@ export class AffiliateService {
     }
 
     get() {
-        return this.affiliate = this.affiliateCollection.snapshotChanges().pipe(map(changes => {
+        return this.affiliates = this.affiliateCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
                 const data = a.payload.doc.data() as Affiliate;
                 data.id = a.payload.doc.id;
@@ -27,12 +27,15 @@ export class AffiliateService {
         }));
     }
 
-    getAffiliate(name: string){
-        return this.afs.collection('Affiliates').doc(name).valueChanges();
+    getAffiliate(id: string) {
+        return this.afs.collection('Affiliates').doc(id).valueChanges();
     }
 
     add(affiliate: Affiliate) {
-        this.affiliateCollection.add(affiliate);
+        this.affiliateCollection.add(affiliate).then(doc => {
+            affiliate.id = doc.id;
+            this.update(affiliate);
+        });
     }
 
     delete(affiliate: Affiliate) {

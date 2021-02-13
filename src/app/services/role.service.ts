@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Role } from '../models/role';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { Role } from '../models/role';
 import { map } from 'rxjs/operators';
 
 @Injectable({
@@ -10,13 +10,15 @@ import { map } from 'rxjs/operators';
 export class RoleService {
 
     roleCollection: AngularFirestoreCollection<Role>;
+    roles: Observable<Role[]>;
+    roleDoc: AngularFirestoreDocument<Role>;
 
     constructor(public afs: AngularFirestore) {
-        this.roleCollection = this.afs.collection('Roles', ref => ref.orderBy('roleName', 'asc'));
+        this.roleCollection = this.afs.collection('Roles', ref => ref.orderBy('firstName', 'asc'));
     }
 
     get() {
-        return this.roleCollection.snapshotChanges().pipe(map(changes => {
+        return this.roles = this.roleCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
                 const data = a.payload.doc.data() as Role;
                 data.id = a.payload.doc.id;
@@ -30,7 +32,11 @@ export class RoleService {
     }
 
     add(role: Role) {
-        this.roleCollection.add(role);
+        console.log('role service', role);
+        this.roleCollection.add(role).then(doc => {
+            role.id = doc.id;
+            this.update(role);
+        });
     }
 
     delete(role: Role) {

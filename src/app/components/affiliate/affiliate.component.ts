@@ -38,7 +38,22 @@ export class AffiliateComponent implements OnInit {
     }
 
     delete(affiliateId) {
-        this.afs.collection('Affiliates').doc(affiliateId).delete();
+        let affiliateName: string;
+        this.affiliateService.getAffiliate(affiliateId).subscribe(dbAffiliate => {
+            const affiliate: Affiliate = dbAffiliate;
+            affiliateName = affiliate.name;
+            this.afs.collection('Roles').ref
+            .where('affiliation', '==', affiliateName).get().then(dbAffiliatedRoles => {
+                const affiliatedRoles: Affiliate[] = dbAffiliatedRoles.docs;
+                if (affiliatedRoles.length === 0) {
+                    this.afs.collection('Affiliates').doc(affiliateId).delete();
+                } else {
+                    alert ('Affiliate "' + affiliateName + '" still has ' + affiliatedRoles.length
+                    + ' role(s) affiliated, cannot delete.');
+                }
+            });
+        });
     }
 
 }
+

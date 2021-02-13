@@ -35,8 +35,8 @@ export class ProfileComponent implements OnInit {
 
         this.roleID = this.route.snapshot.paramMap.get('id');
 
-        this.roleService.getRole(this.roleID).subscribe( rolesFromDB => {
-            this.role = rolesFromDB;
+        this.roleService.getRole(this.roleID).subscribe( roleFromDB => {
+            this.role = roleFromDB;
         });
     }
 }

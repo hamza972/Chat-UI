@@ -10,9 +10,9 @@
                     <input [(ngModel)]="role.title" name="title" type="text" class="form-control" id="title" placeholder="Title">
                 </div>
                 <div class="col-md-12 mb-2">
-                    <select name="affiliation" type="text" class="form-control" id="affiliation">
+                    <select [(ngModel)]="role.affiliateID" name="role.affiliateID" type="text" class="form-control" id="affiliation">
                         <option  value="" selected disabled>Select an affiliate</option>
-                        <option *ngFor="let affiliate of affiliates" [value]="affiliate.name">{{affiliate.name}}</option>
+                        <option *ngFor="let affiliate of affiliates" [value]="affiliate.id">{{affiliate.name}}</option>
                     </select>
                 </div>
 

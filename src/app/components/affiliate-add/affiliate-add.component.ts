@@ -12,7 +12,7 @@ import { Affiliate } from '../../models/affiliate';
 export class AffiliateAddComponent implements OnInit {
 
     user: firebase.User;
-
+    affiliates: Affiliate[];
     affiliate: Affiliate = {
         name: ''
     };
@@ -35,6 +35,9 @@ export class AffiliateAddComponent implements OnInit {
                 if (user[0].systemRole !== 'admin') {
                     this.router.navigate(['/home']);
                 }
+                this.affiliateService.get().subscribe(affiliates => {
+                    this.affiliates = affiliates;
+                });
             }
         });
     }
@@ -44,10 +47,30 @@ export class AffiliateAddComponent implements OnInit {
     }
 
     add() {
+        this.affiliate.name = this.processAffiliateName(this.affiliate.name);
         if (this.affiliate.name !== '') {
+            for (const affiliate of this.affiliates) {
+                if (affiliate.name === this.affiliate.name) {
+                    alert('Affiliate name already in use!');
+                    return;
+                }
+            }
             this.affiliateService.add(this.affiliate);
             this.router.navigate(['/control']);
         }
+    }
+
+    private processAffiliateName(name: string): string {
+        let processedName = '';
+        if (name.length < 2) { return processedName; }
+        const nameSplit = name.split(' ');
+        for (let subName of nameSplit) {
+            subName = subName[0].toUpperCase() + subName.slice(1).toLowerCase();
+            processedName += subName + ' ';
+        }
+        processedName = processedName.trim();
+        console.log(processedName);
+        return processedName;
     }
 
 }

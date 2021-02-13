@@ -81,9 +81,8 @@ export class AffiliateEditComponent implements OnInit {
   }
 
 
-  async update(editedAffiliate) {
-    console.log(editedAffiliate);
-    if (editedAffiliate.title !== '') {
+  async update(editedAffiliate: Affiliate) {
+    if (editedAffiliate.name !== '') {
       editedAffiliate.id = this.affiliateID;
       // update avatar if we have an image confirmed
       if (this.imageConfirmed) {
@@ -91,6 +90,19 @@ export class AffiliateEditComponent implements OnInit {
         const url = await this.storageService.uploadAvatar(this.affiliateID, this.selectedImage);
         this.uploadImageUrl = url;
         editedAffiliate.avatar = this.uploadImageUrl;
+      }
+      // update roles assigned to this affiliate if name change
+      if (this.affiliate.name !== editedAffiliate.name) {
+        this.afs.collection('Roles').ref
+        .where('affiliation', '==', this.affiliate.name).get()
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                doc.ref.update({ affiliation: editedAffiliate.name});
+            });
+        })
+        .catch((error) => {
+            console.log('Error getting role document while updating affiliate name: ', error);
+        });
       }
       this.affiliateService.update(editedAffiliate);
       this.router.navigate(['/control']);
