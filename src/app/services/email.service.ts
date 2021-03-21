@@ -6,6 +6,7 @@ import { LoginService } from '../auth/login.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +22,9 @@ export class EmailService {
     private db: AngularFirestore
   ) {}
 
-  sendEmail(email: Email) {
-    return this.db.collection(`Emails`).add({
+  sendEmail(email: Email): Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>> { //Sean: returns a promise to the function that called it
+    var promise: Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>; //create the promise
+    promise = this.db.collection(`Emails`).add({
       subject: email.subject,
       date: new Date(),
       draft: false,
@@ -36,6 +38,7 @@ export class EmailService {
       },
       body: email.body,
     });
+    return(promise); //returns the promise
   }
 
   draftEmail(email: Email) {
@@ -56,18 +59,19 @@ export class EmailService {
   }
 
   inbox(user: User) {
+    console.log('Geting emails for user ' + user.email);
     this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
-        .where('to.user', '==', user.email)
+        .where('to.user', '==', user.email) 
         .where('to.deleted', '==', false)
         .where('draft', '==', false)
     );
-
     return this.emailCollection.snapshotChanges().pipe(
       map((changes) => {
         return changes.map((a) => {
           const data = a.payload.doc.data() as Email;
           data.id = a.payload.doc.id;
+          console.log(data);
           return data;
         });
       })
