@@ -11,14 +11,15 @@ export class EmailComponent implements OnInit {
   user: User;
   tabstatus = {};
 
-  constructor(private auth: LoginService) {}
+  constructor(private auth: LoginService) { }
 
   ngOnInit() {
     this.auth.getUserCurrent().subscribe((user) => {
       this.user = user;
+      //console.log("User arrived"); //debug
     });
+    //console.log("waiting for user"); //debug
   }
-
   setTab(event): void {
     localStorage.setItem("tab", event.nextId);
   }

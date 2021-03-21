@@ -7,6 +7,7 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Email } from 'src/app/models/email';
 import { EmailService } from '../../services/email.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { promise } from 'protractor';
 
 @Component({
   selector: 'app-email-compose',
@@ -51,7 +52,9 @@ export class EmailComposeComponent implements OnInit {
   ngOnInit(): void {
     this.userService.get().subscribe((participants) => {
       this.participants = participants.map((participant) => participant.email);
+      console.log("Waiting for participants")
     });
+    console.log("Participants have arrived")
   }
 
   searchUsers = (search$: Observable<string>) =>
@@ -75,16 +78,33 @@ export class EmailComposeComponent implements OnInit {
       subject: formdata.subject,
       body: formdata.body,
       to: {
-        user: formdata.sendTo,
+        user: formdata.sendTo
       },
       from: {
         user: this.user.email,
       },
     };
     this.emailForm.reset();
-    this.emailService.sendEmail(this.newEmail);
-    console.log('sending');
-    alert('Your Email has been sent!!');
+    //Sean's Email Promise implementation for checking withfire-base if the email was good or not
+    var promise: Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>;
+    promise = this.emailService.sendEmail(this.newEmail);
+    //Sean's debugging stuff
+    //console.log('sending')
+    //console.log(formdata.subject)
+    //console.log(this.user.email)
+    //Sean: Actually checks if the results from firebase before informing the user if it was sucessful or not!
+    promise.then(result => 
+    {    
+    alert('Your Email has been sent to ' + (formdata.sendTo as string).toLowerCase().trim() + ' , Press ok to continue'); //set email to a ll lower case and trim spaces out of it, 
+    console.log('Sending Complete') //console debug
+    location.reload();
+    });
+    promise.catch(error => //Sean: this method will run if firebase reports a problem
+      {    
+      alert('Something has went wrong, the email was not sent, please try again');
+      console.log('sending failed') //console debug
+      location.reload(); //Sean: reload the page to bring them back to inbox screen.
+      });
   }
 
   draft(formdata) {
@@ -100,7 +120,7 @@ export class EmailComposeComponent implements OnInit {
     };
     this.emailService.draftEmail(this.newEmail);
     console.log('drafting');
-    alert('Your Email has been been moved to the drafts!!');
+    alert('Your Email has been been moved to the drafts!!'); //Sean: Need to immplement a promise here
     this.emailForm.reset();
   }
 }
