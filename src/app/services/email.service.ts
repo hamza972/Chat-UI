@@ -41,8 +41,9 @@ export class EmailService {
     return(promise); //returns the promise
   }
 
-  draftEmail(email: Email) {
-    return this.db.collection(`Emails`).add({
+  draftEmail(email: Email): Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>  { //Sean: returns a promise to the function that called it
+    var promise: Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>; //create the promise
+    promise = this.db.collection(`Emails`).add({
       subject: email.subject,
       date: new Date(),
       draft: true,
@@ -56,6 +57,7 @@ export class EmailService {
       },
       body: email.body,
     });
+    return(promise); //returns the promise
   }
 
   inbox(user: User) {

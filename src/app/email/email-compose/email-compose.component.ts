@@ -84,7 +84,6 @@ export class EmailComposeComponent implements OnInit {
         user: this.user.email,
       },
     };
-    this.emailForm.reset();
     //Sean's Email Promise implementation for checking withfire-base if the email was good or not
     var promise: Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>;
     promise = this.emailService.sendEmail(this.newEmail);
@@ -97,17 +96,18 @@ export class EmailComposeComponent implements OnInit {
     {    
     alert('Your Email has been sent to ' + (formdata.sendTo as string).toLowerCase().trim() + ' , Press ok to continue'); //set email to a ll lower case and trim spaces out of it, 
     console.log('Sending Complete') //console debug
+    this.emailForm.reset(); //SEAN: 26th of march, moved this down to after the email has been sent.
     location.reload();
     });
     promise.catch(error => //Sean: this method will run if firebase reports a problem
       {    
       alert('Something has went wrong, the email was not sent, please try again');
       console.log('sending failed') //console debug
-      location.reload(); //Sean: reload the page to bring them back to inbox screen.
       });
   }
 
   draft(formdata) {
+    //Sean: Actually checks if the results from firebase before informing the user if it was sucessful or not!
     this.newEmail = {
       subject: formdata.subject,
       body: formdata.body,
@@ -118,9 +118,21 @@ export class EmailComposeComponent implements OnInit {
         user: this.user.email,
       },
     };
-    this.emailService.draftEmail(this.newEmail);
+    var promise: Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>;
+    promise = this.emailService.draftEmail(this.newEmail);
     console.log('drafting');
-    alert('Your Email has been been moved to the drafts!!'); //Sean: Need to immplement a promise here
+    promise.then(result => 
+      {    
+      alert('Your Email has been saved as a draft'); //set email to a ll lower case and trim spaces out of it, 
+      console.log('Save as draft') //console debug
+      this.emailForm.reset(); //SEAN: 26th of march, moved this down to after the email has been sent.
+      });
+    alert('Your Email has been been moved to the drafts!!'); //Sean: Need to implement a promise here. Completed on the 26th of march 2021
     this.emailForm.reset();
+    promise.catch(error => //Sean: this method will run if firebase reports a problem
+      {    
+      alert('Something has went wrong, the email was not saved, please try again');
+      console.log('sending failed') //console debug
+      });
   }
 }
