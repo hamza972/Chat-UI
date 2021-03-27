@@ -43,7 +43,11 @@ export class EmailComposeComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.emailForm = this.formBuilder.group({
-      sendTo: [null, Validators.required],
+      sendTo: [null, [Validators.required, 
+        Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")]], 
+        //Feature lost in commit 4d21784e3f5, was added in earlier 1154066f603 credit to past student, MUHAMMAD ZORAIN ALI
+        //original regex [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$ Current Version improved by Sean to permit capitals.
+        //The backend will deal with capitals.
       subject: [null, Validators.required],
       body: [null, Validators.required]
     });
