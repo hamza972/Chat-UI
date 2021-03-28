@@ -7,6 +7,7 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Email } from 'src/app/models/email';
 import { EmailService } from '../../services/email.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { promise } from 'protractor';
 
 @Component({
   selector: 'app-email-compose',
@@ -42,7 +43,11 @@ export class EmailComposeComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.emailForm = this.formBuilder.group({
-      sendTo: [null, Validators.required],
+      sendTo: [null, [Validators.required, 
+        Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")]], 
+        //Feature lost in commit 4d21784e3f5, was added in earlier 1154066f603 credit to past student, MUHAMMAD ZORAIN ALI
+        //original regex [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$ Current Version improved by Sean to permit capitals.
+        //The backend will deal with capitals.
       subject: [null, Validators.required],
       body: [null, Validators.required]
     });
@@ -51,7 +56,9 @@ export class EmailComposeComponent implements OnInit {
   ngOnInit(): void {
     this.userService.get().subscribe((participants) => {
       this.participants = participants.map((participant) => participant.email);
+      console.log("Waiting for participants")
     });
+    console.log("Participants have arrived")
   }
 
   searchUsers = (search$: Observable<string>) =>
@@ -75,19 +82,36 @@ export class EmailComposeComponent implements OnInit {
       subject: formdata.subject,
       body: formdata.body,
       to: {
-        user: formdata.sendTo,
+        user: formdata.sendTo
       },
       from: {
         user: this.user.email,
       },
     };
-    this.emailForm.reset();
-    this.emailService.sendEmail(this.newEmail);
-    console.log('sending');
-    alert('Your Email has been sent!!');
+    //Sean's Email Promise implementation for checking withfire-base if the email was good or not
+    var promise: Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>;
+    promise = this.emailService.sendEmail(this.newEmail);
+    //Sean's debugging stuff
+    //console.log('sending')
+    //console.log(formdata.subject)
+    //console.log(this.user.email)
+    //Sean: Actually checks if the results from firebase before informing the user if it was sucessful or not!
+    promise.then(result => 
+    {    
+    alert('Your Email has been sent to ' + (formdata.sendTo as string).toLowerCase().trim() + ' , Press ok to continue'); //set email to a ll lower case and trim spaces out of it, 
+    console.log('Sending Complete') //console debug
+    this.emailForm.reset(); //SEAN: 26th of march, moved this down to after the email has been sent.
+    location.reload();
+    });
+    promise.catch(error => //Sean: this method will run if firebase reports a problem
+      {    
+      alert('Something has went wrong, the email was not sent, please try again');
+      console.log('sending failed') //console debug
+      });
   }
 
   draft(formdata) {
+    //Sean: Actually checks if the results from firebase before informing the user if it was sucessful or not!
     this.newEmail = {
       subject: formdata.subject,
       body: formdata.body,
@@ -98,9 +122,21 @@ export class EmailComposeComponent implements OnInit {
         user: this.user.email,
       },
     };
-    this.emailService.draftEmail(this.newEmail);
+    var promise: Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>;
+    promise = this.emailService.draftEmail(this.newEmail);
     console.log('drafting');
-    alert('Your Email has been been moved to the drafts!!');
+    promise.then(result => 
+      {    
+      alert('Your Email has been saved as a draft'); //set email to a ll lower case and trim spaces out of it, 
+      console.log('Save as draft') //console debug
+      this.emailForm.reset(); //SEAN: 26th of march, moved this down to after the email has been sent.
+      });
+    alert('Your Email has been been moved to the drafts!!'); //Sean: Need to implement a promise here. Completed on the 26th of march 2021
     this.emailForm.reset();
+    promise.catch(error => //Sean: this method will run if firebase reports a problem
+      {    
+      alert('Something has went wrong, the email was not saved, please try again');
+      console.log('sending failed') //console debug
+      });
   }
 }

@@ -1,30 +1,28 @@
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"> 
 <div class="row">
   <div class="col-12">
     <ngb-tabset
       [destroyOnHide]="false"
       (tabChange)="tabstatus[$event.nextId] = true; setTab($event)"
     >
+    <ngb-tab id="inbox" title="">
+        <ng-template ngbTabTitle><span class="tab-title"> <!-- SEAN: swapped the location of inbox and compose, inbox will now appear first upon loading the page -->
+          <i class="far fa-envelope"></i> &nbsp;Inbox</span> 
+          </ng-template>
+      <ng-template ngbTabContent>
+        <div>
+          <app-email-inbox [user]="user"></app-email-inbox>
+        </div>
+      </ng-template>
+    </ngb-tab>
+
       <ngb-tab id="compose" title="">
           <ng-template ngbTabTitle><span class="tab-title">
               <i class="fa fa-pencil-square-o" aria-hidden="true"></i> &nbsp;Compose</span>
-            </ng-template>
+            </ng-template> <!-- SEAN: swapped the location of inbox and compose, compose will now appear as the second upon loading the page -->
         <ng-template ngbTabContent>
           <div>
             <app-email-compose [user]="user"></app-email-compose>
-          </div>
-        </ng-template>
-      </ngb-tab>
-
-      <ngb-tab id="inbox" title="">
-          <ng-template ngbTabTitle><span class="tab-title">
-            <i class="far fa-envelope"></i> &nbsp;Inbox</span>
-
-            </ng-template>
-        <ng-template ngbTabContent>
-          <div *ngIf="tabstatus['inbox'] === true">
-            <app-email-inbox [user]="user"></app-email-inbox>
           </div>
         </ng-template>
       </ngb-tab>

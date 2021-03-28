@@ -14,9 +14,14 @@ export class EmailInboxComponent implements OnInit {
 
   constructor(private emailService: EmailService) {}
 
-  ngOnInit() {
+  ngOnInit() { //Sean: This almost never works, the 'user' doesn't load in fast enough, see below method 
     this.emailService.inbox(this.user).subscribe((emails) => {
       this.emails = emails;
     });
   }
+  ngOnChanges() { //Sean: auto refresh the emails when new ones come in. Also helps with the issue with loading the 'user' when it becomes available
+    this.emailService.inbox(this.user).subscribe((emails) => {
+      this.emails = emails;
+    });
+    }   
 }
