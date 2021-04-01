@@ -27,10 +27,8 @@ export class TweetComponent implements OnInit {
     editorConfig = {
         toolbar: {
           items: [
-            'heading', 'fontFamily', 'fontSize', 'fontColor', '|',
-            'bold', 'italic', 'underline', 'strikethrough', '|',
             'link', 'bulletedList', 'numberedList', '|',
-            'alignment', 'indent', 'outdent', '|',
+            'indent', 'outdent', '|',
             'blockQuote', 'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo']
         },
         image: {
@@ -82,6 +80,7 @@ export class TweetComponent implements OnInit {
     }
 
     add(content) {
+        console.log('tweet method call');
         if (this.tweet.content !== '') {
             this.tweet = {
                 date: new Date(),
@@ -100,10 +99,11 @@ export class TweetComponent implements OnInit {
                 roleLastName: this.user.roleLastName,
                 roleTitle: this.user.roleTitle,
                 roleAffiliation: this.user.roleAffiliation,
-                roleAvatar: this.userRole.avatar
+                // roleAvatar: this.userRole.avatar
             };
             this.tweetService.add(this.tweet);
             this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
+            this.tweet.content = '';
         }
     }
 }

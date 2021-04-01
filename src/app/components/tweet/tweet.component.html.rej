@@ -1,0 +1,49 @@
+diff a/src/app/components/tweet/tweet.component.html b/src/app/components/tweet/tweet.component.html	(rejected hunks)
+@@ -1 +0,46 @@
+-<p>tweet works!</p>
++<div class="row mt-4">
++
++    <div class="col-12">
++        <div class="row" *ngIf="authError">
++            <div class="col-12 alert alert-danger">
++                {{ authError?.message }}
++            </div>
++        </div>
++        <form #roleForm="ngForm" (ngSubmit)="add()">
++            <div class="row">
++                <div class="col-md-12 mb-2">
++                    <input [(ngModel)]="tweet.content" name="content" type="text" class="form-control" id="content" placeholder="What's on your mind?">
++                </div>
++            </div>
++
++            <div>
++                <div class="row">
++                    <div class="col-md-12">
++                        <button type="submit">Tweet</button>
++                        <!-- <button type="button" (click)="cancel()">Cancel</button> -->
++                    </div>
++                </div>
++            </div>
++        </form>
++    </div>
++
++    <table class="table table-striped">
++        <thead>
++            <tr>
++                <th scope="col">Affiliation</th>
++                <th scope="col">Title</th>
++                <th scope="col">First Name</th>
++                <th scope="col">Last Name</th>
++            </tr>
++        </thead>
++        <tbody>
++            <tr *ngFor="let tweet of tweets">
++                <td>{{tweet.content}}</td>
++                <td>{{tweet.date.toDate() | date: 'medium'}}</td>
++                <td>{{tweet.roleFirstName}}</td>
++                <td>{{tweet.roleLastName}}</td>
++            </tr>
++        </tbody>
++    </table>
++
++</div>
