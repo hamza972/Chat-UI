@@ -81,7 +81,7 @@ export class TweetComponent implements OnInit {
 
     add(content) {
         console.log('tweet method call');
-        if (this.tweet.content !== '') {
+        if (this.tweet.content !== '' && this.tweet.content.length < 280) {
             this.tweet = {
                 date: new Date(),
                 content: this.tweet.content,
