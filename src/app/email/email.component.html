@@ -3,6 +3,7 @@
   <div class="col-12">
     <ngb-tabset
       [destroyOnHide]="false"
+      #tabsystem=""
       (tabChange)="tabstatus[$event.nextId] = true; setTab($event)"
     >
     <ngb-tab id="inbox" title="">
@@ -22,7 +23,7 @@
             </ng-template> <!-- SEAN: swapped the location of inbox and compose, compose will now appear as the second upon loading the page -->
         <ng-template ngbTabContent>
           <div>
-            <app-email-compose [user]="user"></app-email-compose>
+            <app-email-compose [user]="user" (switchtab)="setTabEvent($event)"> </app-email-compose>  <!-- SEAN: Now listens back for an event requesting the UI to change Tabs -->
           </div>
         </ng-template>
       </ngb-tab>
