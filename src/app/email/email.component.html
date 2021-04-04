@@ -23,7 +23,7 @@
             </ng-template> <!-- SEAN: swapped the location of inbox and compose, compose will now appear as the second upon loading the page -->
         <ng-template ngbTabContent>
           <div>
-            <app-email-compose [user]="user" (switchtab)="setTabEvent($event)"> </app-email-compose>  <!-- SEAN: Now listens back for an event requesting the UI to change Tabs -->
+            <app-email-compose [user]="user" [OptionalDraftEmail]="OptionalDraftEmail" (switchtab)="setTabEvent($event)"> </app-email-compose>  <!-- SEAN: Now listens back for an event requesting the UI to change Tabs -->
           </div>
         </ng-template>
       </ngb-tab>
@@ -45,7 +45,7 @@
             </ng-template>
         <ng-template ngbTabContent>
           <div *ngIf="tabstatus['draft'] === true">
-            <app-email-drafts [user]="user"></app-email-drafts>
+            <app-email-drafts [user]="user" (ComposeToDraftRelay)="sendtocompose($event)"> </app-email-drafts>
           </div>
         </ng-template>
       </ngb-tab>

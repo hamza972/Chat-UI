@@ -12,6 +12,10 @@
   <button type="button" name="draftEmail" (click)="draft(emailForm.value)">Draft</button> 
 </form>
 <br />
-<p *ngIf="!emailForm.valid" style="color: red"> Invalid email message. </p> <!-- SEAN: Shows if email form is invalid-->
-<p *ngIf="emailForm.valid" style="color:green"> Valid email message. </p> <!-- SEAN: Shows if email form is valid-->
+<h5 *ngIf="!emailForm.valid" style="color: red"> Invalid email message. </h5> <!-- SEAN: Shows if email form is invalid-->
+<h5 *ngIf="emailForm.valid" style="color:green"> Valid email message. </h5> <!-- SEAN: Shows if email form is valid-->
+<div *ngIf="IsDraft">
+    <h4  style="color: blue"> This message was loaded from a draft </h4> <!-- SEAN: Shows if email form is valid-->
+    <button type="button" class="btn btn-primary" (click)="ClearDraftFromCompose()"> Reset</button>
+  </div>
 <br />

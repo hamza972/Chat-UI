@@ -66,6 +66,11 @@
           Delete
         </button>
       </td>
+      <td *ngIf="getTab() == 'draft'"> <!-- SEAN: Edit button to send the email back to compose-->
+        <button class="btn waves-effect waves-light green" (click)="TransferEmailToCompose(email)">
+          Edit
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>
