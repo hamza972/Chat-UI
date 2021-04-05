@@ -167,8 +167,8 @@ export class EmailService {
     this.emailDoc.update(email);
   }
 
-  hardDelete(email: Email) {
-    this.emailDoc = this.afs.doc(`Emails/${email.id}`);
-    this.emailDoc.delete();
-  }
+  //hardDelete(email: Email) { //Functionality removed, emails cannot be deleted
+    //this.emailDoc = this.afs.doc(`Emails/${email.id}`);
+    //this.emailDoc.delete();
+  //}
 }

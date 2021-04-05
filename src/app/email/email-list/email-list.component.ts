@@ -57,13 +57,14 @@ export class EmailListComponent implements OnInit {
         }
         if (this.getTab() === "send") {
           email.from.deleted = true;
-          this.emailService.delete(email);
+          console.log("Functionality removed, emails cannot be deleted");
         }
         if (this.getTab() === "draft") {
-          this.emailService.hardDelete(email);
+          this.emailService.delete(email);
         }
         if (this.getTab() === "delete") {
-          this.emailService.hardDelete(email);
+          //this.emailService.hardDelete(email);
+          console.log("Functionality removed, emails cannot be deleted");
         }
       }
     });
