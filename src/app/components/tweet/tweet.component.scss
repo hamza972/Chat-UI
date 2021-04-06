@@ -198,6 +198,14 @@ option.a{
   padding-left: 40px;
 }
 
+.BlueColor {
+  color: blue;
+}
+
+.BlueColor:hover {
+  text-decoration: underline;
+}
+
 .modal{
   background-color: unset !important;
   box-shadow: unset !important;

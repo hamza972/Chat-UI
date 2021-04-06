@@ -22,6 +22,7 @@ export class TweetComponent implements OnInit {
     user: AppUser = { systemRole: '' };
     userRole: Role;
     authError: any;
+    hashtagRegEx = new RegExp(/\#.+?\s|\#.+?$/, 'g');
 
     public Editor = Editor;
     editorConfig = {
@@ -79,12 +80,20 @@ export class TweetComponent implements OnInit {
         this.router.navigate(['/tweet']);
     }
 
+    hashtags(content) {
+        return '<span class="BlueColor">'+content+'</span>'
+    }
+
     add(content) {
-        console.log('tweet method call');
         if (this.tweet.content !== '' && this.tweet.content.length < 280) {
+            
+            this.tweet.content = this.tweet.content.replace(this.hashtagRegEx, this.hashtags);
+            this.tweet.hashtag = this.tweet.content.match(this.hashtagRegEx),
+
             this.tweet = {
                 date: new Date(),
                 content: this.tweet.content,
+                hashtag: this.tweet.hashtag,
 
                 /* Properties are from User model,
                 if possible to retrieve data using ID,
@@ -101,6 +110,7 @@ export class TweetComponent implements OnInit {
                 roleAffiliation: this.user.roleAffiliation,
                 // roleAvatar: this.userRole.avatar
             };
+            console.log(this.tweet.hashtag);
             this.tweetService.add(this.tweet);
             //this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
             this.tweet.content = '';

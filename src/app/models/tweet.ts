@@ -2,6 +2,7 @@ export interface Tweet {
     id?: string;
     date?: Date;
     content?: string;
+    hashtag?: string[];
 
     /* Properties are from User model,
     if possible to retrieve data using ID,
