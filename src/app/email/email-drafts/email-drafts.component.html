@@ -1,1 +1,1 @@
-<app-email-list [emails]="emails"></app-email-list>
+<app-email-list [emails]="emails" (SendEmailToCompose)="RelayEvent($event)"> </app-email-list> <!-- Now accepts an event from child component -->

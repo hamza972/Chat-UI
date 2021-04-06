@@ -157,13 +157,18 @@ export class EmailService {
     );
   }
 
+  update(email: Email): Promise<void>{ //Sean: New method to update existing emails
+    this.emailDoc = this.afs.doc(`Emails/${email.id}`);
+      return(this.emailDoc.update(email)); //Sean: Returns Promise
+  } 
+
   delete(email: Email) {
     this.emailDoc = this.afs.doc(`Emails/${email.id}`);
     this.emailDoc.update(email);
   }
 
-  hardDelete(email: Email) {
-    this.emailDoc = this.afs.doc(`Emails/${email.id}`);
-    this.emailDoc.delete();
-  }
+  //hardDelete(email: Email) { //Functionality removed, emails cannot be deleted
+    //this.emailDoc = this.afs.doc(`Emails/${email.id}`);
+    //this.emailDoc.delete();
+  //}
 }
