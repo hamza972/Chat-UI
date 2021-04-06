@@ -27,6 +27,10 @@ export class RoleComponent implements OnInit {
         });
     }
 
+    returnRoles() {
+        return this.roles;
+    }
+
     add() {
         this.router.navigate(['/role-add']);
     }

@@ -8,6 +8,7 @@ import { TweetService } from '../../services/tweet.service';
 import { AuthService } from '../../services/auth.service';
 import { Role } from '../../models/role';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+//import { RSA_PKCS1_OAEP_PADDING } from 'constants';
 
 @Component({
     selector: 'app-tweet',
@@ -22,8 +23,8 @@ export class TweetComponent implements OnInit {
     user: AppUser = { systemRole: '' };
     userRole: Role;
     authError: any;
-    hashtagRegEx = new RegExp(/\#.+?\s|\#.+?$/, 'g');
-
+    hashtagRegEx = new RegExp(/\#(.*?)(?=\s)|\#(.*?)(?=\<)|\#(.*?)$/, 'g');
+    mentionRegEx = new RegExp(/\@(.*?)(?=\s)|\@(.*?)(?=\<)|\@(.*?)$/, 'g');
     public Editor = Editor;
     editorConfig = {
         toolbar: {
@@ -73,45 +74,77 @@ export class TweetComponent implements OnInit {
 
     /* go to profile page */
     profile($event, tweet: Tweet) {
-        this.router.navigate(['/profile/' + tweet.roleID]);
+        this.router.navigate(['/profile/' + tweet.user.id]);
     }
 
     cancel() {
         this.router.navigate(['/tweet']);
     }
 
-    hashtags(content) {
-        return '<span class="BlueColor">'+content+'</span>'
+    hashtagHTMLBuilder(content) {
+        return '<span class="hashtag">'+content+'</span>'
+    }
+
+    mentionHTMLBuilder(content) {
+        return '<span class="mention"; [routerLink]="[\'/profile\', role.id]">'+content+'</span>'
+    }
+
+    mentionCheck(mention) {
+
+        //Creates a list of roles
+        var roles: Role[];
+        var check = false;
+        var newMention = String(mention.substring(1));
+
+        this.roleService.get().subscribe(dbRoles => {
+            roles = dbRoles;
+
+            for (var i = 0; i < roles.length; i++){
+                if(roles[i].id == newMention){
+                    console.log(roles[i].id);
+                    console.log(newMention);
+                    check = true;
+                }
+            }
+        
+        });
+
+        return check;
     }
 
     add(content) {
         if (this.tweet.content !== '' && this.tweet.content.length < 280) {
             
-            this.tweet.content = this.tweet.content.replace(this.hashtagRegEx, this.hashtags);
-            this.tweet.hashtag = this.tweet.content.match(this.hashtagRegEx),
+            //Create hashtag inside content
+            this.tweet.content = this.tweet.content.replace(this.hashtagRegEx, this.hashtagHTMLBuilder);
+            //Put hashtag into a list for reference
+            this.tweet.hashtag = this.tweet.content.match(this.hashtagRegEx);
+
+            //Put hashtag into a list for reference
+            this.tweet.mention = this.tweet.content.match(this.mentionRegEx);
+
+            for (var i = 0; i < this.tweet.mention.length; i++){
+                var checkID = this.mentionCheck(this.tweet.mention[i]);
+                console.log(checkID);
+
+                if (checkID == true) {
+                    console.log(true);
+                    this.tweet.content = this.tweet.content.replace(this.mentionRegEx, this.mentionHTMLBuilder);
+                } else{
+                    
+                }
+            }
 
             this.tweet = {
                 date: new Date(),
                 content: this.tweet.content,
                 hashtag: this.tweet.hashtag,
+                mention: this.tweet.mention,
+                user: this.user,
 
-                /* Properties are from User model,
-                if possible to retrieve data using ID,
-                no need to include this */
-                userID: this.user.id,
-                firstName: this.user.firstName,
-                lastName: this.user.lastName,
-                email: this.user.email,
-                systemRole: this.user.systemRole,
-                roleID: this.user.roleID,
-                roleFirstName: this.user.roleFirstName,
-                roleLastName: this.user.roleLastName,
-                roleTitle: this.user.roleTitle,
-                roleAffiliation: this.user.roleAffiliation,
-                // roleAvatar: this.userRole.avatar
             };
-            console.log(this.tweet.hashtag);
-            this.tweetService.add(this.tweet);
+
+            //this.tweetService.add(this.tweet);
             //this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
             this.tweet.content = '';
         } 

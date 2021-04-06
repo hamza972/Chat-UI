@@ -16,7 +16,7 @@
                     <div class="input-wrapper">
                         <h3>Twitter Feed</h3>
                         <ckeditor name="content" [editor]="Editor" [(ngModel)]="tweet.content"
-                            style="min-height: 500px;" [config]="editorConfig"></ckeditor>
+                            style="min-height: 500px;" [config]="editorConfig" maxlength="280"></ckeditor>
                         <div class="col-md-12">
                             <button type="submit" class="tweet-button">Tweet</button>
                         </div>
@@ -34,8 +34,8 @@
                     <div class="card-content">
                         <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">{{tweet.roleFirstName}}
                             {{tweet.roleLastName}}</p>
-                        <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.firstName}}
-                            {{tweet.lastName}}
+                        <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.user.firstName}}
+                            {{tweet.user.lastName}}
                         </p>
                         <div [innerHtml]="tweet.content"></div>
                     </div>
