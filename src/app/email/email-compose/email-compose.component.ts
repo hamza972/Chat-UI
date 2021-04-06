@@ -152,6 +152,10 @@ export class EmailComposeComponent implements OnInit {
   }
 
   draft(formdata) {
+    if (formdata.subject == "" || formdata.subject == null) {
+      alert("subject must not be empty") //Sean: EMAILS MUST HAVE A SUBJECT, or it will break the drafts section when the search functions throws an exception for missing subject.
+      return
+    }
     if(this.IsDraft == true) //sending existing draft emails back to drafts
     {
      this.OptionalDraftEmail.to.user = ((formdata.sendTo as string).toLowerCase().trim()); //set new information 

@@ -22,6 +22,7 @@ export class EmailComponent implements OnInit {
   ngOnInit() {
     this.auth.getUserCurrent().subscribe((user) => {
       this.user = user;
+      localStorage.setItem("tab", "inbox");
       //console.log("User arrived"); //debug
     });
     //console.log("waiting for user"); //debug
