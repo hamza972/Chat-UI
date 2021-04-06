@@ -102,8 +102,12 @@ export class TweetComponent implements OnInit {
                 // roleAvatar: this.userRole.avatar
             };
             this.tweetService.add(this.tweet);
-            this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
+            //this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
             this.tweet.content = '';
+        } 
+        else {
+            alert('Tweet error');
+            //this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
         }
     }
 }
