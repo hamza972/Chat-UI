@@ -59,14 +59,12 @@
         {{ email.date.seconds * 1000 | date: "dd-MM-yyyy" }}
       </td>
       <td>
-        <button class="btn waves-effect waves-light red" (click)="deleteEmail(email, content)" *ngIf="getTab() == 'inbox' || getTab() == 'draft'" > <!-- SEAN: No longer see the delete button is the delete section, as requested by product owner-->
+        <button class="btn waves-effect waves-light red" (click)="deleteEmail(email, content)" *ngIf="getTab() == 'inbox' || getTab() == 'draft'" style="margin-right: 5%;" > <!-- SEAN: No longer see the delete button is the delete section, as requested by product owner-->
           Delete
         </button>
-      </td>
-      <td *ngIf="getTab() == 'draft'"> <!-- SEAN: Edit button to send the email back to compose-->
-        <button class="btn waves-effect waves-light green" (click)="TransferEmailToCompose(email)">
-          Edit
-        </button>
+        <button class="btn waves-effect waves-light green" (click)="TransferEmailToCompose(email)" *ngIf="getTab() == 'draft'">
+            Edit
+          </button>
       </td>
     </tr>
   </tbody>
