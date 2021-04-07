@@ -63,7 +63,7 @@ export class TweetComponent implements OnInit {
                 this.user = user[0];
                 this.getRoleList();
                 if (this.user.systemRole === 'participant') {
-                    this.roleService.getRole(this.user.roleID).subscribe( role => {
+                    this.roleService.getRole(this.user.role.id).subscribe( role => {
                         this.userRole = role;
                     });
                 }
@@ -113,10 +113,8 @@ export class TweetComponent implements OnInit {
                 console.log(true);
                 return true;
             } 
-            else {
-                return false;
-            }
         }
+        return false;
     }
 
     add(content) {
@@ -130,7 +128,7 @@ export class TweetComponent implements OnInit {
             //Put hashtag into a list for reference
             this.tweet.mention = this.tweet.content.match(this.mentionRegEx);
 
-            if (this.tweet.mention !== undefined) {
+            if (this.tweet.mention !== null) {
 
                 for (var i = 0; i < this.tweet.mention.length; i++){
                     if (this.mentionChecker(this.tweet.mention[i]) == true){

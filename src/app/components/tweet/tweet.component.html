@@ -37,6 +37,8 @@
                         <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.user.firstName}}
                             {{tweet.user.lastName}}
                         </p>
+                        <p class="twitterHandle" *ngIf="user.systemRole !== 'admin'">@{{tweet.user.roleID}}
+                        </p>
                         <div [innerHtml]="tweet.content"></div>
                     </div>
                     <div class="card-date">

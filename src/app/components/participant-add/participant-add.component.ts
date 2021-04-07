@@ -49,11 +49,11 @@ export class ParticipantAddComponent implements OnInit {
         if (this.participant.email !== undefined) {
             if (deakinEmailRgx.test(this.participant.email)) {
                 for (const role of this.roles) {
-                    if (this.participant.roleID === role.id) {
-                        this.participant.roleFirstName = role.firstName;
-                        this.participant.roleLastName = role.lastName;
-                        this.participant.roleTitle = role.title;
-                        this.participant.roleAffiliation = role.affiliation;
+                    if (this.participant.role.id === role.id) {
+                        this.participant.role.firstName = role.firstName;
+                        this.participant.role.lastName = role.lastName;
+                        this.participant.role.title = role.title;
+                        this.participant.role.affiliation = role.affiliation;
                         this.participant.systemRole = 'participant';
                         this.authService.createUser(this.participant)
                         .catch(error => {
@@ -61,7 +61,7 @@ export class ParticipantAddComponent implements OnInit {
                         });
                     }
                 }
-                if (this.participant.roleFirstName === undefined ) {
+                if (this.participant.role.firstName === undefined ) {
                     alert('Issue with role selection');
                 }
             } else {
