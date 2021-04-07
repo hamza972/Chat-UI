@@ -46,4 +46,8 @@ export class RoleService {
     update(role: Role) {
         this.roleCollection.doc(role.id).update(role);
     }
+
+    return() {
+        return this.roles;
+    }
 }

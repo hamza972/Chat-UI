@@ -27,13 +27,13 @@
 
         <div class="row text-fix" *ngFor="let tweet of tweets">
             <div class="col-1">
-                <img (click)="profile($event, tweet)" src={{tweet.roleAvatar}} class="circle responsive-img role-img">
+                <img (click)="profile($event, tweet)" src={{tweet.user.roleAvatar}} class="circle responsive-img role-img">
             </div>
             <div class="col-11">
                 <div class="card-panel">
                     <div class="card-content">
-                        <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">{{tweet.roleFirstName}}
-                            {{tweet.roleLastName}}</p>
+                        <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">{{tweet.user.roleFirstName}}
+                            {{tweet.user.roleLastName}}</p>
                         <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.user.firstName}}
                             {{tweet.user.lastName}}
                         </p>

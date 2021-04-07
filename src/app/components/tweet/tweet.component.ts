@@ -8,6 +8,7 @@ import { TweetService } from '../../services/tweet.service';
 import { AuthService } from '../../services/auth.service';
 import { Role } from '../../models/role';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
 //import { RSA_PKCS1_OAEP_PADDING } from 'constants';
 
 @Component({
@@ -25,6 +26,8 @@ export class TweetComponent implements OnInit {
     authError: any;
     hashtagRegEx = new RegExp(/\#(.*?)(?=\s)|\#(.*?)(?=\<)|\#(.*?)$/, 'g');
     mentionRegEx = new RegExp(/\@(.*?)(?=\s)|\@(.*?)(?=\<)|\@(.*?)$/, 'g');
+    roles: Role[];
+
     public Editor = Editor;
     editorConfig = {
         toolbar: {
@@ -58,6 +61,7 @@ export class TweetComponent implements OnInit {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
+                this.getRoleList();
                 if (this.user.systemRole === 'participant') {
                     this.roleService.getRole(this.user.roleID).subscribe( role => {
                         this.userRole = role;
@@ -85,36 +89,39 @@ export class TweetComponent implements OnInit {
         return '<span class="hashtag">'+content+'</span>'
     }
 
-    mentionHTMLBuilder(content) {
-        return '<span class="mention"; [routerLink]="[\'/profile\', role.id]">'+content+'</span>'
+    mentionHTMLBuilder(mention) {
+        var newMention = mention.substring(1);
+
+        return '<a class="mention"; href="/profile/' + newMention + '">'+mention+'</a>'
     }
 
-    mentionCheck(mention) {
-
-        //Creates a list of roles
-        var roles: Role[];
-        var check = false;
-        var newMention = String(mention.substring(1));
+    //gets a list of roles from the roleService
+    getRoleList() {
 
         this.roleService.get().subscribe(dbRoles => {
-            roles = dbRoles;
-
-            for (var i = 0; i < roles.length; i++){
-                if(roles[i].id == newMention){
-                    console.log(roles[i].id);
-                    console.log(newMention);
-                    check = true;
-                }
-            }
-        
+            this.roles = dbRoles;
+            //console.log(this.roles);
         });
+    }
 
-        return check;
+    mentionChecker(mention) {
+        for (var i = 0; i < this.roles.length; i++){
+            //takes off the @ symbol at the beginning of the mention
+            var newMention = mention.substring(1);
+            //compares the role id to the mention
+            if (this.roles[i].id == newMention) {
+                console.log(true);
+                return true;
+            } 
+            else {
+                return false;
+            }
+        }
     }
 
     add(content) {
         if (this.tweet.content !== '' && this.tweet.content.length < 280) {
-            
+
             //Create hashtag inside content
             this.tweet.content = this.tweet.content.replace(this.hashtagRegEx, this.hashtagHTMLBuilder);
             //Put hashtag into a list for reference
@@ -123,16 +130,15 @@ export class TweetComponent implements OnInit {
             //Put hashtag into a list for reference
             this.tweet.mention = this.tweet.content.match(this.mentionRegEx);
 
-            for (var i = 0; i < this.tweet.mention.length; i++){
-                var checkID = this.mentionCheck(this.tweet.mention[i]);
-                console.log(checkID);
+            if (this.tweet.mention !== undefined) {
 
-                if (checkID == true) {
-                    console.log(true);
-                    this.tweet.content = this.tweet.content.replace(this.mentionRegEx, this.mentionHTMLBuilder);
-                } else{
-                    
+                for (var i = 0; i < this.tweet.mention.length; i++){
+                    if (this.mentionChecker(this.tweet.mention[i]) == true){
+                        console.log(true);
+                        this.tweet.content = this.tweet.content.replace(this.tweet.mention[i], this.mentionHTMLBuilder(this.tweet.mention[i]));
+                    }
                 }
+                
             }
 
             this.tweet = {
@@ -144,7 +150,7 @@ export class TweetComponent implements OnInit {
 
             };
 
-            //this.tweetService.add(this.tweet);
+            this.tweetService.add(this.tweet);
             //this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
             this.tweet.content = '';
         } 
