@@ -90,9 +90,9 @@ export class TweetComponent implements OnInit {
     }
 
     mentionHTMLBuilder(mention) {
-        var newMention = mention.substring(1);
+        //var newMention = mention.substring(1);
 
-        return '<a class="mention"; href="/profile/' + newMention + '">'+mention+'</a>'
+        return '<a class="mention"; href="/profile/' + mention.id + '">@'+mention.twitterHandle+'</a>'
     }
 
     //gets a list of roles from the roleService
@@ -109,12 +109,12 @@ export class TweetComponent implements OnInit {
             //takes off the @ symbol at the beginning of the mention
             var newMention = mention.substring(1);
             //compares the role id to the mention
-            if (this.roles[i].id == newMention) {
-                console.log(true);
-                return true;
+            if (this.roles[i].twitterHandle == newMention) {
+                console.log(this.roles[i]);
+                return this.roles[i];
             } 
         }
-        return false;
+        return undefined;
     }
 
     add(content) {
@@ -131,9 +131,11 @@ export class TweetComponent implements OnInit {
             if (this.tweet.mention !== null) {
 
                 for (var i = 0; i < this.tweet.mention.length; i++){
-                    if (this.mentionChecker(this.tweet.mention[i]) == true){
+                    var mentionRole = this.mentionChecker(this.tweet.mention[i]);
+
+                    if (this.mentionChecker(this.tweet.mention[i]) !== undefined){
                         console.log(true);
-                        this.tweet.content = this.tweet.content.replace(this.tweet.mention[i], this.mentionHTMLBuilder(this.tweet.mention[i]));
+                        this.tweet.content = this.tweet.content.replace(this.tweet.mention[i], this.mentionHTMLBuilder(mentionRole));
                     }
                 }
                 
@@ -147,6 +149,8 @@ export class TweetComponent implements OnInit {
                 user: this.user,
 
             };
+
+            console.log(this.tweet.user.role.twitterHandle);
 
             this.tweetService.add(this.tweet);
             //this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });

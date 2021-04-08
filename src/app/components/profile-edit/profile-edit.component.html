@@ -41,6 +41,14 @@
                         <p>{{role.lastName}}</p>
                     </ng-template>
                 </div>
+                <div class="col-md-12 mb-2">
+                    <h6>Twitter Handle</h6>
+                    <input *ngIf="user.systemRole == 'admin'; else elseLastName" [ngModel]="role?.twitterHandle"
+                        name="twitterHandle" type="text" class="form-control">
+                    <ng-template #elseLastName>
+                        <p>{{role.twitterHandle}}</p>
+                    </ng-template>
+                </div>
             </div>
 
         </div>

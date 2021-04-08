@@ -7,7 +7,6 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Title</th>
                 <th scope="col">Affiliation</th>
@@ -16,7 +15,6 @@
         </thead>
         <tbody>
             <tr *ngFor="let role of roles">
-                <td>{{role.id}}</td>
                 <td>{{role.firstName}} {{role.lastName}}</td>
                 <td>{{role.title}}</td>
                 <td>{{role.affiliation}}</td>
