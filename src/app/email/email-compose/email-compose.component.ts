@@ -61,9 +61,11 @@ export class EmailComposeComponent implements OnInit {
   ngOnInit(): void {
     this.userService.get().subscribe((participants) => {
       this.participants = participants.map((participant) => participant.email);
-      console.log("Waiting for participants")
+      //console.log("Waiting for participants")
     });
-    console.log("Participants have arrived")
+    this.LoadAutoSave();
+    setInterval(this.AutoSave, 3000, this.emailForm) //auto saves very 30 seconds.
+    //console.log("Participants have arrived")
   }
 
   ngOnChanges() { //Sean: auto refreshes when a draft email becomes avalible and puts its into the form. 
@@ -77,11 +79,6 @@ export class EmailComposeComponent implements OnInit {
      //Sean: do nonthing?   
     }
   }   
-  ClearDraftFromCompose(){ //Sean: Clears a draft email from compose.
-    this.IsDraft = false;
-    this.emailForm.reset();
-    this.OptionalDraftEmail = null; 
-  }
   searchUsers = (search$: Observable<string>) =>
     search$.pipe(
       debounceTime(200),
@@ -111,7 +108,7 @@ export class EmailComposeComponent implements OnInit {
       this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectivly sending it, as the all fields should be correct to appear to the recipent mailbox.
       alert('Your Email has been sent to ' + (formdata.sendTo as string).toLowerCase().trim() + ' , Press ok to continue'); //set email to a ll lower case and trim spaces out of it, 
       console.log('Sending Draft Email Complete') //console debug
-      this.emailForm.reset(); //SEAN: 26th of march, moved this down to after the email has been sent.
+      this.ClearAllFields();; //SEAN: 26th of march, moved this down to after the email has been sent.
       this.switchtab.emit("inbox"); //emits the switchtab event which instructs the parent componenet to switch the current tab to the inbox
       this.IsDraft = false; //draft has been sent, switch back to normal new email
      }
@@ -139,7 +136,7 @@ export class EmailComposeComponent implements OnInit {
     {    
     alert('Your Email has been sent to ' + (formdata.sendTo as string).toLowerCase().trim() + ' , Press ok to continue'); //set email to a ll lower case and trim spaces out of it, 
     console.log('Sending Complete') //console debug
-    this.emailForm.reset(); //SEAN: 26th of march, moved this down to after the email has been sent.
+    this.ClearAllFields(); //SEAN: 26th of march, moved this down to after the email has been sent.
     //location.reload(); //This is no longer required, the switchtab event now handles moving the current tab back to the inbox. Its faster than reloading.
     this.switchtab.emit("inbox"); //emits the switchtab event which instructs the parent componenet to switch the current tab to the inbox
     });
@@ -151,6 +148,57 @@ export class EmailComposeComponent implements OnInit {
     }
   }
 
+  AutoSave(emailForm: FormGroup){ //auto runs every 30 seconds, saves the current contents to browser cache
+    console.log(emailForm);
+    console.log("Autosave");
+    var SubjectControl: AbstractControl; //get the individual controls for each input box
+    var ToEmailControl: AbstractControl;
+    var BodyControl: AbstractControl;
+    SubjectControl = emailForm.get("subject"); //get inputs
+    ToEmailControl = emailForm.get("sendTo");
+    BodyControl = emailForm.get("body");
+    console.log(ToEmailControl);
+    //check input to ensure nonthing that is null is saved to the cache
+      if (BodyControl.value != null) {
+        localStorage.setItem("autosave-body", BodyControl.value)
+      }
+      if (SubjectControl.value != null) {
+        localStorage.setItem("autosave-subject", SubjectControl.value)
+      }
+      if (ToEmailControl.value != null) {
+        localStorage.setItem("autosave-to-user", ToEmailControl.value)
+      }
+  }
+  ClearAllFields(){
+    this.emailForm.reset(); 
+    if(this.IsDraft == true) //if this 
+    {
+      this.IsDraft = false;
+      this.emailForm.reset();
+      this.OptionalDraftEmail = null; 
+    }
+    localStorage.removeItem("autosave-to-user"); //clearing the localstorage
+    localStorage.removeItem("autosave-subject");
+    localStorage.removeItem("autosave-body");
+  }
+  LoadAutoSave(){ //this gets called every time the page is refreshed
+    var Body: string = localStorage.getItem("autosave-body")
+    var toUser: string = localStorage.getItem("autosave-to-user");
+    var subject: string = localStorage.getItem("autosave-subject");
+      console.log("Loaded draft email from cache")
+      if (Body != null) {
+        this.emailForm.patchValue({body: Body});
+      }
+      if (toUser != null) {
+        this.emailForm.patchValue({sendTo: toUser});
+      }
+      if (subject != null) {
+        this.emailForm.patchValue({subject: subject});
+      }
+    else {
+      console.log("Attempted to load email details from browser cache, nothing was found")
+    }
+  }
   draft(formdata) {
     if (formdata.subject == "" || formdata.subject == null) {
       alert("subject must not be empty") //Sean: EMAILS MUST HAVE A SUBJECT, or it will break the drafts section when the search functions throws an exception for missing subject.
@@ -168,7 +216,7 @@ export class EmailComposeComponent implements OnInit {
      this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectivly sending it, as the all fields should be correct to appear to the recipent mailbox.
      alert('Your Email has been sent to back to drafts, Press ok to continue'); //set email to a ll lower case and trim spaces out of it, 
      console.log('Sending back to drafts complete') //console debug
-     this.emailForm.reset(); //SEAN: 26th of march, moved this down to after the email has been sent.
+     this.ClearAllFields(); //SEAN: 26th of march, moved this down to after the email has been sent.
      //location.reload(); //This is no longer required, the switchtab event now handles moving the current tab back to the inbox. Its faster than reloading.
      this.switchtab.emit("draft"); //emits the switchtab event which instructs the parent componenet to switch the current tab to the inbox
      this.IsDraft = false; //draft has been sent, switch back to normal new email
@@ -192,7 +240,7 @@ export class EmailComposeComponent implements OnInit {
       {    
       alert('Your Email has been saved as a draft'); //set email to a ll lower case and trim spaces out of it, 
       console.log('Save as draft') //console debug
-      this.emailForm.reset(); //SEAN: 26th of march, moved this down to after the email has been sent.
+      this.ClearAllFields(); //SEAN: 26th of march, moved this down to after the email has been sent.
       this.switchtab.emit("draft");
       });
     this.emailForm.reset();
@@ -204,3 +252,4 @@ export class EmailComposeComponent implements OnInit {
     }
   }
 }
+
