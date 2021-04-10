@@ -39,6 +39,14 @@ button[type="submit"]:hover
     color: #ffffff;
 }
 
+button[type="submit"]:disabled:hover
+{
+    background-color: #FD999A;
+    color: #ffffff;
+}
+
+
+
 * {
 
   box-sizing: border-box;
@@ -178,6 +186,11 @@ option.a{
 
 .tweet-button {
   float: right;
+}
+
+.tweet-button:disabled{
+  opacity: 0.3;
+  cursor:default;
 }
 
 ::ng-deep img {

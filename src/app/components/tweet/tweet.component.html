@@ -16,9 +16,9 @@
                     <div class="input-wrapper">
                         <h3>Twitter Feed</h3>
                         <ckeditor name="content" [editor]="Editor" [(ngModel)]="tweet.content"
-                            style="min-height: 500px;" [config]="editorConfig" maxlength="280"></ckeditor>
+                            style="min-height: 500px;" [config]="editorConfig"></ckeditor>
                         <div class="col-md-12">
-                            <button type="submit" class="tweet-button">Tweet</button>
+                            <button type="submit" class="tweet-button" [disabled]="tweet.content === '' || tweet.content.length > 286">Tweet</button>
                         </div>
                     </div>
                 </div>
