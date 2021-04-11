@@ -8,6 +8,8 @@ import { TweetService } from '../../services/tweet.service';
 import { AuthService } from '../../services/auth.service';
 import { Role } from '../../models/role';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+//import { RSA_PKCS1_OAEP_PADDING } from 'constants';
 
 @Component({
     selector: 'app-tweet',
@@ -22,15 +24,16 @@ export class TweetComponent implements OnInit {
     user: AppUser = { systemRole: '' };
     userRole: Role;
     authError: any;
+    hashtagRegEx = new RegExp(/\#(.*?)(?=\s)|\#(.*?)(?=\<)|\#(.*?)$/, 'g');
+    mentionRegEx = new RegExp(/\@(.*?)(?=\s)|\@(.*?)(?=\<)|\@(.*?)$/, 'g');
+    roles: Role[];
 
     public Editor = Editor;
     editorConfig = {
         toolbar: {
           items: [
-            'heading', 'fontFamily', 'fontSize', 'fontColor', '|',
-            'bold', 'italic', 'underline', 'strikethrough', '|',
             'link', 'bulletedList', 'numberedList', '|',
-            'alignment', 'indent', 'outdent', '|',
+            'indent', 'outdent', '|',
             'blockQuote', 'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo']
         },
         image: {
@@ -58,8 +61,9 @@ export class TweetComponent implements OnInit {
                 this.router.navigate(['/home']);
             } else {
                 this.user = user[0];
+                this.getRoleList();
                 if (this.user.systemRole === 'participant') {
-                    this.roleService.getRole(this.user.roleID).subscribe( role => {
+                    this.roleService.getRole(this.user.role.id).subscribe( role => {
                         this.userRole = role;
                     });
                 }
@@ -74,36 +78,87 @@ export class TweetComponent implements OnInit {
 
     /* go to profile page */
     profile($event, tweet: Tweet) {
-        this.router.navigate(['/profile/' + tweet.roleID]);
+        this.router.navigate(['/profile/' + tweet.user.id]);
     }
 
     cancel() {
         this.router.navigate(['/tweet']);
     }
 
+    hashtagHTMLBuilder(content) {
+        return '<span class="hashtag">'+content+'</span>'
+    }
+
+    mentionHTMLBuilder(mention) {
+        //var newMention = mention.substring(1);
+
+        return '<a class="mention"; href="/profile/' + mention.id + '">@'+mention.twitterHandle+'</a>'
+    }
+
+    //gets a list of roles from the roleService
+    getRoleList() {
+
+        this.roleService.get().subscribe(dbRoles => {
+            this.roles = dbRoles;
+            //console.log(this.roles);
+        });
+    }
+
+    mentionChecker(mention) {
+        for (var i = 0; i < this.roles.length; i++){
+            //takes off the @ symbol at the beginning of the mention
+            var newMention = mention.substring(1);
+            //compares the role id to the mention
+            if (this.roles[i].twitterHandle == newMention) {
+                console.log(this.roles[i]);
+                return this.roles[i];
+            } 
+        }
+        return undefined;
+    }
+
     add(content) {
-        if (this.tweet.content !== '') {
+        if (this.tweet.content !== '' && this.tweet.content.length < 280) {
+
+            //Create hashtag inside content
+            this.tweet.content = this.tweet.content.replace(this.hashtagRegEx, this.hashtagHTMLBuilder);
+            //Put hashtag into a list for reference
+            this.tweet.hashtag = this.tweet.content.match(this.hashtagRegEx);
+
+            //Put hashtag into a list for reference
+            this.tweet.mention = this.tweet.content.match(this.mentionRegEx);
+
+            if (this.tweet.mention !== null) {
+
+                for (var i = 0; i < this.tweet.mention.length; i++){
+                    var mentionRole = this.mentionChecker(this.tweet.mention[i]);
+
+                    if (this.mentionChecker(this.tweet.mention[i]) !== undefined){
+                        console.log(true);
+                        this.tweet.content = this.tweet.content.replace(this.tweet.mention[i], this.mentionHTMLBuilder(mentionRole));
+                    }
+                }
+                
+            }
+
             this.tweet = {
                 date: new Date(),
                 content: this.tweet.content,
+                hashtag: this.tweet.hashtag,
+                mention: this.tweet.mention,
+                user: this.user,
 
-                /* Properties are from User model,
-                if possible to retrieve data using ID,
-                no need to include this */
-                userID: this.user.id,
-                firstName: this.user.firstName,
-                lastName: this.user.lastName,
-                email: this.user.email,
-                systemRole: this.user.systemRole,
-                roleID: this.user.roleID,
-                roleFirstName: this.user.roleFirstName,
-                roleLastName: this.user.roleLastName,
-                roleTitle: this.user.roleTitle,
-                roleAffiliation: this.user.roleAffiliation,
-                roleAvatar: this.userRole.avatar
             };
+
+            console.log(this.tweet.user.role.twitterHandle);
+
             this.tweetService.add(this.tweet);
-            this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
+            //this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
+            this.tweet.content = '';
+        } 
+        else {
+            alert('Tweet error');
+            //this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
         }
     }
 }

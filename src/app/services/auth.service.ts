@@ -71,11 +71,7 @@ export class AuthService {
                     firstName: this.newUser.firstName,
                     lastName: this.newUser.lastName,
                     systemRole: this.newUser.systemRole,
-                    roleID: this.newUser.roleID,
-                    roleFirstName: this.newUser.roleFirstName,
-                    roleLastName: this.newUser.roleLastName,
-                    roleTitle: this.newUser.roleTitle,
-                    roleAffiliation: this.newUser.roleAffiliation
+                    role: this.newUser.role,
                 });
             }
         }

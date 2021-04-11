@@ -189,9 +189,40 @@ option.a{
   list-style-type: inherit;
 }
 
+.ck.ck-content {
+  height: 100px;
+}
+
 .ck.ck-content ul {
   /* Default user agent stylesheet, you can change it to your needs. */
   padding-left: 40px;
+}
+
+.hashtag {
+  color: blue;
+}
+
+.hashtag:hover {
+  text-decoration: underline;
+}
+
+.mention {
+  color: blue;
+}
+
+.twitterHandle {
+  margin-top: 0px;
+  font-size: 12px;
+  color: lightseagreen;
+}
+
+.grey-text{
+  color: grey-text;
+  margin-bottom: 0;
+}
+
+.deep-purple-text{
+  margin-bottom: 0;
 }
 
 .modal{

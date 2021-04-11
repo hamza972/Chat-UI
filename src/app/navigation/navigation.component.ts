@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
 import { AppUser } from '../models/user';
-
+import { Role } from '../models/role';
+//import { userInfo } from 'os';
 @Component({
     selector: 'app-navigation',
     templateUrl: './navigation.component.html',
@@ -10,7 +11,7 @@ import { AppUser } from '../models/user';
 })
 export class NavigationComponent implements OnInit {
 
-    user: AppUser = { roleTitle: ''};
+    user: AppUser;
 
     constructor(
         private auth: AuthService,

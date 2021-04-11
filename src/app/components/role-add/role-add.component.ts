@@ -51,6 +51,7 @@ export class RoleAddComponent implements OnInit {
             this.affiliateService.getAffiliate(this.role.affiliateID).subscribe((dbAffiliate) => {
                 const affiliate: Affiliate = dbAffiliate;
                 this.role.affiliation = affiliate.name;
+                console.log(this.role);
                 this.roleService.add(this.role);
             });
             this.router.navigate(['/control']);

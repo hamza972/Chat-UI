@@ -166,12 +166,12 @@ export class LoginService {
       email: this.newUser.email,
       firstName: this.newUser.firstName,
       lastName: this.newUser.lastName,
-      role: this.newUser.roleID,
+      role: this.newUser.role,
       systemRole: 'participant',
-      roleFirstName: this.newUser.roleFirstName,
-      roleLastName: this.newUser.roleLastName,
-      roleTitle: this.newUser.roleTitle,
-      roleAffiliation: this.newUser.roleAffiliation,
+      roleFirstName: this.newUser.role.firstName,
+      roleLastName: this.newUser.role.lastName,
+      roleTitle: this.newUser.role.title,
+      roleAffiliation: this.newUser.role.affiliation,
     });
   }
 

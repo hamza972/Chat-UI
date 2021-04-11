@@ -90,7 +90,7 @@ export class ProfileEditComponent implements OnInit {
       } else {
         this.user = user[0];
         this.roleID = this.route.snapshot.paramMap.get('id');
-        if (this.user.roleID !== this.roleID && this.user.systemRole !== 'admin') {
+        if (this.user.role.id !== this.roleID && this.user.systemRole !== 'admin') {
           // user is not and admin nor playing the role of this profile
           this.router.navigate(['/profile', this.roleID]);
         }

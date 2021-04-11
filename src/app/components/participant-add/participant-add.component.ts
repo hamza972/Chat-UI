@@ -22,7 +22,8 @@ export class ParticipantAddComponent implements OnInit {
         private router: Router
     ) {}
 
-    ngOnInit(): void {
+    ngOnInit() {
+
         /* Check if user is signed in, otherwise redirect to home */
         this.authService.getUserData().subscribe(user => {
             if (user === null) {
@@ -34,9 +35,15 @@ export class ParticipantAddComponent implements OnInit {
                     this.router.navigate(['/home']);
                 }
             }
+            this.getRoles();
         });
+
+    }
+
+    getRoles() {
         this.roleService.get().subscribe(dbRoles => {
             this.roles = dbRoles;
+            //console.log(this.roles);
         });
     }
 
@@ -49,19 +56,19 @@ export class ParticipantAddComponent implements OnInit {
         if (this.participant.email !== undefined) {
             if (deakinEmailRgx.test(this.participant.email)) {
                 for (const role of this.roles) {
-                    if (this.participant.roleID === role.id) {
-                        this.participant.roleFirstName = role.firstName;
-                        this.participant.roleLastName = role.lastName;
-                        this.participant.roleTitle = role.title;
-                        this.participant.roleAffiliation = role.affiliation;
+                    //console.log(this.participant.role);
+                    if (this.participant.role == role.id) {
+                        console.log(this.participant.role);
+                        this.participant.role = role;
                         this.participant.systemRole = 'participant';
                         this.authService.createUser(this.participant)
                         .catch(error => {
                             alert(error.message);
                         });
+                        
                     }
                 }
-                if (this.participant.roleFirstName === undefined ) {
+                if (this.participant.role.firstName == undefined ) {
                     alert('Issue with role selection');
                 }
             } else {
