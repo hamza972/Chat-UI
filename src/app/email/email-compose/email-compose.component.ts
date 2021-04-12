@@ -49,10 +49,12 @@ export class EmailComposeComponent implements OnInit {
   ) {
     this.emailForm = this.formBuilder.group({
       sendTo: [null, [Validators.required, 
-        Validators.pattern("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")]], 
+        Validators.pattern("(([a-zA-Z0-9._%+-]+@{1}([a-zA-Z0-9.-]+[a-zA-Z\.])+)+([,]{1}[\\s]?)?)+")]], 
         //Feature lost in commit 4d21784e3f5, was added in earlier 1154066f603 credit to past student, MUHAMMAD ZORAIN ALI
         //original regex [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$ Current Version improved by Sean to permit capitals.
         //The backend will deal with capitals.
+        //this has been further updated to only permit one @ symbol and allow multiple comma and space seperated emails.
+        //the emails will be separated and checked again to ensure they meet the regex. 
       subject: [null, Validators.required],
       body: [null, Validators.required]
     });
@@ -79,6 +81,7 @@ export class EmailComposeComponent implements OnInit {
      //Sean: do nonthing?   
     }
   }   
+
   searchUsers = (search$: Observable<string>) =>
     search$.pipe(
       debounceTime(200),
@@ -98,7 +101,63 @@ export class EmailComposeComponent implements OnInit {
     send(formdata) {
      if(this.IsDraft == true) //sending existing draft emails
      {
-      this.OptionalDraftEmail.to.user = ((formdata.sendTo as string).toLowerCase().trim()); //set new information 
+      this.MultiSendFromDraft(formdata); //this method handles emails loaded from draft now
+     }
+     else { //sending normal new emails
+      this.MultiSendNew(formdata); //this method handles emails now
+    }
+  }
+
+  MultiSendNew(formdata){
+    var recipients: string = ((formdata.sendTo as string).toLowerCase().trim());
+    var recipientslist: string[] = recipients.split(',');
+    for (let index = 0; index < recipientslist.length; index++) { //Sean, Clean Up input
+      recipientslist[index] = recipientslist[index].trim();
+      console.log(recipientslist[index]);
+    }
+    if (recipientslist.length > 1){ //for more than one recipient
+      for (let index = 0; index < recipientslist.length; index++) {
+        this.newEmail = {
+          subject: formdata.subject,
+          body: formdata.body,
+          to: {
+            user: recipientslist[index] 
+          },
+          from: {
+            user: this.user.email,
+          },
+        };
+        this.sendEmail(this.newEmail);
+      }
+      alert("The email has been sent to the following recipients:" + recipientslist.toString())
+    }
+    else if(recipientslist.length == 1){ //for only one recipient
+      this.newEmail = {
+        subject: formdata.subject,
+        body: formdata.body,
+        to: {
+          user: recipientslist[0] 
+        },
+        from: {
+          user: this.user.email,
+        },
+      };
+      this.sendEmail(this.newEmail);
+      alert("The email has been sent to the following recipient:" + recipientslist.toString())
+    }
+  }
+
+  MultiSendFromDraft(formdata){
+    console.log(recipients);
+    var recipients: string = ((formdata.sendTo).toLowerCase().trim()); //set to all lower case, remove preceding and trailing whitespaces. 
+    var recipientslist: string[] = recipients.split(','); //split into a string array where a comma occurs.
+    for (let index = 0; index < recipientslist.length; index++) { //Sean, Clean Up input
+      recipientslist[index] = recipientslist[index].trim(); //remove preceding and trailing whitespaces for each recipient email.
+    }
+    if (recipientslist.length > 1){
+      //Sean, the existing email object gets sent to the first person on the recipient list
+      //the others get new email objects.
+      this.OptionalDraftEmail.to.user = recipientslist[0]; //set new information 
       this.OptionalDraftEmail.subject = formdata.subject;
       this.OptionalDraftEmail.body = formdata.body;
       this.OptionalDraftEmail.draft = false;
@@ -106,38 +165,49 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.from.deleted = false;
       this.OptionalDraftEmail.from.user = this.user.email;
       this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectivly sending it, as the all fields should be correct to appear to the recipent mailbox.
-      alert('Your Email has been sent to ' + (formdata.sendTo as string).toLowerCase().trim() + ' , Press ok to continue'); //set email to a ll lower case and trim spaces out of it, 
-      console.log('Sending Draft Email Complete') //console debug
-      this.ClearAllFields();; //SEAN: 26th of march, moved this down to after the email has been sent.
+      console.log('Your Email has been sent to ' + recipientslist[0]); 
+      this.ClearAllFields();
       this.switchtab.emit("inbox"); //emits the switchtab event which instructs the parent componenet to switch the current tab to the inbox
       this.IsDraft = false; //draft has been sent, switch back to normal new email
-     }
-     else { //sending normal new emails
-    this.newEmail = {
-      subject: formdata.subject,
-      body: formdata.body,
-      to: {
-        user: ((formdata.sendTo as string).toLowerCase().trim()) //SEAN: Set all to lower case and remove any leading or trailing whitespaces. 
-        //SEAN: user no longer has to worry about capitals.
-      },
-      from: {
-        user: this.user.email,
-      },
-    };
-    //Sean's Email Promise implementation for checking withfire-base if the email was good or not
+      //Creating new emails for the others recipients.
+      for (let index = 1; index < recipientslist.length; index++) {
+        this.newEmail = {
+          subject: formdata.subject,
+          body: formdata.body,
+          to: {
+            user: recipientslist[index] 
+          },
+          from: {
+            user: this.user.email,
+          },
+        };
+        this.sendEmail(this.newEmail);
+      }
+      alert("The email has been sent to the following recipents:" + recipientslist.toString())
+    }
+    else if(recipientslist.length == 1){ //for only one recipient
+      this.OptionalDraftEmail.to.user = recipientslist[0]; //set new information 
+      this.OptionalDraftEmail.subject = formdata.subject;
+      this.OptionalDraftEmail.body = formdata.body;
+      this.OptionalDraftEmail.draft = false;
+      this.OptionalDraftEmail.to.deleted = false;
+      this.OptionalDraftEmail.from.deleted = false;
+      this.OptionalDraftEmail.from.user = this.user.email;
+      this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
+      alert('Your Email has been sent to ' + recipientslist[0]); //set email to a ll lower case and trim spaces out of it, 
+      this.ClearAllFields();
+      this.switchtab.emit("inbox"); //emits the switchtab event which instructs the parent component to switch the current tab to the inbox
+      this.IsDraft = false; //draft has been sent, switch back to normal new email
+    }
+  }
+  sendEmail(emailtobesent: Email) {
     var promise: Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>;
     promise = this.emailService.sendEmail(this.newEmail);
-    //Sean's debugging stuff
-    //console.log('sending')
-    //console.log(formdata.subject)
-    //console.log(this.user.email)
-    //Sean: Actually checks if the results from firebase before informing the user if it was sucessful or not!
+    //Sean: Actually checks if the results from firebase before informing the user if it was successful or not!
     promise.then(result => 
     {    
-    alert('Your Email has been sent to ' + (formdata.sendTo as string).toLowerCase().trim() + ' , Press ok to continue'); //set email to a ll lower case and trim spaces out of it, 
-    console.log('Sending Complete') //console debug
-    this.ClearAllFields(); //SEAN: 26th of march, moved this down to after the email has been sent.
-    //location.reload(); //This is no longer required, the switchtab event now handles moving the current tab back to the inbox. Its faster than reloading.
+    console.log('Your Email has been sent to ' + emailtobesent.to.user + ' , Press ok to continue'); 
+    this.ClearAllFields(); 
     this.switchtab.emit("inbox"); //emits the switchtab event which instructs the parent componenet to switch the current tab to the inbox
     });
     promise.catch(error => //Sean: this method will run if firebase reports a problem
@@ -146,59 +216,7 @@ export class EmailComposeComponent implements OnInit {
       console.log('sending failed') //console debug
       });
     }
-  }
 
-  AutoSave(emailForm: FormGroup){ //auto runs every 30 seconds, saves the current contents to browser cache
-    console.log(emailForm);
-    console.log("Autosave");
-    var SubjectControl: AbstractControl; //get the individual controls for each input box
-    var ToEmailControl: AbstractControl;
-    var BodyControl: AbstractControl;
-    SubjectControl = emailForm.get("subject"); //get inputs
-    ToEmailControl = emailForm.get("sendTo");
-    BodyControl = emailForm.get("body");
-    console.log(ToEmailControl);
-    //check input to ensure nonthing that is null is saved to the cache
-      if (BodyControl.value != null) {
-        localStorage.setItem("autosave-body", BodyControl.value)
-      }
-      if (SubjectControl.value != null) {
-        localStorage.setItem("autosave-subject", SubjectControl.value)
-      }
-      if (ToEmailControl.value != null) {
-        localStorage.setItem("autosave-to-user", ToEmailControl.value)
-      }
-  }
-  ClearAllFields(){
-    this.emailForm.reset(); 
-    if(this.IsDraft == true) //if this 
-    {
-      this.IsDraft = false;
-      this.emailForm.reset();
-      this.OptionalDraftEmail = null; 
-    }
-    localStorage.removeItem("autosave-to-user"); //clearing the localstorage
-    localStorage.removeItem("autosave-subject");
-    localStorage.removeItem("autosave-body");
-  }
-  LoadAutoSave(){ //this gets called every time the page is refreshed
-    var Body: string = localStorage.getItem("autosave-body")
-    var toUser: string = localStorage.getItem("autosave-to-user");
-    var subject: string = localStorage.getItem("autosave-subject");
-      console.log("Loaded draft email from cache")
-      if (Body != null) {
-        this.emailForm.patchValue({body: Body});
-      }
-      if (toUser != null) {
-        this.emailForm.patchValue({sendTo: toUser});
-      }
-      if (subject != null) {
-        this.emailForm.patchValue({subject: subject});
-      }
-    else {
-      console.log("Attempted to load email details from browser cache, nothing was found")
-    }
-  }
   draft(formdata) {
     if (formdata.subject == "" || formdata.subject == null) {
       alert("subject must not be empty") //Sean: EMAILS MUST HAVE A SUBJECT, or it will break the drafts section when the search functions throws an exception for missing subject.
@@ -249,6 +267,59 @@ export class EmailComposeComponent implements OnInit {
       alert('Something has went wrong, the email was not saved, please try again');
       console.log('sending failed') //console debug
       });
+    }
+  }
+  //form clear
+  ClearAllFields(){
+    this.emailForm.reset(); 
+    if(this.IsDraft == true) //if this 
+    {
+      this.IsDraft = false;
+      this.emailForm.reset();
+      this.OptionalDraftEmail = null; 
+    }
+    localStorage.removeItem("autosave-to-user"); //clearing the localstorage
+    localStorage.removeItem("autosave-subject");
+    localStorage.removeItem("autosave-body");
+  }
+
+  //autosave functions
+  AutoSave(emailForm: FormGroup){ //auto runs every 30 seconds, saves the current contents to browser cache
+    console.log("Autosave");
+    var SubjectControl: AbstractControl; //get the individual controls for each input box
+    var ToEmailControl: AbstractControl;
+    var BodyControl: AbstractControl;
+    SubjectControl = emailForm.get("subject"); //get inputs
+    ToEmailControl = emailForm.get("sendTo");
+    BodyControl = emailForm.get("body");
+    //check input to ensure nonthing that is null is saved to the cache
+      if (BodyControl.value != null) {
+        localStorage.setItem("autosave-body", BodyControl.value)
+      }
+      if (SubjectControl.value != null) {
+        localStorage.setItem("autosave-subject", SubjectControl.value)
+      }
+      if (ToEmailControl.value != null) {
+        localStorage.setItem("autosave-to-user", ToEmailControl.value)
+      }
+  }
+
+  LoadAutoSave(){ //this gets called every time the page is refreshed
+    var Body: string = localStorage.getItem("autosave-body")
+    var toUser: string = localStorage.getItem("autosave-to-user");
+    var subject: string = localStorage.getItem("autosave-subject");
+      console.log("Loaded draft email from cache")
+      if (Body != null) {
+        this.emailForm.patchValue({body: Body});
+      }
+      if (toUser != null) {
+        this.emailForm.patchValue({sendTo: toUser});
+      }
+      if (subject != null) {
+        this.emailForm.patchValue({subject: subject});
+      }
+    else {
+      console.log("Attempted to load email details from browser cache, nothing was found")
     }
   }
 }
