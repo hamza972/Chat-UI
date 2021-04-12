@@ -7,4 +7,5 @@ export interface Tweet {
     hashtag?: string[];
     mention?: string[];
     user?: AppUser;
+    textSearch?: string;
   }

@@ -21,7 +21,7 @@ input[type=text]
 
 button[type="submit"]
 {
-  margin-top: 40px;
+  margin-top: 10px;
   margin-left: 84%;
   // margin-right: 30px;
   width: 15%;
@@ -221,6 +221,12 @@ option.a{
 
 .mention {
   color: blue;
+}
+
+.searchBox {
+resize: none;
+height: inherit;
+padding: 9px;
 }
 
 .twitterHandle {

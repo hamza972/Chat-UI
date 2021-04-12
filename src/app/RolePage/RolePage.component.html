@@ -6,6 +6,8 @@
             <th scope="col">Name</th>
             <th scope="col">Title</th>
             <th scope="col">Affiliation</th>
+            <th scope="col">Twitter Handle</th>
+
         </tr>
     </thead>
 
@@ -15,6 +17,8 @@
             <td><a [routerLink]="['/profile', role.id]">{{role.firstName}} {{role.lastName}}</a></td>
             <td>{{role.title}}</td>
             <td>{{role.affiliation}}</td>
+            <td>@{{role.twitterHandle}}</td>
+
         </tr>
     </tbody>
 </table>

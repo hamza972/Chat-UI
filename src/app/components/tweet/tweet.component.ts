@@ -28,7 +28,9 @@ export class TweetComponent implements OnInit {
     mentionRegEx = new RegExp(/\@(.*?)(?=\s)|\@(.*?)(?=\<)|\@(.*?)$/, 'g');
     roles: Role[];
     tweetError: string = null;
-    //tweetLength = this.tweet.content.replace(/(<([^>]+)>)/gi, "");
+    removeHTML = new RegExp(/(<([^>]+)>)/, 'g');
+    hashtagList: string[];
+    tweetSearch: string;
 
 
     public Editor = Editor;
@@ -91,6 +93,8 @@ export class TweetComponent implements OnInit {
     hashtagHTMLBuilder(content) {
         return '<span class="hashtag">'+content+'</span>'
     }
+
+
 
     mentionHTMLBuilder(mention) {
         //var newMention = mention.substring(1);
@@ -158,20 +162,9 @@ export class TweetComponent implements OnInit {
 
             };
 
-            console.log(this.tweet.user.role.twitterHandle);
-
             this.tweetService.add(this.tweet);
-            //this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
             this.tweet.content = '';
         } 
-        else {
-
-            if (this.tweet.content.length > 280){
-                
-            }
-
-            this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
-        }
     }
 }
 
