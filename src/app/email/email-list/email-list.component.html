@@ -13,7 +13,7 @@
   <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col" *ngIf="getTab() == 'send' || getTab() == 'draft'">To</th>
+      <th scope="col" *ngIf="getTab() == 'send' || getTab() == 'draft' ">To</th>
       <th scope="col" *ngIf="getTab() == 'inbox'">From</th>
       <th scope="col" *ngIf="getTab() == 'delete'">User</th>
       <th scope="col">Subject</th>
@@ -60,7 +60,7 @@
       </td>
       <td>
         <button class="btn waves-effect waves-light red" (click)="deleteEmail(email, content)" *ngIf="getTab() == 'inbox' || getTab() == 'draft'" style="margin-right: 5%;" > <!-- SEAN: No longer see the delete button is the delete section, as requested by product owner-->
-          Delete
+          Archive
         </button>
         <button class="btn waves-effect waves-light green" (click)="TransferEmailToCompose(email)" *ngIf="getTab() == 'draft'">
             Edit

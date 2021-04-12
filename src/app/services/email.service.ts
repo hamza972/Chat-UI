@@ -73,7 +73,6 @@ export class EmailService {
         return changes.map((a) => {
           const data = a.payload.doc.data() as Email;
           data.id = a.payload.doc.id;
-          console.log(data);
           return data;
         });
       })
