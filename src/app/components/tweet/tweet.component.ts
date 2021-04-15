@@ -94,7 +94,9 @@ export class TweetComponent implements OnInit {
         return '<span class="hashtag">'+content+'</span>'
     }
 
+    hashtagSearch(hashtag) {
 
+    }
 
     mentionHTMLBuilder(mention) {
         //var newMention = mention.substring(1);
