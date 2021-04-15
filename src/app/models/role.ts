@@ -8,5 +8,6 @@ export interface Role {
     lastName?: string;
     description?: string;
     avatar?: string;
+    email?: string;
 }
 
