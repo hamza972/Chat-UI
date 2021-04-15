@@ -21,7 +21,7 @@ input[type=text]
 
 button[type="submit"]
 {
-  margin-top: 40px;
+  margin-top: 10px;
   margin-left: 84%;
   // margin-right: 30px;
   width: 15%;
@@ -38,6 +38,14 @@ button[type="submit"]:hover
     background-color: #8ABBDB;
     color: #ffffff;
 }
+
+button[type="submit"]:disabled:hover
+{
+    background-color: #FD999A;
+    color: #ffffff;
+}
+
+
 
 * {
 
@@ -180,6 +188,11 @@ option.a{
   float: right;
 }
 
+.tweet-button:disabled{
+  opacity: 0.3;
+  cursor:default;
+}
+
 ::ng-deep img {
   max-width: 100%;
 }
@@ -200,6 +213,8 @@ option.a{
 
 .hashtag {
   color: blue;
+  background: none;
+  border: none;
 }
 
 .hashtag:hover {
@@ -208,6 +223,12 @@ option.a{
 
 .mention {
   color: blue;
+}
+
+.searchBox {
+resize: none;
+height: inherit;
+padding: 9px;
 }
 
 .twitterHandle {

@@ -5,7 +5,7 @@
     <div class="row mt-4">
 
         <div class="col-12">
-            
+
             <div class="row text-fix" *ngIf="authError">
                 <div class="col-12 alert alert-danger">
                     {{ authError?.message }}
@@ -15,34 +15,71 @@
                 <div class="row">
                     <div class="input-wrapper">
                         <h3>Twitter Feed</h3>
+                        <div class="d-flex w-100" style="margin-bottom: 12px; height:40px">
+                            <textarea [(ngModel)]="searchText" name="searchHashtag" type="text" class="searchBox"
+                                id="txtSearchHashtag" placeholder="Hashtag search" rows="1" onkeydown="if(event.keyCode == 13) return false;"></textarea>
+
+                            <button class="search-btn">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
                         <ckeditor name="content" [editor]="Editor" [(ngModel)]="tweet.content"
-                            style="min-height: 500px;" [config]="editorConfig" maxlength="280"></ckeditor>
+                            style="min-height: 500px;" [config]="editorConfig"></ckeditor>
                         <div class="col-md-12">
-                            <button type="submit" class="tweet-button">Tweet</button>
+                            <button type="submit" class="tweet-button"
+                                [disabled]="tweet.content === '' || tweet.content.length > 286">Tweet</button>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
 
-        <div class="row text-fix" *ngFor="let tweet of tweets">
-            <div class="col-1">
-                <img (click)="profile($event, tweet)" src={{tweet.user.roleAvatar}} class="circle responsive-img role-img">
-            </div>
-            <div class="col-11">
-                <div class="card-panel">
-                    <div class="card-content">
-                        <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">{{tweet.user.role.firstName}}
-                            {{tweet.user.role.lastName}}</p>
-                        <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.user.firstName}}
-                            {{tweet.user.lastName}}
-                        </p>
-                        <p class="twitterHandle">@{{tweet.user.role.twitterHandle}}
-                        </p>
-                        <div [innerHtml]="tweet.content"></div>
+        <div *ngFor="let tweet of tweets">
+            <div class="row text-fix" *ngIf="(tweet.hashtag == null || tweet.hashtag == '') && (searchText == null || searchText == '')">
+                <div class="col-1">
+                    <img (click)="profile($event, tweet)" src={{tweet.user.roleAvatar}}
+                        class="circle responsive-img role-img">
+                </div>
+                <div class="col-11">
+                    <div class="card-panel">
+                        <div class="card-content">
+                            <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">{{tweet.user.role.firstName}}
+                                {{tweet.user.role.lastName}}</p>
+                            <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.user.firstName}}
+                                {{tweet.user.lastName}}
+                            </p>
+                            <p class="twitterHandle">@{{tweet.user.role.twitterHandle}}
+                            </p>
+                            <div [innerHtml]="tweet.content"></div>
+                        </div>
+                        <div class="card-date">
+                            <p>{{tweet.date.toDate() | date: 'medium'}}</p>
+                        </div>
                     </div>
-                    <div class="card-date">
-                        <p>{{tweet.date.toDate() | date: 'medium'}}</p>
+                </div>
+            </div>
+            <div *ngFor="let hashtag of tweet.hashtag">
+                <div class="row text-fix" *ngIf="hashtag.toLowerCase().includes(searchText) || (searchText == null || searchText == '')">
+                    <div class="col-1">
+                        <img (click)="profile($event, tweet)" src={{tweet.user.roleAvatar}}
+                            class="circle responsive-img role-img">
+                    </div>
+                    <div class="col-11">
+                        <div class="card-panel">
+                            <div class="card-content">
+                                <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">{{tweet.user.role.firstName}}
+                                    {{tweet.user.role.lastName}}</p>
+                                <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.user.firstName}}
+                                    {{tweet.user.lastName}}
+                                </p>
+                                <p class="twitterHandle">@{{tweet.user.role.twitterHandle}}
+                                </p>
+                                <div [innerHtml]="tweet.content"></div>
+                            </div>
+                            <div class="card-date">
+                                <p>{{tweet.date.toDate() | date: 'medium'}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -50,8 +87,8 @@
 
     </div>
 
-     <!-- alert -->
-     <ng-template #content let-modal>
+    <!-- alert -->
+    <ng-template #content let-modal>
         <div class="modal-header">
             <h4 class="modal-title" id="modal-basic-title">Alert</h4>
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">

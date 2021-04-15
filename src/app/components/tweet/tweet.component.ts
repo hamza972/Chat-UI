@@ -27,6 +27,11 @@ export class TweetComponent implements OnInit {
     hashtagRegEx = new RegExp(/\#(.*?)(?=\s)|\#(.*?)(?=\<)|\#(.*?)$/, 'g');
     mentionRegEx = new RegExp(/\@(.*?)(?=\s)|\@(.*?)(?=\<)|\@(.*?)$/, 'g');
     roles: Role[];
+    tweetError: string = null;
+    removeHTML = new RegExp(/(<([^>]+)>)/, 'g');
+    hashtagList: string[];
+    tweetSearch: string;
+
 
     public Editor = Editor;
     editorConfig = {
@@ -89,11 +94,18 @@ export class TweetComponent implements OnInit {
         return '<span class="hashtag">'+content+'</span>'
     }
 
+    hashtagSearch(hashtag) {
+
+    }
+
     mentionHTMLBuilder(mention) {
         //var newMention = mention.substring(1);
 
         return '<a class="mention"; href="/profile/' + mention.id + '">@'+mention.twitterHandle+'</a>'
     }
+
+
+    
 
     //gets a list of roles from the roleService
     getRoleList() {
@@ -136,6 +148,8 @@ export class TweetComponent implements OnInit {
                     if (this.mentionChecker(this.tweet.mention[i]) !== undefined){
                         console.log(true);
                         this.tweet.content = this.tweet.content.replace(this.tweet.mention[i], this.mentionHTMLBuilder(mentionRole));
+                    } else {
+                        
                     }
                 }
                 
@@ -150,15 +164,9 @@ export class TweetComponent implements OnInit {
 
             };
 
-            console.log(this.tweet.user.role.twitterHandle);
-
             this.tweetService.add(this.tweet);
-            //this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
             this.tweet.content = '';
         } 
-        else {
-            alert('Tweet error');
-            //this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => { });
-        }
     }
 }
+
