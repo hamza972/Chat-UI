@@ -37,9 +37,8 @@ export class TweetComponent implements OnInit {
     editorConfig = {
         toolbar: {
           items: [
-            'link', 'bulletedList', 'numberedList', '|',
-            'indent', 'outdent', '|',
-            'blockQuote', 'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo']
+            'link', '|',
+            'imageUpload', 'mediaEmbed', 'undo', 'redo']
         },
         image: {
           toolbar: [
