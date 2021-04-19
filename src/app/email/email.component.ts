@@ -3,6 +3,7 @@ import { NgbTab, NgbTabset } from "@ng-bootstrap/ng-bootstrap";
 import { LoginService } from "../auth/login.service";
 import { AppUser as User } from "../models/user";
 import { Email } from '../models/email';
+import { AuthService } from './../services/auth.service';
 
 
 @Component({
@@ -17,15 +18,16 @@ export class EmailComponent implements OnInit {
   tabstatus = {};
   @ViewChild('tabsystem', {static: false}) tabsystem: NgbTabset;
 
-  constructor(private auth: LoginService) { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
-    this.auth.getUserCurrent().subscribe((user) => {
-      this.user = user;
+    this.auth.getUserData().subscribe((user) => {
+      this.user = user[0];
       localStorage.setItem("tab", "inbox");
-      //console.log("User arrived"); //debug
+      console.log("User arrived: "); //debug
+      console.log(this.user);
     });
-    //console.log("waiting for user"); //debug
+    console.log("waiting for user"); //debug
   }
   setTab(event): void {
     console.log(event.nextId);

@@ -43,8 +43,44 @@ export class RoleService {
         this.roleCollection.doc(role.id).delete();
     }
 
-    update(role: Role) {
-        this.roleCollection.doc(role.id).update(role);
+    //update(role: Role) {
+      //  this.roleCollection.doc(role.id).update(role);
+    //}
+    update(role: Role): Promise<void>{ //Sean: New method to update existing emails
+        var currentrole = this.afs.doc(`Roles/${role.id}`);
+          return(currentrole.update(role)); //Sean: Returns Promise
+      } 
+
+    Equals(role1: Role, role2: Role):boolean {
+        if(role1.avatar != role2.avatar){
+            return false
+        }
+        if(role1.firstName != role2.firstName){
+            return false
+        }
+        if(role1.description != role2.description){
+            return false
+        }
+        if(role1.email != role2.email ){
+            return false
+        }
+        if(role1.lastName!= role2.lastName ){
+            return false
+        }
+        if(role1.email != role2.email ){
+            return false
+        }
+        if(role1.twitterHandle != role2.twitterHandle ){
+            return false
+        }
+        if(role1.twitterHandle != role2.twitterHandle ){
+            return false
+        }
+        if(role1.title != role2.title ){
+            return false
+        }
+        console.log("returning true")
+        return(true);
     }
 
     return() {
