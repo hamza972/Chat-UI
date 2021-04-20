@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './../services/auth.service';
 import { Router } from '@angular/router';
 import { AppUser } from '../models/user';
+import { Notification } from '../models/notification'
 import { Role } from '../models/role';
 //import { userInfo } from 'os';
 @Component({
