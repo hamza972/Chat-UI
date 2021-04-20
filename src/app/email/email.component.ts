@@ -24,23 +24,22 @@ export class EmailComponent implements OnInit {
     this.auth.getUserData().subscribe((user) => {
       this.user = user[0];
       localStorage.setItem("tab", "inbox");
-      console.log("User arrived: "); //debug
-      console.log(this.user);
     });
-    console.log("waiting for user"); //debug
   }
   setTab(event): void {
-    console.log(event.nextId);
     localStorage.setItem("tab", event.nextId);
   }
-  setTabEvent(tab: string): void{ //this method is called when an event called 'switchtab' is called from a child componenet
-    this.tabsystem.select(tab); //this uses the 'tabsystem' Viewchild which is a NgbTabset object to change the current active tab.
+  setTabEvent(tab: string): void{ //this method is called when an event called 'switch-tab' is called from a child component
+    this.tabsystem.select(tab); //this uses the 'tab-system' View-child which is a NgbTabset object to change the current active tab.
   }
   sendtocompose(email: Email)
   {
-    console.log("Got the email back from draft");
     this.OptionalDraftEmail = email;
     this.tabsystem.select('compose');
-    console.log(email);
+  }
+  ClearDraft(): void {
+    console.log(this.OptionalDraftEmail)
+    this.OptionalDraftEmail = null;
+    console.log("Clearing draft")
   }
 }

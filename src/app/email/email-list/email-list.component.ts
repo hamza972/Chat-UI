@@ -15,7 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class EmailListComponent implements OnInit {
   @Input() emails: Email[];
-  @Output() SendEmailToCompose = new EventEmitter<Email>(); //SEAN: Creates and allows the 'switchtab' event to be sent to the parent component
+  @Output() SendEmailToCompose = new EventEmitter<Email>(); //SEAN: Creates and allows the 'switch-tab' event to be sent to the parent component
   emails$: Observable<Email[]>;
   filter = new FormControl("");
   constructor(private sr: DomSanitizer, private emailService: EmailService, private modalService: NgbModal) { }
@@ -55,16 +55,8 @@ export class EmailListComponent implements OnInit {
           email.to.deleted = true;
           this.emailService.delete(email);
         }
-        if (this.getTab() === "send") {
-          email.from.deleted = true;
-          console.log("Functionality removed, emails cannot be deleted");
-        }
         if (this.getTab() === "draft") {
           this.emailService.delete(email);
-        }
-        if (this.getTab() === "delete") {
-          //this.emailService.hardDelete(email);
-          console.log("Functionality removed, emails cannot be deleted");
         }
       }
     });
@@ -89,7 +81,6 @@ export class EmailListComponent implements OnInit {
 
   TransferEmailToCompose(email: Email) //Sean: transfer email back to compose via events
   {
-    console.log("Sending Email Back to Compose");
     this.SendEmailToCompose.emit(email); 
   }
 }
