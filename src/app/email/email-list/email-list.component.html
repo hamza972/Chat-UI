@@ -62,7 +62,7 @@
         <button class="btn waves-effect waves-light red" (click)="deleteEmail(email, content)" *ngIf="getTab() == 'inbox' || getTab() == 'draft'" style="margin-right: 5%;" > <!-- SEAN: No longer see the delete button is the delete section, as requested by product owner-->
           Archive
         </button>
-        <button class="btn waves-effect waves-light green" (click)="viewEmail(email, content)" *ngIf="getTab() == 'inbox' || getTab() == 'draft'" style="margin-right: 15%;" > 
+        <button class="btn waves-effect waves-light green" (click)="viewEmail(email, content)"  style="margin-right: 5%;" >  <!-- SEAN: Fixed margin and changed to appear on all tabs-->
           View
         </button>
         <button class="btn waves-effect waves-light green" (click)="TransferEmailToCompose(email)" *ngIf="getTab() == 'draft'">
