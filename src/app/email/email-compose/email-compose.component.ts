@@ -54,7 +54,6 @@ export class EmailComposeComponent implements OnInit {
       //original regex [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$ Current Version improved by Sean to permit capitals.
       //The backend will deal with capitals.
       //this has been further updated to only permit one @ symbol and allow multiple comma and space separated emails.
-      //the emails will be separated and checked again to ensure they meet the regex. 
       subject: [null, Validators.required],
       body: [null, Validators.required]
     });
@@ -63,11 +62,9 @@ export class EmailComposeComponent implements OnInit {
   ngOnInit(): void {
     this.userService.get().subscribe((participants) => {
       this.participants = participants.map((participant) => participant.email);
-      //console.log("Waiting for participants")
     });
     this.LoadAutoSave();
     setInterval(this.AutoSave, 3000, this.emailForm) //auto saves very 30 seconds.
-    //console.log("Participants have arrived")
   }
 
   ngOnChanges() { //Sean: auto refreshes when a draft email becomes available and puts its into the form. 
@@ -76,9 +73,6 @@ export class EmailComposeComponent implements OnInit {
       this.emailForm.patchValue({ sendTo: this.OptionalDraftEmail.to.user });
       this.emailForm.patchValue({ subject: this.OptionalDraftEmail.subject });
       this.emailForm.patchValue({ body: this.OptionalDraftEmail.body });
-    }
-    else {
-      //Sean: do nothing?   
     }
   }
 
@@ -124,7 +118,7 @@ export class EmailComposeComponent implements OnInit {
             user: recipientslist[index]
           },
           from: {
-            user: this.user.email,
+            user: this.user.role.email,
           },
         };
         this.sendEmail(this.newEmail);
@@ -139,7 +133,7 @@ export class EmailComposeComponent implements OnInit {
           user: recipientslist[0]
         },
         from: {
-          user: this.user.email,
+          user: this.user.role.email,
         },
       };
       this.sendEmail(this.newEmail);
@@ -163,8 +157,8 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.draft = false;
       this.OptionalDraftEmail.to.deleted = false;
       this.OptionalDraftEmail.from.deleted = false;
-      this.OptionalDraftEmail.from.user = this.user.email;
-      var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectivly sending it, as the all fields should be correct to appear to the recipent mailbox.
+      this.OptionalDraftEmail.from.user = this.user.role.email;
+      var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
       Updatepromise.then(result => { //this callback is run if sucessful
         alert('Your Email has been sent to ' + recipientslist[0]); //set email to a ll lower case and trim spaces out of it, 
         this.ClearAllFields();
@@ -178,7 +172,7 @@ export class EmailComposeComponent implements OnInit {
               user: recipientslist[index]
             },
             from: {
-              user: this.user.email,
+              user: this.user.role.email,
             },
           };
           this.sendEmail(this.newEmail); //promises are covered under the that function.
@@ -197,7 +191,7 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.draft = false;
       this.OptionalDraftEmail.to.deleted = false;
       this.OptionalDraftEmail.from.deleted = false;
-      this.OptionalDraftEmail.from.user = this.user.email;
+      this.OptionalDraftEmail.from.user = this.user.role.email;
       var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
       Updatepromise.then(result => {
         alert('Your Email has been sent to ' + recipientslist[0]); //set email to a ll lower case and trim spaces out of it, 
@@ -241,13 +235,12 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.draft = true; //this sends it back to drafts instead of a proper send!
       this.OptionalDraftEmail.to.deleted = false;
       this.OptionalDraftEmail.from.deleted = false;
-      this.OptionalDraftEmail.from.user = this.user.email;
+      this.OptionalDraftEmail.from.user = this.user.role.email;
       var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipient mailbox.
       Updatepromise.then(result => {
         alert('Your Email has been saved to back to drafts, Press ok to continue'); //set email to a ll lower case and trim spaces out of it, 
         console.log('Sending back to drafts complete') //console debug
-        this.ClearAllFields(); //SEAN: 26th of march, moved this down to after the email has been sent.
-        //location.reload(); //This is no longer required, the switchtab event now handles moving the current tab back to the inbox. Its faster than reloading.
+        this.ClearAllFields(); 
         this.switchtab.emit("draft"); //emits the switchtab event which instructs the parent component to switch the current tab to the inbox
         this.IsDraft = false; //draft has been sent, switch back to normal new email
       });
@@ -266,7 +259,7 @@ export class EmailComposeComponent implements OnInit {
           user: formdata.sendTo || ' ',
         },
         from: {
-          user: this.user.email,
+          user: this.user.role.email,
         },
       };
       var promise: Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>;
@@ -288,11 +281,12 @@ export class EmailComposeComponent implements OnInit {
   //form clear
   ClearAllFields() {
     this.emailForm.reset();
-    if (this.IsDraft == true) //if this 
+    if (this.IsDraft == true) 
     {
       this.IsDraft = false;
       this.emailForm.reset();
       this.OptionalDraftEmail = null;
+      this.ClearDraft.emit();
     }
     localStorage.removeItem("autosave-to-user"); //clearing the localstorage
     localStorage.removeItem("autosave-subject");
@@ -309,7 +303,7 @@ export class EmailComposeComponent implements OnInit {
     SubjectControl = emailForm.get("subject"); //get inputs
     ToEmailControl = emailForm.get("sendTo");
     BodyControl = emailForm.get("body");
-    //check input to ensure nonthing that is null is saved to the cache
+    //check input to ensure nothing that is null is saved to the cache
     if (BodyControl.value != null) {
       localStorage.setItem("autosave-body", BodyControl.value)
     }
@@ -338,9 +332,6 @@ export class EmailComposeComponent implements OnInit {
     else {
       console.log("Attempted to load email details from browser cache, nothing was found")
     }
-  }
-  LoadDraftEmailAutosave(){
-
   }
 }
 

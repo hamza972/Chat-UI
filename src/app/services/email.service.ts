@@ -61,10 +61,10 @@ export class EmailService {
   }
 
   inbox(user: User) {
-    console.log('Geting emails for user ' + user.email);
+    console.log('Geting emails for user ' + user.role.email);
     this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
-        .where('to.user', '==', user.email) 
+        .where('to.user', '==', user.role.email) 
         .where('to.deleted', '==', false)
         .where('draft', '==', false)
     );
@@ -82,7 +82,7 @@ export class EmailService {
   sent(user: User) {
     this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
-        .where('from.user', '==', user.email)
+        .where('from.user', '==', user.role.email)
         .where('from.deleted', '==', false)
         .where('draft', '==', false)
     );
@@ -101,7 +101,7 @@ export class EmailService {
   drafts(user: User) {
     this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
-        .where('from.user', '==', user.email)
+        .where('from.user', '==', user.role.email)
         .where('from.deleted', '==', false)
         .where('draft', '==', true)
     );
@@ -126,7 +126,7 @@ export class EmailService {
 
   inboxDeleted(user: User) {
     this.emailCollection = this.afs.collection('Emails', (ref) =>
-      ref.where('to.user', '==', user.email).where('to.deleted', '==', true)
+      ref.where('to.user', '==', user.role.email).where('to.deleted', '==', true)
     );
 
     return this.emailCollection.snapshotChanges().pipe(
@@ -142,7 +142,7 @@ export class EmailService {
 
   sentDeleted(user: User) {
     this.emailCollection = this.afs.collection('Emails', (ref) =>
-      ref.where('from.user', '==', user.email).where('from.deleted', '==', true)
+      ref.where('from.user', '==', user.role.email).where('from.deleted', '==', true)
     );
 
     return this.emailCollection.snapshotChanges().pipe(
