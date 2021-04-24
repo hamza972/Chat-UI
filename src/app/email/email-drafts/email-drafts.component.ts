@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Email } from '../../models/email';
 import { EmailService } from '../../services/email.service';
 import { AppUser } from '../../models/user';
@@ -11,6 +11,7 @@ import { AppUser } from '../../models/user';
 export class EmailDraftsComponent implements OnInit {
   emails: Email[];
   @Input() user: AppUser;
+  @Output() ComposeToDraftRelay = new EventEmitter<Email>(); //SEAN: Creates and allows the 'SendEmailToCompose' event to be relayed through this component, back
 
   constructor(private emailService: EmailService) {}
 
@@ -18,5 +19,11 @@ export class EmailDraftsComponent implements OnInit {
     this.emailService.drafts(this.user).subscribe((emails) => {
       this.emails = emails;
     });
+  }
+  RelayEvent(email: Email) //Sean: transfer email back to compose via events, relay through this component
+  {
+    console.log("Sending Email Back to Compose. Relay through parent component");
+    this.ComposeToDraftRelay.emit(email);  //Sean: Relay the event through
+    console.log(email);
   }
 }

@@ -10,4 +10,3 @@ export interface Role {
     avatar?: string;
     email?: string;
 }
-

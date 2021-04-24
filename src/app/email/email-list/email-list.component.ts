@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, Input, Output ,ViewEncapsulation, EventEmitter } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { Email } from "../../models/email";
 import { Observable } from "rxjs";
@@ -15,6 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class EmailListComponent implements OnInit {
   @Input() emails: Email[];
+  @Output() SendEmailToCompose = new EventEmitter<Email>(); //SEAN: Creates and allows the 'switch-tab' event to be sent to the parent component
   emails$: Observable<Email[]>;
   filter = new FormControl("");
   constructor(private sr: DomSanitizer, private emailService: EmailService, private modalService: NgbModal) { }
@@ -54,15 +55,8 @@ export class EmailListComponent implements OnInit {
           email.to.deleted = true;
           this.emailService.delete(email);
         }
-        if (this.getTab() === "send") {
-          email.from.deleted = true;
-          this.emailService.delete(email);
-        }
         if (this.getTab() === "draft") {
-          this.emailService.hardDelete(email);
-        }
-        if (this.getTab() === "delete") {
-          this.emailService.hardDelete(email);
+          this.emailService.delete(email);
         }
       }
     });
@@ -83,5 +77,10 @@ export class EmailListComponent implements OnInit {
       return "me";
     }
     return from;
+  }
+
+  TransferEmailToCompose(email: Email) //Sean: transfer email back to compose via events
+  {
+    this.SendEmailToCompose.emit(email); 
   }
 }

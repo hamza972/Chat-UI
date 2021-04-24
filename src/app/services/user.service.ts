@@ -74,7 +74,7 @@ export class UserService {
   }
 
   update(user: AppUser) {
-      this.userDoc = this.afs.doc('Users/${user.id}');
+    this.userDoc = this.afs.doc(`Users/${user.id}`);
       this.userDoc.update(user);
   }
 }

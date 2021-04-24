@@ -1,6 +1,5 @@
 <form [formGroup]="emailForm" (ngSubmit)="send(emailForm.value);">
-  <input name="sender" id="email-to" type="text" [formControlName]="'sendTo'" placeholder="To..."
-    [ngbTypeahead]="searchUsers" />
+  <input name="sender" id="email-to" type="text" [formControlName]="'sendTo'" placeholder="To..."/> <!-- SEAN: removed some attribute causing ood behaviour with the text box -->
   <br />
   <input type="text" [formControlName]="'subject'" name="subject" placeholder="Subject..." />
   <hr />
@@ -9,7 +8,18 @@
   </ckeditor>
 
   <br /><br />
-
-  <button type="submit" name="sendEmail" [disabled]="!emailForm.valid">Send</button>
-  <button type="button" name="draftEmail" (click)="draft(emailForm.value)">Draft</button>
+  <button type="submit" name="sendEmail" [disabled]="!emailForm.valid" [ngClass]="{'SubmitButtonGreen': emailForm.valid == true}">Send</button> <!-- SEAN: Submit Button is only active when the email form contents is valid-->
+  <button type="button" name="draftEmail" (click)="draft(emailForm.value)">Save As Draft</button> 
+  <button type="button" name="draftEmail" style="background-color:yellowgreen" (click)="ClearAllFields()">Clear</button> 
 </form>
+<br />
+<div class="alert alert-danger" *ngIf="!emailForm.valid">
+  <h5  style="color: red"> Invalid email message. </h5> <!-- SEAN: Shows if email form is invalid-->
+</div>
+<div class="alert alert-success" *ngIf="emailForm.valid">
+  <h5 *ngIf="emailForm.valid" style="color:green"> Valid email message. </h5> <!-- SEAN: Shows if email form is valid-->
+</div>
+<div class="alert alert-info" *ngIf="IsDraft">
+    <h5  style="color: blue"> This message was loaded from a draft, press the clear button to create a new email. </h5> <!-- SEAN: Shows if email form is valid-->
+  </div>
+<br />

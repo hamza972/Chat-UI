@@ -6,6 +6,7 @@ import { LoginService } from '../auth/login.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
+import { promise } from 'protractor';
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +22,9 @@ export class EmailService {
     private db: AngularFirestore
   ) {}
 
-  sendEmail(email: Email) {
-    return this.db.collection(`Emails`).add({
+  sendEmail(email: Email): Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>> { //Sean: returns a promise to the function that called it
+    var promise: Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>; //create the promise
+    promise = this.db.collection(`Emails`).add({
       subject: email.subject,
       date: new Date(),
       draft: false,
@@ -36,10 +38,12 @@ export class EmailService {
       },
       body: email.body,
     });
+    return(promise); //returns the promise
   }
 
-  draftEmail(email: Email) {
-    return this.db.collection(`Emails`).add({
+  draftEmail(email: Email): Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>  { //Sean: returns a promise to the function that called it
+    var promise: Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>; //create the promise
+    promise = this.db.collection(`Emails`).add({
       subject: email.subject,
       date: new Date(),
       draft: true,
@@ -53,16 +57,17 @@ export class EmailService {
       },
       body: email.body,
     });
+    return(promise); //returns the promise
   }
 
   inbox(user: User) {
+    console.log('Geting emails for user ' + user.role.email);
     this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
-        .where('to.user', '==', user.email)
+        .where('to.user', '==', user.role.email) 
         .where('to.deleted', '==', false)
         .where('draft', '==', false)
     );
-
     return this.emailCollection.snapshotChanges().pipe(
       map((changes) => {
         return changes.map((a) => {
@@ -77,7 +82,7 @@ export class EmailService {
   sent(user: User) {
     this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
-        .where('from.user', '==', user.email)
+        .where('from.user', '==', user.role.email)
         .where('from.deleted', '==', false)
         .where('draft', '==', false)
     );
@@ -96,7 +101,7 @@ export class EmailService {
   drafts(user: User) {
     this.emailCollection = this.afs.collection('Emails', (ref) =>
       ref
-        .where('from.user', '==', user.email)
+        .where('from.user', '==', user.role.email)
         .where('from.deleted', '==', false)
         .where('draft', '==', true)
     );
@@ -121,7 +126,7 @@ export class EmailService {
 
   inboxDeleted(user: User) {
     this.emailCollection = this.afs.collection('Emails', (ref) =>
-      ref.where('to.user', '==', user.email).where('to.deleted', '==', true)
+      ref.where('to.user', '==', user.role.email).where('to.deleted', '==', true)
     );
 
     return this.emailCollection.snapshotChanges().pipe(
@@ -137,7 +142,7 @@ export class EmailService {
 
   sentDeleted(user: User) {
     this.emailCollection = this.afs.collection('Emails', (ref) =>
-      ref.where('from.user', '==', user.email).where('from.deleted', '==', true)
+      ref.where('from.user', '==', user.role.email).where('from.deleted', '==', true)
     );
 
     return this.emailCollection.snapshotChanges().pipe(
@@ -151,13 +156,18 @@ export class EmailService {
     );
   }
 
+  update(email: Email): Promise<void>{ //Sean: New method to update existing emails
+    this.emailDoc = this.afs.doc(`Emails/${email.id}`);
+      return(this.emailDoc.update(email)); //Sean: Returns Promise
+  } 
+
   delete(email: Email) {
     this.emailDoc = this.afs.doc(`Emails/${email.id}`);
     this.emailDoc.update(email);
   }
 
-  hardDelete(email: Email) {
-    this.emailDoc = this.afs.doc(`Emails/${email.id}`);
-    this.emailDoc.delete();
-  }
+  //hardDelete(email: Email) { //Functionality removed, emails cannot be deleted
+    //this.emailDoc = this.afs.doc(`Emails/${email.id}`);
+    //this.emailDoc.delete();
+  //}
 }
