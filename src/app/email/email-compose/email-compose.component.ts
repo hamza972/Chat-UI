@@ -119,6 +119,7 @@ export class EmailComposeComponent implements OnInit {
           },
           from: {
             user: this.user.role.email,
+            actualuser: (this.user.firstName + " " + this.user.lastName)
           },
         };
         this.sendEmail(this.newEmail);
@@ -134,6 +135,7 @@ export class EmailComposeComponent implements OnInit {
         },
         from: {
           user: this.user.role.email,
+          actualuser: (this.user.firstName + " " + this.user.lastName)
         },
       };
       this.sendEmail(this.newEmail);
@@ -158,6 +160,7 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.to.deleted = false;
       this.OptionalDraftEmail.from.deleted = false;
       this.OptionalDraftEmail.from.user = this.user.role.email;
+      this.OptionalDraftEmail.from.actualuser = (this.user.firstName + " " + this.user.lastName);
       var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
       Updatepromise.then(result => { //this callback is run if sucessful
         alert('Your Email has been sent to ' + recipientslist[0]); //set email to a ll lower case and trim spaces out of it, 
@@ -173,6 +176,7 @@ export class EmailComposeComponent implements OnInit {
             },
             from: {
               user: this.user.role.email,
+              actualuser: (this.user.firstName + " " + this.user.lastName)
             },
           };
           this.sendEmail(this.newEmail); //promises are covered under the that function.
@@ -192,6 +196,7 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.to.deleted = false;
       this.OptionalDraftEmail.from.deleted = false;
       this.OptionalDraftEmail.from.user = this.user.role.email;
+      this.OptionalDraftEmail.from.actualuser = (this.user.firstName + " " + this.user.lastName);
       var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
       Updatepromise.then(result => {
         alert('Your Email has been sent to ' + recipientslist[0]); //set email to a ll lower case and trim spaces out of it, 
@@ -236,6 +241,7 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.to.deleted = false;
       this.OptionalDraftEmail.from.deleted = false;
       this.OptionalDraftEmail.from.user = this.user.role.email;
+      this.OptionalDraftEmail.from.actualuser = (this.user.firstName + " " + this.user.lastName);
       var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipient mailbox.
       Updatepromise.then(result => {
         alert('Your Email has been saved to back to drafts, Press ok to continue'); //set email to a ll lower case and trim spaces out of it, 
@@ -260,6 +266,7 @@ export class EmailComposeComponent implements OnInit {
         },
         from: {
           user: this.user.role.email,
+          actualuser: (this.user.firstName + " " + this.user.lastName),
         },
       };
       var promise: Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>;

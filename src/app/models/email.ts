@@ -7,6 +7,7 @@ export interface Email {
   from?: {
     user?: string;
     deleted?: boolean;
+    actualuser?: string;
   };
   to?: {
     user?: string;

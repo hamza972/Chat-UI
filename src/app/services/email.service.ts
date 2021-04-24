@@ -14,6 +14,7 @@ import { promise } from 'protractor';
 export class EmailService {
   emailCollection: AngularFirestoreCollection<Email>;
   email: Observable<Email[]>;
+  emaillist: string[];
   emailDoc: AngularFirestoreDocument<Email>;
 
   constructor(
@@ -31,6 +32,7 @@ export class EmailService {
       from: {
         user: email.from.user,
         deleted: false,
+        actualuser: email.from.actualuser
       },
       to: {
         user: email.to.user,
@@ -40,6 +42,10 @@ export class EmailService {
     });
     return(promise); //returns the promise
   }
+
+  //GetAutoCompleteList(): String[] {
+    //this.emaillist = this.afs.collection("Emails\\EmailList")
+  //}
 
   draftEmail(email: Email): Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>  { //Sean: returns a promise to the function that called it
     var promise: Promise <firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>; //create the promise

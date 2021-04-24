@@ -9,12 +9,13 @@
   </div>
 </form>
 
-<table class="table table-striped">
+<table class="table table-striped" id="table">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col" *ngIf="getTab() == 'send' || getTab() == 'draft' ">To</th>
       <th scope="col" *ngIf="getTab() == 'inbox'">From</th>
+      <th scope="col" *ngIf="getAdminIsUser() && getTab() == 'inbox'">From Participant</th>
       <th scope="col" *ngIf="getTab() == 'delete'">User</th>
       <th scope="col">Subject</th>
       <th scope="col">Body</th>
@@ -28,6 +29,12 @@
       <td *ngIf="getTab() == 'inbox'">
         <ngb-highlight
           [result]="email.from.user"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td *ngIf="getAdminIsUser() && getTab() == 'inbox'">
+        <ngb-highlight
+          [result]="email.from.actualuser"
           [term]="filter.value"
         ></ngb-highlight>
       </td>

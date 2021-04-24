@@ -1,11 +1,14 @@
 import { Component, OnInit, Input, Output ,ViewEncapsulation, EventEmitter } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { AuthService } from '../../services/auth.service';
 import { Email } from "../../models/email";
 import { Observable } from "rxjs";
+import { AppUser } from '../../models/user';
 import { map, startWith } from "rxjs/operators";
 import { EmailService } from "../../services/email.service";
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RoleService } from '..//../services/role.service';
 
 @Component({
   selector: "app-email-list",
@@ -18,10 +21,23 @@ export class EmailListComponent implements OnInit {
   @Output() SendEmailToCompose = new EventEmitter<Email>(); //SEAN: Creates and allows the 'switch-tab' event to be sent to the parent component
   emails$: Observable<Email[]>;
   filter = new FormControl("");
-  constructor(private sr: DomSanitizer, private emailService: EmailService, private modalService: NgbModal) { }
+  user: AppUser;
+  IsUserAdmin: boolean;
+  constructor(private sr: DomSanitizer, private emailService: EmailService, private modalService: NgbModal, private auth: AuthService) { }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.auth.getUserData().subscribe(user => {
+      if (user === null) {
+          console.log("unable to find user")
+      } else {
+          this.user = user[0];
+          if(this.user.systemRole == "admin"){
+            this.IsUserAdmin = true;
+          }   
+      } 
+  });
+  }
 
   ngOnChanges() {
     if (this.emails !== undefined) {
@@ -41,6 +57,10 @@ export class EmailListComponent implements OnInit {
         email.body.toLowerCase().includes(term)
       );
     });
+  }
+
+  getAdminIsUser() {
+    return(this.IsUserAdmin);
   }
 
   getTab() {
