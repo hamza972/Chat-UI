@@ -18,7 +18,6 @@
                         <div class="d-flex w-100" style="margin-bottom: 12px; height:40px">
                             <textarea [(ngModel)]="searchText" name="searchHashtag" type="text" class="searchBox"
                                 id="txtSearchHashtag" placeholder="Hashtag search" rows="1" onkeydown="if(event.keyCode == 13) return false;"></textarea>
-
                             <button class="search-btn">
                                 <i class="fa fa-search"></i>
                             </button>
@@ -26,8 +25,11 @@
                         <ckeditor name="content" [editor]="Editor" [(ngModel)]="tweet.content"
                             style="min-height: 500px;" [config]="editorConfig"></ckeditor>
                         <div class="col-md-12">
+                            <div class="tweetLength">
+                                {{tweetContent(tweet.content).length}}/280 Characters
+                            </div>
                             <button type="submit" class="tweet-button"
-                                [disabled]="tweet.content === '' || tweet.content.length > 286">Tweet</button>
+                                [disabled]="tweet.content === '' || tweetContent(tweet.content).length > 280">Tweet</button>
                         </div>
                     </div>
                 </div>

@@ -19,6 +19,10 @@ input[type=text]
     color: rgba(0, 0, 0, .3);
 }
 
+.tweetLength{
+  text-align: right;
+}
+
 button[type="submit"]
 {
   margin-top: 10px;

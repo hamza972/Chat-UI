@@ -83,6 +83,14 @@ export class TweetComponent implements OnInit {
 
     }
 
+    tweetContent(content){
+        content = content.replace(/&nbsp;/g, ' ');
+        if (!content.replace(/\s/g, '').length) {
+            content = '';
+          }
+        return content.replace(this.removeHTML,"");
+    }
+
     /* go to profile page */
     profile($event, tweet: Tweet) {
         this.router.navigate(['/profile/' + tweet.user.id]);
@@ -94,10 +102,6 @@ export class TweetComponent implements OnInit {
 
     hashtagHTMLBuilder(content) {
         return '<span class="hashtag">'+content+'</span>'
-    }
-
-    hashtagSearch(hashtag) {
-
     }
 
     mentionHTMLBuilder(mention) {
@@ -172,7 +176,7 @@ export class TweetComponent implements OnInit {
                 user: this.user,
 
             };
-            //this.tweetService.add(this.tweet);
+            this.tweetService.add(this.tweet);
             this.tweet.content = '';
         } 
     }
