@@ -15,7 +15,7 @@ export class NotificationService {
     notificationDoc: AngularFirestoreDocument<Notification>;
 
     constructor(public afs: AngularFirestore) {
-        this.notificationCollection = this.afs.collection('Notification', ref => ref.orderBy('notificationDate', 'desc'));
+        this.notificationCollection = this.afs.collection('Notification', ref => ref.orderBy('date', 'desc'));
 
         this.notification = this.notificationCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {

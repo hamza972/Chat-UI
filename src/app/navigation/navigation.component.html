@@ -38,8 +38,10 @@
                                 <i class="fa fa-bell"> </i>
                                 </a>
                             </li>
-                            <div ngbDropdownMenu aria-labelledby="userDropdown">
-                     
+                            <div ngbDropdownMenu aria-labelledby="notificationDropdown">
+                                <div *ngFor="let notification of notifications" ngbDropdownItem class="diary">
+                                    <a>You recieved a {{notification.type}} from {{notification.from.firstName}} {{notification.from.lastName}}</a>
+                                </div>
                             </div>
                         </ul>
                          <ul class="user" ngbDropdown>
