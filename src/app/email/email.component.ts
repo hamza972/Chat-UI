@@ -16,7 +16,7 @@ export class EmailComponent implements OnInit {
   OptionalDraftEmail: Email;
   user: User;
   tabstatus = {};
-  @ViewChild('tabsystem', {static: false}) tabsystem: NgbTabset;
+  @ViewChild('SendTo', {static: false}) tabsystem: NgbTabset;
 
   constructor(private auth: AuthService) { }
 

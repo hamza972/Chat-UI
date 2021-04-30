@@ -39,12 +39,15 @@ import { AffiliateComponent } from './components/affiliate/affiliate.component';
 import { AffiliateAddComponent } from './components/affiliate-add/affiliate-add.component';
 import { AffiliateEditComponent } from './components/affiliate-edit/affiliate-edit.component';
 
-
 import { AffiliateService } from './services/affiliate.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { RoleService } from './services/role.service';
 import { StorageService } from './services/storage.service';
+
+//Sean added the following for autocomplete:
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
+
 
 /*
  * All imports for emails including services and external componenets
@@ -66,6 +69,7 @@ import { HttpModule } from '@angular/http';
 
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
@@ -107,6 +111,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
   ],
   imports: [
     BrowserModule,
+    AutocompleteLibModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

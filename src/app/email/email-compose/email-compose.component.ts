@@ -1,22 +1,27 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
 import * as Editor from '../../../assets/custom-ckeditor/ckeditor';
 import { UserService } from '../../services/user.service';
-import { Observable } from 'rxjs';
+import { ObjectUnsubscribedError, Observable } from 'rxjs';
 import { AppUser } from '../../models/user';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Email } from 'src/app/models/email';
 import { EmailService } from '../../services/email.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { promise } from 'protractor';
+import {AutocompleteComponent, AutocompleteLibModule} from 'angular-ng-autocomplete';
+import { RoleService } from 'src/app/services/role.service';
+import { ArrayType } from '@angular/compiler';
 
 @Component({
   selector: 'app-email-compose',
   templateUrl: './email-compose.component.html',
   styleUrls: ['./email-compose.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class EmailComposeComponent implements OnInit {
   @Output() switchtab = new EventEmitter<String>(); //SEAN: Creates and allows the 'switchtab' event to be sent to the parent component.
   @Output() ClearDraft = new EventEmitter<void>(); //SEAN: IS sent to the parent component used to clear drafts.
+  
   public Editor = Editor;
   editorConfig = {
     toolbar: {
@@ -38,19 +43,23 @@ export class EmailComposeComponent implements OnInit {
   participants: string[];
   @Input() user: AppUser;
   @Input() OptionalDraftEmail: Email;
+  @ViewChild('SendTo', {static: false}) autocomplete: AutocompleteComponent
+
   IsDraft: Boolean;
   newEmail: Email;
   emailForm: FormGroup;
+  displayname: string = 'email';
 
   constructor(
     private userService: UserService,
     private emailService: EmailService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private roleService: RoleService
   ) {
     this.emailForm = this.formBuilder.group({
       sendTo: [null, [Validators.required,
       Validators.pattern("(([a-zA-Z0-9._%+-]+@{1}([a-zA-Z0-9.-]+[a-zA-Z\.])+)+([,]{1}[\\s]?)?)+")]],
-      //Feature lost in commit 4d21784e3f5, was added in earlier 1154066f603 credit to past student, MUHAMMAD ZORAIN ALI
+      //Feature lost in commit 4d21784e3f5, was added in earlier commit 1154066f603 credit to past student, MUHAMMAD ZORAIN ALI
       //original regex [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$ Current Version improved by Sean to permit capitals.
       //The backend will deal with capitals.
       //this has been further updated to only permit one @ symbol and allow multiple comma and space separated emails.
@@ -65,6 +74,19 @@ export class EmailComposeComponent implements OnInit {
     });
     this.LoadAutoSave();
     setInterval(this.AutoSave, 3000, this.emailForm) //auto saves very 30 seconds.
+     this.roleService.getEmailList().subscribe(result => {
+       var StringArray: Array<String> = Array.from(result['EmailArray']);
+       var resultarray: Array<Object> = new Array;
+      for (let index = 0; index < StringArray.length; index++) {
+        var dataobject: object = new Object;
+        dataobject['email'] = StringArray[index]
+        dataobject['id'] = index;
+        resultarray.push(dataobject)
+      }
+       console.log(resultarray);
+       this.autocomplete.data = resultarray
+       this.autocomplete.searchKeyword = 'email';
+    });     
   }
 
   ngOnChanges() { //Sean: auto refreshes when a draft email becomes available and puts its into the form. 
