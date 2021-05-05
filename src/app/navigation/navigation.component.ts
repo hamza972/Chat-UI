@@ -8,7 +8,6 @@ import { RoleService } from '../services/role.service';
 import { UserService } from '../services/user.service';
 import { NotificationService } from '../services/notification.service';
 
-
 @Component({
     selector: 'app-navigation',
     templateUrl: './navigation.component.html',
@@ -100,5 +99,18 @@ export class NavigationComponent implements OnInit {
         return (window.location.pathname === path) ? 'active' : '';
     }
 
+    unreadNotificationCount() {
+        var unreadNotifications = 0
+        this.notifications.forEach(notification => {
+            if(notification.viewed == false) {
+                unreadNotifications += 1
+            }
+        });
+        return unreadNotifications;
+    }
 
+    readNotification(notification: Notification){
+        notification.viewed = true;
+        this.notificationService.update(notification);
+    }
 }

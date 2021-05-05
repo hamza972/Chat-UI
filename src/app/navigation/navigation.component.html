@@ -35,12 +35,13 @@
                          <!-- set right side content -->
                          <ul class="notification" ngbDropdown>
                             <li id="notificationDropdown" ngbDropdownToggle><a>
-                                <i class="fa fa-bell"> </i>
+                                <i class="fa fa-bell"></i><span class="notificationCount">{{unreadNotificationCount()}}</span>
                                 </a>
                             </li>
                             <div ngbDropdownMenu aria-labelledby="notificationDropdown">
                                 <div *ngFor="let notification of notifications" ngbDropdownItem class="diary">
-                                    <a>You recieved a {{notification.type}} from {{notification.from.firstName}} {{notification.from.lastName}}</a>
+                                    <a *ngIf="notification.viewed == false" (click)="readNotification(notification)" [routerLink]="['/', notification.type]" class="unread">You recieved a {{notification.type}} from {{notification.from.firstName}} {{notification.from.lastName}}</a>
+                                    <a *ngIf="notification.viewed == true" [routerLink]="['/', notification.type]" class="read">You recieved a {{notification.type}} from {{notification.from.firstName}} {{notification.from.lastName}}</a>
                                 </div>
                             </div>
                         </ul>
