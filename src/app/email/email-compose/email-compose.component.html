@@ -1,7 +1,7 @@
 <form [formGroup]="emailForm" (ngSubmit)="send(emailForm.value);">
   <!-- <input name="sender" id="email-to" type="text" [formControlName]="'sendTo'" placeholder="To..."/>  --> <!-- SEAN: removed some attribute causing ood behaviour with the text box -->
   <div class="autocompleteFix">
-  <ng-autocomplete  name="sender" #SendTo id="email-to" type="text" [formControlName]="'sendTo'" placeholder="Recipients" historyIdentifier="displayname" [heading]='email' [searchKeyword]='displayname' [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">    </ng-autocomplete>
+  <ng-autocomplete  name="sender" #SendTo id="email-to" type="text" [formControlName]="'sendTo'" placeholder="Recipients" historyIdentifier="displayname" [heading]="'Email'" [searchKeyword]='displayname' (closed)="setastouched()" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">    </ng-autocomplete>
   <ng-template #itemTemplate let-item>
     <a [innerHTML]="item.email"></a>
     </ng-template>

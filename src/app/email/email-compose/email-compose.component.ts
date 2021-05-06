@@ -57,7 +57,7 @@ export class EmailComposeComponent implements OnInit {
   ) {
     this.emailForm = this.formBuilder.group({
       sendTo: [null, [Validators.required,
-      Validators.pattern("(([a-zA-Z0-9._%+-]+@{1}([a-zA-Z0-9.-]+[a-zA-Z\.])+)+([,]{1}[\\s]?)?)+")]],
+      Validators.pattern("(([a-zA-Z0-9._%+-]+@{1}([a-zA-Z0-9.-]+[a-zA-Z\.])+)+([\\s]?[,]{1}[\\s]?)?)+")]],
       //Feature lost in commit 4d21784e3f5, was added in earlier 1154066f603 credit to past student, MUHAMMAD ZORAIN ALI
       //original regex [a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$ Current Version improved by Sean to permit capitals.
       //The backend will deal with capitals.
@@ -167,6 +167,7 @@ export class EmailComposeComponent implements OnInit {
     console.log(recipients);
     var recipients: string = ((formdata.sendTo).toLowerCase().trim()); //set to all lower case, remove preceding and trailing whitespaces. 
     var recipientslist: string[] = recipients.split(','); //split into a string array where a comma occurs.
+    this.Sendnotifcations(recipientslist);
     for (let index = 0; index < recipientslist.length; index++) { //Sean, Clean Up input
       recipientslist[index] = recipientslist[index].trim(); //remove preceding and trailing whitespaces for each recipient email.
     }
@@ -376,7 +377,7 @@ export class EmailComposeComponent implements OnInit {
     localStorage.setItem("autosave-emailid", email.id)
     this.OptionalDraftEmail.to.user = ((ToEmailControl.value as string).toLowerCase().trim()); //set new information 
     this.OptionalDraftEmail.subject = SubjectControl.value;
-    this.OptionalDraftEmail.body = BodyControl.value
+    this.OptionalDraftEmail.body = BodyControl.value;
     this.OptionalDraftEmail.draft = true; //this sends it back to drafts instead of a proper send!
     this.OptionalDraftEmail.to.deleted = false;
     this.OptionalDraftEmail.from.deleted = false;
@@ -414,6 +415,33 @@ export class EmailComposeComponent implements OnInit {
       this.IsDraft = true;
       this.OptionalDraftEmail = email;
   });
+  }
+  Sendnotifcations(recipientslist:string[]){
+    this.roleService.get().subscribe(dbRoles => {
+      console.log(dbRoles);
+      dbRoles.forEach(element => {
+        recipientslist.forEach(recipient => {
+            if(element.email == recipient){
+              //send notifcation
+            }
+            });
+        });
+      })
+  }
+  setastouched() {
+    console.log("marked as touched");
+    var ToEmailControl: AbstractControl;
+    ToEmailControl = this.emailForm.get("sendTo");
+    console.log(ToEmailControl.value);
+    var output = ToEmailControl.value
+    if (typeof output === 'string')   {
+      console.log("got string")
+      ToEmailControl.setValue(output);
+    }
+    else {
+      console.log(typeof output)
+      ToEmailControl.setValue(output['email']);
+    }
   }
 }
 
