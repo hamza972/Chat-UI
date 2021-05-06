@@ -6,6 +6,8 @@ import { Notification } from '../models/notification'
 import { Role } from '../models/role';
 import { RoleService } from '../services/role.service';
 import { UserService } from '../services/user.service';
+import { NotificationService } from '../services/notification.service';
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 @Component({
     selector: 'app-navigation',
@@ -16,10 +18,12 @@ export class NavigationComponent implements OnInit {
 
     user: AppUser;
     private roles: Role[];
+    private notifications: Notification[] = [];
     constructor(
         private auth: AuthService,
         private router: Router,
         private roleService: RoleService,
+        private notificationService: NotificationService,
         private userService: UserService
     ) { }
 
@@ -31,21 +35,40 @@ export class NavigationComponent implements OnInit {
             } else {
                 this.user = user[0];
             }
-            this.Checkrole(); 
+            this.Checkrole();
+            this.getNotifications();
         });
     }
+
+    getNotifications(){
+        this.notificationService.get().subscribe(dbNotifications => {
+            this.notifications = dbNotifications;
+            console.log(true);
+        });
+    }
+
+    checkNotifications(notifications: Notification[]){
+        var userNotifications: Notification[] = [];
+        console.log(notifications);
+        for(var i = 0; i < notifications.length; i++){
+            if(notifications[i].role.id == this.user.role.id) {
+                userNotifications.push(notifications[i]);
+            }
+        }
+        console.log(userNotifications);
+        return userNotifications;
+    }
+
     Checkrole() {    
         this.roleService.get().subscribe(dbRoles => {
         this.roles = dbRoles;
-        console.log(this.roles);
-        console.log(this.user.role);
         for (let index = 0; index < this.roles.length; index++) {
             if(this.roles[index].id == this.user.role.id)
             {
                 if (this.roleService.Equals(this.roles[index], this.user.role) == false)
                 {
                     console.log(this.roles[index]);
-                    this.user.role = this.roles[index]
+                    this.user.role = this.roles[index];
                     this.userService.update(this.user);
                     console.log("Updated User role information");
                     break;
@@ -72,5 +95,35 @@ export class NavigationComponent implements OnInit {
 
     getClass = (path) => {
         return (window.location.pathname === path) ? 'active' : '';
+    }
+
+    unreadNotificationCount() {
+        var unreadNotifications = 0;
+        for(var i = 0; i < this.notifications.length; i++){
+            if(this.notifications[i].viewed == false) {
+                unreadNotifications++;
+            }
+        }
+        return unreadNotifications;
+    }
+
+    readNotification(notification: Notification){
+        notification.viewed = true;
+        this.notificationService.update(notification);
+    }
+
+    notificationDateFormat(notification: Notification){
+        var date = notification.date.toLocaleDateString();
+        document.getElementById("notificationDate").innerHTML = date;
+        console.log(date);
+    }
+
+    clearNotifications(){
+        this.notifications.forEach(notification => {
+            if(notification.viewed == false){
+                notification.viewed = true;
+                this.notificationService.update(notification)
+            }
+        });
     }
 }

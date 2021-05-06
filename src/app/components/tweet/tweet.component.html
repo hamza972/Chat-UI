@@ -39,7 +39,7 @@
         <div *ngFor="let tweet of tweets">
             <div class="row text-fix" *ngIf="(tweet.hashtag == null || tweet.hashtag == '') && (searchText == null || searchText == '')">
                 <div class="col-1">
-                    <img (click)="profile($event, tweet)" src={{tweet.user.roleAvatar}}
+                    <img (click)="profile($event, tweet)" src={{tweet.user.role.avatar}}
                         class="circle responsive-img role-img">
                 </div>
                 <div class="col-11">

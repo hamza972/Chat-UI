@@ -154,11 +154,13 @@ export class TweetComponent implements OnInit {
                         this.notification.viewed = false;
                         this.notification.type = 'tweet';
                         this.notification.role = mentionRole;
+                        this.notification.from = this.user.role;
                         this.notification = {
                             date: new Date(),
                             viewed: this.notification.viewed,
                             type: this.notification.type,
                             role: this.notification.role,
+                            from: this.notification.from,
                         }
                         this.notificationService.add(this.notification);
                         this.tweet.content = this.tweet.content.replace(this.tweet.mention[i], this.mentionHTMLBuilder(mentionRole));

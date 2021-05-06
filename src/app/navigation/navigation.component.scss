@@ -56,6 +56,20 @@
     left: 0;
 }
 
+.readAllBtn
+{
+  margin-top: 5px;
+  margin-left: 63%;
+  // margin-right: 30px;
+  width: 30%;
+  border: none;
+  outline: none ;
+  height: 40px;
+  font-size: 20px;    
+  background: #FD999A;
+  cursor: pointer;
+  color:  #ffffff; 
+}
 
 /* set user */
 .user
@@ -84,12 +98,15 @@
 .nav .diary a
 {
     font-size: 15px;
-    padding-left: 0px;
+    padding-left: 5px;
     line-height: 30px;
     color: black;
     text-decoration: none;
 }
 
+.unread {
+    background: lightgrey;
+}
 
 // set basic detail
 
@@ -136,3 +153,6 @@
     color: #C0C0C0;
 }
 
+.notificationCount {
+    margin: 5px;
+}

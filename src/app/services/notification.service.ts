@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Notification } from '../models/Notification';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AppUser } from '../models/user';
 
 @Injectable({
     providedIn: 'root'
@@ -13,9 +14,10 @@ export class NotificationService {
     notificationCollection: AngularFirestoreCollection<Notification>;
     notification: Observable<Notification[]>;
     notificationDoc: AngularFirestoreDocument<Notification>;
+    user: AppUser;
 
     constructor(public afs: AngularFirestore) {
-        this.notificationCollection = this.afs.collection('Notification', ref => ref.orderBy('notificationDate', 'desc'));
+        this.notificationCollection = this.afs.collection('Notification', ref => ref.orderBy('date', 'desc'));
 
         this.notification = this.notificationCollection.snapshotChanges().pipe(map(changes => {
             return changes.map(a => {
@@ -46,4 +48,11 @@ export class NotificationService {
         this.notificationDoc = this.afs.doc(`Notification/${notification.id}`);
         this.notificationDoc.update(notification);
     }
+
+    getUserNotifications(user: AppUser) {
+        this.notificationCollection = this.afs.collection('Notification', ref => ref.orderBy('date', 'desc').where('role.id', "==", this.user.role.id));
+        return this.notificationCollection.valueChanges();
+
+    }
+
 }

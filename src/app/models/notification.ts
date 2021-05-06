@@ -5,5 +5,6 @@ export interface Notification {
     type?: string;
     role?: Role;
     date?: Date;
+    from?: Role;
     viewed?: boolean;
 }
