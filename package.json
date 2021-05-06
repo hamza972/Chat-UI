@@ -26,6 +26,7 @@
     "@ckeditor/ckeditor5-angular": "^1.2.3",
     "@ckeditor/ckeditor5-build-classic": "^18.0.0",
     "@ng-bootstrap/ng-bootstrap": "~5.2.2",
+    "angular-ng-autocomplete": "^2.0.5",
     "bootstrap": "^4.4.1",
     "firebase": "^7.14.3",
     "font-awesome": "^4.7.0",

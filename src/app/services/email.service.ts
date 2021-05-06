@@ -31,6 +31,7 @@ export class EmailService {
       from: {
         user: email.from.user,
         deleted: false,
+        actualuser: email.from.actualuser
       },
       to: {
         user: email.to.user,
@@ -122,6 +123,21 @@ export class EmailService {
       this.inboxDeleted(user),
       this.sentDeleted(user),
     ]);
+  }
+
+  GetSpecficEmail(user: User, emailid: string){
+    this.emailCollection = this.afs.collection('Emails', (ref) =>
+    ref.where('id', '==', emailid)
+    );
+    return this.emailCollection.snapshotChanges().pipe(
+      map((changes) => {
+        return changes.map((a) => {
+          const data = a.payload.doc.data() as Email;
+          data.id = a.payload.doc.id;
+          return data;
+        });
+      })
+    );
   }
 
   inboxDeleted(user: User) {

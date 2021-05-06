@@ -1,5 +1,15 @@
 <form [formGroup]="emailForm" (ngSubmit)="send(emailForm.value);">
-  <input name="sender" id="email-to" type="text" [formControlName]="'sendTo'" placeholder="To..."/> <!-- SEAN: removed some attribute causing ood behaviour with the text box -->
+  <!-- <input name="sender" id="email-to" type="text" [formControlName]="'sendTo'" placeholder="To..."/>  --> <!-- SEAN: removed some attribute causing ood behaviour with the text box -->
+  <div class="autocompleteFix">
+  <ng-autocomplete  name="sender" #SendTo id="email-to" type="text" [formControlName]="'sendTo'" placeholder="Recipients" historyIdentifier="displayname" [heading]="'Email'" [searchKeyword]='displayname' (closed)="setastouched()" [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate">    </ng-autocomplete>
+  <ng-template #itemTemplate let-item>
+    <a [innerHTML]="item.email"></a>
+    </ng-template>
+    
+    <ng-template #notFoundTemplate let-notFound class="autocompleteFix">
+    <div [innerHTML]="notFound"> </div>
+    </ng-template>
+  </div>
   <br />
   <input type="text" [formControlName]="'subject'" name="subject" placeholder="Subject..." />
   <hr />
@@ -9,8 +19,8 @@
 
   <br /><br />
   <button type="submit" name="sendEmail" [disabled]="!emailForm.valid" [ngClass]="{'SubmitButtonGreen': emailForm.valid == true}">Send</button> <!-- SEAN: Submit Button is only active when the email form contents is valid-->
-  <button type="button" name="draftEmail" (click)="draft(emailForm.value)">Save As Draft</button> 
-  <button type="button" name="draftEmail" style="background-color:yellowgreen" (click)="ClearAllFields()">Clear</button> 
+  <button type="button" name="draftEmail" (click)="draft(emailForm.value)"> Save As Draft </button> 
+  <button type="button" name="draftEmail" style="background-color:yellowgreen" (click)="ClearAllFields()"> Clear </button> 
 </form>
 <br />
 <div class="alert alert-danger" *ngIf="!emailForm.valid">

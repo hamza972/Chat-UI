@@ -17,6 +17,7 @@ export class RoleAddComponent implements OnInit {
     affiliates: Affiliate[];
     user: firebase.User;
     authError: any;
+    EmaiList: any;
 
     constructor(
         private auth: AuthService,
@@ -53,9 +54,9 @@ export class RoleAddComponent implements OnInit {
                 this.role.affiliation = affiliate.name;
                 console.log(this.role);
                 this.roleService.add(this.role);
+                this.roleService.AppendEmailList(this.role.email);
             });
             this.router.navigate(['/control']);
         }
     }
-
 }

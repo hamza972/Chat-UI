@@ -9,12 +9,13 @@
   </div>
 </form>
 
-<table class="table table-striped">
+<table class="table table-striped" id="table">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col" *ngIf="getTab() == 'send' || getTab() == 'draft' ">To</th>
       <th scope="col" *ngIf="getTab() == 'inbox'">From</th>
+      <th scope="col" *ngIf="getAdminIsUser() && getTab() == 'inbox'">From Participant</th>
       <th scope="col" *ngIf="getTab() == 'delete'">User</th>
       <th scope="col">Subject</th>
       <th scope="col">Body</th>
@@ -28,6 +29,12 @@
       <td *ngIf="getTab() == 'inbox'">
         <ngb-highlight
           [result]="email.from.user"
+          [term]="filter.value"
+        ></ngb-highlight>
+      </td>
+      <td *ngIf="getAdminIsUser() && getTab() == 'inbox'">
+        <ngb-highlight
+          [result]="email.from.actualuser"
           [term]="filter.value"
         ></ngb-highlight>
       </td>
@@ -62,7 +69,7 @@
         <button class="btn waves-effect waves-light red" (click)="deleteEmail(email, content)" *ngIf="getTab() == 'inbox' || getTab() == 'draft'" style="margin-right: 5%;" > <!-- SEAN: No longer see the delete button is the delete section, as requested by product owner-->
           Archive
         </button>
-        <button class="btn waves-effect waves-light green" (click)="viewEmail(email, content)" *ngIf="getTab() == 'inbox' || getTab() == 'draft'" style="margin-right: 15%;" > 
+        <button class="btn waves-effect waves-light green" (click)="viewEmail(email, content)"  style="margin-right: 5%;" >  <!-- SEAN: Fixed margin and changed to appear on all tabs-->
           View
         </button>
         <button class="btn waves-effect waves-light green" (click)="TransferEmailToCompose(email)" *ngIf="getTab() == 'draft'">
@@ -81,7 +88,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <h5>Are you sure you want to delete this email?</h5>
+    <h5>Are you sure you want to archive this email?</h5>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn waves-effect waves-light red" (click)="modal.close(true)">Yes</button>

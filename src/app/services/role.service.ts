@@ -3,6 +3,9 @@ import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument 
 import { Observable } from 'rxjs';
 import { Role } from '../models/role';
 import { map } from 'rxjs/operators';
+import { listChanges } from '@angular/fire/database';
+import { promise } from 'selenium-webdriver';
+import * as firebase from 'firebase';
 
 @Injectable({
     providedIn: 'root'
@@ -12,9 +15,13 @@ export class RoleService {
     roleCollection: AngularFirestoreCollection<Role>;
     roles: Observable<Role[]>;
     roleDoc: AngularFirestoreDocument<Role>;
+    roleEmailArray: AngularFirestoreDocument;
+    EmailArray: String[];
 
     constructor(public afs: AngularFirestore) {
         this.roleCollection = this.afs.collection('Roles', ref => ref.orderBy('firstName', 'asc'));
+        this.roleEmailArray = this.afs.collection('Roles').doc('EmailArray')
+        this.getEmailList();
     }
 
     get() {
@@ -25,6 +32,16 @@ export class RoleService {
                 return data;
             });
         }));
+    }
+    getEmailList(): Observable<firebase.firestore.DocumentData> {   
+        return(this.roleEmailArray.valueChanges());
+    }
+
+    AppendEmailList(newemail: string) {
+        var EmailArrayDocument = this.afs.doc(`Roles/EmailArray`);
+        return(EmailArrayDocument.update({
+        EmailArray: firebase.firestore.FieldValue.arrayUnion('arrayItem')
+        }))
     }
 
     getRole(id: string) {
@@ -46,7 +63,7 @@ export class RoleService {
     //update(role: Role) {
       //  this.roleCollection.doc(role.id).update(role);
     //}
-    update(role: Role): Promise<void>{ //Sean: New method to update existing emails
+    update(role: Role): Promise<void>{ //Sean: New method to update existing roles
         var currentrole = this.afs.doc(`Roles/${role.id}`);
           return(currentrole.update(role)); //Sean: Returns Promise
       } 
