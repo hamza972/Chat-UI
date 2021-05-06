@@ -21,42 +21,56 @@
 
                         <!-- set leftside content -->
                         <ul class="right hide-on-med-and-down">
-                            <li><a *ngIf="user" [ngClass]="getClass('/scenario')" routerLink="/scenario">Scenario</a></li>
+                            <li><a *ngIf="user" [ngClass]="getClass('/scenario')" routerLink="/scenario">Scenario</a>
+                            </li>
                             <li><a *ngIf="user" [ngClass]="getClass('/RolePage')" routerLink="/RolePage">Roles</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/email')" routerLink="/email">Email</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/tweet')" routerLink="/tweet">Twitter</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/news')" routerLink="/news">News</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/chat')" routerLink="/chat">Chat</a></li>
                             <li><a *ngIf="user" [ngClass]="getClass('/diary')" routerLink="/diary">Team Diary</a></li>
-                            <li *ngIf="user.systemRole === 'admin'"><a *ngIf="user" [ngClass]="getClass('/control')" routerLink="/control">Control</a></li>
+                            <li *ngIf="user.systemRole === 'admin'"><a *ngIf="user" [ngClass]="getClass('/control')"
+                                    routerLink="/control">Control</a></li>
                             <!-- <li *ngIf="user.systemRole === 'participant'"><a *ngIf="user" [ngClass]="getClass('/profile-edit')" [routerLink]="['/profile-edit', user.roleID]">Update Role Profile</a></li> -->
                         </ul>
 
-                         <!-- set right side content -->
-                         <ul class="notification" ngbDropdown>
+                        <!-- set right side content -->
+                        <ul class="notification" ngbDropdown>
                             <li id="notificationDropdown" ngbDropdownToggle><a>
-                                <i class="fa fa-bell"></i><span class="notificationCount">{{unreadNotificationCount()}}</span>
+                                    <i class="fa fa-bell"></i><span
+                                        class="notificationCount">{{unreadNotificationCount()}}</span>
                                 </a>
                             </li>
                             <div ngbDropdownMenu aria-labelledby="notificationDropdown">
-                                <div *ngFor="let notification of notifications" ngbDropdownItem class="diary">
-                                    <a *ngIf="notification.viewed == false" (click)="readNotification(notification)" [routerLink]="['/', notification.type]" class="unread">You recieved a {{notification.type}} from {{notification.from.firstName}} {{notification.from.lastName}}</a>
-                                    <a *ngIf="notification.viewed == true" [routerLink]="['/', notification.type]" class="read">You recieved a {{notification.type}} from {{notification.from.firstName}} {{notification.from.lastName}}</a>
+                                <div *ngFor="let notification of notifications | slice:0:10;" ngbDropdownItem class="diary">
+                                    <a *ngIf="notification.viewed == false" (click)="readNotification(notification)"
+                                        [routerLink]="['/', notification.type]" class="unread"><span>You recieved a
+                                            {{notification.type}} from {{notification.from.firstName}}
+                                            {{notification.from.lastName}}</span>
+                                        <div></div>
+                                    </a>
+                                    <a *ngIf="notification.viewed == true" [routerLink]="['/', notification.type]">
+                                        <span>You recieved a {{notification.type}} from {{notification.from.firstName}}
+                                            {{notification.from.lastName}}</span>
+                                    </a>
                                 </div>
+                                <button class="readAllBtn" (click)="clearNotifications()">Read All</button>
                             </div>
                         </ul>
-                         <ul class="user" ngbDropdown>
+                        <ul class="user" ngbDropdown>
                             <li id="userDropdown" ngbDropdownToggle><a>
-                                <i class="fa fa-user"> </i>
-                                {{user.firstName}}
-                                <i class="fa fa-angle-down"> </i>
+                                    <i class="fa fa-user"> </i>
+                                    {{user.firstName}}
+                                    <i class="fa fa-angle-down"> </i>
                                 </a>
                             </li>
                             <div ngbDropdownMenu aria-labelledby="userDropdown">
-                              <div *ngIf="user.systemRole === 'participant'" ngbDropdownItem class="diary">  <a [routerLink]="['/profile-edit', user.role.id]">Update Role Profile</a> </div>                          
-                              <div *ngIf="user.systemRole === 'admin'" ngbDropdownItem class="diary">  <a routerLink="/control">{{user.firstName}} {{user.lastName}}</a> </div>                          
-                              <!-- <div ngbDropdownItem>{{user.rolePosition}} {{user.roleAffiliation}}</div> -->
-                              <div ngbDropdownItem (click)="logout()" routerLink="/">Logout</div>
+                                <div *ngIf="user.systemRole === 'participant'" ngbDropdownItem class="diary"> <a
+                                        [routerLink]="['/profile-edit', user.role.id]">Update Role Profile</a> </div>
+                                <div *ngIf="user.systemRole === 'admin'" ngbDropdownItem class="diary"> <a
+                                        routerLink="/control">{{user.firstName}} {{user.lastName}}</a> </div>
+                                <!-- <div ngbDropdownItem>{{user.rolePosition}} {{user.roleAffiliation}}</div> -->
+                                <div ngbDropdownItem (click)="logout()" routerLink="/">Logout</div>
                             </div>
                         </ul>
                     </div>

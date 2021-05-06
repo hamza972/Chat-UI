@@ -7,6 +7,7 @@ import { Role } from '../models/role';
 import { RoleService } from '../services/role.service';
 import { UserService } from '../services/user.service';
 import { NotificationService } from '../services/notification.service';
+import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 @Component({
     selector: 'app-navigation',
@@ -17,7 +18,7 @@ export class NavigationComponent implements OnInit {
 
     user: AppUser;
     private roles: Role[];
-    private notifications: Notification[];
+    private notifications: Notification[] = [];
     constructor(
         private auth: AuthService,
         private router: Router,
@@ -39,13 +40,10 @@ export class NavigationComponent implements OnInit {
         });
     }
 
-    showNotifications(){
-        console.log(this.notifications);
-    }
-
     getNotifications(){
         this.notificationService.get().subscribe(dbNotifications => {
-            this.notifications = this.checkNotifications(dbNotifications);
+            this.notifications = dbNotifications;
+            console.log(true);
         });
     }
 
@@ -100,17 +98,32 @@ export class NavigationComponent implements OnInit {
     }
 
     unreadNotificationCount() {
-        var unreadNotifications = 0
-        this.notifications.forEach(notification => {
-            if(notification.viewed == false) {
-                unreadNotifications += 1
+        var unreadNotifications = 0;
+        for(var i = 0; i < this.notifications.length; i++){
+            if(this.notifications[i].viewed == false) {
+                unreadNotifications++;
             }
-        });
+        }
         return unreadNotifications;
     }
 
     readNotification(notification: Notification){
         notification.viewed = true;
         this.notificationService.update(notification);
+    }
+
+    notificationDateFormat(notification: Notification){
+        var date = notification.date.toLocaleDateString();
+        document.getElementById("notificationDate").innerHTML = date;
+        console.log(date);
+    }
+
+    clearNotifications(){
+        this.notifications.forEach(notification => {
+            if(notification.viewed == false){
+                notification.viewed = true;
+                this.notificationService.update(notification)
+            }
+        });
     }
 }
