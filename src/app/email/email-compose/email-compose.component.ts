@@ -215,6 +215,7 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.to.deleted = false;
       this.OptionalDraftEmail.from.deleted = false;
       this.OptionalDraftEmail.from.user = this.user.role.email;
+      this.OptionalDraftEmail.from.actualuser = (this.user.firstName + " " + this.user.lastName)
       var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
       Updatepromise.then(result => {
         alert('Your Email has been sent to ' + recipientslist[0]); //set email to a ll lower case and trim spaces out of it, 
@@ -230,6 +231,7 @@ export class EmailComposeComponent implements OnInit {
     }
   }
   sendEmail(emailtobesent: Email) {
+    emailtobesent.from.actualuser = (this.user.firstName + " " + this.user.lastName)
     var promise: Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData>>;
     promise = this.emailService.sendEmail(this.newEmail);
     //Sean: Actually checks if the results from firebase before informing the user if it was successful or not!
