@@ -11,6 +11,8 @@ import {AutocompleteComponent, AutocompleteLibModule} from 'angular-ng-autocompl
 import { RoleService } from 'src/app/services/role.service';
 import { ArrayType } from '@angular/compiler';
 import { promise } from 'protractor';
+import { Notification } from '../../models/notification';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-email-compose',
@@ -49,11 +51,13 @@ export class EmailComposeComponent implements OnInit {
   connectionOk: boolean;
   displayname: string = 'email';
 
+
   constructor(
     private userService: UserService,
     private emailService: EmailService,
     private formBuilder: FormBuilder,
-    private roleService: RoleService
+    private roleService: RoleService,
+    private notificationService: NotificationService
   ) {
     this.emailForm = this.formBuilder.group({
       sendTo: [null, [Validators.required,
@@ -127,6 +131,7 @@ export class EmailComposeComponent implements OnInit {
   MultiSendNew(formdata) {
     var recipients: string = ((formdata.sendTo as string).toLowerCase().trim());
     var recipientslist: string[] = recipients.split(',');
+    this.Sendnotifcations(recipientslist);
     for (let index = 0; index < recipientslist.length; index++) { //Sean, Clean Up input
       recipientslist[index] = recipientslist[index].trim();
       console.log(recipientslist[index]);
@@ -421,10 +426,17 @@ export class EmailComposeComponent implements OnInit {
   Sendnotifcations(recipientslist:string[]){
     this.roleService.get().subscribe(dbRoles => {
       console.log(dbRoles);
-      dbRoles.forEach(element => {
+      dbRoles.forEach(roleSearch => {
         recipientslist.forEach(recipient => {
-            if(element.email == recipient){
-              //send notifcation
+            if(roleSearch.email == recipient){
+              var notifcation: Notification = {
+              role : roleSearch,
+              from : this.user.role,
+              type : 'email',
+              viewed : false,
+              date : new Date(),
+              }
+              this.notificationService.add(notifcation);
             }
             });
         });
