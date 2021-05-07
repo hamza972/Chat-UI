@@ -125,7 +125,7 @@ export class EmailService {
     ]);
   }
 
-  GetSpecficEmail(user: User, emailid: string){
+  GetSpecficEmail(user: User, emailid: string): Observable<Email[]>{
     this.emailCollection = this.afs.collection('Emails', (ref) =>
     ref.where('id', '==', emailid)
     );
