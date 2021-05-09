@@ -5,6 +5,8 @@ import { Observable } from 'rxjs';
 import { AppUser } from '../../models/user';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Email } from 'src/app/models/email';
+import { EmailDistributionLists } from 'src/app/models/email-distrobution';
+import { EmailDistributionService } from 'src/app/services/EmailDistrobutionList.service';
 import { EmailService } from '../../services/email.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {AutocompleteComponent, AutocompleteLibModule} from 'angular-ng-autocomplete';
@@ -57,7 +59,8 @@ export class EmailComposeComponent implements OnInit {
     private emailService: EmailService,
     private formBuilder: FormBuilder,
     private roleService: RoleService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private emaildistroService: EmailDistributionService
   ) {
     this.emailForm = this.formBuilder.group({
       sendTo: [null, [Validators.required,
@@ -77,6 +80,19 @@ export class EmailComposeComponent implements OnInit {
       this.connectionOk = true; 
     });
     this.LoadAutoSave();
+
+    //Testing methods for the 
+    // var testlist: Array<string> = new Array<string>();
+    // testlist.push("Testing@meps.com.au");
+    // var TestDistributionLists: EmailDistributionLists = {
+    //     email: "TestEmail.meps.com",
+    //     List: testlist
+    // }
+    // this.emaildistroService.Add(TestDistributionLists);
+    
+    this.emaildistroService.Get().subscribe( result => {
+        console.log(result);
+    })
     setInterval( () => { this.AutoSave(this.emailForm, this.IsDraft, this.connectionOk, this.OptionalDraftEmail)}, 30000, ) //auto saves very 30 seconds.
     this.roleService.getEmailList().subscribe(result => {
       var StringArray: Array<String> = Array.from(result['EmailArray']);
@@ -456,6 +472,20 @@ export class EmailComposeComponent implements OnInit {
       console.log(typeof output)
       ToEmailControl.setValue(output['email']);
     }
+  }
+  DistributeViaEmailList(email: Email, distrolist: EmailDistributionLists )
+  { 
+    distrolist.List.forEach(recipient => {
+      email.to.user = recipient
+      this.sendEmail(email);
+    });
+  }
+  findEmailList(email: Email, EmailDistributionLists: EmailDistributionLists[]) {
+    EmailDistributionLists.forEach(distrolist => {
+      if (distrolist.email == email){
+        return(distrolist);
+      }
+    });
   }
 }
 
