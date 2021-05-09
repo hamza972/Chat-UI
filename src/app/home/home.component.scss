@@ -12,6 +12,10 @@
     background-image: url("../../assets/img/Middle-East-Map.jpg");
 
 }
+
+.col-12 {
+    width: 100;
+}
 .map:hover
 {
     background-position: -1000px 0;
@@ -36,12 +40,12 @@ h3
 }
 .one
 {
-    height: 350px;
+    height:100ch;
     overflow:auto;
 }
 .two
 {
-    height: 350px;
+    height:100ch;
     overflow:auto;
 }
 
@@ -50,7 +54,7 @@ h3
 .button
 {
     // display: inline-block;
-    float: left;
+    //float: left;
     // margin-top: 40px;
     // margin-bottom: 200px;
     height: 40px;
@@ -210,6 +214,8 @@ body
   background-color: #E1EEF6;
   font-size: 20px;
   width: 100%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
 a{
   color:#B1B6B8;
@@ -234,4 +240,24 @@ a{
 
 ::ng-deep img {
     max-width: 100%;
+  }
+
+  /* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
   }
