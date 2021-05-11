@@ -69,6 +69,7 @@ import { HttpModule } from '@angular/http';
 
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { EmailDistrobutionControlComponent } from './email-distrobution-control/email-distrobution-control.component';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -108,6 +109,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     ProfileEditComponent,
     AffiliateEditComponent,
     AdminAddComponent,
+    EmailDistrobutionControlComponent,
   ],
   imports: [
     BrowserModule,

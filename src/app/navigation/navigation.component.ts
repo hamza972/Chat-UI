@@ -37,12 +37,14 @@ export class NavigationComponent implements OnInit {
             }
             this.Checkrole();
             this.getNotifications();
+
         });
     }
 
     getNotifications(){
         this.notificationService.get().subscribe(dbNotifications => {
             this.notifications = dbNotifications;
+            this.notifications = this.checkNotifications(this.notifications);
             console.log(true);
         });
     }
@@ -51,7 +53,7 @@ export class NavigationComponent implements OnInit {
         var userNotifications: Notification[] = [];
         console.log(notifications);
         for(var i = 0; i < notifications.length; i++){
-            if(notifications[i].role.id == this.user.role.id) {
+            if(notifications[i].role.id === this.user.role.id) {
                 userNotifications.push(notifications[i]);
             }
         }

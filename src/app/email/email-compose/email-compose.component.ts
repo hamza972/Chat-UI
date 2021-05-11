@@ -52,6 +52,7 @@ export class EmailComposeComponent implements OnInit {
   emailForm: FormGroup;
   connectionOk: boolean;
   displayname: string = 'email';
+  EmailDistroLists: EmailDistributionLists[]
 
 
   constructor(
@@ -91,7 +92,7 @@ export class EmailComposeComponent implements OnInit {
     // this.emaildistroService.Add(TestDistributionLists);
     
     this.emaildistroService.Get().subscribe( result => {
-        console.log(result);
+      this.EmailDistroLists = result;
     })
     setInterval( () => { this.AutoSave(this.emailForm, this.IsDraft, this.connectionOk, this.OptionalDraftEmail)}, 30000, ) //auto saves very 30 seconds.
     this.roleService.getEmailList().subscribe(result => {
@@ -148,6 +149,8 @@ export class EmailComposeComponent implements OnInit {
     var recipients: string = ((formdata.sendTo as string).toLowerCase().trim());
     var recipientslist: string[] = recipients.split(',');
     this.Sendnotifcations(recipientslist);
+    recipientslist.forEach(element => {
+    });
     for (let index = 0; index < recipientslist.length; index++) { //Sean, Clean Up input
       recipientslist[index] = recipientslist[index].trim();
       console.log(recipientslist[index]);
@@ -164,6 +167,7 @@ export class EmailComposeComponent implements OnInit {
             user: this.user.role.email,
           },
         };
+        this.HandleEmailDistroLists(recipientslist, this.newEmail);
         this.sendEmail(this.newEmail);
       }
       alert("The email has been sent to the following recipients:" + recipientslist.toString())
@@ -177,9 +181,15 @@ export class EmailComposeComponent implements OnInit {
         },
         from: {
           user: this.user.role.email,
-        },
-      };
-      this.sendEmail(this.newEmail);
+        }
+      }
+      if(this.HandleEmailDistroLists(recipientslist, this.newEmail) == true)
+      {
+        return
+      }
+      else {
+        this.sendEmail(this.newEmail);
+      }
       alert("The email has been sent to the following recipient:" + recipientslist.toString())
     }
   }
@@ -477,15 +487,43 @@ export class EmailComposeComponent implements OnInit {
   { 
     distrolist.List.forEach(recipient => {
       email.to.user = recipient
+      console.log("distrobution email sent to " + recipient);
+      this.Sendnotifcations(distrolist.List);
       this.sendEmail(email);
     });
   }
-  findEmailList(email: Email, EmailDistributionLists: EmailDistributionLists[]) {
-    EmailDistributionLists.forEach(distrolist => {
-      if (distrolist.email == email){
-        return(distrolist);
+  HandleEmailDistroLists(recipients: string[], email: Email): boolean {
+    var EmailDistributionLists = null;
+    recipients.forEach(recipient => {
+       var TempEmailDistributionLists = this.findEmailList(recipient);
+      if(TempEmailDistributionLists != null){ 
+        console.log("distribution List Found for emails, setting");
+        EmailDistributionLists = TempEmailDistributionLists
       }
     });
+    console.log(EmailDistributionLists);
+    if(EmailDistributionLists == null){
+      console.log("No distribution List Found for email");
+      return(false);
+    }
+    else {
+      console.log("distribution List Found for email");
+      this.DistributeViaEmailList(email, EmailDistributionLists);
+      return(true);
+    }
+  }
+  findEmailList(email: string): EmailDistributionLists {
+    var foundistrolist: EmailDistributionLists = null;
+    this.EmailDistroLists.forEach(distrolist => {
+      console.log(distrolist.email)
+      console.log(email)
+      if (distrolist.email == email){
+        foundistrolist = distrolist
+        console.log("Found match for eamil");
+        return(foundistrolist);
+      }
+    });
+    return(foundistrolist);
   }
 }
 

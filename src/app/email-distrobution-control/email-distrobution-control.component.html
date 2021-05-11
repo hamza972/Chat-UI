@@ -1,0 +1,11 @@
+<h3>Email Distrobution Lists</h3>
+<h4>Add </h4>
+<br>
+<form [formGroup]="emailForm" (ngSubmit)="Onsubmit(emailForm.value)"> 
+    <input name="email" type="text" [formControlName]="'emaildistroemail'">
+    <br>
+    <input name="list" type="text" [formControlName]="'distrolist'">
+    <button type="submit" name="sendEmail" [disabled]="!emailForm.valid" [ngClass]="{'SubmitButtonGreen': emailForm.valid == true}">Send</button>
+</form>
+<br>
+<h4>View: </h4>

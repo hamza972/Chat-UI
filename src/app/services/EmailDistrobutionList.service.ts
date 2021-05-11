@@ -4,6 +4,7 @@ import { EmailDistributionLists } from '../models/email-distrobution';
 import { LoginService } from '../auth/login.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { RoleService } from '../services/role.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class EmailDistributionService {
   constructor(
     public afs: AngularFirestore,
     public auth: LoginService,
-    private db: AngularFirestore
+    private db: AngularFirestore,
+    private roleService: RoleService
   ) {}
 
     Get(){ //Sean Get entire list of every
@@ -32,6 +34,7 @@ export class EmailDistributionService {
     }
 
     Add(newlist: EmailDistributionLists): Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData>> {
+      this.roleService.AppendEmailList(newlist.email);
       this.EmailDistributionCollection = this.afs.collection('EmailDistrobutionLists')
       var promise: Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData>> = this.EmailDistributionCollection.add(newlist);
       return(promise);
