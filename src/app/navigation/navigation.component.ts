@@ -40,18 +40,19 @@ export class NavigationComponent implements OnInit {
         });
     }
 
-    getNotifications(){
+    getNotifications() {
         this.notificationService.get().subscribe(dbNotifications => {
             this.notifications = dbNotifications;
+            this.notifications = this.checkNotifications(this.notifications);
             console.log(true);
         });
     }
 
-    checkNotifications(notifications: Notification[]){
+    checkNotifications(notifications: Notification[]) {
         var userNotifications: Notification[] = [];
         console.log(notifications);
-        for(var i = 0; i < notifications.length; i++){
-            if(notifications[i].role.id == this.user.role.id) {
+        for (var i = 0; i < notifications.length; i++) {
+            if (notifications[i].role.id == this.user.role.id) {
                 userNotifications.push(notifications[i]);
             }
         }
@@ -59,26 +60,31 @@ export class NavigationComponent implements OnInit {
         return userNotifications;
     }
 
-    Checkrole() {    
+    checkNotification(notification: Notification) {
+        if (notification.role.id == this.user.role.id) {
+            return true;
+        }
+        return false;
+    }
+
+    Checkrole() {
         this.roleService.get().subscribe(dbRoles => {
-        this.roles = dbRoles;
-        for (let index = 0; index < this.roles.length; index++) {
-            if(this.roles[index].id == this.user.role.id)
-            {
-                if (this.roleService.Equals(this.roles[index], this.user.role) == false)
-                {
-                    console.log(this.roles[index]);
-                    this.user.role = this.roles[index];
-                    this.userService.update(this.user);
-                    console.log("Updated User role information");
+            this.roles = dbRoles;
+            for (let index = 0; index < this.roles.length; index++) {
+                if (this.roles[index].id == this.user.role.id) {
+                    if (this.roleService.Equals(this.roles[index], this.user.role) == false) {
+                        console.log(this.roles[index]);
+                        this.user.role = this.roles[index];
+                        this.userService.update(this.user);
+                        console.log("Updated User role information");
+                        break;
+                    }
+                    console.log("User role information is up to date");
                     break;
                 }
-            console.log("User role information is up to date");
-            break;
             }
-        }
         })
-    }  
+    }
     login() {
         this.router.navigate(['/login']);
     }
@@ -99,28 +105,28 @@ export class NavigationComponent implements OnInit {
 
     unreadNotificationCount() {
         var unreadNotifications = 0;
-        for(var i = 0; i < this.notifications.length; i++){
-            if(this.notifications[i].viewed == false) {
+        for (var i = 0; i < this.notifications.length; i++) {
+            if (this.notifications[i].viewed == false) {
                 unreadNotifications++;
             }
         }
         return unreadNotifications;
     }
 
-    readNotification(notification: Notification){
+    readNotification(notification: Notification) {
         notification.viewed = true;
         this.notificationService.update(notification);
     }
 
-    notificationDateFormat(notification: Notification){
+    notificationDateFormat(notification: Notification) {
         var date = notification.date.toLocaleDateString();
         document.getElementById("notificationDate").innerHTML = date;
         console.log(date);
     }
 
-    clearNotifications(){
+    clearNotifications() {
         this.notifications.forEach(notification => {
-            if(notification.viewed == false){
+            if (notification.viewed == false) {
                 notification.viewed = true;
                 this.notificationService.update(notification)
             }

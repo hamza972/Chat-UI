@@ -43,16 +43,15 @@
                             <div ngbDropdownMenu aria-labelledby="notificationDropdown">
                                 <div *ngFor="let notification of notifications | slice:0:10;" ngbDropdownItem
                                     class="diary">
-                                    <a *ngIf="notification.viewed == false" (click)="readNotification(notification)"
+                                    <a *ngIf="notification.viewed == false && checkNotification(notification) == true;" (click)="readNotification(notification)"
                                         [routerLink]="['/', notification.type]" class="unread">
                                         <div class="notificationContent">You recieved a {{notification.type}} from
                                             {{notification.from.firstName}}
                                             {{notification.from.lastName}}</div>
                                         <div class="notificationDate">{{notification.date.toDate() | date: 'medium'}}
                                         </div>
-                                        <div></div>
                                     </a>
-                                    <a *ngIf="notification.viewed == true" [routerLink]="['/', notification.type]">
+                                    <a *ngIf="notification.viewed == true && checkNotification(notification) == true;" [routerLink]="['/', notification.type]">
                                         <div class="notificationContent">You recieved a {{notification.type}} from
                                             {{notification.from.firstName}}
                                             {{notification.from.lastName}}</div>
