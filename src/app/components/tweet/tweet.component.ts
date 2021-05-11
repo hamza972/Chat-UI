@@ -93,7 +93,7 @@ export class TweetComponent implements OnInit {
 
     /* go to profile page */
     profile($event, tweet: Tweet) {
-        this.router.navigate(['/profile/' + tweet.user.id]);
+        this.router.navigate(['/profile/' + tweet.user.role.id]);
     }
 
     cancel() {

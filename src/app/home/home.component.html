@@ -4,50 +4,54 @@
 <div class="map"></div>
 <!-- user is logged in -->
 <div class="row" *ngIf="user">
-<!--  five latest tweets and five latest news -->
+    <!--  five latest tweets and five latest news -->
     <div class="col-6">
         <h3>Latest Tweets</h3>
+        <div class="see-more">
+            <a class="darkgrey-text" [routerLink]="['/tweet']">See More</a>
+        </div>
         <div class="one">
-            <div class="row text-fix" *ngFor="let tweet of tweets; let i=index">
-                <div *ngIf="i<5">
-                    <div class="col-1">
-                        <img src={{tweet.user.role.avatar}} alt="" class="circle responsive-img role-img">
-                    </div>
-                    <div class="col-12">
-                        <div class="card-panel">
-                            <div class="card-content">
-                                <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">
-                                    {{tweet.user.role.firstName}}
-                                    {{tweet.user.role.lastName}}
-                                </p>
-                                <p class="twitterHandle">@{{tweet.user.role.twitterHandle}}
-                                </p>
-                                <p class="black-text" [innerHtml]="tweet.content"></p>
-                            </div>
-                            <div class="card-date">
-                                <p>{{tweet.date.toDate() | date: 'medium'}}</p>
-                            </div>
+            <div class="row text-fix" *ngFor="let tweet of tweets | slice:0:10">
+
+                <div class="col-1">
+                    <img src={{tweet.user.role.avatar}} alt="" class="circle responsive-img role-img">
+                </div>
+                <div class="col-12">
+                    <div class="card-panel">
+                        <div class="card-content">
+                            <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">
+                                {{tweet.user.role.firstName}}
+                                {{tweet.user.role.lastName}}
+                            </p>
+                            <p class="twitterHandle">@{{tweet.user.role.twitterHandle}}
+                            </p>
+                            <p class="black-text" [innerHtml]="tweet.content"></p>
+                        </div>
+                        <div class="card-date">
+                            <p>{{tweet.date.toDate() | date: 'medium'}}</p>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 
     <div class="col-6">
         <h3>Latest News</h3>
+        <div class="see-more">
+            <a [routerLink]="['/news']">See More</a>
+        </div>
         <div class="two">
-            <div class="row text-fix" *ngFor="let newsItem of news; let i=index">
-                <div *ngIf="i<5">
-                    <div class="col-12">
-                        <div class="card-panel ">
-                            <div class="card-content">
-                                <p class="bold-text" [innerHtml]="newsItem.newsHeadline"></p>
-                                <p class="black-text" [innerHtml]="newsItem.newsDescription"></p>
-                            </div>
-                            <div class="card-date">
-                                <p>{{newsItem.newsDate.toDate() | date: 'medium'}}</p>
-                            </div>
+            <div class="row text-fix" *ngFor="let newsItem of news | slice:0:10">
+                <div class="col-12">
+                    <div class="card-panel ">
+                        <div class="card-content">
+                            <p class="bold-text" [innerHtml]="newsItem.newsHeadline"></p>
+                            <p class="black-text" [innerHtml]="newsItem.newsDescription"></p>
+                        </div>
+                        <div class="card-date">
+                            <p>{{newsItem.newsDate.toDate() | date: 'medium'}}</p>
                         </div>
                     </div>
                 </div>
@@ -57,6 +61,7 @@
 </div>
 
 <!-- ===== Not Logged In View ======= -->
+
 <body *ngIf="!user">
     <div class="container" *ngIf="!user">
         <div class="imgBx" *ngIf="!user">
@@ -64,7 +69,7 @@
         </div>
         <div class="select" *ngIf="!user">
             <button type="button" class="btn btn-primary mr-2" *ngIf="!user" (click)="login()" name="button"
-            autofocus>Login</button>
+                autofocus>Login</button>
         </div>
     </div>
 </body>

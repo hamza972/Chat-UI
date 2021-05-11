@@ -17,7 +17,8 @@
                         <h3>Twitter Feed</h3>
                         <div class="d-flex w-100" style="margin-bottom: 12px; height:40px">
                             <textarea [(ngModel)]="searchText" name="searchHashtag" type="text" class="searchBox"
-                                id="txtSearchHashtag" placeholder="Hashtag search" rows="1" onkeydown="if(event.keyCode == 13) return false;"></textarea>
+                                id="txtSearchHashtag" placeholder="Hashtag search" rows="1"
+                                onkeydown="if(event.keyCode == 13) return false;"></textarea>
                             <button class="search-btn">
                                 <i class="fa fa-search"></i>
                             </button>
@@ -37,7 +38,8 @@
         </div>
 
         <div *ngFor="let tweet of tweets">
-            <div class="row text-fix" *ngIf="(tweet.hashtag == null || tweet.hashtag == '') && (searchText == null || searchText == '')">
+            <div class="row text-fix"
+                *ngIf="(tweet.hashtag == null || tweet.hashtag == '') && (searchText == null || searchText == '')">
                 <div class="col-1">
                     <img (click)="profile($event, tweet)" src={{tweet.user.role.avatar}}
                         class="circle responsive-img role-img">
@@ -61,7 +63,8 @@
                 </div>
             </div>
             <div *ngFor="let hashtag of tweet.hashtag">
-                <div class="row text-fix" *ngIf="hashtag.toLowerCase().includes(searchText) || (searchText == null || searchText == '')">
+                <div class="row text-fix"
+                    *ngIf="hashtag.toLowerCase().includes(searchText) || (searchText == null || searchText == '')">
                     <div class="col-1">
                         <img (click)="profile($event, tweet)" src={{tweet.user.roleAvatar}}
                             class="circle responsive-img role-img">
