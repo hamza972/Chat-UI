@@ -15,10 +15,27 @@
 img.responsive-img{
   margin-top: 10px;
   margin-bottom: 10px;
+  width: 90%;
 }
 .col-12 {
     width: 100;
 }
+
+.col-13{
+    flex: 25%;
+    float: left;
+    margin: 0%;
+}
+.col-14 {
+    flex: 75%;
+    float: left;
+}
+
+.row {
+    display: flex;
+}
+
+
 .map:hover
 {
     background-position: -1000px 0;
@@ -226,6 +243,7 @@ body
 {
   border: 5px solid #A3A3A3;
 }
+
 .select .btn-primary:hover,
 .select .mr-2:hover
 {

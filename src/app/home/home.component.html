@@ -12,20 +12,23 @@
         </div>
         <div class="one">
             <div class="row text-fix" *ngFor="let tweet of tweets | slice:0:10">
-
-                <div class="col-1">
-                    <img src={{tweet.user.role.avatar}} alt="" class="circle responsive-img role-img">
-                </div>
                 <div class="col-12">
                     <div class="card-panel">
                         <div class="card-content">
-                            <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">
-                                {{tweet.user.role.firstName}}
-                                {{tweet.user.role.lastName}}
-                            </p>
-                            <p class="twitterHandle">@{{tweet.user.role.twitterHandle}}
-                            </p>
-                            <p class="black-text" [innerHtml]="tweet.content"></p>
+                            <div class='row'>
+                                <div class="col-13">
+                                    <img src={{tweet.user.role.avatar}} alt="" class="circle responsive-img role-img">
+                                </div>
+                                <div class="col-14">
+                                    <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">
+                                        {{tweet.user.role.firstName}}
+                                        {{tweet.user.role.lastName}}
+                                    </p>
+                                    <p class="twitterHandle">@{{tweet.user.role.twitterHandle}}
+                                    </p>
+                                    <p class="black-text" [innerHtml]="tweet.content"></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-date">
                             <p>{{tweet.date.toDate() | date: 'medium'}}</p>

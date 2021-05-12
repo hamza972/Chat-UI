@@ -40,21 +40,23 @@
         <div *ngFor="let tweet of tweets">
             <div class="row text-fix"
                 *ngIf="(tweet.hashtag == null || tweet.hashtag == '') && (searchText == null || searchText == '')">
-                <div class="col-1">
-                    <img (click)="profile($event, tweet)" src={{tweet.user.role.avatar}}
-                        class="circle responsive-img role-img">
-                </div>
-                <div class="col-11">
+                <div class="col-12">
                     <div class="card-panel">
                         <div class="card-content">
-                            <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">{{tweet.user.role.firstName}}
-                                {{tweet.user.role.lastName}}</p>
-                            <p class="deep-purple-text" *ngIf="user.systemRole === 'admin'">{{tweet.user.firstName}}
-                                {{tweet.user.lastName}}
-                            </p>
-                            <p class="twitterHandle">@{{tweet.user.role.twitterHandle}}
-                            </p>
-                            <div [innerHtml]="tweet.content"></div>
+                            <div class='row'>
+                                <div class="col-13">
+                                    <img src={{tweet.user.role.avatar}} alt="" class="circle responsive-img role-img">
+                                </div>
+                                <div class="col-14">
+                                    <p class="grey-text" *ngIf="tweet.systemRole !== 'admin'">
+                                        {{tweet.user.role.firstName}}
+                                        {{tweet.user.role.lastName}}
+                                    </p>
+                                    <p class="twitterHandle">@{{tweet.user.role.twitterHandle}}
+                                    </p>
+                                    <p class="black-text" [innerHtml]="tweet.content"></p>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-date">
                             <p>{{tweet.date.toDate() | date: 'medium'}}</p>
