@@ -10,7 +10,6 @@ import { Role } from '../../models/role';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Notification } from '../../models/notification';
 import { NotificationService } from 'src/app/services/notification.service';
-import { Mention } from '@ckeditor/ckeditor5-mention';
 //import { RSA_PKCS1_OAEP_PADDING } from 'constants';
 
 @Component({
@@ -35,20 +34,9 @@ export class TweetComponent implements OnInit {
     tweetSearch: string;
     notification: Notification = {};
 
-
-    public Editor = Editor;
+    public Editor = Editor
+    
     editorConfig = {
-        plugins: [ Mention ],
-
-        mention: {
-            feeds: [
-                {
-                    marker: '@',
-                    feed: [ '@Barney', '@Lily', '@Marshall', '@Robin', '@Ted' ],
-                    minimumCharacters: 1
-                }
-            ]
-        },
         toolbar: {
           items: [
             'link', '|',
@@ -63,6 +51,7 @@ export class TweetComponent implements OnInit {
         language: 'en'
     };
 
+    
     constructor(
         private auth: AuthService,
         private tweetService: TweetService,
