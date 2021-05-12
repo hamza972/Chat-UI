@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { EmailDistributionLists } from 'src/app/models/email-distrobution';
 import { EmailDistributionService } from 'src/app/services/EmailDistrobutionList.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
@@ -7,7 +7,8 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 @Component({
   selector: 'app-email-distrobution-control',
   templateUrl: './email-distrobution-control.component.html',
-  styleUrls: ['./email-distrobution-control.component.scss']
+  styleUrls: ['./email-distrobution-control.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class EmailDistrobutionControlComponent implements OnInit {
 

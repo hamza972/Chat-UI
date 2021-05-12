@@ -1,11 +1,14 @@
-<h3>Email Distrobution Lists</h3>
-<h4>Add </h4>
+<div id="container">
+<h4>Email Distributions Lists</h4>
+<h5>Add </h5>
 <br>
 <form [formGroup]="emailForm" (ngSubmit)="Onsubmit(emailForm.value)"> 
-    <input name="email" type="text" [formControlName]="'emaildistroemail'">
+    <input name="email" type="text" placeholder='Email' [formControlName]="'emaildistroemail' ">
     <br>
-    <input name="list" type="text" [formControlName]="'distrolist'">
-    <button type="submit" name="sendEmail" [disabled]="!emailForm.valid" [ngClass]="{'SubmitButtonGreen': emailForm.valid == true}">Send</button>
+    <input name="list" type="text" placeholder='Recipients' [formControlName]="'distrolist'">
+    <button class="btn btn-primary" type="submit" name="sendEmail" [disabled]="!emailForm.valid" [ngClass]="{'SubmitButtonGreen': emailForm.valid == true}">Add new</button>
 </form>
 <br>
-<h4>View: </h4>
+<h5>View:</h5>
+<h6>To be implemented.</h6>
+</div>
