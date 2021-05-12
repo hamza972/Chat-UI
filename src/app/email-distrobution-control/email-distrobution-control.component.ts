@@ -45,6 +45,15 @@ export class EmailDistrobutionControlComponent implements OnInit {
       List: recipientslist,
       email: ((formdata.emaildistroemail as string).toLowerCase().trim()),
     }
-    this.emaildistroService.Add(newemaildistro);
+    var promise: Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData>> = this.emaildistroService.Add(newemaildistro);
+    promise.then(result => {
+      alert('Your Email distrobution list has been created')
+      this.emailForm.reset();
+    });
+    promise.catch(error => //Sean: this method will run if firebase reports a problem
+    {
+      alert('Something has went wrong, the email distrobution list was not setup');
+      console.log('sending failed') //console debug
+    });
   }
 }
