@@ -1,12 +1,11 @@
 
 .map
 {
-    display: inline-block;
-    
+    align-items: center;
     margin-top: 40px;
     margin-bottom: 20px;
-    // margin-left:20%;
-    margin-right:20%;
+    margin-left:auto;
+    margin-right:auto;
     height: 354px;
     width: 1000px;
     background-image: url("../../assets/img/Middle-East-Map.jpg");
@@ -17,6 +16,7 @@ img.responsive-img{
   margin-bottom: 10px;
   width: 90%;
 }
+
 .col-12 {
     width: 100;
 }
