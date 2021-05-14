@@ -212,7 +212,13 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.to.deleted = false;
       this.OptionalDraftEmail.from.deleted = false;
       this.OptionalDraftEmail.from.user = this.user.role.email;
-      var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
+      if(this.HandleEmailDistroLists(recipientslist, this.newEmail) == true)
+      {
+        
+      }
+      else {
+        var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
+      }
       Updatepromise.then(result => { //this callback is run if sucessful
         alert('Your Email has been sent to ' + recipientslist[0]); //set email to a ll lower case and trim spaces out of it, 
         this.ClearAllFields();
@@ -229,7 +235,13 @@ export class EmailComposeComponent implements OnInit {
               user: this.user.role.email,
             },
           };
-          this.sendEmail(this.newEmail); //promises are covered under the that function.
+          if(this.HandleEmailDistroLists(recipientslist, this.newEmail) == true)
+          {
+            continue;
+          }
+          else {
+            this.sendEmail(this.newEmail);
+          }
         }
       });
       Updatepromise.catch(error => //Sean: this method will run if firebase reports a problem
@@ -247,7 +259,13 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.from.deleted = false;
       this.OptionalDraftEmail.from.user = this.user.role.email;
       this.OptionalDraftEmail.from.actualuser = (this.user.firstName + " " + this.user.lastName)
-      var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
+      if(this.HandleEmailDistroLists(recipientslist, this.newEmail) == true)
+      {
+        return
+      }
+      else {
+        var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
+      }
       Updatepromise.then(result => {
         alert('Your Email has been sent to ' + recipientslist[0]); //set email to a ll lower case and trim spaces out of it, 
         this.ClearAllFields();
@@ -485,16 +503,17 @@ export class EmailComposeComponent implements OnInit {
   }
   DistributeViaEmailList(email: Email, distrolist: EmailDistributionLists )
   { 
+    this.Sendnotifcations(distrolist.List);
     distrolist.List.forEach(recipient => {
       email.to.user = recipient
       console.log("distrobution email sent to " + recipient);
-      this.Sendnotifcations(distrolist.List);
       this.sendEmail(email);
     });
   }
   HandleEmailDistroLists(recipients: string[], email: Email): boolean {
-    var EmailDistributionLists = null;
+    var EmailDistributionLists = null; //find a valid email distrobution list within
     recipients.forEach(recipient => {
+       EmailDistributionLists = null
        var TempEmailDistributionLists = this.findEmailList(recipient);
       if(TempEmailDistributionLists != null){ 
         console.log("distribution List Found for emails, setting");

@@ -60,6 +60,16 @@
           </div>
         </ng-template>
       </ngb-tab>
+      <ngb-tab id="emaildistro" title="">
+        <ng-template ngbTabTitle><span class="tab-title">
+          <i class="fas fa-list"></i> &nbsp;Email Distribution Lists</span>
+          </ng-template>
+      <ng-template ngbTabContent>
+        <div *ngIf="tabstatus['emaildistro'] === true">
+          <app-email-view-distro-lists></app-email-view-distro-lists>
+        </div>
+      </ng-template>
+    </ngb-tab>
     </ngb-tabset>
   </div>
 </div>

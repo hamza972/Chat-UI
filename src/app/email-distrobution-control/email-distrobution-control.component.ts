@@ -2,6 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { EmailDistributionLists } from 'src/app/models/email-distrobution';
 import { EmailDistributionService } from 'src/app/services/EmailDistrobutionList.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { RoleService } from '../services/role.service';
 
 
 @Component({
@@ -13,10 +14,12 @@ import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/fo
 export class EmailDistrobutionControlComponent implements OnInit {
 
   emailForm: FormGroup;
+  EmailDistributionListsArray: EmailDistributionLists[];
 
   constructor(
     private formBuilder: FormBuilder,
-    private emaildistroService: EmailDistributionService
+    private emaildistroService: EmailDistributionService,
+    private roleservice: RoleService
   ) {
     this.emailForm = this.formBuilder.group({
       emaildistroemail: [null, [Validators.required,
@@ -32,10 +35,18 @@ export class EmailDistrobutionControlComponent implements OnInit {
   }
 
   ngOnInit() {
-  
+
+    //Get email distrobution lists, all of them.
+
+    this.emaildistroService.Get().subscribe( result => {
+      this.EmailDistributionListsArray = result;
+      console.log(result);
+    })
   }
-  
+
   Onsubmit(formdata){
+    var email: string
+    email = ((formdata.emaildistroemail as string).toLowerCase().trim());
     var recipients: string = ((formdata.distrolist as string).toLowerCase().trim());
     var recipientslist: string[] = recipients.split(',');
     for (let index = 0; index < recipientslist.length; index++) {
@@ -48,6 +59,7 @@ export class EmailDistrobutionControlComponent implements OnInit {
     var promise: Promise<firebase.firestore.DocumentReference<firebase.firestore.DocumentData>> = this.emaildistroService.Add(newemaildistro);
     promise.then(result => {
       alert('Your Email distrobution list has been created')
+      this.roleservice.AppendEmailList(email);
       this.emailForm.reset();
     });
     promise.catch(error => //Sean: this method will run if firebase reports a problem

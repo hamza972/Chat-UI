@@ -10,5 +10,18 @@
 </form>
 <br>
 <h5>View:</h5>
-<h6>To be implemented.</h6>
+<table class="table table-striped col-12">
+    <thead>
+        <tr>
+            <th scope="col">Email</th>
+            <th scope="col" class="action">Lists</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let DistroLists of EmailDistributionListsArray">
+            <td>{{DistroLists.email}}</td>
+            <td>{{DistroLists.List}}</td>
+        </tr>
+    </tbody>
+</table>
 </div>
