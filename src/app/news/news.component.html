@@ -15,11 +15,7 @@
                     <div class="d-flex w-100">
                         <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="form-control"
                             id="txtSearchNews" placeholder="Enter title to search"></textarea>
-
-                        <button class="search-btn">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
+                    </div> 
                 </div>
                 <div class="col-md-12 mb-2">
                     <ckeditor name="content" [editor]="Editor" [config]="editorConfig" ngModel
@@ -27,7 +23,7 @@
                     </ckeditor>
                 </div>
                 <div class="col-md-12">
-                    <button class="submit-btn" type="submit">Post</button>
+                    <button class="submit-btn" type="submit" >Post</button>
                 </div>
             </div>
         </form>
