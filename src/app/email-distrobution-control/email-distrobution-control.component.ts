@@ -37,7 +37,6 @@ export class EmailDistrobutionControlComponent implements OnInit {
   ngOnInit() {
 
     //Get email distrobution lists, all of them.
-
     this.emaildistroService.Get().subscribe( result => {
       this.EmailDistributionListsArray = result;
       console.log(result);
@@ -66,6 +65,19 @@ export class EmailDistrobutionControlComponent implements OnInit {
     {
       alert('Something has went wrong, the email distrobution list was not setup');
       console.log('sending failed') //console debug
+    });
+  }
+  
+  Delete(distrolist: EmailDistributionLists){
+    console.log("Got onclick");
+    var promise: Promise<void>
+    promise = this.emaildistroService.Delete(distrolist)
+    promise.then(result => {
+      alert('The email distrobution list has been deleted')
+    });
+    promise.catch(error => //Sean: this method will run if firebase reports a problem
+    {
+      alert('Something has went wrong, the email distrobution list was not deleted');
     });
   }
 }

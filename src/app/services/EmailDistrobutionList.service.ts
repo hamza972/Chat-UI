@@ -44,4 +44,8 @@ export class EmailDistributionService {
       this.DistroEmailDoc = this.afs.doc(`EmailDistrobutionLists/${DistroList.id}`);
         return(this.DistroEmailDoc.update(DistroList)); //Sean: Returns Promise
     } 
+    Delete(DistroList: EmailDistributionLists): Promise<void>{
+      this.DistroEmailDoc = this.afs.doc(`EmailDistrobutionLists/${DistroList.id}`);
+      return(this.DistroEmailDoc.delete()); //Sean: Returns Promise
+    }
 }
