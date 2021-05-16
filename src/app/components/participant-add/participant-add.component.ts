@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { RoleService } from '../../services/role.service';
 import { AppUser } from '../../models/user';
 import { Role } from '../../models/role';
+import { textChangeRangeIsUnchanged } from 'typescript';
 
 @Component({
     selector: 'app-participant-add',
@@ -40,6 +41,11 @@ export class ParticipantAddComponent implements OnInit {
 
     }
 
+    updateSystemRole(){
+        var selectBox = document.getElementById("systemRole");
+        console.log(selectBox);
+    }
+
     getRoles() {
         this.roleService.get().subscribe(dbRoles => {
             this.roles = dbRoles;
@@ -61,10 +67,11 @@ export class ParticipantAddComponent implements OnInit {
                         console.log(this.participant.role);
                         this.participant.role = role;
                         this.participant.systemRole = 'participant';
-                        this.authService.createUser(this.participant)
+                        console.log(this.participant.systemRole);
+                        /*this.authService.createUser(this.participant)
                         .catch(error => {
                             alert(error.message);
-                        });
+                        });*/
                         
                     }
                 }

@@ -5,6 +5,7 @@ import { Affiliate } from '../../models/affiliate';
 import { RoleService } from '../../services/role.service';
 import { AuthService } from '../../services/auth.service';
 import { AffiliateService } from '../../services/affiliate.service';
+import { AppUser } from 'src/app/models/user';
 
 @Component({
     selector: 'app-role-add',
@@ -15,7 +16,7 @@ export class RoleAddComponent implements OnInit {
 
     role: Role = { };
     affiliates: Affiliate[];
-    user: firebase.User;
+    user: AppUser = {};
     authError: any;
     EmaiList: any;
 

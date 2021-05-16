@@ -9,16 +9,12 @@
             <div class="row">
                 <div class="d-flex flex-column flex-md-row justify-content-between w-100">
                     <div class="w-100">
-                        <input ngModel #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control"
+                        <input *ngIf="this.user.affiliate.name == News Media" ngModel #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control"
                             id="newsHeadline" placeholder="Enter Headline">
                     </div>
                     <div class="d-flex w-100">
                         <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="form-control"
                             id="txtSearchNews" placeholder="Enter title to search"></textarea>
-
-                        <button class="search-btn">
-                            <i class="fa fa-search"></i>
-                        </button>
                     </div>
                 </div>
                 <div class="col-md-12 mb-2">
