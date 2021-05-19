@@ -17,13 +17,6 @@
                         </div>
 
                         <div class="col-md-12 mb-2">
-                            <select [(ngModel)]="participant.systemRole" name="systemRole" type="text" class="form-control">
-                                <option [value]="participant">Participant</option>
-                                <option [value]="news">News</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-12 mb-2">
                             <select [(ngModel)]="participant.role" name="role" type="text" class="form-control">
                                 <option *ngFor="let role of roles" [value]="role.id">
                                     {{role.firstName}} {{role.lastName}} - {{role.title}} of {{role.affiliation}}
