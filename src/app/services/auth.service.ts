@@ -61,6 +61,7 @@ export class AuthService {
                     email: this.newUser.email,
                     firstName: this.newUser.firstName,
                     lastName: this.newUser.lastName,
+                    role: this.newUser.role,
                     systemRole: this.newUser.systemRole,
                 });
             }
@@ -90,9 +91,7 @@ export class AuthService {
             });
     }
 
-    logout() {
-        this.router.navigate(['/home']);
-        window.location.reload();
+    logout(): Promise<void> {
         return this.afAuth.auth.signOut();
     }
 }

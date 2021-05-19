@@ -8,7 +8,8 @@ import { TweetService } from '../../services/tweet.service';
 import { AuthService } from '../../services/auth.service';
 import { Role } from '../../models/role';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Observable } from 'rxjs';
+import { Notification } from '../../models/notification';
+import { NotificationService } from 'src/app/services/notification.service';
 //import { RSA_PKCS1_OAEP_PADDING } from 'constants';
 
 @Component({
@@ -31,15 +32,15 @@ export class TweetComponent implements OnInit {
     removeHTML = new RegExp(/(<([^>]+)>)/, 'g');
     hashtagList: string[];
     tweetSearch: string;
+    notification: Notification = {};
 
 
     public Editor = Editor;
     editorConfig = {
         toolbar: {
           items: [
-            'link', 'bulletedList', 'numberedList', '|',
-            'indent', 'outdent', '|',
-            'blockQuote', 'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo']
+            'link', '|',
+            'imageUpload', 'mediaEmbed', 'undo', 'redo']
         },
         image: {
           toolbar: [
@@ -55,7 +56,8 @@ export class TweetComponent implements OnInit {
         private tweetService: TweetService,
         private roleService: RoleService,
         private router: Router,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private notificationService: NotificationService,
     ) { }
 
 
@@ -81,6 +83,14 @@ export class TweetComponent implements OnInit {
 
     }
 
+    tweetContent(content){
+        content = content.replace(/&nbsp;/g, ' ');
+        if (!content.replace(/\s/g, '').length) {
+            content = '';
+          }
+        return content.replace(this.removeHTML,"");
+    }
+
     /* go to profile page */
     profile($event, tweet: Tweet) {
         this.router.navigate(['/profile/' + tweet.user.id]);
@@ -92,10 +102,6 @@ export class TweetComponent implements OnInit {
 
     hashtagHTMLBuilder(content) {
         return '<span class="hashtag">'+content+'</span>'
-    }
-
-    hashtagSearch(hashtag) {
-
     }
 
     mentionHTMLBuilder(mention) {
@@ -122,7 +128,6 @@ export class TweetComponent implements OnInit {
             var newMention = mention.substring(1);
             //compares the role id to the mention
             if (this.roles[i].twitterHandle == newMention) {
-                console.log(this.roles[i]);
                 return this.roles[i];
             } 
         }
@@ -131,7 +136,6 @@ export class TweetComponent implements OnInit {
 
     add(content) {
         if (this.tweet.content !== '' && this.tweet.content.length < 280) {
-
             //Create hashtag inside content
             this.tweet.content = this.tweet.content.replace(this.hashtagRegEx, this.hashtagHTMLBuilder);
             //Put hashtag into a list for reference
@@ -145,12 +149,23 @@ export class TweetComponent implements OnInit {
                 for (var i = 0; i < this.tweet.mention.length; i++){
                     var mentionRole = this.mentionChecker(this.tweet.mention[i]);
 
-                    if (this.mentionChecker(this.tweet.mention[i]) !== undefined){
-                        console.log(true);
+                    if (mentionRole !== undefined){
+                        console.log(mentionRole);
+                        this.notification.viewed = false;
+                        this.notification.type = 'tweet';
+                        this.notification.role = mentionRole;
+                        this.notification.from = this.user.role;
+                        this.notification = {
+                            date: new Date(),
+                            viewed: this.notification.viewed,
+                            type: this.notification.type,
+                            role: this.notification.role,
+                            from: this.notification.from,
+                        }
+                        this.notificationService.add(this.notification);
                         this.tweet.content = this.tweet.content.replace(this.tweet.mention[i], this.mentionHTMLBuilder(mentionRole));
-                    } else {
-                        
                     }
+                    
                 }
                 
             }
@@ -163,7 +178,6 @@ export class TweetComponent implements OnInit {
                 user: this.user,
 
             };
-
             this.tweetService.add(this.tweet);
             this.tweet.content = '';
         } 

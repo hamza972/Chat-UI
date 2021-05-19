@@ -5,12 +5,16 @@ import { Observable } from 'rxjs';
 import { AppUser } from '../../models/user';
 import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 import { Email } from 'src/app/models/email';
+import { EmailDistributionLists } from 'src/app/models/email-distrobution';
+import { EmailDistributionService } from 'src/app/services/EmailDistrobutionList.service';
 import { EmailService } from '../../services/email.service';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import {AutocompleteComponent, AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { RoleService } from 'src/app/services/role.service';
 import { ArrayType } from '@angular/compiler';
 import { promise } from 'protractor';
+import { Notification } from '../../models/notification';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-email-compose',
@@ -48,12 +52,16 @@ export class EmailComposeComponent implements OnInit {
   emailForm: FormGroup;
   connectionOk: boolean;
   displayname: string = 'email';
+  EmailDistroLists: EmailDistributionLists[]
+
 
   constructor(
     private userService: UserService,
     private emailService: EmailService,
     private formBuilder: FormBuilder,
-    private roleService: RoleService
+    private roleService: RoleService,
+    private notificationService: NotificationService,
+    private emaildistroService: EmailDistributionService
   ) {
     this.emailForm = this.formBuilder.group({
       sendTo: [null, [Validators.required,
@@ -73,6 +81,19 @@ export class EmailComposeComponent implements OnInit {
       this.connectionOk = true; 
     });
     this.LoadAutoSave();
+
+    //Testing methods for the 
+    // var testlist: Array<string> = new Array<string>();
+    // testlist.push("Testing@meps.com.au");
+    // var TestDistributionLists: EmailDistributionLists = {
+    //     email: "TestEmail.meps.com",
+    //     List: testlist
+    // }
+    // this.emaildistroService.Add(TestDistributionLists);
+    
+    this.emaildistroService.Get().subscribe( result => {
+      this.EmailDistroLists = result;
+    })
     setInterval( () => { this.AutoSave(this.emailForm, this.IsDraft, this.connectionOk, this.OptionalDraftEmail)}, 30000, ) //auto saves very 30 seconds.
     this.roleService.getEmailList().subscribe(result => {
       var StringArray: Array<String> = Array.from(result['EmailArray']);
@@ -127,6 +148,9 @@ export class EmailComposeComponent implements OnInit {
   MultiSendNew(formdata) {
     var recipients: string = ((formdata.sendTo as string).toLowerCase().trim());
     var recipientslist: string[] = recipients.split(',');
+    this.Sendnotifcations(recipientslist);
+    recipientslist.forEach(element => {
+    });
     for (let index = 0; index < recipientslist.length; index++) { //Sean, Clean Up input
       recipientslist[index] = recipientslist[index].trim();
       console.log(recipientslist[index]);
@@ -143,6 +167,7 @@ export class EmailComposeComponent implements OnInit {
             user: this.user.role.email,
           },
         };
+        this.HandleEmailDistroLists(recipientslist, this.newEmail);
         this.sendEmail(this.newEmail);
       }
       alert("The email has been sent to the following recipients:" + recipientslist.toString())
@@ -156,9 +181,15 @@ export class EmailComposeComponent implements OnInit {
         },
         from: {
           user: this.user.role.email,
-        },
-      };
-      this.sendEmail(this.newEmail);
+        }
+      }
+      if(this.HandleEmailDistroLists(recipientslist, this.newEmail) == true)
+      {
+        return
+      }
+      else {
+        this.sendEmail(this.newEmail);
+      }
       alert("The email has been sent to the following recipient:" + recipientslist.toString())
     }
   }
@@ -181,7 +212,13 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.to.deleted = false;
       this.OptionalDraftEmail.from.deleted = false;
       this.OptionalDraftEmail.from.user = this.user.role.email;
-      var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
+      if(this.HandleEmailDistroLists(recipientslist, this.newEmail) == true)
+      {
+        
+      }
+      else {
+        var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
+      }
       Updatepromise.then(result => { //this callback is run if sucessful
         alert('Your Email has been sent to ' + recipientslist[0]); //set email to a ll lower case and trim spaces out of it, 
         this.ClearAllFields();
@@ -198,7 +235,13 @@ export class EmailComposeComponent implements OnInit {
               user: this.user.role.email,
             },
           };
-          this.sendEmail(this.newEmail); //promises are covered under the that function.
+          if(this.HandleEmailDistroLists(recipientslist, this.newEmail) == true)
+          {
+            continue;
+          }
+          else {
+            this.sendEmail(this.newEmail);
+          }
         }
       });
       Updatepromise.catch(error => //Sean: this method will run if firebase reports a problem
@@ -216,7 +259,13 @@ export class EmailComposeComponent implements OnInit {
       this.OptionalDraftEmail.from.deleted = false;
       this.OptionalDraftEmail.from.user = this.user.role.email;
       this.OptionalDraftEmail.from.actualuser = (this.user.firstName + " " + this.user.lastName)
-      var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
+      if(this.HandleEmailDistroLists(recipientslist, this.newEmail) == true)
+      {
+        return
+      }
+      else {
+        var Updatepromise: Promise<void> = this.emailService.update(this.OptionalDraftEmail); //This will update the email object in firebase, effectively sending it, as the all fields should be correct to appear to the recipent mailbox.
+      }
       Updatepromise.then(result => {
         alert('Your Email has been sent to ' + recipientslist[0]); //set email to a ll lower case and trim spaces out of it, 
         this.ClearAllFields();
@@ -421,10 +470,17 @@ export class EmailComposeComponent implements OnInit {
   Sendnotifcations(recipientslist:string[]){
     this.roleService.get().subscribe(dbRoles => {
       console.log(dbRoles);
-      dbRoles.forEach(element => {
+      dbRoles.forEach(roleSearch => {
         recipientslist.forEach(recipient => {
-            if(element.email == recipient){
-              //send notifcation
+            if(roleSearch.email == recipient){
+              var notifcation: Notification = {
+              role : roleSearch,
+              from : this.user.role,
+              type : 'email',
+              viewed : false,
+              date : new Date(),
+              }
+              this.notificationService.add(notifcation);
             }
             });
         });
@@ -444,6 +500,49 @@ export class EmailComposeComponent implements OnInit {
       console.log(typeof output)
       ToEmailControl.setValue(output['email']);
     }
+  }
+  DistributeViaEmailList(email: Email, distrolist: EmailDistributionLists )
+  { 
+    this.Sendnotifcations(distrolist.List);
+    distrolist.List.forEach(recipient => {
+      email.to.user = recipient
+      console.log("distrobution email sent to " + recipient);
+      this.sendEmail(email);
+    });
+  }
+  HandleEmailDistroLists(recipients: string[], email: Email): boolean {
+    var EmailDistributionLists = null; //find a valid email distrobution list within
+    recipients.forEach(recipient => {
+       EmailDistributionLists = null
+       var TempEmailDistributionLists = this.findEmailList(recipient);
+      if(TempEmailDistributionLists != null){ 
+        console.log("distribution List Found for emails, setting");
+        EmailDistributionLists = TempEmailDistributionLists
+      }
+    });
+    console.log(EmailDistributionLists);
+    if(EmailDistributionLists == null){
+      console.log("No distribution List Found for email");
+      return(false);
+    }
+    else {
+      console.log("distribution List Found for email");
+      this.DistributeViaEmailList(email, EmailDistributionLists);
+      return(true);
+    }
+  }
+  findEmailList(email: string): EmailDistributionLists {
+    var foundistrolist: EmailDistributionLists = null;
+    this.EmailDistroLists.forEach(distrolist => {
+      console.log(distrolist.email)
+      console.log(email)
+      if (distrolist.email == email){
+        foundistrolist = distrolist
+        console.log("Found match for eamil");
+        return(foundistrolist);
+      }
+    });
+    return(foundistrolist);
   }
 }
 

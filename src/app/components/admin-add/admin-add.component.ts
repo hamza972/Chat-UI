@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AppUser } from '../../models/user';
+import { Role } from '../../models/role';
+import { RoleService } from '../../services/role.service';
+//import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 
 @Component({
   selector: 'app-admin-add',
@@ -12,10 +15,13 @@ export class AdminAddComponent implements OnInit {
   admin: AppUser = {};
   editState = false;
   user: AppUser;
+  roles: Role[];
+
 
   constructor(
       private authService: AuthService,
-      private router: Router
+      private router: Router,
+      private roleService: RoleService
   ) {}
 
   ngOnInit(): void {
@@ -29,6 +35,9 @@ export class AdminAddComponent implements OnInit {
               if (user[0].systemRole !== 'admin') {
                   this.router.navigate(['/home']);
               }
+              this.roleService.get().subscribe(dbRoles => {
+              this.roles = dbRoles;
+            });
           }
       });
   }
@@ -38,7 +47,14 @@ export class AdminAddComponent implements OnInit {
   }
 
   add() {
+    var controlRole;
     if (this.admin.email !== undefined) {
+      for (var i = 0; this.roles.length > i; i++){
+        if (this.roles[i].firstName == 'Control'){
+          controlRole = this.roles[i];
+        }
+      }
+      this.admin.role = controlRole;
       this.admin.systemRole = 'admin';
       this.authService.createUser(this.admin)
       .catch(error => {
