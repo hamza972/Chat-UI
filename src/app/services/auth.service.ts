@@ -91,9 +91,7 @@ export class AuthService {
             });
     }
 
-    logout() {
-        this.router.navigate(['/home']);
-        window.location.reload();
+    logout(): Promise<void> {
         return this.afAuth.auth.signOut();
     }
 }
