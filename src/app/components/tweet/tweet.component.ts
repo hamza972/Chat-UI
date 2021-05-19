@@ -34,8 +34,8 @@ export class TweetComponent implements OnInit {
     tweetSearch: string;
     notification: Notification = {};
 
-
-    public Editor = Editor;
+    public Editor = Editor
+    
     editorConfig = {
         toolbar: {
           items: [
@@ -51,6 +51,7 @@ export class TweetComponent implements OnInit {
         language: 'en'
     };
 
+    
     constructor(
         private auth: AuthService,
         private tweetService: TweetService,
@@ -93,7 +94,7 @@ export class TweetComponent implements OnInit {
 
     /* go to profile page */
     profile($event, tweet: Tweet) {
-        this.router.navigate(['/profile/' + tweet.user.id]);
+        this.router.navigate(['/profile/' + tweet.user.role.id]);
     }
 
     cancel() {

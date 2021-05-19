@@ -1,6 +1,7 @@
 export interface Role {
     id?: string;
     title?: string;
+    type?: string;
     twitterHandle?: string;
     affiliation?: string;
     affiliateID?: string;

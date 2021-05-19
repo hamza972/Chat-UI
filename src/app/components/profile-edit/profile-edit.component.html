@@ -43,9 +43,10 @@
                 </div>
                 <div class="col-md-12 mb-2">
                     <h6>Twitter Handle</h6>
-                    <input *ngIf="user.systemRole == 'admin'; else elseLastName" [ngModel]="role?.twitterHandle"
+                    <input *ngIf="user.systemRole == 'admin'; else elseTwitterHandle" [ngModel]="role?.twitterHandle"
                         name="twitterHandle" type="text" class="form-control">
-                    <ng-template #elseLastName>
+                        
+                    <ng-template #twitterhandle>
                         <p>{{role.twitterHandle}}</p>
                     </ng-template>
                 </div>
@@ -77,7 +78,7 @@
 
     </div>
     <div class="row">
-        <button type="submit" class="btn blue">Save</button> &nbsp;
+        <button type="submit" (click)="update(role)"class="btn blue">Save</button> &nbsp;
         <button type="button" (click)="cancel() " class="btn blue">Cancel</button>
     </div>
 

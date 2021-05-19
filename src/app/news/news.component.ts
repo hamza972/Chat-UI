@@ -20,6 +20,7 @@ export class NewsComponent implements OnInit {
   authError: any;
   searchText: string;
   editorConfig = {
+    height: 200,
     toolbar: {
       items: [
         'heading', 'fontFamily', 'fontSize', 'fontColor', '|',

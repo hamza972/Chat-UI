@@ -15,6 +15,7 @@
                             <input [(ngModel)]="participant.lastName" name="lastName" type="text" class="form-control"
                                 id="lastName" placeholder="Last Name" required>
                         </div>
+
                         <div class="col-md-12 mb-2">
                             <select [(ngModel)]="participant.role" name="role" type="text" class="form-control">
                                 <option *ngFor="let role of roles" [value]="role.id">

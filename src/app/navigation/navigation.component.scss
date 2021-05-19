@@ -60,7 +60,6 @@
 {
   margin-top: 5px;
   margin-left: 63%;
-  // margin-right: 30px;
   width: 30%;
   border: none;
   outline: none ;
@@ -69,6 +68,10 @@
   background: #FD999A;
   cursor: pointer;
   color:  #ffffff; 
+}
+
+.readAllBtn:hover{
+    background-color: #8ABBDB;
 }
 
 /* set user */
@@ -99,9 +102,28 @@
 {
     font-size: 15px;
     padding-left: 5px;
-    line-height: 30px;
+    line-height: 20px;
     color: black;
     text-decoration: none;
+}
+
+.nav .diary a .notificationDate{
+    color:lightseagreen;
+    font-size: 12px;
+    margin:0%
+}
+
+.nav .diary a .notificationContent{
+    padding: 0%;
+    margin:0%
+}
+
+.nav .diary a .notificationContent.hidden{
+    display: none;
+}
+
+.nav .diary a .notificationDate.hidden{
+    display: none;
 }
 
 .unread {
@@ -155,4 +177,10 @@
 
 .notificationCount {
     margin: 5px;
+}
+
+.nav .item{
+    color:black;
+    line-height: 35px;
+    text-align: center;
 }
