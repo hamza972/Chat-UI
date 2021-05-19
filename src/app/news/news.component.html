@@ -8,13 +8,15 @@
         <form #newsCreateForm="ngForm" (ngSubmit)="createNews(newsDescription, newsHeadline, content)">
             <div class="row">
                 <div class="d-flex flex-column flex-md-row justify-content-between w-100">
-                    <div class="w-100">
-                        <input *ngIf="this.user.affiliate == 'News' || this.user.systemRole == 'admin'" ngModel #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control"
+                    <div class="d-flex w-100">
+                        <input *ngIf="this.user.affiliate == 'News' || this.user.systemRole == 'admin'" ngModel
+                            #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control"
                             id="newsHeadline" placeholder="Enter Headline">
                     </div>
-                    <div class="d-flex w-100">
-                        <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="form-control"
-                            id="txtSearchNews" placeholder="Enter title to search"></textarea>
+                    <div class="d-flex w-100" style="margin-bottom: 12px; height:40px">
+                        <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="searchBox"
+                            id="txtSearchNews" placeholder="Headline search" rows="1"
+                            onkeydown="if(event.keyCode == 13) return false;"></textarea>
                     </div>
                 </div>
                 <div class="col-md-12 mb-2" *ngIf="this.user.affiliate == 'News' || this.user.systemRole == 'admin'">
@@ -30,25 +32,25 @@
     </div>
 </div>
 
-    <div class="row text-fix" *ngFor="let newsItem of newsItems | filter : searchText">
-        <!-- <div class="col-1">
+<div class="row text-fix" *ngFor="let newsItem of newsItems | filter : searchText">
+    <!-- <div class="col-1">
             <img src="assets/img/roles/bahrain_king.jpg" alt="" class="circle responsive-img role-img">
         </div>-->
-        <div class="col-12">
-            <div class="card-panel ">
-                <div class="card-content">
-                    <p class="h1" [innerHtml]="newsItem.newsHeadline"></p>
-                    <p class="grey-text">{{newsItem.userRole}} ({{newsItem.userName}})</p>
-                    <div class="card-action">
-                        <a>{{newsItem.newsDate.toDate() | date: 'medium'}}</a>
-                    </div>
-                    <!-- <p class="deep-purple-text" *ngIf="user.rolePosition === 'admin'">{{newsItem.firstName}} {{newsItem.lastName}}</p>-->
-                    <p class="black-text" [innerHtml]="newsItem.newsDescription"></p>
+    <div class="col-12">
+        <div class="card-panel ">
+            <div class="card-content">
+                <p class="h1" [innerHtml]="newsItem.newsHeadline"></p>
+                <p class="grey-text">{{newsItem.userRole}} ({{newsItem.userName}})</p>
+                <div class="card-action">
+                    <a>{{newsItem.newsDate.toDate() | date: 'medium'}}</a>
                 </div>
-                <p class="deep-purple-text" >{{newsItem.firstName}} {{newsItem.lastName}}</p>
+                <!-- <p class="deep-purple-text" *ngIf="user.rolePosition === 'admin'">{{newsItem.firstName}} {{newsItem.lastName}}</p>-->
+                <p class="black-text" [innerHtml]="newsItem.newsDescription"></p>
             </div>
+            <p class="deep-purple-text">{{newsItem.firstName}} {{newsItem.lastName}}</p>
         </div>
     </div>
+</div>
 
 
 <!-- alert box -->
