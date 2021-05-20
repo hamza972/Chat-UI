@@ -95,8 +95,15 @@ export class NavigationComponent implements OnInit {
     }
 
     logout() {
-        this.auth.logout();
-        this.router.navigate(['/']);
+        var promise: Promise<void>
+        promise = this.auth.logout();
+        promise.then(result => { 
+            console.log("Logout Sucessful");
+            this.router.navigate(['/login']);
+        })
+        promise.catch(result =>{
+            console.log("Logout failed");
+        })
     }
 
     getClass = (path) => {
