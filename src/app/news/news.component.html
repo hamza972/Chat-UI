@@ -5,26 +5,24 @@
                 {{ authError?.message }}
             </div>
         </div>
-        <form #newsCreateForm="ngForm" (ngSubmit)="createNews(newsDescription, newsHeadline, content)">
+        <div class="d-flex w-100">
+            <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="txtSearchNews"
+                id="txtSearchNews" placeholder="Enter title to search"></textarea>
+        </div>
+        <form #newsCreateForm="ngForm" (ngSubmit)="createNews(newsDescription, newsHeadline, content)" *ngIf="this.user.affiliate == 'News' || this.user.systemRole == 'admin'">
             <div class="row">
                 <div class="d-flex flex-column flex-md-row justify-content-between w-100">
-                    <div class="d-flex w-100">
-                        <input *ngIf="this.user.affiliate == 'News' || this.user.systemRole == 'admin'" ngModel
-                            #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control"
+                    <div class="w-100">
+                        <input ngModel #newsHeadline="ngModel" name="newsHeadline" type="text" class="form-control"
                             id="newsHeadline" placeholder="Enter Headline">
                     </div>
-                    <div class="d-flex w-100" style="margin-bottom: 12px; height:40px">
-                        <textarea [(ngModel)]="searchText" name="searchNews" type="text" class="searchBox"
-                            id="txtSearchNews" placeholder="Headline search" rows="1"
-                            onkeydown="if(event.keyCode == 13) return false;"></textarea>
-                    </div>
                 </div>
-                <div class="col-md-12 mb-2" *ngIf="this.user.affiliate == 'News' || this.user.systemRole == 'admin'">
+                <div class="col-md-12 mb-2">
                     <ckeditor name="content" [editor]="Editor" [config]="editorConfig" ngModel
                         #newsDescription="ngModel">
                     </ckeditor>
                 </div>
-                <div class="col-md-12" *ngIf="this.user.affiliate == 'News' || this.user.systemRole == 'admin'">
+                <div class="col-md-12">
                     <button class="submit-btn" type="submit">Post</button>
                 </div>
             </div>

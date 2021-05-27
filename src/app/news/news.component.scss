@@ -54,10 +54,12 @@ a{
 //     margin-top: 25px;   
 // }
 
-.searchBox {
+.txtSearchNews {
   resize: none;
-  height: inherit;
+  height: 40px;
   padding: 9px;
+  margin-bottom: 20px;
+  margin-left: 60%;
   text-align: middle;
   }
 
@@ -74,7 +76,7 @@ input[type=text]:not(.browser-default)
   height: inherit;
   padding: 9px;
   text-align: middle;
-  width: 90%;
+  width: 98%;
   background-color: rgb(228, 228, 228);
 }
 // ==================  Adjust the news description box  =========================
