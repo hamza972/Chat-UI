@@ -68,10 +68,10 @@ export class ParticipantAddComponent implements OnInit {
                         this.participant.role = role;
                         this.participant.systemRole = 'participant';
                         console.log(this.participant.systemRole);
-                        /*this.authService.createUser(this.participant)
+                        this.authService.createUser(this.participant)
                         .catch(error => {
                             alert(error.message);
-                        });*/
+                        });
                         
                     }
                 }
