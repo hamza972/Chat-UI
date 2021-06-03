@@ -1,7 +1,9 @@
 <!-- ===== Logged In View ======= -->
 
 <!-- map imag -->
-<div class="map"></div>
+<div class="MapResponsive">
+    <div class="map"></div>
+    </div>
 <!-- user is logged in -->
 <div class="row" *ngIf="user">
     <!--  five latest tweets and five latest news -->
@@ -14,7 +16,7 @@
             <div class="row text-fix" *ngFor="let tweet of tweets | slice:0:10">
                 <div class="col-12">
                     <div class="card-panel">
-                        <div class="card-content">
+                        <div class="card-content bullets">
                             <div class='row'>
                                 <div class="col-13">
                                     <img src={{tweet.user.role.avatar}} alt="" class="circle responsive-img role-img">
@@ -49,7 +51,7 @@
             <div class="row text-fix" *ngFor="let newsItem of news | slice:0:10">
                 <div class="col-12">
                     <div class="card-panel ">
-                        <div class="card-content">
+                        <div class="card-content bullets">
                             <p class="bold-text" [innerHtml]="newsItem.newsHeadline"></p>
                             <p class="black-text" [innerHtml]="newsItem.newsDescription"></p>
                         </div>

@@ -1,8 +1,11 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 <body>
 
-    <div class="row mt-4">
-        <div class="col-12">
+ <!-- <div class="row mt-4">
+        <div class="col-12"> -->
+            <div class="row text-fix" >
+                <div class="col-1"></div>
+                <div class="col-11">
 
             <div class="row" *ngIf="authError">
                 <div class="col-12 alert alert-danger">
@@ -31,7 +34,7 @@
         <div class="col-11">
             <div class="card-panel">
                 <div class="card-content">
-                    <p class="black-text" style="font-family:Georgia"><i [innerHtml]="scenario.content"></i></p>
+                    <p class="black-text bullets" style="font-family:Georgia max-width= 100%;"><i [innerHtml]="scenario.content"></i></p>
                 </div>
                 <div class="card-action">
                     <a class="card-date">{{scenario.date.toDate() | date: 'medium'}}</a>

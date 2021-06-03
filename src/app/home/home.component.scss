@@ -11,6 +11,25 @@
     background-image: url("../../assets/img/Middle-East-Map.jpg");
 
 }
+@media screen and (max-width: 648px) {
+  .MapResponsive {
+      overflow-x: scroll;
+      max-width: 100%;
+  }
+  .map {
+  display: inline-block;
+  
+  margin-top: 40px;
+  margin-bottom: 20px;
+  // margin-left:20%;
+  margin-right:20%;
+  height: 354px;
+  width: 300%;
+  //width: 1000px;
+  background-image: url("../../assets/img/Middle-East-Map.jpg");
+
+}
+}
 img.responsive-img{
   margin-top: 10px;
   margin-bottom: 10px;
@@ -258,9 +277,9 @@ body
 
 .card-date
 {
-  background-color: #E1EEF6;
+  background-color: white;
   font-size: 20px;
-  color: #4eadda;
+  color: black;
   width: 100%;
 }
 
@@ -271,7 +290,7 @@ body
 
 .card-panel
 {
-  background-color: #E1EEF6;
+  background-color: white;
   font-size: 20px;
   width: 100%;
   margin: inherit;
@@ -333,4 +352,9 @@ a{
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
+  }
+
+  ::ng-deep .bullets ul > li {
+    margin-left: 5%;
+    list-style-type: initial;
   }

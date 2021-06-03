@@ -2,3 +2,57 @@ img.role-img {
     max-width: 75px !important;
     cursor: pointer;
 }
+img {
+    width: 100% ;
+    border-style: none;
+  }
+  
+  
+  ::ng-deep .ck.ck-content ul,
+  ::ng-deep .ck.ck-content ul li{
+    list-style-type: inherit;
+    
+  }
+  :host ::ng-deep .ck-button__toggle {
+      border-radius: calc(var(--ck-border-radius)*3.5) !important;
+  }
+  
+  :host ::ng-deep .ck-button__toggle__inner {
+      border-radius: calc(var(--ck-border-radius)*3.5) !important;
+  }
+  html, body { height: 100%; }
+  body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+  
+  .ck-rounded-corners .ck.ck-editor__main>.ck-editor__editable, .ck.ck-editor__main>.ck-editor__editable.ck-rounded-corners {
+    border-radius: var(--ck-border-radius);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    /* background-color: .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) { background-color: #003300;border-color: var(--ck-color-base-border);}; */
+  }
+  .cke_contents{margin:5px;background-color:blue;}
+  
+  .ck.ck-editor__main>.ck-editor__editable {
+    background: #433737;
+    border-radius: 0;
+  }
+  
+  
+  
+  .ck.ck-content ul {
+    /* Default user agent stylesheet, you can change it to your needs. */
+    padding-left: 40px;
+  }
+  editor color changed to custom
+  .ck.ck-editor__main>.ck-editor__editable {
+    background: #ffffff;
+    color: white;
+    border-radius: 0;
+  }
+  
+  .ck.ck-editor__main>.ck-editor__editable:focus {
+    border-color: var(--ck-color-base-border);
+    background: #003300 !important;
+    color: white;
+    border-radius: 0;
+  }
+  
