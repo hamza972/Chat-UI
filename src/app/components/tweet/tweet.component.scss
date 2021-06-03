@@ -42,19 +42,19 @@ button[type="submit"].tweet-button
   outline: none;
   height: 40px;
   font-size: 20px;    
-  background: #FD999A;
+  background: #d2b99e;
   cursor: pointer;
   color:  #ffffff; 
 }
 button[type="submit"].tweet-button:hover
 {
-    background-color: #8ABBDB;
+    background-color: #5c2731;
     color: #ffffff;
 }
 
 button[type="submit"].tweet-button:disabled:hover
 {
-    background-color: #FD999A;
+    background-color: #d2b99e;
     color: #ffffff;
 }
 
@@ -121,15 +121,15 @@ button[type="submit"].tweet-button:disabled:hover
 }
 .card-panel
 {
-  background-color: #E1EEF6;
+  background-color: white;
   font-size: 20px;
   width: 100%;
 }
 .card-date
 {
-  background-color: #E1EEF6;
+  background-color: white;
   font-size: 20px;
-  color: #4eadda;
+  color: black;
   width: 100%;
 }
 a{
@@ -220,6 +220,24 @@ img.responsive-img{
 ::ng-deep .ck.ck-content ul li{
   list-style-type: inherit;
 }
+// ul:not(.browser-default) > li {
+//   list-style-type: inherit;
+// }
+
+// ul:not(.browser-default) {
+//   padding-left: 0;
+//   display: list-item;
+//   list-style-type: inherit;
+// }
+// .ck.ck-content ul,
+// .ck.ck-content ul li{
+//   list-style-type: inherit;
+// }
+
+// .ck.ck-content ul {
+//   /* Default user agent stylesheet, you can change it to your needs. */
+//   padding-left: 40px;
+// }
 
 .ck.ck-content {
   height: 100px;
@@ -284,3 +302,44 @@ padding: 9px;
 .modal button:focus{
   background-color: unset !important;
 }
+
+
+.marginleft {
+  margin-left: 8%;
+  }
+  //editor color changed to custom
+  .ck.ck-editor__main>.ck-editor__editable {
+    background: #ffffff;
+    color: white;
+    border-radius: 0;
+  }
+  
+  .ck.ck-editor__main>.ck-editor__editable:focus {
+    border-color: var(--ck-color-base-border);
+    background: #003300 !important;
+    color: white;
+    border-radius: 0;
+  }
+  .ck.ck-content ul,
+  .ck.ck-content ul li{
+    list-style-type: inherit;
+  }
+  
+  .ck.ck-content ul {
+    /* Default user agent stylesheet, you can change it to your needs. */
+    padding-left: 40px;
+  }
+  
+  // .ck.ck-content ul,
+  // .ck.ck-content ul li{
+  //   list-style-type: inherit;
+  // }
+  
+  .ck.ck-content ul {
+    /* Default user agent stylesheet, you can change it to your needs. */
+    padding-left: 40px;
+  }
+  ::ng-deep .bullets ul > li {
+    margin-left: 5%;
+    list-style-type: initial;
+  }

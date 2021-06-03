@@ -4,16 +4,22 @@ body {
 .input-wrapper
 {
 margin-top: 10px;
-  // height: 200px;
+   height: 200px;
   width: 100%;
   // background-color: #FFFAE8;
-  margin-left: 8%;
+  margin-left: 1%;
+  //margin-left: 8%;
   // box-shadow: 0 0 2px rgba(0, 0, 0, .3);
 }
+img {
+  width: 100% !important;
+  border-style: none;
+}
+
 
 input[type=text]
 {
-  margin-left: 20px;
+  margin-left: 50px;
   margin-top: 10px;
   border-bottom: none;
   width: 80%;
@@ -28,20 +34,21 @@ input[type=text]
 button[type="submit"]
 {
   margin-top: 40px;
-  margin-left: 84%;
+  //margin-left: 84%;
   // margin-right: 30px;
+  float: right; 
   width: 15%;
   border: none;
   outline: none ;
   height: 40px;
   font-size: 20px;    
-  background: #FD999A;
+  background: #d2b99e;
   cursor: pointer;
   color:  #ffffff; 
 }
 button[type="submit"]:hover
 {
-    background-color: #8ABBDB;
+    background-color: #5c2731;
     color: #ffffff;
 }
 
@@ -108,15 +115,15 @@ button[type="submit"]:hover
   margin: 4px 2px;
 }
 .card-panel{
-  background-color: #E1EEF6;
+  background-color: white;
   width: 100%;
   font-size: 20px;
 }
 .card-date
 {
-  background-color: #E1EEF6;
+  background-color: white;
   font-size: 20px;
-  color: #4eadda;
+  color: black;
   width: 100%;
 }
 
@@ -179,4 +186,42 @@ option.a{
 
 .option:hover .text{
   left: 40px;
+}
+
+
+// .ck.ck-content ul,
+// .ck.ck-content ul li{
+//   list-style-type: inherit;
+// }
+
+.ck.ck-content ul {
+  /* Default user agent stylesheet, you can change it to your needs. */
+  padding-left: 40px;
+}
+
+
+.ck.ck-content ul {
+  /* Default user agent stylesheet, you can change it to your needs. */
+  padding-left: 40px;
+}
+
+
+ul li {
+  list-style-type: none;
+}
+
+
+::ng-deep .bullets ul li {
+  margin-left: 5%;
+  list-style-type: initial;
+}
+::ng-deep .ck.ck-content ul,
+::ng-deep .ck.ck-content ul li{
+  list-style-type: inherit;
+  
+}
+::ng-deep .ck.ck-content ul,
+::ng-deep .ck.ck-content ul > li{
+  list-style-type: inherit;
+  
 }

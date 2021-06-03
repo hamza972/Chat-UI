@@ -21,16 +21,143 @@
 
                         <!-- set leftside content -->
                         <ul class="right hide-on-med-and-down">
-                            <li><a *ngIf="user" [ngClass]="getClass('/scenario')" routerLink="/scenario">Scenario</a>
+                            <li>
+                               <div class="flip-card">
+                                  <div class="flip-card-inner">
+                                     <div class="flip-card-front">
+                                       <div class="imgBx">
+                                          <a *ngIf="user" [ngClass]="getClass('/scenario')"
+                                          routerLink="/scenario"><img src="../../../assets/img/scenario.png"
+                                             alt=""></a>
+                                       </div>
+                                      
+                                     </div>
+                                     <div class="flip-card-back">                            
+                                          <a *ngIf="user" [ngClass]="getClass('/scenario')"
+                                        routerLink="/scenario">Scenario</a>
+                                     </div>
+                                  </div>
+                               </div>
                             </li>
-                            <li><a *ngIf="user" [ngClass]="getClass('/RolePage')" routerLink="/RolePage">Roles</a></li>
-                            <li><a *ngIf="user" [ngClass]="getClass('/email')" routerLink="/email">Email</a></li>
-                            <li><a *ngIf="user" [ngClass]="getClass('/tweet')" routerLink="/tweet">Twitter</a></li>
-                            <li><a *ngIf="user" [ngClass]="getClass('/news')" routerLink="/news">News</a></li>
-                            <li><a *ngIf="user" [ngClass]="getClass('/chat')" routerLink="/chat">Chat</a></li>
-                            <li><a *ngIf="user" [ngClass]="getClass('/diary')" routerLink="/diary">Team Diary</a></li>
-                            <li *ngIf="user.systemRole === 'admin'"><a *ngIf="user" [ngClass]="getClass('/control')"
-                                    routerLink="/control">Control</a></li>
+                            <li>
+                               <div class="flip-card">
+                                  <div class="flip-card-inner">
+                                     <div class="flip-card-front">
+                                       <div class="imgBx">
+                                          <a *ngIf="user" [ngClass]="getClass('/RolePage')"
+                                          routerLink="/RolePage"> <img src="../../../assets/img/Roles.png"
+                                             alt=""></a>
+                                       </div>
+                                    
+                                     </div>
+                                     <div class="flip-card-back">
+                                       <a *ngIf="user" [ngClass]="getClass('/RolePage')"
+                                       routerLink="/RolePage">Roles</a>
+                                     </div>
+                                  </div>
+                                 </div>
+                            </li>
+                            <li>
+                               <div class="flip-card">
+                                  <div class="flip-card-inner">
+                                     <div class="flip-card-front">
+                                       <div class="imgBx">
+                                          <a *ngIf="user" [ngClass]="getClass('/email')" routerLink="/email"> <img
+                                             src="../../../assets/img/emails.png" alt=""></a>
+                                       </div> 
+                                     </div>
+                                     <div class="flip-card-back">
+                                          <a *ngIf="user" [ngClass]="getClass('/email')" routerLink="/email">Email</a>
+                                     </div>
+                                  </div>
+                               </div>
+                            </li>
+                            <li>
+                               <div class="flip-card">
+                                  <div class="flip-card-inner">
+                                     <div class="flip-card-front"> <div class="imgBx">
+                                       <a *ngIf="user" [ngClass]="getClass('/tweet')" routerLink="/tweet"> <img
+                                          src="../../../assets/img/twitter.png" alt=""></a>
+                                    </div>
+                                     </div>
+                                     <div class="flip-card-back">
+                                       
+                                        <a *ngIf="user" [ngClass]="getClass('/tweet')"
+                                        routerLink="/tweet">Twitter</a>
+                                     </div>
+                                  </div>
+                               </div>
+                            </li>
+                            <li>
+                               <div class="flip-card">
+                                  <div class="flip-card-inner">
+                                     <div class="flip-card-front">
+                                       <div class="imgBx">
+                                          <a *ngIf="user" [ngClass]="getClass('/news')" routerLink="/news">
+                                          <img src="../../../assets/img/news.png" alt=""></a>
+                                       </div>
+                                     </div>
+                                     <div class="flip-card-back">
+                                       <a *ngIf="user" [ngClass]="getClass('/news')"
+                                       routerLink="/news">News</a>
+                                       
+                                     </div>
+                                  </div>
+                               </div>
+                            </li>
+                            <li>
+                               <div class="flip-card">
+                                  <div class="flip-card-inner">
+                                     <div class="flip-card-front">
+                                       <div class="imgBx">
+                                          <a *ngIf="user" [ngClass]="getClass('/chat')" routerLink="/chat">
+                                          <img src="../../../assets/img/chat.png" alt="">
+                                          </a>
+                                       </div>
+                                     </div>
+                                     <div class="flip-card-back">
+                                       <a *ngIf="user" [ngClass]="getClass('/chat')"
+                                       routerLink="/chat">Chat</a>
+                                        
+                                     </div>
+                                  </div>
+                               </div>
+                            </li>
+                            <li>
+                               <div class="flip-card">
+                                  <div class="flip-card-inner">
+                                     <div class="flip-card-front">
+                                       <div class="imgBx">
+                                          <a *ngIf="user" [ngClass]="getClass('/diary')" routerLink="/diary">
+                                          <img src="../../../assets/img/diary.png" alt="">
+                                          </a>
+                                       </div>
+                                     </div>
+                                     <div class="flip-card-back team">
+                                       <a *ngIf="user" [ngClass]="getClass('/diary')" routerLink="/diary">Team Diary</a>
+                                       
+                                     </div>
+                                  </div>
+                               </div>
+                            </li>
+                            <li *ngIf="user.systemRole === 'admin'">
+                               <div class="flip-card">
+                                  <div class="flip-card-inner">
+                                     <div class="flip-card-front">
+                                       <div class="imgBx">
+                                          <a *ngIf="user" [ngClass]="getClass('/control')" routerLink="/control">
+                                          <img src="../../../assets/img/control.png" alt="">
+                                          </a>
+                                       </div>
+                                     </div>
+                                     <div class="flip-card-back">
+                                       <a *ngIf="user" [ngClass]="getClass('/control')"
+                                       routerLink="/control">Control</a>
+                                     </div>
+                                  </div>
+                               </div>
+                            </li>
+                       
                             <!-- <li *ngIf="user.systemRole === 'participant'"><a *ngIf="user" [ngClass]="getClass('/profile-edit')" [routerLink]="['/profile-edit', user.roleID]">Update Role Profile</a></li> -->
                         </ul>
                         <!-- set right side content -->
