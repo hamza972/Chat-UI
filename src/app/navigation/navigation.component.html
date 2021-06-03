@@ -45,7 +45,7 @@
                                     class="diary">
                                     <a *ngIf="notification.viewed == false && checkNotification(notification) == true;" (click)="readNotification(notification)"
                                         [routerLink]="['/', notification.type]" class="unread">
-                                        <div class="notificationContent">You recieved a {{notification.type}} from
+                                        <div class="notificationContent">You received a {{notification.type}} from
                                             {{notification.from.firstName}}
                                             {{notification.from.lastName}}</div>
                                         <div class="notificationDate">{{notification.date.toDate() | date: 'medium'}}
