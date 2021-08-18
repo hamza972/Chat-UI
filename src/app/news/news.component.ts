@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../services/news.service';
 import { Router } from '@angular/router';
-import { News } from '../models/News';
+import { News } from '../models/news';
 import { AuthService } from '../services/auth.service';
 import { AppUser } from '../models/user';
 import * as Editor from '../../assets/custom-ckeditor/ckeditor';
