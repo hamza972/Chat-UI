@@ -30,9 +30,9 @@
                                           routerLink="/scenario"><img src="../../../assets/img/scenario.png"
                                              alt=""></a>
                                        </div>
-                                      
+
                                      </div>
-                                     <div class="flip-card-back">                            
+                                     <div class="flip-card-back">
                                           <a *ngIf="user" [ngClass]="getClass('/scenario')"
                                         routerLink="/scenario">Scenario</a>
                                      </div>
@@ -48,7 +48,7 @@
                                           routerLink="/RolePage"> <img src="../../../assets/img/Roles.png"
                                              alt=""></a>
                                        </div>
-                                    
+
                                      </div>
                                      <div class="flip-card-back">
                                        <a *ngIf="user" [ngClass]="getClass('/RolePage')"
@@ -64,7 +64,7 @@
                                        <div class="imgBx">
                                           <a *ngIf="user" [ngClass]="getClass('/email')" routerLink="/email"> <img
                                              src="../../../assets/img/emails.png" alt=""></a>
-                                       </div> 
+                                       </div>
                                      </div>
                                      <div class="flip-card-back">
                                           <a *ngIf="user" [ngClass]="getClass('/email')" routerLink="/email">Email</a>
@@ -81,7 +81,7 @@
                                     </div>
                                      </div>
                                      <div class="flip-card-back">
-                                       
+
                                         <a *ngIf="user" [ngClass]="getClass('/tweet')"
                                         routerLink="/tweet">Twitter</a>
                                      </div>
@@ -100,7 +100,7 @@
                                      <div class="flip-card-back">
                                        <a *ngIf="user" [ngClass]="getClass('/news')"
                                        routerLink="/news">News</a>
-                                       
+
                                      </div>
                                   </div>
                                </div>
@@ -118,7 +118,7 @@
                                      <div class="flip-card-back">
                                        <a *ngIf="user" [ngClass]="getClass('/chat')"
                                        routerLink="/chat">Chat</a>
-                                        
+
                                      </div>
                                   </div>
                                </div>
@@ -135,7 +135,7 @@
                                      </div>
                                      <div class="flip-card-back team">
                                        <a *ngIf="user" [ngClass]="getClass('/diary')" routerLink="/diary">Team Diary</a>
-                                       
+
                                      </div>
                                   </div>
                                </div>
@@ -157,7 +157,7 @@
                                   </div>
                                </div>
                             </li>
-                       
+
                             <!-- <li *ngIf="user.systemRole === 'participant'"><a *ngIf="user" [ngClass]="getClass('/profile-edit')" [routerLink]="['/profile-edit', user.roleID]">Update Role Profile</a></li> -->
                         </ul>
                         <!-- set right side content -->
@@ -170,7 +170,7 @@
                             <div ngbDropdownMenu aria-labelledby="notificationDropdown">
                                 <div *ngFor="let notification of notifications | slice:0:10;" ngbDropdownItem
                                     class="diary">
-                                    <a *ngIf="notification.viewed == false && checkNotification(notification) == true;" (click)="readNotification(notification)"
+                                    <a *ngIf="notification && notification.viewed == false && checkNotification(notification) == true;" (click)="readNotification(notification)"
                                         [routerLink]="['/', notification.type]" class="unread">
                                         <div class="notificationContent">You received a {{notification.type}} from
                                             {{notification.from.firstName}}

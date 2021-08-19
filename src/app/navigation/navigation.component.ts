@@ -61,6 +61,12 @@ export class NavigationComponent implements OnInit {
     }
 
     checkNotification(notification: Notification) {
+      if (!notification.role) {
+        return false;
+      }
+      if (this.user.role) {
+        return;
+      }
         if (notification.role.id == this.user.role.id) {
             return true;
         }
@@ -97,7 +103,7 @@ export class NavigationComponent implements OnInit {
     logout() {
         var promise: Promise<void>
         promise = this.auth.logout();
-        promise.then(result => { 
+        promise.then(result => {
             console.log("Logout Sucessful");
             this.router.navigate(['/login']);
         })

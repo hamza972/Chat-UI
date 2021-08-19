@@ -44,6 +44,7 @@ import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
 import { RoleService } from './services/role.service';
 import { StorageService } from './services/storage.service';
+import {ChatServiceService} from "./chat/chat-service.service"
 
 //Sean added the following for autocomplete:
 import {AutocompleteLibModule} from 'angular-ng-autocomplete';
@@ -141,6 +142,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     EmailService,
     StorageService,
     AngularFireStorage,
+    ChatServiceService,
   ],
   bootstrap: [AppComponent],
 })
