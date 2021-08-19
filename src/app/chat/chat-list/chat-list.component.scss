@@ -7,23 +7,25 @@ aside {
   vertical-align: top;
 
   header {
+    position: relative;
     padding: 20px 10px;
     input {
-      width: 91%;
-      height: 50px;
-      line-height: 50px;
-      padding: 0 10px;
-      background-color: #5e616a;
-      border: none;
-      border-radius: 3px;
-      color: #fff;
+      width: 73%;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 10px;
+    background-color: #5e616a;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    padding-right: 47px;
     }
     img {
       width: 40px;
-      position: relative;
-      right: 6px;
-      top: -50px;
-      left: 200px;
+    position: absolute;
+    right: 6px;
+    top: 24px;
+    left: 200px;
     }
   }
 

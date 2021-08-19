@@ -73,6 +73,7 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
 import { EmailDistrobutionControlComponent } from './email-distrobution-control/email-distrobution-control.component';
 import { EmailViewDistroListsComponent } from './email/email-view-distro-lists/email-view-distro-lists.component';
 import { ChatListComponent } from './chat/chat-list/chat-list.component';
+import { SearchBarComponent } from './chat/search-bar/search-bar.component';
 
 
 const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
@@ -115,6 +116,7 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     EmailDistrobutionControlComponent,
     EmailViewDistroListsComponent,
     ChatListComponent,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule,

@@ -29,7 +29,7 @@ constructor(private auth: LoginService,
     const list: MUser[] = [];
     snapshot.docs.forEach(item => {
       const data: any = item.data();
-      list.push({id: item.uid, name: `${data.firstName} ${data.lastName}`, email: data.email, online: false})
+      list.push({id: item.id, name: `${data.firstName} ${data.lastName}`, email: data.email, online: false})
     });
     console.log(list)
     this.userList = list;

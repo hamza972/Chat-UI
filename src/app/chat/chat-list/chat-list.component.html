@@ -1,6 +1,9 @@
 <aside>
   <header>
-    <input type="text" placeholder="search">
+    <ng-template #rt let-r="result" let-t="term">
+      <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+    </ng-template>
+    <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter"/>
     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_search.png" >
   </header>
   <ul>
