@@ -10,7 +10,7 @@ export interface MChatMessage {
     message: string;
     date: Date;
     sender: string;
-    read: boolean;
+    read?: boolean;
 }
 
 export interface MUser {

@@ -45,6 +45,9 @@ main {
 main header {
   height: 110px;
   padding: 30px 20px 30px 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 main header > * {
   display: inline-block;
@@ -52,7 +55,7 @@ main header > * {
 }
 main header img:first-child {
   border-radius: 50%;
-  width: 65px;
+  width: 50px;
 }
 main header img:last-child {
   width: 24px;
@@ -72,7 +75,7 @@ main header h3 {
   color: #7e818a;
 }
 
-#chat {
+#chat-container {
   padding-left: 0;
   margin: 0;
   list-style-type: none;
@@ -81,22 +84,22 @@ main header h3 {
   border-top: 2px solid #fff;
   border-bottom: 2px solid #fff;
 }
-#chat li {
+#chat-container li {
   padding: 10px 30px;
 }
-#chat h2,
-#chat h3 {
+#chat-container h2,
+#chat-container h3 {
   display: inline-block;
   font-size: 13px;
   font-weight: normal;
 }
-#chat h3 {
+#chat-container h3 {
   color: #bbb;
 }
-#chat .entete {
+#chat-container .entete {
   margin-bottom: 5px;
 }
-#chat .message {
+#chat-container .message {
   padding: 20px;
   color: #fff;
   line-height: 25px;
@@ -105,26 +108,26 @@ main header h3 {
   text-align: left;
   border-radius: 5px;
 }
-#chat .me {
+#chat-container .me {
   text-align: right;
 }
-#chat .you .message {
+#chat-container .you .message {
   background-color: #58b666;
 }
-#chat .me .message {
+#chat-container .me .message {
   background-color: #6fbced;
 }
-#chat .triangle {
+#chat-container .triangle {
   width: 0;
   height: 0;
   border-style: solid;
   border-width: 0 10px 10px 10px;
 }
-#chat .you .triangle {
+#chat-container .you .triangle {
   border-color: transparent transparent #58b666 transparent;
   margin-left: 15px;
 }
-#chat .me .triangle {
+#chat-container .me .triangle {
   border-color: transparent transparent #6fbced transparent;
   margin-left: 375px;
 }

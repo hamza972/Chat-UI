@@ -28,12 +28,13 @@ export class ChatServiceService {
   }
 
   async createChatRoom(messageTxt, receiver, userId){
-    const roomdId = this.firestore.createId();
-    await this.firestore.collection("ChatRooms").doc(roomdId).set({
+    const roomId = this.firestore.createId();
+    await this.firestore.collection("ChatRooms").doc(roomId).set({
       lastUpdate: new Date().getTime(),
       members: [userId, receiver],
+      roomId,
     });
-    this.sendMessage(messageTxt, userId, roomdId)
+    this.sendMessage(messageTxt, userId, roomId)
   }
 
   async sendMessage(messageTxt, sender, chatRoom) {
@@ -47,6 +48,6 @@ export class ChatServiceService {
 
   getChatRoomMessage(chatRoom: string){
     const path = `ChatRooms/${chatRoom}/messages`;
-    return this.firestore.collection(path).valueChanges();
+    return this.firestore.collection(path, ref => ref.orderBy("time", "asc")).valueChanges();
   }
 }

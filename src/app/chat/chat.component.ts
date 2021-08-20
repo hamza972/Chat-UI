@@ -20,6 +20,7 @@ chatRoomsList: MChatRoom[] = []
 selectedUser: MUser = null
 messageTxt: string = ""
 currentChatRoom: MChatRoom = null;
+messagesList: MChatMessage[] = []
 
 constructor(private auth: LoginService,
             private router: Router,
@@ -66,14 +67,16 @@ constructor(private auth: LoginService,
           const users = item.members;
           const findIndex = users.findIndex((a) => a !== userId);
           const res = await this.chatService.getUserById(users[findIndex])
-          const room: MChatRoom = {id: item.id, user: res, members: item.members, lastUpdate: item.lastUpdate}
+          const room: MChatRoom = {id: item.roomId, user: res, members: item.members, lastUpdate: item.lastUpdate}
           l.push(room)
         }
         this.chatRoomsList = l;
-        this.currentChatRoom = l[0];
+        if(!this.currentChatRoom){
+          this.currentChatRoom = l[0];
+          this.selectedUser = l[0].user;
+        }
         this.getChatRoomMessages();
       }
-      
     })
   }
 
@@ -85,17 +88,35 @@ constructor(private auth: LoginService,
     if(!this.messageTxt){
       return;
     }
-    const findIndex = this.chatRoomsList.findIndex(a => a.user.id === this.selectedUser.id);
+    const findIndex = this.chatRoomsList.findIndex(a => this.selectedUser && a.user.id === this.selectedUser.id);
     if(findIndex < 0) {
       this.chatService.createChatRoom(this.messageTxt, this.selectedUser.id, this.currentUser.id)
     } else {
       this.chatService.sendMessage(this.messageTxt, this.currentUser.id, this.currentChatRoom.id)
     }
+    this.messageTxt = ""
+  }
+
+  goToBottom(){
+    const elem = document.getElementById("chat-container")
+    elem.scrollTo(0,elem.scrollHeight);
   }
 
   getChatRoomMessages(){
-    this.chatService.getChatRoomMessage(this.currentChatRoom.id).subscribe(res=>{
-      console.log(res);
+    this.chatService.getChatRoomMessage(this.currentChatRoom.id).subscribe((res: any)=>{
+      const l: MChatMessage[] = []
+      for(let i = 0; i < res.length; i++){
+        console.log(res[i]);
+        const item: any = res[i]
+        const msg: MChatMessage = {sender: item.sender, date: item.time, message: item.messageTxt}
+        l.push(msg)
+      }
+      const element = document.getElementById("chat");
+      // element.scrollTop = element.scrollHeight
+      this.messagesList = l;
+      setTimeout(()=>{
+        this.goToBottom()
+      },200)
     })
   }
 

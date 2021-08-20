@@ -1,84 +1,32 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 <div id="container">
-	<app-chat-list [users]="userList" (setSelectedUser)="setSelectedUser($event)"></app-chat-list>
+	<app-chat-list [users]="userList" [chatRoomsList]="chatRoomsList" (setSelectedUser)="setSelectedUser($event)"></app-chat-list>
 	<main>
 		<div *ngIf="selectedUser && selectedUser.id">
 			<header>
 				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
 				<div>
 					<h2>Chat with {{selectedUser.name}}</h2>
-					<h3>already 1902 messages</h3>
 				</div>
 				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt="">
 			</header>
-			<ul id="chat">
-				<li class="you">
+			<div  id="chat-container">
+				<ul>
+					<li [ngClass]="{'you': item.sender === selectedUser.id, 'me': item.sender == currentUser.id}"
+					*ngFor="let item of messagesList; let i = index" [attr.data-index]="i">
 					<div class="entete">
 						<span class="status green"></span>
-						<h2>Vincent</h2>
-						<h3>10:12AM, Today</h3>
+						<h2 *ngIf="currentUser.id === item.sender">{{currentUser.name}}</h2>
+						<h2 *ngIf="selectedUser.id === item.sender">{{currentUser.name}}</h2>
+						<h3>{{item.date  | date:'HH-mm'}}</h3>
 					</div>
 					<div class="triangle"></div>
 					<div class="message">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+						{{item.message}}
 					</div>
-				</li>
-				<li class="me">
-					<div class="entete">
-						<h3>10:12AM, Today</h3>
-						<h2>Vincent</h2>
-						<span class="status blue"></span>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-					</div>
-				</li>
-				<li class="me">
-					<div class="entete">
-						<h3>10:12AM, Today</h3>
-						<h2>Vincent</h2>
-						<span class="status blue"></span>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						OK
-					</div>
-				</li>
-				<li class="you">
-					<div class="entete">
-						<span class="status green"></span>
-						<h2>Vincent</h2>
-						<h3>10:12AM, Today</h3>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-					</div>
-				</li>
-				<li class="me">
-					<div class="entete">
-						<h3>10:12AM, Today</h3>
-						<h2>Vincent</h2>
-						<span class="status blue"></span>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-					</div>
-				</li>
-				<li class="me">
-					<div class="entete">
-						<h3>10:12AM, Today</h3>
-						<h2>Vincent</h2>
-						<span class="status blue"></span>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						OK
-					</div>
-				</li>
-			</ul>
+					</li>
+				</ul>
+			</div>
 			<footer>
 				<textarea placeholder="Type your message"  [(ngModel)]="messageTxt"></textarea>
 				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="">
