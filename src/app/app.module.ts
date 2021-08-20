@@ -68,14 +68,11 @@ import { RolePageComponent } from './RolePage/RolePage.component';
 import { NgChatModule } from 'ng-chat';
 import { HttpModule } from '@angular/http';
 
-import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { EmailDistrobutionControlComponent } from './email-distrobution-control/email-distrobution-control.component';
 import { EmailViewDistroListsComponent } from './email/email-view-distro-lists/email-view-distro-lists.component';
 import { ChatListComponent } from './chat/chat-list/chat-list.component';
 
-
-const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
 
 
 @NgModule({
@@ -131,7 +128,6 @@ const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
     Ng2SearchPipeModule,
     HttpModule,
     NgChatModule,
-    SocketIoModule.forRoot(config),
     ImageCropperModule,
   ],
   providers: [
