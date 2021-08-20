@@ -13,6 +13,7 @@ export class ChatListComponent implements OnInit {
   @Input() users: MUser[] = []
   @Input() chatRoomsList: MChatRoom[] = []
   @Output() setSelectedUser: EventEmitter<any> = new EventEmitter<any>();
+  @Output() changeChatRoom: EventEmitter<any> = new EventEmitter<any>();
 
   model: any = {};
   constructor() { }
@@ -26,13 +27,10 @@ export class ChatListComponent implements OnInit {
       map(term => term.length < 1 ? []
         : this.users.filter(v => v.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10))
     )
-    console.log(this.setSelectedUser);
     return res
   }
   
   formatter(x: MUser){
-    // console.log(this.setSelectedUser);
-    // this.setSelectedUser.emit(x);
     return x.name
   };
 
@@ -41,6 +39,10 @@ export class ChatListComponent implements OnInit {
       this.setSelectedUser.emit(this.model)
       this.model =  null
     }
+  }
+
+  setChatRoom(chatRoom){
+    this.changeChatRoom.emit(chatRoom)
   }
 
 }

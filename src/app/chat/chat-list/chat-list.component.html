@@ -7,7 +7,7 @@
     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_search.png" >
   </header>
   <ul *ngIf="chatRoomsList && chatRoomsList.length> 0">
-    <li *ngFor="let item of chatRoomsList; let i = index" [attr.data-index]="i">
+    <li *ngFor="let item of chatRoomsList; let i = index" [attr.data-index]="i" (click)="setChatRoom(item)">
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
       <div>
         <h2 *ngIf="item.user">{{item.user.name}}</h2>

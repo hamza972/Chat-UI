@@ -82,6 +82,15 @@ constructor(private auth: LoginService,
 
   setSelectedUser(usr) {
     this.selectedUser = usr
+    // check if has a chatRoom
+    const index = this.chatRoomsList.findIndex(item => item.members.includes(usr.id))
+    if(index >= 0){
+      this.currentChatRoom = this.chatRoomsList[index]
+      this.getChatRoomMessages()
+    }else {
+      this.messagesList = []
+      this.currentChatRoom = null
+    }
   }
 
   onMessageChange(){
@@ -103,6 +112,7 @@ constructor(private auth: LoginService,
   }
 
   getChatRoomMessages(){
+    this.messagesList = []
     this.chatService.getChatRoomMessage(this.currentChatRoom.id).subscribe((res: any)=>{
       const l: MChatMessage[] = []
       for(let i = 0; i < res.length; i++){
@@ -118,6 +128,12 @@ constructor(private auth: LoginService,
         this.goToBottom()
       },200)
     })
+  }
+
+  setChatRoom(chatRoom: MChatRoom){
+    this.selectedUser = chatRoom.user;
+    this.currentChatRoom = chatRoom;
+    this.getChatRoomMessages()
   }
 
 }
