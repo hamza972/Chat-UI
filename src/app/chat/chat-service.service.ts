@@ -43,6 +43,8 @@ export class ChatServiceService {
       sender,
       messageTxt,
       time: new Date().getTime()
+    }).then(()=>{
+      this.updateChatRoom( chatRoom, { lastUpdate: new Date() } )
     })
   }
 
@@ -50,4 +52,8 @@ export class ChatServiceService {
     const path = `ChatRooms/${chatRoom}/messages`;
     return this.firestore.collection(path, ref => ref.orderBy("time", "asc")).valueChanges();
   }
+
+  updateChatRoom<T>( chatRoomId: string, value: object ): Promise<void> {
+		return this.firestore.collection( "ChatRooms" ).doc( chatRoomId ).update( value );
+	}
 }

@@ -74,8 +74,8 @@ constructor(private auth: LoginService,
         if(!this.currentChatRoom){
           this.currentChatRoom = l[0];
           this.selectedUser = l[0].user;
+          this.getChatRoomMessages();
         }
-        this.getChatRoomMessages();
       }
     })
   }
@@ -93,7 +93,7 @@ constructor(private auth: LoginService,
     }
   }
 
-  onMessageChange(){
+  onSendMessage(){
     if(!this.messageTxt){
       return;
     }
@@ -101,6 +101,9 @@ constructor(private auth: LoginService,
     if(findIndex < 0) {
       this.chatService.createChatRoom(this.messageTxt, this.selectedUser.id, this.currentUser.id)
     } else {
+      const room: MChatRoom = this.chatRoomsList[findIndex]
+      this.chatRoomsList.splice(findIndex, 1)
+      this.chatRoomsList = [room, ...this.chatRoomsList];
       this.chatService.sendMessage(this.messageTxt, this.currentUser.id, this.currentChatRoom.id)
     }
     this.messageTxt = ""
@@ -116,7 +119,6 @@ constructor(private auth: LoginService,
     this.chatService.getChatRoomMessage(this.currentChatRoom.id).subscribe((res: any)=>{
       const l: MChatMessage[] = []
       for(let i = 0; i < res.length; i++){
-        console.log(res[i]);
         const item: any = res[i]
         const msg: MChatMessage = {sender: item.sender, date: item.time, message: item.messageTxt}
         l.push(msg)
@@ -135,5 +137,9 @@ constructor(private auth: LoginService,
     this.currentChatRoom = chatRoom;
     this.getChatRoomMessages()
   }
-
+  onClickEnter($event){
+    if($event.key === "Enter"){
+      this.onSendMessage()
+    }
+  }
 }
