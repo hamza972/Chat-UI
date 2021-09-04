@@ -52,7 +52,7 @@ const routes: Routes = [
 { path: 'profile/:id', component: ProfileComponent},
 { path: 'profile-edit/:id', component: ProfileEditComponent },
 { path: 'admin-add', component: AdminAddComponent },
-{ path: '', redirectTo: '/chat', pathMatch: 'full'}
+{ path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
 
 @NgModule({
