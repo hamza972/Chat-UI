@@ -162,4 +162,9 @@ constructor(private auth: LoginService,
   deleteMessage(id: string){
     this.chatService.deleteMessage(this.currentChatRoom.id, id)
   }
+
+  addToChatRoom(event){
+    console.log(event);
+    
+  }
 }

@@ -15,6 +15,9 @@ export class ChatListComponent implements OnInit {
   @Input() userStatus: any = {};
   @Output() setSelectedUser: EventEmitter<any> = new EventEmitter<any>();
   @Output() changeChatRoom: EventEmitter<any> = new EventEmitter<any>();
+  @Output() addToChatRoom: EventEmitter<any> = new EventEmitter<any>();
+  keyword: string = "name"
+  userSelected: boolean = false
 
   model: any = {};
   constructor() { }
@@ -42,6 +45,11 @@ export class ChatListComponent implements OnInit {
     }
   }
 
+  selectEvent(e){
+    this.userSelected = true
+    this.setSelectedUser.emit(e)
+  }
+
   setChatRoom(chatRoom){
     this.changeChatRoom.emit(chatRoom)
   }
@@ -51,6 +59,18 @@ export class ChatListComponent implements OnInit {
       return user.status
     }
     return "offline"
+  }
+
+  addToChat(item){
+    this.addToChatRoom.emit(item)
+  }
+
+  inputCleared(){
+    this.userSelected = false
+  }
+
+  inputChanged(){
+    this.userSelected = true
   }
 
 }

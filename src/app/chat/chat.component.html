@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 <div id="container">
 	<app-chat-list [users]="userList" [chatRoomsList]="chatRoomsList" [userStatus]="userStatus"
-		(setSelectedUser)="setSelectedUser($event)" (changeChatRoom)="setChatRoom($event)">
+		(setSelectedUser)="setSelectedUser($event)" (changeChatRoom)="setChatRoom($event)" (addToChatRoom)="addToChatRoom($event)">
 	</app-chat-list>
 	<main>
 		<div *ngIf="selectedUser && selectedUser.id">
