@@ -88,7 +88,6 @@ constructor(private auth: LoginService,
 
   setSelectedUser(usr) {
     this.selectedUser = usr
-    // check if has a chatRoom
     const index = this.chatRoomsList.findIndex(item => item.members.includes(usr.id))
     if(index >= 0){
       this.currentChatRoom = this.chatRoomsList[index]

@@ -14,7 +14,7 @@
 			</header>
 			<div id="chat-container">
 				<ul>
-					<li [ngClass]="{'you': item.sender === selectedUser.id, 'me': item.sender == currentUser.id}"
+					<li [ngClass]="{'you': item.sender != currentUser.id, 'me': item.sender == currentUser.id}"
 						*ngFor="let item of messagesList; let i = index" [attr.data-index]="i">
 						<div class="entete">
 							<span class="status"
