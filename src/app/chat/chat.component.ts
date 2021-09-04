@@ -117,7 +117,6 @@ constructor(private auth: LoginService,
 
   goToBottom(){
     const elem = document.getElementById("chat-container")
-    console.log(elem.scrollHeight - elem.scrollTop - elem.offsetHeight)
     if(this.forceScroll) {
       elem.scrollTo(0,elem.scrollHeight);
       this.forceScroll = false
