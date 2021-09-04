@@ -3,7 +3,8 @@ export interface MChatRoom {
 	lastUpdate: Date;
 	members: string[];
 	unreadMessages?: number;
-    user?: MUser
+    user?: MUser;
+    users?: MUser[];
 }
 
 export interface MChatMessage {

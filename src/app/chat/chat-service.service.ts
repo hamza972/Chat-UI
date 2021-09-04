@@ -66,4 +66,14 @@ export class ChatServiceService {
     const path = `ChatRooms/${chatRoomId}/messages/${messageId}`;
     this.firestore.collection("ChatRooms").doc(chatRoomId).collection("messages").doc(messageId).delete()
   }
+
+  deleteChatRoom(chatRoomId: string){
+    this.firestore.collection("ChatRooms").doc(chatRoomId).delete()
+  }
+
+  addUserToChatRoom(chatRoomId:string, users: string[] ){
+    this.firestore.collection("ChatRooms").doc(chatRoomId).update({
+      users
+    })
+  }
 }

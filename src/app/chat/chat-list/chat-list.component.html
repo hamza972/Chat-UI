@@ -23,7 +23,10 @@
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
       <div>
         <h2 *ngIf="item.user">{{item.user.name}}</h2>
-        <h3>
+        <h2 *ngIf="item.users">
+          <span *ngFor="let usr of item.users.slice(0, 2);">{{usr.name}},</span>
+        </h2>
+        <h3 *ngIf="item.user">
           <span class="status orange"></span>
           {{getStatus(userStatus[item.user.id])}}
         </h3>

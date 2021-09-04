@@ -18,11 +18,13 @@ userList: MUser[] = [];
 currentUser: MUser = null
 chatRoomsList: MChatRoom[] = []
 selectedUser: MUser = null
+selectedUsersGroup: MUser[] = null
 messageTxt: string = ""
 currentChatRoom: MChatRoom = null;
 messagesList: MChatMessage[] = []
 userStatus: {} = {};
 forceScroll: boolean = true
+
 
 constructor(private auth: LoginService,
             private router: Router,
@@ -70,15 +72,29 @@ constructor(private auth: LoginService,
         for(let i = 0; i < snapshot.length; i++){
           const item  = snapshot[i]
           const users = item.members;
-          const findIndex = users.findIndex((a) => a !== userId);
-          const res = await this.chatService.getUserById(users[findIndex])
-          const room: MChatRoom = {id: item.roomId, user: res, members: item.members, lastUpdate: item.lastUpdate}
+          let chatRoomUsers = null;
+          let user = null
+          if (users.length > 2) {
+            const findIndex = users.findIndex((a) => a === userId);
+            chatRoomUsers = [];
+            for (let i = 0; i < users.length; i++) {
+              if (i != findIndex) {
+                const res = await this.chatService.getUserById(users[i])
+                chatRoomUsers.push(res)
+              }
+            }
+          } else {
+            const findIndex = users.findIndex((a) => a !== userId);
+            user = await this.chatService.getUserById(users[findIndex])
+          }
+          const room: MChatRoom = {id: item.roomId, user: user, members: item.members, lastUpdate: item.lastUpdate, users: chatRoomUsers}
           l.push(room)
         }
         this.chatRoomsList = l;
         if(!this.currentChatRoom){
           this.currentChatRoom = l[0];
           this.selectedUser = l[0].user;
+          this.selectedUsersGroup = l[0].users;
           this.forceScroll = true;
           this.getChatRoomMessages();
         }
@@ -104,6 +120,7 @@ constructor(private auth: LoginService,
     }
     const findIndex = this.chatRoomsList.findIndex(a => this.selectedUser && a.user.id === this.selectedUser.id);
     if(findIndex < 0) {
+      this.currentChatRoom = null;
       this.chatService.createChatRoom(this.messageTxt, this.selectedUser.id, this.currentUser.id)
     } else {
       const room: MChatRoom = this.chatRoomsList[findIndex]
@@ -142,6 +159,7 @@ constructor(private auth: LoginService,
 
   setChatRoom(chatRoom: MChatRoom){
     this.selectedUser = chatRoom.user;
+    this.selectedUsersGroup = chatRoom.users;
     this.currentChatRoom = chatRoom;
     this.getChatRoomMessages()
   }
@@ -159,11 +177,34 @@ constructor(private auth: LoginService,
   }
 
   deleteMessage(id: string){
-    this.chatService.deleteMessage(this.currentChatRoom.id, id)
+    if (this.messagesList.length === 1) {
+      this.chatService.deleteChatRoom(this.currentChatRoom.id)
+      const index = this.chatRoomsList.findIndex(a => a.id === this.currentChatRoom.id)
+      this.currentChatRoom = index > 0 ? this.chatRoomsList[index - 1]:this.chatRoomsList[index + 1]
+      if (this.currentChatRoom) {
+        this.getChatRoomMessages()
+        this.selectedUser = this.currentChatRoom.user;
+        this.selectedUsersGroup = this.currentChatRoom.users
+      }
+    } else {
+      this.chatService.deleteMessage(this.currentChatRoom.id, id)
+    }
+    
   }
 
-  addToChatRoom(event){
-    console.log(event);
-    
+  addToChatRoom(e: MUser){
+    const users = this.currentChatRoom.users;
+    const user = this.currentChatRoom.user
+    if (users && users.findIndex(a => a.id === e.id) === -1) {
+      const list: string[] = [this.currentUser.id]
+      users.map(item => list.push(item.id))
+      list.push(e.id)
+      this.chatService.addUserToChatRoom(this.currentChatRoom.id, list);
+    }else if(user && user.id !== e.id){
+      const list: string[] = [this.currentUser.id, this.currentChatRoom.user.id, e.id]
+      this.chatService.addUserToChatRoom(this.currentChatRoom.id, list);
+    } else {
+      this.setSelectedUser(e)
+    }
   }
 }
