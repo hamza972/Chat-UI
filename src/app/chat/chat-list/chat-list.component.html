@@ -13,7 +13,7 @@
         <h2 *ngIf="item.user">{{item.user.name}}</h2>
         <h3>
           <span class="status orange"></span>
-          offline
+          {{getStatus(userStatus[item.user.id])}}
         </h3>
       </div>
     </li>
