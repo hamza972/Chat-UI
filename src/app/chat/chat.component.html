@@ -24,9 +24,15 @@
 							<h3>{{item.date | date:'HH-mm'}}</h3>
 						</div>
 						<div class="triangle"></div>
-						<div class="message">
-							{{item.message}}
+						<div class="message-container">
+							<div *ngIf="item.sender == currentUser.id" class="delete-icon" (click)="deleteMessage(item.messageId)">
+								<i class="far fa-trash-alt"></i>
+							</div>
+							<div class="message">
+								{{item.message}}
+							</div>
 						</div>
+						
 					</li>
 				</ul>
 			</div>

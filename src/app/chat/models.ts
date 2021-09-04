@@ -11,6 +11,7 @@ export interface MChatMessage {
     date: Date;
     sender: string;
     read?: boolean;
+    messageId?: string;
 }
 
 export interface MUser {

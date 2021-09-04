@@ -22,6 +22,7 @@ messageTxt: string = ""
 currentChatRoom: MChatRoom = null;
 messagesList: MChatMessage[] = []
 userStatus: {} = {};
+forceScroll: boolean = true
 
 constructor(private auth: LoginService,
             private router: Router,
@@ -34,7 +35,6 @@ constructor(private auth: LoginService,
       this.getAllUsers(res.id)
     })
     this.chatService.getUserStatus().subscribe(resp => {
-      console.log(resp);
       this.userStatus = resp
     })
     
@@ -79,6 +79,7 @@ constructor(private auth: LoginService,
         if(!this.currentChatRoom){
           this.currentChatRoom = l[0];
           this.selectedUser = l[0].user;
+          this.forceScroll = true;
           this.getChatRoomMessages();
         }
       }
@@ -116,7 +117,13 @@ constructor(private auth: LoginService,
 
   goToBottom(){
     const elem = document.getElementById("chat-container")
-    elem.scrollTo(0,elem.scrollHeight);
+    console.log(elem.scrollHeight - elem.scrollTop - elem.offsetHeight)
+    if(this.forceScroll) {
+      elem.scrollTo(0,elem.scrollHeight);
+      this.forceScroll = false
+    } else if(elem.scrollHeight - elem.scrollTop - elem.offsetHeight < 360) {
+        elem.scrollTo(0,elem.scrollHeight);
+    }
   }
 
   getChatRoomMessages(){
@@ -125,11 +132,9 @@ constructor(private auth: LoginService,
       const l: MChatMessage[] = []
       for(let i = 0; i < res.length; i++){
         const item: any = res[i]
-        const msg: MChatMessage = {sender: item.sender, date: item.time, message: item.messageTxt}
+        const msg: MChatMessage = {sender: item.sender, date: item.time, message: item.messageTxt, messageId: item.messageId}
         l.push(msg)
       }
-      const element = document.getElementById("chat");
-      // element.scrollTop = element.scrollHeight
       this.messagesList = l;
       setTimeout(()=>{
         this.goToBottom()
@@ -153,5 +158,9 @@ constructor(private auth: LoginService,
       return this.userStatus[uid].status
     }
     return "offline"
+  }
+
+  deleteMessage(id: string){
+    this.chatService.deleteMessage(this.currentChatRoom.id, id)
   }
 }
