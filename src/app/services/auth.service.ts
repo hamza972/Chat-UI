@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFireDatabase} from "@angular/fire/database"
+import { tap, map, switchMap, first } from 'rxjs/operators';
 import { BehaviorSubject, of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import * as firebase from 'firebase/app';
 import { AppUser } from '../models/user';
+import { connect } from 'socket.io-client';
+import { async } from '@angular/core/testing';
 
 @Injectable({
     providedIn: 'root'
@@ -13,12 +17,17 @@ export class AuthService {
     private eventAuthError = new BehaviorSubject<string>('');
     eventAuthError$ = this.eventAuthError.asObservable();
     newUser: any;
+    userId: string;
 
     constructor(
         private afAuth: AngularFireAuth,
         private db: AngularFirestore,
-        private router: Router
-    ) { }
+        private router: Router,
+        private database: AngularFireDatabase,
+    ) { 
+        this.updateOnlineUser();
+        this.onDisconnect();
+    }
 
     getUserData() {
         return this.afAuth.authState.pipe(
@@ -93,5 +102,29 @@ export class AuthService {
 
     logout(): Promise<void> {
         return this.afAuth.auth.signOut();
+    }
+
+    updateOnlineUser() {
+        this.database.object('.info/connected').valueChanges().subscribe(async (resp) => {
+            const uid = this.afAuth.auth.currentUser.uid;
+            const status = resp ? 'online' : 'offline'
+            this.database.object(`status/${uid}`).update({ status, timestamp: this.timestamp })
+        })
+    }
+
+
+    get timestamp() {
+        return firebase.database.ServerValue.TIMESTAMP;
+    }
+
+    onDisconnect() {
+        this.afAuth.authState.subscribe(user => {
+            if(user && user.uid){
+                this.database.object(`status/${user.uid}`).query.ref.onDisconnect().set({
+                    status: 'offline',
+                    timestamp: this.timestamp
+                })
+            }
+        })
     }
 }

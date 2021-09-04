@@ -21,6 +21,7 @@ selectedUser: MUser = null
 messageTxt: string = ""
 currentChatRoom: MChatRoom = null;
 messagesList: MChatMessage[] = []
+userStatus: {} = {};
 
 constructor(private auth: LoginService,
             private router: Router,
@@ -31,6 +32,10 @@ constructor(private auth: LoginService,
       this.currentUser = {email: res.email, id: res.id, name: `${res.firstName} ${res.lastName}`}
       this.getChatRooms(res.id)
       this.getAllUsers(res.id)
+    })
+    this.chatService.getUserStatus().subscribe(resp => {
+      console.log(resp);
+      this.userStatus = resp
     })
     
   }
@@ -141,5 +146,12 @@ constructor(private auth: LoginService,
     if($event.key === "Enter"){
       this.onSendMessage()
     }
+  }
+
+  getStatus(uid){
+    if(this.userStatus[uid]){
+      return this.userStatus[uid].status
+    }
+    return "offline"
   }
 }

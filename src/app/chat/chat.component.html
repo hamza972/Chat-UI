@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 <div id="container">
-	<app-chat-list [users]="userList" [chatRoomsList]="chatRoomsList" (setSelectedUser)="setSelectedUser($event)" (changeChatRoom)="setChatRoom($event)"></app-chat-list>
+	<app-chat-list [users]="userList" [chatRoomsList]="chatRoomsList" [userStatus]="userStatus"
+		(setSelectedUser)="setSelectedUser($event)" (changeChatRoom)="setChatRoom($event)">
+	</app-chat-list>
 	<main>
 		<div *ngIf="selectedUser && selectedUser.id">
 			<header>
@@ -10,25 +12,27 @@
 				</div>
 				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt="">
 			</header>
-			<div  id="chat-container">
+			<div id="chat-container">
 				<ul>
 					<li [ngClass]="{'you': item.sender === selectedUser.id, 'me': item.sender == currentUser.id}"
-					*ngFor="let item of messagesList; let i = index" [attr.data-index]="i">
-					<div class="entete">
-						<span class="status green"></span>
-						<h2 *ngIf="currentUser.id === item.sender">{{currentUser.name}}</h2>
-						<h2 *ngIf="selectedUser.id === item.sender">{{currentUser.name}}</h2>
-						<h3>{{item.date  | date:'HH-mm'}}</h3>
-					</div>
-					<div class="triangle"></div>
-					<div class="message">
-						{{item.message}}
-					</div>
+						*ngFor="let item of messagesList; let i = index" [attr.data-index]="i">
+						<div class="entete">
+							<span class="status"
+								[ngClass]="{'green': getStatus(selectedUser.id) == 'online' , 'orange': getStatus(selectedUser.id) == 'offline'}"></span>
+							<h2 *ngIf="currentUser.id === item.sender">{{currentUser.name}}</h2>
+							<h2 *ngIf="selectedUser.id === item.sender">{{currentUser.name}}</h2>
+							<h3>{{item.date | date:'HH-mm'}}</h3>
+						</div>
+						<div class="triangle"></div>
+						<div class="message">
+							{{item.message}}
+						</div>
 					</li>
 				</ul>
 			</div>
 			<footer>
-				<textarea placeholder="Type your message"  [(ngModel)]="messageTxt" (keypress)="onClickEnter($event)"></textarea>
+				<textarea placeholder="Type your message" [(ngModel)]="messageTxt"
+					(keypress)="onClickEnter($event)"></textarea>
 				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="">
 				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png" alt="">
 				<button (click)="onSendMessage($event)" class="send-button">Send</button>

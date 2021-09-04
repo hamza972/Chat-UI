@@ -12,6 +12,7 @@ export class ChatListComponent implements OnInit {
 
   @Input() users: MUser[] = []
   @Input() chatRoomsList: MChatRoom[] = []
+  @Input() userStatus: any = {};
   @Output() setSelectedUser: EventEmitter<any> = new EventEmitter<any>();
   @Output() changeChatRoom: EventEmitter<any> = new EventEmitter<any>();
 
@@ -43,6 +44,13 @@ export class ChatListComponent implements OnInit {
 
   setChatRoom(chatRoom){
     this.changeChatRoom.emit(chatRoom)
+  }
+
+  getStatus(user){
+    if(user){
+      return user.status
+    }
+    return "offline"
   }
 
 }

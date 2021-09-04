@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentChangeAction } from '@angular/fire/firestore';
 import { MUser, MChatMessage, MChatRoom } from './models';
+import { AngularFireDatabase} from "@angular/fire/database"
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Observable, of } from 'rxjs';
 })
 export class ChatServiceService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, private database: AngularFireDatabase) { }
 
   getAllUsers(): Observable<any>{
     return this.firestore.collection("Users").get()
@@ -56,4 +57,8 @@ export class ChatServiceService {
   updateChatRoom<T>( chatRoomId: string, value: object ): Promise<void> {
 		return this.firestore.collection( "ChatRooms" ).doc( chatRoomId ).update( value );
 	}
+
+  getUserStatus(){
+    return this.database.object("status").valueChanges()
+  }
 }
