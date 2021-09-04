@@ -90,6 +90,7 @@ constructor(private auth: LoginService,
           const room: MChatRoom = {id: item.roomId, user: user, members: item.members, lastUpdate: item.lastUpdate, users: chatRoomUsers}
           l.push(room)
         }
+        console.log(l);
         this.chatRoomsList = l;
         if(!this.currentChatRoom){
           this.currentChatRoom = l[0];
@@ -118,12 +119,13 @@ constructor(private auth: LoginService,
     if(!this.messageTxt){
       return;
     }
-    const findIndex = this.chatRoomsList.findIndex(a => this.selectedUser && a.user.id === this.selectedUser.id);
-    if(findIndex < 0) {
+    
+    if(!this.currentChatRoom) {
       this.currentChatRoom = null;
       this.chatService.createChatRoom(this.messageTxt, this.selectedUser.id, this.currentUser.id)
     } else {
-      const room: MChatRoom = this.chatRoomsList[findIndex]
+      const room: MChatRoom = this.currentChatRoom
+      const findIndex = this.chatRoomsList.findIndex(a => a.id === room.id)
       this.chatRoomsList.splice(findIndex, 1)
       this.chatRoomsList = [room, ...this.chatRoomsList];
       this.chatService.sendMessage(this.messageTxt, this.currentUser.id, this.currentChatRoom.id)
@@ -136,7 +138,7 @@ constructor(private auth: LoginService,
     if(this.forceScroll) {
       elem.scrollTo(0,elem.scrollHeight);
       this.forceScroll = false
-    } else if(elem.scrollHeight - elem.scrollTop - elem.offsetHeight < 360) {
+    } else {
         elem.scrollTo(0,elem.scrollHeight);
     }
   }
@@ -193,18 +195,20 @@ constructor(private auth: LoginService,
   }
 
   addToChatRoom(e: MUser){
-    const users = this.currentChatRoom.users;
-    const user = this.currentChatRoom.user
-    if (users && users.findIndex(a => a.id === e.id) === -1) {
-      const list: string[] = [this.currentUser.id]
-      users.map(item => list.push(item.id))
+    const members = this.currentChatRoom.members;
+    if (members && members.findIndex(a => a === e.id) === -1) {
+      const list: string[] = members
       list.push(e.id)
-      this.chatService.addUserToChatRoom(this.currentChatRoom.id, list);
-    }else if(user && user.id !== e.id){
-      const list: string[] = [this.currentUser.id, this.currentChatRoom.user.id, e.id]
       this.chatService.addUserToChatRoom(this.currentChatRoom.id, list);
     } else {
       this.setSelectedUser(e)
     }
+  }
+
+  getSenderName(senderId) {
+    console.log(this.selectedUsersGroup);
+    console.log(senderId);
+    
+    return this.selectedUsersGroup.find(a => a.id ===senderId).name
   }
 }

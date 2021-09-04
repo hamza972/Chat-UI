@@ -71,9 +71,9 @@ export class ChatServiceService {
     this.firestore.collection("ChatRooms").doc(chatRoomId).delete()
   }
 
-  addUserToChatRoom(chatRoomId:string, users: string[] ){
+  addUserToChatRoom(chatRoomId:string, members: string[] ){
     this.firestore.collection("ChatRooms").doc(chatRoomId).update({
-      users
+      members
     })
   }
 }
