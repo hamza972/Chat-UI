@@ -1,17 +1,32 @@
 <aside (click)="onChange($event)">
   <header>
-    <ng-template #rt let-r="result" let-t="term" >
-      <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
-    </ng-template>
-    <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" [resultTemplate]="rt" [inputFormatter]="formatter"/>
-    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_search.png" >
+    <div class="ng-autocomplete">
+      <ng-autocomplete [data]="users" [searchKeyword]="keyword" placeholder="Search"
+      [itemTemplate]="itemTemplate" [notFoundTemplate]="notFoundTemplate" (selected)='selectEvent($event)' (inputChanged)="inputChanged()" (inputCleared)="inputCleared()">
+      </ng-autocomplete>
+      <img *ngIf="!userSelected" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_search.png" >
+      <ng-template #itemTemplate let-item>
+        <div class="item">
+          <span [innerHTML]="item.name"></span>
+          <i class="fas fa-user-plus" (click)="addToChat(item)" id="id-button"></i>
+        </div>
+      </ng-template>
+      
+      <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+      </ng-template>
+    </div>
+    
   </header>
   <ul *ngIf="chatRoomsList && chatRoomsList.length> 0">
     <li *ngFor="let item of chatRoomsList; let i = index" [attr.data-index]="i" (click)="setChatRoom(item)">
       <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
       <div>
         <h2 *ngIf="item.user">{{item.user.name}}</h2>
-        <h3>
+        <h2 *ngIf="item.users">
+          <span *ngFor="let usr of item.users.slice(0, 2);">{{usr.name}},</span>
+        </h2>
+        <h3 *ngIf="item.user">
           <span class="status orange"></span>
           {{getStatus(userStatus[item.user.id])}}
         </h3>

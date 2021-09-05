@@ -51,7 +51,7 @@ export class ChatServiceService {
 
   getChatRoomMessage(chatRoom: string){
     const path = `ChatRooms/${chatRoom}/messages`;
-    return this.firestore.collection(path, ref => ref.orderBy("time", "asc")).valueChanges();
+    return this.firestore.collection(path, ref => ref.orderBy("time", "asc")).valueChanges({ idField: 'messageId' });
   }
 
   updateChatRoom<T>( chatRoomId: string, value: object ): Promise<void> {
@@ -60,5 +60,20 @@ export class ChatServiceService {
 
   getUserStatus(){
     return this.database.object("status").valueChanges()
+  }
+
+  deleteMessage(chatRoomId: string, messageId) {
+    const path = `ChatRooms/${chatRoomId}/messages/${messageId}`;
+    this.firestore.collection("ChatRooms").doc(chatRoomId).collection("messages").doc(messageId).delete()
+  }
+
+  deleteChatRoom(chatRoomId: string){
+    this.firestore.collection("ChatRooms").doc(chatRoomId).delete()
+  }
+
+  addUserToChatRoom(chatRoomId:string, members: string[] ){
+    this.firestore.collection("ChatRooms").doc(chatRoomId).update({
+      members
+    })
   }
 }

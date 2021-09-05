@@ -114,6 +114,17 @@ main header h3 {
 #chat-container .you .message {
   background-color: #58b666;
 }
+#chat-container .me {
+  .message-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    .delete-icon {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
+}
 #chat-container .me .message {
   background-color: #6fbced;
 }

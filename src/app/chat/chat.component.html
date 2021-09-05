@@ -1,32 +1,52 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 <div id="container">
 	<app-chat-list [users]="userList" [chatRoomsList]="chatRoomsList" [userStatus]="userStatus"
-		(setSelectedUser)="setSelectedUser($event)" (changeChatRoom)="setChatRoom($event)">
+		(setSelectedUser)="setSelectedUser($event)" (changeChatRoom)="setChatRoom($event)" (addToChatRoom)="addToChatRoom($event)">
 	</app-chat-list>
 	<main>
-		<div *ngIf="selectedUser && selectedUser.id">
-			<header>
+		<div *ngIf="(selectedUser && selectedUser.id) || (selectedUsersGroup && selectedUsersGroup.length > 0) ">
+			<header *ngIf="(selectedUser && selectedUser.id)">
 				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
 				<div>
 					<h2>Chat with {{selectedUser.name}}</h2>
 				</div>
 				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt="">
 			</header>
+			<header *ngIf="(selectedUsersGroup && selectedUsersGroup.length > 0)">
+				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
+				<div>
+					<h2>Chat with <span *ngFor="let usr of selectedUsersGroup.slice(0, 3);">{{usr.name}},</span></h2>
+				</div>
+				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt="">
+			</header>
 			<div id="chat-container">
 				<ul>
-					<li [ngClass]="{'you': item.sender === selectedUser.id, 'me': item.sender == currentUser.id}"
+					<li [ngClass]="{'you': item.sender != currentUser.id, 'me': item.sender == currentUser.id}"
 						*ngFor="let item of messagesList; let i = index" [attr.data-index]="i">
-						<div class="entete">
+						<div class="entete" *ngIf="(selectedUser && selectedUser.id)">
 							<span class="status"
 								[ngClass]="{'green': getStatus(selectedUser.id) == 'online' , 'orange': getStatus(selectedUser.id) == 'offline'}"></span>
 							<h2 *ngIf="currentUser.id === item.sender">{{currentUser.name}}</h2>
 							<h2 *ngIf="selectedUser.id === item.sender">{{currentUser.name}}</h2>
 							<h3>{{item.date | date:'HH-mm'}}</h3>
 						</div>
-						<div class="triangle"></div>
-						<div class="message">
-							{{item.message}}
+						<div class="entete" *ngIf="(selectedUsersGroup && selectedUsersGroup.length > 0)">
+							<span class="status"
+								[ngClass]="{'green': getStatus(item.sender) == 'online' , 'orange': getStatus(item.sender) == 'offline'}"></span>
+							<h2 *ngIf="currentUser.id === item.sender">{{currentUser.name}}</h2>
+							<h2 *ngIf="currentUser.id !== item.sender">{{getSenderName(item.sender)}}</h2>
+							<h3>{{item.date | date:'HH-mm'}}</h3>
 						</div>
+						<div class="triangle"></div>
+						<div class="message-container">
+							<div *ngIf="item.sender == currentUser.id" class="delete-icon" (click)="deleteMessage(item.messageId)">
+								<i class="far fa-trash-alt"></i>
+							</div>
+							<div class="message">
+								{{item.message}}
+							</div>
+						</div>
+						
 					</li>
 				</ul>
 			</div>

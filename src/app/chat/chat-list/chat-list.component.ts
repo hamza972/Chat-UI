@@ -15,6 +15,10 @@ export class ChatListComponent implements OnInit {
   @Input() userStatus: any = {};
   @Output() setSelectedUser: EventEmitter<any> = new EventEmitter<any>();
   @Output() changeChatRoom: EventEmitter<any> = new EventEmitter<any>();
+  @Output() addToChatRoom: EventEmitter<any> = new EventEmitter<any>();
+  keyword: string = "name"
+  userSelected: boolean = false
+  isAdd: boolean = false
 
   model: any = {};
   constructor() { }
@@ -42,6 +46,17 @@ export class ChatListComponent implements OnInit {
     }
   }
 
+  selectEvent(e){
+    setTimeout(() => {
+      console.log(this.isAdd);
+      if(!this.isAdd){
+        this.userSelected = true
+        this.setSelectedUser.emit(e)
+      }
+    }, 300)
+    
+  }
+
   setChatRoom(chatRoom){
     this.changeChatRoom.emit(chatRoom)
   }
@@ -53,4 +68,19 @@ export class ChatListComponent implements OnInit {
     return "offline"
   }
 
+  addToChat(item){
+    this.isAdd = true
+    this.addToChatRoom.emit(item)
+    setTimeout(()=> {
+      this.isAdd = false
+    }, 500)
+  }
+
+  inputCleared(){
+    this.userSelected = false
+  }
+
+  inputChanged(){
+    this.userSelected = true
+  }
 }
